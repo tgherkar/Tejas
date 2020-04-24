@@ -1,0 +1,3247 @@
+{
+  "info": {
+    "_postman_id": "c3405a26-367f-43ee-a091-d567bbfacf43",
+    "name": "Consumer",
+    "description": "Swagger document by Swashbuckle",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "{consumer Id}",
+      "item": [
+        {
+          "name": "email",
+          "item": [
+            {
+              "name": "saveconsumeremail",
+              "_postman_id": "03a8cfe1-f926-4938-b413-a79673a651d7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "correlation-id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"consumerID\": \"<long>\",\n    \"eMailAddress\": \"<string>\",\n    \"validityCode\": \"<integer>\",\n    \"optIn\": \"<boolean>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerId/email",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerId",
+                    "email"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerId",
+                      "value": "",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "description": "Save the Consumer EMail Address"
+              },
+              "response": [
+                {
+                  "id": "3c7a67e3-8ddf-47b7-a8ee-57b0821039cb",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": ""
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"eMailAddress\": \"<string>\",\n    \"validityCode\": \"<integer>\",\n    \"optIn\": \"<boolean>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:consumerId/email",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":consumerId",
+                        "email"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<string>\""
+                },
+                {
+                  "id": "85ca25a0-7589-4fa9-8369-74584e56af88",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": ""
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"eMailAddress\": \"<string>\",\n    \"validityCode\": \"<integer>\",\n    \"optIn\": \"<boolean>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:consumerId/email",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":consumerId",
+                        "email"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<object>\""
+                },
+                {
+                  "id": "f807d6fa-9bd3-4c04-9aed-62e15300d0f9",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": ""
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"eMailAddress\": \"<string>\",\n    \"validityCode\": \"<integer>\",\n    \"optIn\": \"<boolean>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:consumerId/email",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":consumerId",
+                        "email"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<string>\""
+                }
+              ]
+            },
+            {
+              "name": "confirmconsumeremail",
+              "_postman_id": "220409a7-c3fd-4a4e-bd22-3a221c1653d2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"consumerID\": \"<long>\",\n    \"confirmationDate\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerId/email/confirm",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerId",
+                    "email",
+                    "confirm"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerId",
+                      "value": "",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "description": "Sets the Confirmation Date of the Consumer EMail Address"
+              },
+              "response": [
+                {
+                  "id": "414b7fe6-a9f9-4364-aa55-7e9bfab58f1d",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": ""
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"confirmationDate\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:consumerId/email/confirm",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":consumerId",
+                        "email",
+                        "confirm"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<string>\""
+                },
+                {
+                  "id": "8e039452-d2c4-4366-8d76-a75945ecf515",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": ""
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"confirmationDate\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:consumerId/email/confirm",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":consumerId",
+                        "email",
+                        "confirm"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<object>\""
+                },
+                {
+                  "id": "f7ab5b55-8022-46de-8132-02a530e705ec",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": ""
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"confirmationDate\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:consumerId/email/confirm",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":consumerId",
+                        "email",
+                        "confirm"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<string>\""
+                }
+              ]
+            },
+            {
+              "name": "unconfirmconsumeremail",
+              "_postman_id": "5a710c9d-7ba4-442b-bf72-bea802e165c1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"consumerID\": \"<long>\",\n    \"confirmationDate\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerId/email/unconfirm",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerId",
+                    "email",
+                    "unconfirm"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerId",
+                      "value": "",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "description": "Sets the Confirmation Date of the Consumer EMail Address to NULL"
+              },
+              "response": [
+                {
+                  "id": "08717f41-0321-4beb-b134-28f5c991c787",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": ""
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"confirmationDate\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:consumerId/email/unconfirm",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":consumerId",
+                        "email",
+                        "unconfirm"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<object>\""
+                },
+                {
+                  "id": "74c26687-0167-4e15-bfc3-284f36a2dee1",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": ""
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"confirmationDate\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:consumerId/email/unconfirm",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":consumerId",
+                        "email",
+                        "unconfirm"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<string>\""
+                },
+                {
+                  "id": "d5c9dabe-906e-4e74-887f-981ae81a70dd",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": ""
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"confirmationDate\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:consumerId/email/unconfirm",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":consumerId",
+                        "email",
+                        "unconfirm"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<string>\""
+                }
+              ]
+            }
+          ],
+          "_postman_id": "53058d1a-d1a0-4d5c-8090-d5d682d64f67",
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "phone",
+          "item": [
+            {
+              "name": "{consumer Phone Id}",
+              "item": [
+                {
+                  "name": "confirmconsumerphone",
+                  "_postman_id": "ef1b44c4-27c9-47a3-bf3b-cad34b76479d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-West",
+                        "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Correlation-Id",
+                        "value": "{{$guid}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerPhoneID\": \"<long>\",\n    \"consumerID\": \"<long>\",\n    \"confirmationDate\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/:consumerId/phone/:consumerPhoneId/confirm",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        ":consumerId",
+                        "phone",
+                        ":consumerPhoneId",
+                        "confirm"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId",
+                          "value": "",
+                          "type": "string"
+                        },
+                        {
+                          "key": "consumerPhoneId",
+                          "value": "",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "description": "Sets the Confirmation Date of the Consumer Phone Number"
+                  },
+                  "response": [
+                    {
+                      "id": "55b5f829-d1bd-431e-8aaf-fb2de8c2ea44",
+                      "name": "Server Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Ocp-Apim-Subscription-Key-South",
+                            "value": ""
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"consumerPhoneID\": \"<long>\",\n    \"consumerID\": \"<long>\",\n    \"confirmationDate\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/:consumerId/phone/:consumerPhoneId/confirm",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":consumerId",
+                            "phone",
+                            ":consumerPhoneId",
+                            "confirm"
+                          ],
+                          "variable": [
+                            {
+                              "key": "consumerId"
+                            },
+                            {
+                              "key": "consumerPhoneId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "\"<object>\""
+                    },
+                    {
+                      "id": "e2464ac6-5301-4c33-9120-67fc7f8c6f04",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Ocp-Apim-Subscription-Key-South",
+                            "value": ""
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"consumerPhoneID\": \"<long>\",\n    \"consumerID\": \"<long>\",\n    \"confirmationDate\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/:consumerId/phone/:consumerPhoneId/confirm",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":consumerId",
+                            "phone",
+                            ":consumerPhoneId",
+                            "confirm"
+                          ],
+                          "variable": [
+                            {
+                              "key": "consumerId"
+                            },
+                            {
+                              "key": "consumerPhoneId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "\"<string>\""
+                    },
+                    {
+                      "id": "f935c2c1-d802-4ef0-80b4-348e2efa7de0",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Ocp-Apim-Subscription-Key-South",
+                            "value": ""
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"consumerPhoneID\": \"<long>\",\n    \"consumerID\": \"<long>\",\n    \"confirmationDate\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/:consumerId/phone/:consumerPhoneId/confirm",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":consumerId",
+                            "phone",
+                            ":consumerPhoneId",
+                            "confirm"
+                          ],
+                          "variable": [
+                            {
+                              "key": "consumerId"
+                            },
+                            {
+                              "key": "consumerPhoneId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "\"<string>\""
+                    }
+                  ]
+                },
+                {
+                  "name": "unconfirmconsumerphone",
+                  "_postman_id": "a18b8c3a-6695-4f57-a2b8-0aad8625abfd",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-West",
+                        "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Correlation-Id",
+                        "value": "{{$guid}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerPhoneID\": \"<long>\",\n    \"consumerID\": \"<long>\",\n    \"confirmationDate\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/:consumerId/phone/:consumerPhoneId/unconfirm",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        ":consumerId",
+                        "phone",
+                        ":consumerPhoneId",
+                        "unconfirm"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId",
+                          "value": "",
+                          "type": "string"
+                        },
+                        {
+                          "key": "consumerPhoneId",
+                          "value": "",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "description": "Sets the Confirmation Date of the Consumer Phone Number to NULL"
+                  },
+                  "response": [
+                    {
+                      "id": "437352ab-c69b-4de4-a675-a346fb7eb78b",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Ocp-Apim-Subscription-Key-South",
+                            "value": ""
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"consumerPhoneID\": \"<long>\",\n    \"consumerID\": \"<long>\",\n    \"confirmationDate\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/:consumerId/phone/:consumerPhoneId/unconfirm",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":consumerId",
+                            "phone",
+                            ":consumerPhoneId",
+                            "unconfirm"
+                          ],
+                          "variable": [
+                            {
+                              "key": "consumerId"
+                            },
+                            {
+                              "key": "consumerPhoneId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "\"<string>\""
+                    },
+                    {
+                      "id": "7d8f2289-f016-424f-9dd3-5973c39cdafc",
+                      "name": "Server Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Ocp-Apim-Subscription-Key-South",
+                            "value": ""
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"consumerPhoneID\": \"<long>\",\n    \"consumerID\": \"<long>\",\n    \"confirmationDate\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/:consumerId/phone/:consumerPhoneId/unconfirm",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":consumerId",
+                            "phone",
+                            ":consumerPhoneId",
+                            "unconfirm"
+                          ],
+                          "variable": [
+                            {
+                              "key": "consumerId"
+                            },
+                            {
+                              "key": "consumerPhoneId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "\"<object>\""
+                    },
+                    {
+                      "id": "a203e4e9-f045-4272-82a2-f83ea1bfe6c1",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Ocp-Apim-Subscription-Key-South",
+                            "value": ""
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"consumerPhoneID\": \"<long>\",\n    \"consumerID\": \"<long>\",\n    \"confirmationDate\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/:consumerId/phone/:consumerPhoneId/unconfirm",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":consumerId",
+                            "phone",
+                            ":consumerPhoneId",
+                            "unconfirm"
+                          ],
+                          "variable": [
+                            {
+                              "key": "consumerId"
+                            },
+                            {
+                              "key": "consumerPhoneId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "\"<string>\""
+                    }
+                  ]
+                }
+              ],
+              "_postman_id": "3aa23376-7707-4577-9674-5219e969a9be",
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "saveconsumerphone",
+              "_postman_id": "a420d590-5f65-4437-9dcd-77c8d2d340d1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"consumerID\": \"<long>\",\n    \"number\": \"<string>\",\n    \"sourceCode\": \"<integer>\",\n    \"statusCode\": \"<integer>\",\n    \"typeCode\": \"<integer>\",\n    \"technologyTypeCode\": \"<integer>\",\n    \"qualityScore\": \"<long>\",\n    \"userName\": \"<string>\",\n    \"consentGiven\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerId/phone",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerId",
+                    "phone"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerId",
+                      "value": "",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "description": "Save a new Consumer Phone Number"
+              },
+              "response": [
+                {
+                  "id": "5d95bc16-58c4-4b93-ab1f-0f1403ae0ac0",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": ""
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"number\": \"<string>\",\n    \"sourceCode\": \"<integer>\",\n    \"statusCode\": \"<integer>\",\n    \"typeCode\": \"<integer>\",\n    \"technologyTypeCode\": \"<integer>\",\n    \"qualityScore\": \"<long>\",\n    \"userName\": \"<string>\",\n    \"consentGiven\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:consumerId/phone",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":consumerId",
+                        "phone"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<string>\""
+                },
+                {
+                  "id": "9c309328-f097-4574-8e3b-563a7aa0e20a",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": ""
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"number\": \"<string>\",\n    \"sourceCode\": \"<integer>\",\n    \"statusCode\": \"<integer>\",\n    \"typeCode\": \"<integer>\",\n    \"technologyTypeCode\": \"<integer>\",\n    \"qualityScore\": \"<long>\",\n    \"userName\": \"<string>\",\n    \"consentGiven\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:consumerId/phone",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":consumerId",
+                        "phone"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<string>\""
+                },
+                {
+                  "id": "b5c0eb9c-cb6d-4b2e-8aac-020af81d8c35",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": ""
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"number\": \"<string>\",\n    \"sourceCode\": \"<integer>\",\n    \"statusCode\": \"<integer>\",\n    \"typeCode\": \"<integer>\",\n    \"technologyTypeCode\": \"<integer>\",\n    \"qualityScore\": \"<long>\",\n    \"userName\": \"<string>\",\n    \"consentGiven\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:consumerId/phone",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":consumerId",
+                        "phone"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<object>\""
+                }
+              ]
+            }
+          ],
+          "_postman_id": "70148721-beb0-4e1f-9d42-d075b548547b",
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "address",
+          "item": [
+            {
+              "name": "consumeraddress",
+              "_postman_id": "68a1f823-0b87-45de-bd1e-e47b4f1491cb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"consumerAddress\": {\n        \"consumerID\": \"<long>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"county\": \"<string>\",\n        \"postCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"source\": \"<string>\"\n    },\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerId/address",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerId",
+                    "address"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerId",
+                      "value": "",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "description": "Saves the Consumers address"
+              },
+              "response": [
+                {
+                  "id": "0c56c44d-4fda-4af1-8ee5-47bc4d5da4ad",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": ""
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerAddress\": {\n        \"consumerID\": \"<long>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"county\": \"<string>\",\n        \"postCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"source\": \"<string>\"\n    },\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:consumerId/address",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":consumerId",
+                        "address"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<object>\""
+                },
+                {
+                  "id": "44f3697c-27c7-4dc4-98cc-265f2ac28872",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": ""
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerAddress\": {\n        \"consumerID\": \"<long>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"county\": \"<string>\",\n        \"postCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"source\": \"<string>\"\n    },\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:consumerId/address",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":consumerId",
+                        "address"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<string>\""
+                },
+                {
+                  "id": "6d132314-b14b-4315-afbf-94733e12baac",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": ""
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerAddress\": {\n        \"consumerID\": \"<long>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"county\": \"<string>\",\n        \"postCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"source\": \"<string>\"\n    },\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:consumerId/address",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":consumerId",
+                        "address"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n \"consumerID\": \"<long>\",\n \"legacyID\": \"<string>\",\n \"agencyID\": \"<long>\",\n \"title\": \"<string>\",\n \"firstName\": \"<string>\",\n \"lastName\": \"<string>\",\n \"dateOfBirth\": \"<dateTime>\",\n \"email\": \"<string>\",\n \"emailValidityCode\": \"<integer>\",\n \"emailValidityValueText\": \"<string>\",\n \"emailConfirmedDate\": \"<dateTime>\",\n \"consumerAddress\": {\n  \"consumerID\": \"<long>\",\n  \"addressLine1\": \"<string>\",\n  \"addressLine2\": \"<string>\",\n  \"addressLine3\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"county\": \"<string>\",\n  \"postCode\": \"<string>\",\n  \"country\": \"<string>\",\n  \"source\": \"<string>\"\n },\n \"consumerPhones\": [\n  {\n   \"consumerPhoneID\": \"<long>\",\n   \"consumerID\": \"<long>\",\n   \"number\": \"<string>\",\n   \"sourceCode\": \"<integer>\",\n   \"sourceValueText\": \"<string>\",\n   \"statusCode\": \"<integer>\",\n   \"statusValueText\": \"<string>\",\n   \"typeCode\": \"<integer>\",\n   \"typeValueText\": \"<string>\",\n   \"countryCode\": \"<integer>\",\n   \"countryValueText\": \"<string>\",\n   \"softDeleteFlag\": \"<string>\",\n   \"qualityScoreNumber\": \"<long>\",\n   \"consentFlag\": \"<string>\",\n   \"consentDate\": \"<dateTime>\",\n   \"technologyTypeCode\": \"<integer>\",\n   \"technologyTypeValueText\": \"<string>\",\n   \"confirmedDate\": \"<dateTime>\"\n  },\n  {\n   \"consumerPhoneID\": \"<long>\",\n   \"consumerID\": \"<long>\",\n   \"number\": \"<string>\",\n   \"sourceCode\": \"<integer>\",\n   \"sourceValueText\": \"<string>\",\n   \"statusCode\": \"<integer>\",\n   \"statusValueText\": \"<string>\",\n   \"typeCode\": \"<integer>\",\n   \"typeValueText\": \"<string>\",\n   \"countryCode\": \"<integer>\",\n   \"countryValueText\": \"<string>\",\n   \"softDeleteFlag\": \"<string>\",\n   \"qualityScoreNumber\": \"<long>\",\n   \"consentFlag\": \"<string>\",\n   \"consentDate\": \"<dateTime>\",\n   \"technologyTypeCode\": \"<integer>\",\n   \"technologyTypeValueText\": \"<string>\",\n   \"confirmedDate\": \"<dateTime>\"\n  }\n ],\n \"consumerAccount\": {\n  \"consumerAccountID\": \"<long>\",\n  \"consumerID\": \"<long>\",\n  \"currentBalance\": \"<double>\",\n  \"originalBalance\": \"<double>\",\n  \"owner\": \"<string>\",\n  \"servicer\": \"<string>\",\n  \"consumerAccountIdentifierAgencyId\": \"<long>\"\n },\n \"preDefault\": {\n  \"consumerID\": \"<long>\",\n  \"startArrearsStatus\": \"<integer>\",\n  \"startArrearsAmount\": \"<double>\",\n  \"currentArrearsStatus\": \"<integer>\",\n  \"currentArrearsAmount\": \"<double>\",\n  \"currentDueAmount\": \"<double>\",\n  \"isSpecialArrangementFlag\": \"<boolean>\",\n  \"specialArrangementAmount\": \"<double>\",\n  \"repaymentPercentage\": \"<double>\",\n  \"creditType\": \"<string>\",\n  \"isAnniversaryFlag\": \"<boolean>\",\n  \"contractualInstalmentAmount\": \"<double>\",\n  \"isActive\": \"<boolean>\"\n },\n \"linkedConsumerCount\": \"<integer>\",\n \"consumerCallBack\": {\n  \"isCallBackOutstanding\": \"<boolean>\",\n  \"callbackRequestTime\": \"<dateTime>\",\n  \"phoneNumber\": \"<string>\",\n  \"category\": \"<string>\",\n  \"reasonForCall\": \"<string>\",\n  \"requestDate\": \"<dateTime>\",\n  \"requestUserId\": \"<long>\",\n  \"isCallBackAllowed\": \"<boolean>\",\n  \"callBackDisallowedReason\": \"<string>\",\n  \"actionCode\": \"<string>\",\n  \"resultCode\": \"<string>\"\n }\n}"
+                }
+              ]
+            },
+            {
+              "name": "consumeraddressasync",
+              "_postman_id": "20ac0205-d293-4b35-bbf5-b885eac84c31",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"consumerAddress\": {\n        \"consumerID\": \"<long>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"county\": \"<string>\",\n        \"postCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"source\": \"<string>\"\n    },\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerId/address/async",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerId",
+                    "address",
+                    "async"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerId",
+                      "value": "",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "description": "Saves the consumer Address"
+              },
+              "response": [
+                {
+                  "id": "bced1caf-29b3-42ca-bf0e-d1c912b67037",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": ""
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerAddress\": {\n        \"consumerID\": \"<long>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"county\": \"<string>\",\n        \"postCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"source\": \"<string>\"\n    },\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:consumerId/address/async",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":consumerId",
+                        "address",
+                        "async"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<object>\""
+                },
+                {
+                  "id": "d526ed4b-7aeb-4801-a087-dafe7d7af4cc",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": ""
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerAddress\": {\n        \"consumerID\": \"<long>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"county\": \"<string>\",\n        \"postCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"source\": \"<string>\"\n    },\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:consumerId/address/async",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":consumerId",
+                        "address",
+                        "async"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<string>\""
+                },
+                {
+                  "id": "d8fd9f17-5e63-487f-9876-6e05693842fe",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Ocp-Apim-Subscription-Key-South",
+                        "value": ""
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerAddress\": {\n        \"consumerID\": \"<long>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"county\": \"<string>\",\n        \"postCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"source\": \"<string>\"\n    },\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:consumerId/address/async",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":consumerId",
+                        "address",
+                        "async"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<string>\""
+                }
+              ]
+            }
+          ],
+          "_postman_id": "176efc9c-f8c5-4eed-8525-df60d4744ec2",
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "consumer",
+          "_postman_id": "01a414f8-f794-4891-a53f-cb287646ba28",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
+              },
+              {
+                "key": "Correlation-Id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/consumer/:consumerId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "consumer",
+                ":consumerId"
+              ],
+              "variable": [
+                {
+                  "key": "consumerId",
+                  "value": "2345678",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Get consumer by given ConsumerID"
+          },
+          "response": [
+            {
+              "id": "239e5ba2-3113-468c-8f02-19a711eca14e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": ""
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:consumerId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":consumerId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerId"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "\"<string>\""
+            },
+            {
+              "id": "489a3d1a-0b53-4927-afc3-395734efe1e5",
+              "name": "Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": ""
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:consumerId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":consumerId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerId"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "\"<object>\""
+            },
+            {
+              "id": "808ea303-4bf5-43a5-8c69-d5d031cc4a7d",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": ""
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:consumerId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":consumerId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerId"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n \"consumerID\": \"<long>\",\n \"legacyID\": \"<string>\",\n \"agencyID\": \"<long>\",\n \"title\": \"<string>\",\n \"firstName\": \"<string>\",\n \"lastName\": \"<string>\",\n \"dateOfBirth\": \"<dateTime>\",\n \"email\": \"<string>\",\n \"emailValidityCode\": \"<integer>\",\n \"emailValidityValueText\": \"<string>\",\n \"emailConfirmedDate\": \"<dateTime>\",\n \"consumerAddress\": {\n  \"consumerID\": \"<long>\",\n  \"addressLine1\": \"<string>\",\n  \"addressLine2\": \"<string>\",\n  \"addressLine3\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"county\": \"<string>\",\n  \"postCode\": \"<string>\",\n  \"country\": \"<string>\",\n  \"source\": \"<string>\"\n },\n \"consumerPhones\": [\n  {\n   \"consumerPhoneID\": \"<long>\",\n   \"consumerID\": \"<long>\",\n   \"number\": \"<string>\",\n   \"sourceCode\": \"<integer>\",\n   \"sourceValueText\": \"<string>\",\n   \"statusCode\": \"<integer>\",\n   \"statusValueText\": \"<string>\",\n   \"typeCode\": \"<integer>\",\n   \"typeValueText\": \"<string>\",\n   \"countryCode\": \"<integer>\",\n   \"countryValueText\": \"<string>\",\n   \"softDeleteFlag\": \"<string>\",\n   \"qualityScoreNumber\": \"<long>\",\n   \"consentFlag\": \"<string>\",\n   \"consentDate\": \"<dateTime>\",\n   \"technologyTypeCode\": \"<integer>\",\n   \"technologyTypeValueText\": \"<string>\",\n   \"confirmedDate\": \"<dateTime>\"\n  },\n  {\n   \"consumerPhoneID\": \"<long>\",\n   \"consumerID\": \"<long>\",\n   \"number\": \"<string>\",\n   \"sourceCode\": \"<integer>\",\n   \"sourceValueText\": \"<string>\",\n   \"statusCode\": \"<integer>\",\n   \"statusValueText\": \"<string>\",\n   \"typeCode\": \"<integer>\",\n   \"typeValueText\": \"<string>\",\n   \"countryCode\": \"<integer>\",\n   \"countryValueText\": \"<string>\",\n   \"softDeleteFlag\": \"<string>\",\n   \"qualityScoreNumber\": \"<long>\",\n   \"consentFlag\": \"<string>\",\n   \"consentDate\": \"<dateTime>\",\n   \"technologyTypeCode\": \"<integer>\",\n   \"technologyTypeValueText\": \"<string>\",\n   \"confirmedDate\": \"<dateTime>\"\n  }\n ],\n \"consumerAccount\": {\n  \"consumerAccountID\": \"<long>\",\n  \"consumerID\": \"<long>\",\n  \"currentBalance\": \"<double>\",\n  \"originalBalance\": \"<double>\",\n  \"owner\": \"<string>\",\n  \"servicer\": \"<string>\",\n  \"consumerAccountIdentifierAgencyId\": \"<long>\"\n },\n \"preDefault\": {\n  \"consumerID\": \"<long>\",\n  \"startArrearsStatus\": \"<integer>\",\n  \"startArrearsAmount\": \"<double>\",\n  \"currentArrearsStatus\": \"<integer>\",\n  \"currentArrearsAmount\": \"<double>\",\n  \"currentDueAmount\": \"<double>\",\n  \"isSpecialArrangementFlag\": \"<boolean>\",\n  \"specialArrangementAmount\": \"<double>\",\n  \"repaymentPercentage\": \"<double>\",\n  \"creditType\": \"<string>\",\n  \"isAnniversaryFlag\": \"<boolean>\",\n  \"contractualInstalmentAmount\": \"<double>\",\n  \"isActive\": \"<boolean>\"\n },\n \"linkedConsumerCount\": \"<integer>\",\n \"consumerCallBack\": {\n  \"isCallBackOutstanding\": \"<boolean>\",\n  \"callbackRequestTime\": \"<dateTime>\",\n  \"phoneNumber\": \"<string>\",\n  \"category\": \"<string>\",\n  \"reasonForCall\": \"<string>\",\n  \"requestDate\": \"<dateTime>\",\n  \"requestUserId\": \"<long>\",\n  \"isCallBackAllowed\": \"<boolean>\",\n  \"callBackDisallowedReason\": \"<string>\",\n  \"actionCode\": \"<string>\",\n  \"resultCode\": \"<string>\"\n }\n}"
+            }
+          ]
+        },
+        {
+          "name": "consumeraccountowner",
+          "_postman_id": "611286da-21df-4526-a256-50be3702f58a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
+              },
+              {
+                "key": "Correlation-Id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/consumer/:consumerId/account/:consumerAccountId/owner",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "consumer",
+                ":consumerId",
+                "account",
+                ":consumerAccountId",
+                "owner"
+              ],
+              "variable": [
+                {
+                  "key": "consumerId",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "consumerAccountId",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Returns the active account owners for the given consumer account Id"
+          },
+          "response": [
+            {
+              "id": "1680969c-e2ff-47b1-a451-e09dd71e7a56",
+              "name": "Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": ""
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:consumerId/account/:consumerAccountId/owner",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":consumerId",
+                    "account",
+                    ":consumerAccountId",
+                    "owner"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerId"
+                    },
+                    {
+                      "key": "consumerAccountId"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "\"<object>\""
+            },
+            {
+              "id": "73fe709c-6e0c-4384-9123-93d4ac52d334",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": ""
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:consumerId/account/:consumerAccountId/owner",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":consumerId",
+                    "account",
+                    ":consumerAccountId",
+                    "owner"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerId"
+                    },
+                    {
+                      "key": "consumerAccountId"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n {\n  \"consumerAccountOwnerID\": \"<long>\",\n  \"consumerID\": \"<long>\",\n  \"legacyID\": \"<string>\",\n  \"consumerName\": \"<string>\",\n  \"consumerBirthDate\": \"<dateTime>\",\n  \"ownership\": \"<string>\",\n  \"type\": \"<string>\",\n  \"attachDate\": \"<dateTime>\"\n },\n {\n  \"consumerAccountOwnerID\": \"<long>\",\n  \"consumerID\": \"<long>\",\n  \"legacyID\": \"<string>\",\n  \"consumerName\": \"<string>\",\n  \"consumerBirthDate\": \"<dateTime>\",\n  \"ownership\": \"<string>\",\n  \"type\": \"<string>\",\n  \"attachDate\": \"<dateTime>\"\n }\n]"
+            },
+            {
+              "id": "d90cbf7e-146a-4fd3-ae75-13ff07e6f310",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": ""
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:consumerId/account/:consumerAccountId/owner",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":consumerId",
+                    "account",
+                    ":consumerAccountId",
+                    "owner"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerId"
+                    },
+                    {
+                      "key": "consumerAccountId"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "\"<string>\""
+            }
+          ]
+        }
+      ],
+      "_postman_id": "6809cc5f-f870-48c5-bfc7-7b73ec98c04f"
+    },
+    {
+      "name": "Get Active Consumer Account Owner",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "3ff0d7e9-121a-4f2d-aa98-b5053c620bc7",
+            "exec": [
+              "var schemaResponse = {",
+              "                        \"description\": \"Success\",",
+              "                        \"schema\": {",
+              "                            \"uniqueItems\": false,",
+              "                            \"type\": \"array\",",
+              "                            \"items\": {",
+              "                                \"$ref\": \"#/definitions/ConsumerAccountOwner\"",
+              "                            }",
+              "                        }",
+              "};",
+              "var schemaConsumerAO = {",
+              "    \"schema\": {",
+              "            \"type\": \"object\",",
+              "            \"properties\": {",
+              "                \"consumerAccountOwnerID\": {",
+              "                    \"format\": \"int64\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"consumerID\": {",
+              "                    \"format\": \"int64\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"legacyID\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"consumerName\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"consumerBirthDate\": {",
+              "                    \"format\": \"date-time\",",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"ownership\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"type\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"attachDate\": {",
+              "                    \"format\": \"date-time\",",
+              "                    \"type\": \"string\"",
+              "                }",
+              "            }",
+              "        }",
+              "};",
+              "if (data.test_polarity==null || data.test_polarity==1){",
+              "pm.test(\"TEST1: Response Check \", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"TEST2: Status code Check\", function() {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"TEST3: Response Header Checks\", function() {",
+              "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');",
+              "});",
+              "",
+              "pm.test(\"TEST4: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});",
+              "",
+              "pm.test(\"TEST5: Response Schema is valid\", function() {",
+              "  pm.expect(tv4.validate(pm.response.json, schemaResponse, true, false)).to.be.true;",
+              "});",
+              "",
+              "pm.test(\"TEST7: Consumer Account Owner Schema is valid\", function() {",
+              "    for(var i=0;  i<(pm.response.json.length); i++) {",
+              "        pm.expect(tv4.validate(pm.response.json[i], schemaConsumerAO,true, false)).to.be.true;",
+              "        }",
+              "});",
+              "} else {",
+              "    //Negative TESTS",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "_postman_id": "f5cde597-ecfa-440f-8630-c3acacce1ffd",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Ocp-Apim-Subscription-Key-South",
+            "value": "{{Ocp-Apim-Subscription-Key-South}}",
+            "type": "text"
+          },
+          {
+            "key": "Ocp-Apim-Subscription-Key-West",
+            "value": "{{Ocp-Apim-Subscription-Key-West}}",
+            "type": "text"
+          },
+          {
+            "key": "Correlation-Id",
+            "value": "{{$guid}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/consumer/GetActiveConsumerAccountOwner/:consumerAccountId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "consumer",
+            "GetActiveConsumerAccountOwner",
+            ":consumerAccountId"
+          ],
+          "variable": [
+            {
+              "key": "consumerAccountId",
+              "value": "{{cnsmr_accnt_id}}",
+              "type": "string"
+            }
+          ]
+        },
+        "description": "Returns the active account owners for the given consumer account Id"
+      },
+      "response": [
+        {
+          "id": "11f8e424-1e27-4435-b47d-76053577b32c",
+          "name": "Bad Request",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": ""
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/GetActiveConsumerAccountOwner/:consumerAccountId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "GetActiveConsumerAccountOwner",
+                ":consumerAccountId"
+              ],
+              "variable": [
+                {
+                  "key": "consumerAccountId"
+                }
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "\"<string>\""
+        },
+        {
+          "id": "8d9a4166-bfc9-482c-a9e1-99167decbed8",
+          "name": "Server Error",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": ""
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/GetActiveConsumerAccountOwner/:consumerAccountId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "GetActiveConsumerAccountOwner",
+                ":consumerAccountId"
+              ],
+              "variable": [
+                {
+                  "key": "consumerAccountId"
+                }
+              ]
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "\"<object>\""
+        },
+        {
+          "id": "f6dd6cc7-da87-4c32-b31a-c4b0d4ccea14",
+          "name": "Success",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": ""
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/GetActiveConsumerAccountOwner/:consumerAccountId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "GetActiveConsumerAccountOwner",
+                ":consumerAccountId"
+              ],
+              "variable": [
+                {
+                  "key": "consumerAccountId"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "[\n {\n  \"consumerAccountOwnerID\": \"<long>\",\n  \"consumerID\": \"<long>\",\n  \"legacyID\": \"<string>\",\n  \"consumerName\": \"<string>\",\n  \"consumerBirthDate\": \"<dateTime>\",\n  \"ownership\": \"<string>\",\n  \"type\": \"<string>\",\n  \"attachDate\": \"<dateTime>\"\n },\n {\n  \"consumerAccountOwnerID\": \"<long>\",\n  \"consumerID\": \"<long>\",\n  \"legacyID\": \"<string>\",\n  \"consumerName\": \"<string>\",\n  \"consumerBirthDate\": \"<dateTime>\",\n  \"ownership\": \"<string>\",\n  \"type\": \"<string>\",\n  \"attachDate\": \"<dateTime>\"\n }\n]"
+        }
+      ]
+    },
+    {
+      "name": "Get By Consumer Id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "3052ee97-1214-4373-aea7-a20790e76b68",
+            "exec": [
+              "var schemaResponse = {",
+              "        \"description\": \"Success\",",
+              "        \"schema\": {",
+              "            \"type\": \"object\",",
+              "            \"properties\": {",
+              "                \"consumerID\": {",
+              "                    \"format\": \"int64\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"legacyID\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"agencyID\": {",
+              "                    \"format\": \"int64\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"title\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"firstName\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"lastName\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"dateOfBirth\": {",
+              "                    \"format\": \"date-time\",",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"email\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"emailValidityCode\": {",
+              "                    \"format\": \"int32\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"emailValidityValueText\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"emailConfirmedDate\": {",
+              "                    \"format\": \"date-time\",",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"consumerAddress\": {",
+              "                    \"$ref\": \"#/definitions/ConsumerAddress\"",
+              "                },",
+              "                \"consumerPhoneNumbers\": {",
+              "                    \"uniqueItems\": false,",
+              "                    \"type\": \"array\",",
+              "                    \"items\": {",
+              "                        \"$ref\": \"#/0/ConsumerPhoneNumber\"",
+              "                    }",
+              "                },",
+              "                \"consumerAccount\": {",
+              "                    \"$ref\": \"#/definitions/ConsumerAccount\"",
+              "                },",
+              "                \"preDefault\": {",
+              "                    \"$ref\": \"#/definitions/PreDefault\"",
+              "                },",
+              "                \"linkedConsumerCount\": {",
+              "                    \"format\": \"int32\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"consumerCallBack\": {",
+              "                    \"$ref\": \"#/definitions/ConsumerCallBack\"",
+              "                }",
+              "            }",
+              "        }",
+              "};",
+              "",
+              "var schemaConsumerAddres = { \"schema\": ",
+              "        {",
+              "            \"type\": \"object\",",
+              "            \"properties\": {",
+              "                \"consumerID\": {",
+              "                    //\"format\": \"int64\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"addressLine1\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"addressLine2\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"addressLine3\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"city\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"state\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"county\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"postCode\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"country\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"source\": {",
+              "                    \"type\": \"string\"",
+              "                }",
+              "            }",
+              "        }",
+              "};",
+              "var schemaConsumerAccount = ",
+              "{   \"schema\":",
+              "    {",
+              "            \"type\": \"object\",",
+              "            \"properties\": {",
+              "                \"consumerAccountID\": {",
+              "                    \"format\": \"int64\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"consumerID\": {",
+              "                    \"format\": \"int64\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"currentBalance\": {",
+              "                    \"format\": \"double\",",
+              "                    \"type\": \"number\"",
+              "                },",
+              "                \"originalBalance\": {",
+              "                    \"format\": \"double\",",
+              "                    \"type\": \"number\"",
+              "                },",
+              "                \"owner\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"servicer\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"consumerAccountIdentifierAgencyId\": {",
+              "                    \"format\": \"int64\",",
+              "                    \"type\": \"integer\"",
+              "                }",
+              "            }",
+              "        }",
+              "};",
+              "var schemaConsumerPhoneNumber =",
+              "{   \"schema\": ",
+              "        {",
+              "    ",
+              "            \"type\": \"object\",",
+              "            \"properties\": {",
+              "                \"consumerPhoneID\": {",
+              "                    \"format\": \"int64\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"consumerID\": {",
+              "                    \"format\": \"int64\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"number\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"sourceCode\": {",
+              "                    \"format\": \"int32\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"sourceValueText\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"statusCode\": {",
+              "                    \"format\": \"int32\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"statusValueText\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"typeCode\": {",
+              "                    \"format\": \"int32\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"typeValueText\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"countryCode\": {",
+              "                    \"format\": \"int32\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"countryValueText\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"softDeleteFlag\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"qualityScoreNumber\": {",
+              "                    \"format\": \"int64\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"consentFlag\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"consentDate\": {",
+              "                    \"format\": \"date-time\",",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"technologyTypeCode\": {",
+              "                    \"format\": \"int32\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"technologyTypeValueText\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"confirmedDate\": {",
+              "                    \"format\": \"date-time\",",
+              "                    \"type\": \"string\"",
+              "                }",
+              "            }",
+              "        }",
+              "};",
+              "",
+              "var schemapreDefault = {",
+              "    \"schema\":",
+              "    {",
+              "            \"type\": \"object\",",
+              "            \"properties\": {",
+              "                \"consumerID\": {",
+              "                    \"format\": \"int64\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"startArrearsStatus\": {",
+              "                    \"format\": \"int32\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"startArrearsAmount\": {",
+              "                    \"format\": \"double\",",
+              "                    \"type\": \"number\"",
+              "                },",
+              "                \"currentArrearsStatus\": {",
+              "                    \"format\": \"int32\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"currentArrearsAmount\": {",
+              "                    \"format\": \"double\",",
+              "                    \"type\": \"number\"",
+              "                },",
+              "                \"currentDueAmount\": {",
+              "                    \"format\": \"double\",",
+              "                    \"type\": \"number\"",
+              "                },",
+              "                \"isSpecialArrangementFlag\": {",
+              "                    \"type\": \"boolean\"",
+              "                },",
+              "                \"specialArrangementAmount\": {",
+              "                    \"format\": \"double\",",
+              "                    \"type\": \"number\"",
+              "                },",
+              "                \"repaymentPercentage\": {",
+              "                    \"format\": \"double\",",
+              "                    \"type\": \"number\"",
+              "                },",
+              "                \"creditType\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"isAnniversaryFlag\": {",
+              "                    \"type\": \"boolean\"",
+              "                },",
+              "                \"contractualInstalmentAmount\": {",
+              "                    \"format\": \"double\",",
+              "                    \"type\": \"number\"",
+              "                },",
+              "                \"isActive\": {",
+              "                    \"type\": \"boolean\"",
+              "                }",
+              "            }",
+              "        }",
+              "};",
+              "",
+              "var schemaConsumerCallBack = {",
+              "    \"schema\":",
+              "    {",
+              "            \"type\": \"object\",",
+              "            \"properties\": {",
+              "                \"isCallBackOutstanding\": {",
+              "                    \"type\": \"boolean\"",
+              "                },",
+              "                \"callbackRequestTime\": {",
+              "                    \"format\": \"date-time\",",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"phoneNumber\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"category\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"reasonForCall\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"requestDate\": {",
+              "                    \"format\": \"date-time\",",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"requestUserId\": {",
+              "                    \"format\": \"int64\",",
+              "                    \"type\": \"integer\"",
+              "                },",
+              "                \"isCallBackAllowed\": {",
+              "                    \"type\": \"boolean\"",
+              "                },",
+              "                \"callBackDisallowedReason\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"actionCode\": {",
+              "                    \"type\": \"string\"",
+              "                },",
+              "                \"resultCode\": {",
+              "                    \"type\": \"string\"",
+              "                }",
+              "            }",
+              "        }",
+              "};",
+              "/////////////////////////////////////////////////////////////////////////////////////",
+              "let expectedCode = pm.iterationData.get(\"expectedHttpCode\");",
+              "var jsonData = pm.response.json();",
+              "var req = request.url;",
+              "var query = request.url.split('/');",
+              "console.log(query);",
+              "console.log(req);",
+              "if (data.test_polarity==null || data.test_polarity==1){",
+              "pm.test(\"TEST1: Consumer ID Check\", function() {",
+              "    if (data.cnsmr_id==null){",
+              "    pm.expect(JSON.stringify(jsonData.consumerID)).to.deep.equal(query[6]);",
+              "    }else{",
+              "    pm.expect(jsonData.consumerID).to.deep.equal(data.cnsmr_id);",
+              "    }",
+              "});",
+              "",
+              "pm.test(\"TEST2: Status code Check\", function() {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"TEST3: Response Header Checks\", function() {",
+              "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');",
+              "});",
+              "",
+              "pm.test(\"TEST4: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {",
+              "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+              "});",
+              "",
+              "pm.test(\"TEST5: Response Schema is valid\", function() {",
+              "  pm.expect(tv4.validate(jsonData, schemaResponse, true, false)).to.be.true;",
+              "});",
+              "",
+              "pm.test(\"TEST6: Consumer Address Schema is valid\", function() {",
+              "  pm.expect(tv4.validate(jsonData.consumerAddress, schemaConsumerAddres,true, false)).to.be.true;",
+              "});",
+              "",
+              "pm.test(\"TEST7: Consumer Phone number Schema is valid\", function() {",
+              "    if (jsonData.consumerPhones !== null){",
+              "    for(var i=0;  i<(jsonData.consumerPhones.length); i++) {",
+              "        pm.expect(tv4.validate(jsonData.consumerPhones[i], schemaConsumerPhoneNumber,true, false)).to.be.true;",
+              "        }",
+              "    }",
+              "});",
+              "",
+              "pm.test(\"TEST8: Consumer Account Schema is valid\", function() {",
+              "  pm.expect(tv4.validate(jsonData.consumerAccount, schemaConsumerAccount,true, false)).to.be.true;",
+              "});",
+              "",
+              "pm.test(\"TEST9: Prefeault Schema is valid\", function() {",
+              "  pm.expect(tv4.validate(jsonData.preDefault, schemapreDefault,true, false)).to.be.true;",
+              "});",
+              "",
+              "pm.test(\"TEST10: Consumer Callback Schema is valid\", function() {",
+              "  pm.expect(tv4.validate(jsonData.consumerCallBack, schemaConsumerCallBack,true, false)).to.be.true;",
+              "});",
+              "} else {",
+              "    ",
+              "    //negative TESTS",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "_postman_id": "210f2bf2-d673-4a2b-bce4-7b8e226d07ee",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "password": "TEST",
+            "username": "cabotcm\\mjones"
+          }
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Ocp-Apim-Subscription-Key-South",
+            "value": "{{Ocp-Apim-Subscription-Key-South}}",
+            "type": "text"
+          },
+          {
+            "key": "Ocp-Apim-Subscription-Key-West",
+            "value": "{{Ocp-Apim-Subscription-Key-West}}",
+            "type": "text"
+          },
+          {
+            "key": "Correlation-Id",
+            "value": "{{$guid}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/consumer/GetByConsumerId/:consumerId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "consumer",
+            "GetByConsumerId",
+            ":consumerId"
+          ],
+          "variable": [
+            {
+              "key": "consumerId",
+              "value": "3216547",
+              "type": "string"
+            }
+          ]
+        },
+        "description": "Returns the consumer for the given consumer id"
+      },
+      "response": [
+        {
+          "id": "5fa64f2f-51b3-4d6f-8f0e-38771f416c17",
+          "name": "Bad Request",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": ""
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/GetByConsumerId/:consumerId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "GetByConsumerId",
+                ":consumerId"
+              ],
+              "variable": [
+                {
+                  "key": "consumerId"
+                }
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "\"<string>\""
+        },
+        {
+          "id": "6274d9fa-29a7-4af0-a5f7-c83466091f43",
+          "name": "Server Error",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": ""
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/GetByConsumerId/:consumerId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "GetByConsumerId",
+                ":consumerId"
+              ],
+              "variable": [
+                {
+                  "key": "consumerId"
+                }
+              ]
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "\"<object>\""
+        },
+        {
+          "id": "71ca8c1d-6401-4b92-8739-2b874c45ce2b",
+          "name": "Success",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": ""
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/GetByConsumerId/:consumerId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "GetByConsumerId",
+                ":consumerId"
+              ],
+              "variable": [
+                {
+                  "key": "consumerId"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n \"consumerID\": \"<long>\",\n \"legacyID\": \"<string>\",\n \"agencyID\": \"<long>\",\n \"title\": \"<string>\",\n \"firstName\": \"<string>\",\n \"lastName\": \"<string>\",\n \"dateOfBirth\": \"<dateTime>\",\n \"email\": \"<string>\",\n \"emailValidityCode\": \"<integer>\",\n \"emailValidityValueText\": \"<string>\",\n \"emailConfirmedDate\": \"<dateTime>\",\n \"consumerAddress\": {\n  \"consumerID\": \"<long>\",\n  \"addressLine1\": \"<string>\",\n  \"addressLine2\": \"<string>\",\n  \"addressLine3\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"county\": \"<string>\",\n  \"postCode\": \"<string>\",\n  \"country\": \"<string>\",\n  \"source\": \"<string>\"\n },\n \"consumerPhones\": [\n  {\n   \"consumerPhoneID\": \"<long>\",\n   \"consumerID\": \"<long>\",\n   \"number\": \"<string>\",\n   \"sourceCode\": \"<integer>\",\n   \"sourceValueText\": \"<string>\",\n   \"statusCode\": \"<integer>\",\n   \"statusValueText\": \"<string>\",\n   \"typeCode\": \"<integer>\",\n   \"typeValueText\": \"<string>\",\n   \"countryCode\": \"<integer>\",\n   \"countryValueText\": \"<string>\",\n   \"softDeleteFlag\": \"<string>\",\n   \"qualityScoreNumber\": \"<long>\",\n   \"consentFlag\": \"<string>\",\n   \"consentDate\": \"<dateTime>\",\n   \"technologyTypeCode\": \"<integer>\",\n   \"technologyTypeValueText\": \"<string>\",\n   \"confirmedDate\": \"<dateTime>\"\n  },\n  {\n   \"consumerPhoneID\": \"<long>\",\n   \"consumerID\": \"<long>\",\n   \"number\": \"<string>\",\n   \"sourceCode\": \"<integer>\",\n   \"sourceValueText\": \"<string>\",\n   \"statusCode\": \"<integer>\",\n   \"statusValueText\": \"<string>\",\n   \"typeCode\": \"<integer>\",\n   \"typeValueText\": \"<string>\",\n   \"countryCode\": \"<integer>\",\n   \"countryValueText\": \"<string>\",\n   \"softDeleteFlag\": \"<string>\",\n   \"qualityScoreNumber\": \"<long>\",\n   \"consentFlag\": \"<string>\",\n   \"consentDate\": \"<dateTime>\",\n   \"technologyTypeCode\": \"<integer>\",\n   \"technologyTypeValueText\": \"<string>\",\n   \"confirmedDate\": \"<dateTime>\"\n  }\n ],\n \"consumerAccount\": {\n  \"consumerAccountID\": \"<long>\",\n  \"consumerID\": \"<long>\",\n  \"currentBalance\": \"<double>\",\n  \"originalBalance\": \"<double>\",\n  \"owner\": \"<string>\",\n  \"servicer\": \"<string>\",\n  \"consumerAccountIdentifierAgencyId\": \"<long>\"\n },\n \"preDefault\": {\n  \"consumerID\": \"<long>\",\n  \"startArrearsStatus\": \"<integer>\",\n  \"startArrearsAmount\": \"<double>\",\n  \"currentArrearsStatus\": \"<integer>\",\n  \"currentArrearsAmount\": \"<double>\",\n  \"currentDueAmount\": \"<double>\",\n  \"isSpecialArrangementFlag\": \"<boolean>\",\n  \"specialArrangementAmount\": \"<double>\",\n  \"repaymentPercentage\": \"<double>\",\n  \"creditType\": \"<string>\",\n  \"isAnniversaryFlag\": \"<boolean>\",\n  \"contractualInstalmentAmount\": \"<double>\",\n  \"isActive\": \"<boolean>\"\n },\n \"linkedConsumerCount\": \"<integer>\",\n \"consumerCallBack\": {\n  \"isCallBackOutstanding\": \"<boolean>\",\n  \"callbackRequestTime\": \"<dateTime>\",\n  \"phoneNumber\": \"<string>\",\n  \"category\": \"<string>\",\n  \"reasonForCall\": \"<string>\",\n  \"requestDate\": \"<dateTime>\",\n  \"requestUserId\": \"<long>\",\n  \"isCallBackAllowed\": \"<boolean>\",\n  \"callBackDisallowedReason\": \"<string>\",\n  \"actionCode\": \"<string>\",\n  \"resultCode\": \"<string>\"\n }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Save Consumer Address",
+      "_postman_id": "789f019c-310b-4aab-b672-8d3085649093",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Ocp-Apim-Subscription-Key-South",
+            "value": "{{Ocp-Apim-Subscription-Key-South}}",
+            "type": "text"
+          },
+          {
+            "key": "Ocp-Apim-Subscription-Key-West",
+            "value": "{{Ocp-Apim-Subscription-Key-West}}",
+            "type": "text"
+          },
+          {
+            "key": "Correlation-Id",
+            "value": "{{$guid}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\"ConsumerAddress\": {\r\n        \"ConsumerID\": 4346991,\r\n        \"SecondaryConsumerId\": 0,\r\n        \"SecondaryConsumerEmail\": \"sec@email.com\",\r\n        \"AddressLine1\": \"15, Cookie Way\",\r\n        \"AddressLine2\": \"Cookie Street\",\r\n        \"AddressLine3\": \"Cookie Road\",\r\n        \"City\": \"CookieBurgh\",\r\n        \"State\": \"Coockie\",\r\n        \"County\": \"TEST Cookie\",\r\n        \"PostCode\": \"TF3 4NT\",\r\n        \"Country\": \"UK\",\r\n        \"Source\": \"UNKNOWN\"\r\n    }\r\n}"
+        },
+        "url": "{{baseUrl}}/consumer/SaveConsumerAddress",
+        "description": "Saves the Consumers address"
+      },
+      "response": [
+        {
+          "id": "0d9b3edd-f56b-4437-842d-e1517504781b",
+          "name": "Success",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"consumerAddress\": {\n        \"consumerID\": \"<long>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"county\": \"<string>\",\n        \"postCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"source\": \"<string>\"\n    },\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+            },
+            "url": "{{baseUrl}}/SaveConsumerAddress"
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n \"consumerID\": \"<long>\",\n \"legacyID\": \"<string>\",\n \"agencyID\": \"<long>\",\n \"title\": \"<string>\",\n \"firstName\": \"<string>\",\n \"lastName\": \"<string>\",\n \"dateOfBirth\": \"<dateTime>\",\n \"email\": \"<string>\",\n \"emailValidityCode\": \"<integer>\",\n \"emailValidityValueText\": \"<string>\",\n \"emailConfirmedDate\": \"<dateTime>\",\n \"consumerAddress\": {\n  \"consumerID\": \"<long>\",\n  \"addressLine1\": \"<string>\",\n  \"addressLine2\": \"<string>\",\n  \"addressLine3\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"county\": \"<string>\",\n  \"postCode\": \"<string>\",\n  \"country\": \"<string>\",\n  \"source\": \"<string>\"\n },\n \"consumerPhones\": [\n  {\n   \"consumerPhoneID\": \"<long>\",\n   \"consumerID\": \"<long>\",\n   \"number\": \"<string>\",\n   \"sourceCode\": \"<integer>\",\n   \"sourceValueText\": \"<string>\",\n   \"statusCode\": \"<integer>\",\n   \"statusValueText\": \"<string>\",\n   \"typeCode\": \"<integer>\",\n   \"typeValueText\": \"<string>\",\n   \"countryCode\": \"<integer>\",\n   \"countryValueText\": \"<string>\",\n   \"softDeleteFlag\": \"<string>\",\n   \"qualityScoreNumber\": \"<long>\",\n   \"consentFlag\": \"<string>\",\n   \"consentDate\": \"<dateTime>\",\n   \"technologyTypeCode\": \"<integer>\",\n   \"technologyTypeValueText\": \"<string>\",\n   \"confirmedDate\": \"<dateTime>\"\n  },\n  {\n   \"consumerPhoneID\": \"<long>\",\n   \"consumerID\": \"<long>\",\n   \"number\": \"<string>\",\n   \"sourceCode\": \"<integer>\",\n   \"sourceValueText\": \"<string>\",\n   \"statusCode\": \"<integer>\",\n   \"statusValueText\": \"<string>\",\n   \"typeCode\": \"<integer>\",\n   \"typeValueText\": \"<string>\",\n   \"countryCode\": \"<integer>\",\n   \"countryValueText\": \"<string>\",\n   \"softDeleteFlag\": \"<string>\",\n   \"qualityScoreNumber\": \"<long>\",\n   \"consentFlag\": \"<string>\",\n   \"consentDate\": \"<dateTime>\",\n   \"technologyTypeCode\": \"<integer>\",\n   \"technologyTypeValueText\": \"<string>\",\n   \"confirmedDate\": \"<dateTime>\"\n  }\n ],\n \"consumerAccount\": {\n  \"consumerAccountID\": \"<long>\",\n  \"consumerID\": \"<long>\",\n  \"currentBalance\": \"<double>\",\n  \"originalBalance\": \"<double>\",\n  \"owner\": \"<string>\",\n  \"servicer\": \"<string>\",\n  \"consumerAccountIdentifierAgencyId\": \"<long>\"\n },\n \"preDefault\": {\n  \"consumerID\": \"<long>\",\n  \"startArrearsStatus\": \"<integer>\",\n  \"startArrearsAmount\": \"<double>\",\n  \"currentArrearsStatus\": \"<integer>\",\n  \"currentArrearsAmount\": \"<double>\",\n  \"currentDueAmount\": \"<double>\",\n  \"isSpecialArrangementFlag\": \"<boolean>\",\n  \"specialArrangementAmount\": \"<double>\",\n  \"repaymentPercentage\": \"<double>\",\n  \"creditType\": \"<string>\",\n  \"isAnniversaryFlag\": \"<boolean>\",\n  \"contractualInstalmentAmount\": \"<double>\",\n  \"isActive\": \"<boolean>\"\n },\n \"linkedConsumerCount\": \"<integer>\",\n \"consumerCallBack\": {\n  \"isCallBackOutstanding\": \"<boolean>\",\n  \"callbackRequestTime\": \"<dateTime>\",\n  \"phoneNumber\": \"<string>\",\n  \"category\": \"<string>\",\n  \"reasonForCall\": \"<string>\",\n  \"requestDate\": \"<dateTime>\",\n  \"requestUserId\": \"<long>\",\n  \"isCallBackAllowed\": \"<boolean>\",\n  \"callBackDisallowedReason\": \"<string>\",\n  \"actionCode\": \"<string>\",\n  \"resultCode\": \"<string>\"\n }\n}"
+        },
+        {
+          "id": "0feb6dd0-bead-41bb-b10d-c36c31668ca7",
+          "name": "Server Error",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"consumerAddress\": {\n        \"consumerID\": \"<long>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"county\": \"<string>\",\n        \"postCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"source\": \"<string>\"\n    },\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+            },
+            "url": "{{baseUrl}}/SaveConsumerAddress"
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "\"<object>\""
+        },
+        {
+          "id": "f4d7af85-1c97-481b-9443-24223333ebce",
+          "name": "Bad Request",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"consumerAddress\": {\n        \"consumerID\": \"<long>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"county\": \"<string>\",\n        \"postCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"source\": \"<string>\"\n    },\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+            },
+            "url": "{{baseUrl}}/SaveConsumerAddress"
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "\"<string>\""
+        }
+      ]
+    },
+    {
+      "name": "Save Consumer Address Async",
+      "_postman_id": "e5228dec-9a83-43bd-b76a-2c0a5ddbb5ac",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Ocp-Apim-Subscription-Key-South",
+            "value": "{{Ocp-Apim-Subscription-Key-South}}",
+            "type": "text"
+          },
+          {
+            "key": "Ocp-Apim-Subscription-Key-West",
+            "value": "{{Ocp-Apim-Subscription-Key-West}}",
+            "type": "text"
+          },
+          {
+            "key": "Correlation-Id",
+            "value": "{{$guid}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"consumerAddress\": {\n        \"consumerID\": \"<long>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"county\": \"<string>\",\n        \"postCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"source\": \"<string>\"\n    },\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+        },
+        "url": "{{baseUrl}}/consumer/SaveConsumerAddressAsync",
+        "description": "Saves the consumer Address"
+      },
+      "response": [
+        {
+          "id": "0f047d4a-bfeb-4ac2-80dd-3c93049558f0",
+          "name": "Server Error",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"consumerAddress\": {\n        \"consumerID\": \"<long>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"county\": \"<string>\",\n        \"postCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"source\": \"<string>\"\n    },\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+            },
+            "url": "{{baseUrl}}/SaveConsumerAddressAsync"
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "\"<object>\""
+        },
+        {
+          "id": "2810f404-e905-49ef-98fc-2208b28cf00f",
+          "name": "Bad Request",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"consumerAddress\": {\n        \"consumerID\": \"<long>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"county\": \"<string>\",\n        \"postCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"source\": \"<string>\"\n    },\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+            },
+            "url": "{{baseUrl}}/SaveConsumerAddressAsync"
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "\"<string>\""
+        },
+        {
+          "id": "46aa032a-57e4-4b3c-9d2d-089700190841",
+          "name": "Success",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"consumerAddress\": {\n        \"consumerID\": \"<long>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"county\": \"<string>\",\n        \"postCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"source\": \"<string>\"\n    },\n    \"userName\": \"<string>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+            },
+            "url": "{{baseUrl}}/SaveConsumerAddressAsync"
+          },
+          "status": "No Content",
+          "code": 204,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "\"<string>\""
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "2c60d727-7521-4d8a-9d47-d6589f212de1",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "61325485-8f45-4851-92d4-b773233dc388",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "9c978d5e-dd8a-4b4f-b996-9dc8961cebdd",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
