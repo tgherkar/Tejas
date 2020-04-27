@@ -40832,7 +40832,7 @@
                   "var query = request.url.split('/');",
                   "pm.test(\"TEST1: legacy ID Check\", function() {",
                   "    if (data.cnsmr_id==null){",
-                  "    pm.expect(jsonData.legacyID).to.deep.equal(query[4]);",
+                  "    pm.expect(jsonData.legacyID).to.deep.equal(query[5]);",
                   "    }else{",
                   "    pm.expect(jsonData.legacyID).to.deep.equal(data.legacyID);",
                   "    }",
