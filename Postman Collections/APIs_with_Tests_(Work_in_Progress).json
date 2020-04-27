@@ -40897,7 +40897,7 @@
                   "});",
                   " pm.test(\"Incorrect Consumer ID should be not found\", function () {",
                   "     pm.expect(responseCode.code).to.equal(204);",
-                  "     pm.expect(responseBody).to.be(null);",
+                  "     pm.expect(responseBody).to.equal('');",
                   "});",
                   "}",
                   ""
