@@ -18536,6 +18536,9 @@
                 "id": "69d98657-7f4d-4db0-9222-e2655d968ad4",
                 "exec": [
                   "var jsonData = JSON.parse(responseBody);",
+                  "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));",
+                  "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));",
+                  "console.log(\"Average response time: \" + responseTime + \"ms\");",
                   "",
                   "var Ajv = require('ajv'),",
                   "ajv = new Ajv({logger: console}),",
