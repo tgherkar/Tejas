@@ -19880,10 +19880,7 @@
                   "console.log(\"Using payload as \" + payload);",
                   "console.log(environment.secret);",
                   "var hash = CryptoJS.HmacSHA256(payload, environment.secret).toString(CryptoJS.enc.Hex);",
-                  "postman.setGlobalVariable(\"signature\", \"sha256=\" + hash);",
-                  "",
-                  "",
-                  ""
+                  "postman.setGlobalVariable(\"signature\", \"sha256=\" + hash);"
                 ],
                 "type": "text/javascript"
               }
