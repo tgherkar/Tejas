@@ -1,0 +1,319 @@
+{
+	"id": "3ebae608-9636-49b7-8f18-013cc3444ebd",
+	"values": [
+		{
+			"key": "auth_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjU1NDhGRkQ5LURGRUYtNDA3Qi1BN0JDLTk5RjgzMjZCRDEwMSIsIm5iZiI6MTU2ODYzOTQwOCwiZXhwIjoxNTY4NjU3NDA4LCJpYXQiOjE1Njg2Mzk0MDgsImlzcyI6IkF6dXJlIiwiYXVkIjoiUmFja3NwYWNlIn0.KSHANB2xl--vlUMu1mjwAlIngHYztTgCh6_YaKjgttE",
+			"enabled": false
+		},
+		{
+			"key": "cnsmr_id",
+			"value": "4346991",
+			"enabled": true
+		},
+		{
+			"key": "cnsmr_accnt_id",
+			"value": "1572329",
+			"enabled": true
+		},
+		{
+			"key": "AddressLine1",
+			"value": "15, Cookie Way",
+			"enabled": true
+		},
+		{
+			"key": "AddressLine2",
+			"value": "Cookie Street",
+			"enabled": true
+		},
+		{
+			"key": "City",
+			"value": "CookieBurgh",
+			"enabled": true
+		},
+		{
+			"key": "State",
+			"value": "Coockie",
+			"enabled": true
+		},
+		{
+			"key": "County",
+			"value": "TEST Cookie",
+			"enabled": true
+		},
+		{
+			"key": "PostCode",
+			"value": "TE573ER",
+			"enabled": true
+		},
+		{
+			"key": "Country",
+			"value": "UK",
+			"enabled": true
+		},
+		{
+			"key": "Source",
+			"value": "UNKNOWN",
+			"enabled": true
+		},
+		{
+			"key": "AddressLine3",
+			"value": "Cookie Road",
+			"enabled": true
+		},
+		{
+			"key": "SecondaryConsumerId",
+			"value": "0",
+			"enabled": true
+		},
+		{
+			"key": "SecondaryConsumerEmail",
+			"value": "sec@email.com",
+			"enabled": true
+		},
+		{
+			"key": "test_polarity",
+			"value": "1",
+			"enabled": true
+		},
+		{
+			"key": "legacyID",
+			"value": "10021",
+			"enabled": true
+		},
+		{
+			"key": "customerId",
+			"value": 25,
+			"enabled": true
+		},
+		{
+			"key": "orderId",
+			"value": "0a75ad50-692b-4a06-955a-ffb4d7ea3ad8",
+			"enabled": true
+		},
+		{
+			"key": "initials",
+			"value": "D",
+			"enabled": true
+		},
+		{
+			"key": "firstname",
+			"value": "David",
+			"enabled": true
+		},
+		{
+			"key": "surname",
+			"value": "Plum",
+			"enabled": true
+		},
+		{
+			"key": "dob",
+			"value": "1953-10-12",
+			"enabled": true
+		},
+		{
+			"key": "email",
+			"value": "BaileyTest4+User105@gmail.com",
+			"enabled": true
+		},
+		{
+			"key": "pay_amount",
+			"value": "5.00",
+			"enabled": true
+		},
+		{
+			"key": "TxtAuthNo",
+			"value": "997794",
+			"enabled": true
+		},
+		{
+			"key": "PaymentAt",
+			"value": "2019-10-10",
+			"enabled": true
+		},
+		{
+			"key": "card_type",
+			"value": "Visa",
+			"enabled": true
+		},
+		{
+			"key": "Ac_Cd",
+			"value": "SFEMAIL",
+			"enabled": true
+		},
+		{
+			"key": "Rs_Cd",
+			"value": "SFACTVTY",
+			"enabled": true
+		},
+		{
+			"key": "auth_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjU1NDhGRkQ5LURGRUYtNDA3Qi1BN0JDLTk5RjgzMjZCRDEwMSIsIm5iZiI6MTU4NDYxMTA5NiwiZXhwIjoxNTg0NjI5MDk2LCJpYXQiOjE1ODQ2MTEwOTYsImlzcyI6IkF6dXJlIiwiYXVkIjoiUmFja3NwYWNlIn0.wHHETy79zflIjGAPRje_U0EDXyEXFLFGnuBmRPxS4L4",
+			"enabled": true
+		},
+		{
+			"key": "htmlText",
+			"value": "\"<p>CONNW (New Contact Us Case) </p>\"",
+			"enabled": true
+		},
+		{
+			"key": "dt_call",
+			"value": "2020-02-02",
+			"enabled": true
+		},
+		{
+			"key": "tm_call",
+			"value": "10:27:01",
+			"enabled": true
+		},
+		{
+			"key": "phn_num",
+			"value": "02313272483",
+			"enabled": true
+		},
+		{
+			"key": "call_purpose",
+			"value": "Test Call 1",
+			"enabled": true
+		},
+		{
+			"key": "isAccntHldr",
+			"value": "True",
+			"enabled": true
+		},
+		{
+			"key": "isDPARqsted",
+			"value": "True",
+			"enabled": true
+		},
+		{
+			"key": "isAutoPymnt",
+			"value": "False",
+			"enabled": true
+		},
+		{
+			"key": "cnsmrlc_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "sfsid_delete",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "signature",
+			"value": "sha256=92ed5d70cd702b2958f8d6b5857478419df2028fae6600565a8d1c03e980b7b7",
+			"enabled": true
+		},
+		{
+			"key": "title",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "Curr_Bal",
+			"value": "1000.00",
+			"enabled": true
+		},
+		{
+			"key": "Orig_Bal",
+			"value": "2000.00",
+			"enabled": true
+		},
+		{
+			"key": "consumerPhoneID",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "softDeleteFlag",
+			"value": "N",
+			"enabled": true
+		},
+		{
+			"key": "legID",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "SFSID",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "getSFSID",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "prev_nm",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "rev_dt",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "rev_dt_set",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "countryCode",
+			"value": "229",
+			"enabled": true
+		},
+		{
+			"key": "add_sourceCode",
+			"value": "0",
+			"enabled": true
+		},
+		{
+			"key": "consumerPhoneID",
+			"value": "2078765",
+			"enabled": true
+		},
+		{
+			"key": "applyToLinkedConsumers",
+			"value": "false",
+			"enabled": true
+		},
+		{
+			"key": "phn_sourceCode",
+			"value": "0",
+			"enabled": true
+		},
+		{
+			"key": "phn_statusCode",
+			"value": "1",
+			"enabled": true
+		},
+		{
+			"key": "phn_typeCode",
+			"value": "3",
+			"enabled": true
+		},
+		{
+			"key": "phn_techtypeCode",
+			"value": "2",
+			"enabled": true
+		},
+		{
+			"key": "phn_qualScore",
+			"value": "726",
+			"enabled": true
+		},
+		{
+			"key": "phn_consentGiven",
+			"value": "true",
+			"enabled": true
+		}
+	],
+	"name": "Team Workspace Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2020-04-29T08:59:40.825Z",
+	"_postman_exported_using": "Postman/7.22.1"
+}
