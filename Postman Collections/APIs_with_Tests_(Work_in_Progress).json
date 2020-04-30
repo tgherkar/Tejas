@@ -40980,6 +40980,103 @@
         }
       ],
       "_postman_id": "0ec32dc1-7625-4b9e-aac8-e0558e723e43"
+    },
+    {
+      "name": "OAuth Renewal",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "1ad5de18-505e-4763-a0b0-adb1baaf5f05",
+            "exec": [
+              "let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+              "let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+              "let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+              "let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default'\r",
+              "\r",
+              "let getTokenRequest = {\r",
+              "    method: 'POST',\r",
+              "    url: tokenUrl,\r",
+              "    auth: {\r",
+              "        type: \"basic\",\r",
+              "        basic: [\r",
+              "            { key: \"username\", value: clientId },\r",
+              "            { key: \"password\", value: clientSecret }\r",
+              "        ]\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'formdata',\r",
+              "        formdata: [\r",
+              "            { key: 'grant_type', value: 'client_credentials' },\r",
+              "            { key: 'scope', value: scope }\r",
+              "        ]\r",
+              "    }\r",
+              "};\r",
+              "\r",
+              "pm.sendRequest(getTokenRequest, (err, response) => {\r",
+              "    let jsonResponse = response.json(),\r",
+              "        newAccessToken = jsonResponse.access_token;\r",
+              "\r",
+              "    console.log({ err, jsonResponse, newAccessToken })\r",
+              "\r",
+              "    pm.environment.set('accessToken', newAccessToken);\r",
+              "    pm.globals.set(\"OAuth_Token\", newAccessToken);\r",
+              "    pm.variables.set('accessToken', newAccessToken);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "2a7b142c-f940-430e-a662-c8b4439a9a22",
+            "exec": [
+              "let jsonResponse = response.json();\r",
+              "\r",
+              "pm.environment.set('OAuth_Token', jsonResponse.access_token);\r",
+              "pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+              "pm.environment.set(\"OAuth_Timestamp\", new Date());"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "_postman_id": "87fe24fd-80db-4e1e-bd6d-75e8f16bf028",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "password": "]3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2",
+            "username": "21b8fbef-726b-47a4-8135-1bcfe2ba9a98"
+          }
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "grant_type",
+              "value": "client_credentials",
+              "type": "text"
+            },
+            {
+              "key": "scope",
+              "value": "api://81167d3d-853f-4207-80fa-3225a4927aca/.default",
+              "type": "text"
+            }
+          ],
+          "options": {
+            "formdata": {}
+          }
+        },
+        "url": "https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token"
+      },
+      "response": []
     }
   ]
 }
