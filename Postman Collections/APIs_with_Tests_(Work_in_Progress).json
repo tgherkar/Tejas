@@ -23992,6 +23992,69 @@
                     ],
                     "type": "text/javascript"
                   }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "246ab7df-6878-4fdd-87f4-9b99574e92d9",
+                    "exec": [
+                      "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                      "{\r",
+                      "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                      "} else {\r",
+                      "    var tokenDate = new Date(2010,1,1);\r",
+                      "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                      "    if(tokenTimestamp){\r",
+                      "        tokenDate = Date.parse(tokenTimestamp);\r",
+                      "    }\r",
+                      "    //console.log(\"timestamp is\"+tokenDate);\r",
+                      "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                      "    if(!expiresInTime){\r",
+                      "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                      "    }\r",
+                      "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                      "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                      "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                      "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                      "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                      "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                      "\r",
+                      "        let getTokenRequest = {\r",
+                      "            method: 'POST',\r",
+                      "            url: tokenUrl,\r",
+                      "            auth: {\r",
+                      "                type: \"basic\",\r",
+                      "                basic: [\r",
+                      "                    { key: \"username\", value: clientId },\r",
+                      "                    { key: \"password\", value: clientSecret }\r",
+                      "                ]\r",
+                      "            },\r",
+                      "            body: {\r",
+                      "                mode: 'formdata',\r",
+                      "                formdata: [\r",
+                      "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                      "                    { key: 'scope', value: scope }\r",
+                      "                ]\r",
+                      "            }\r",
+                      "        };\r",
+                      "\r",
+                      "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                      "            let jsonResponse = response.json(),\r",
+                      "            newAccessToken = jsonResponse.access_token;\r",
+                      "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                      "\r",
+                      "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                      "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                      "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                      "        });\r",
+                      "\r",
+                      "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                      "    }\r",
+                      "}\r",
+                      "//console.log(\"End of Pre-req script\");"
+                    ],
+                    "type": "text/javascript"
+                  }
                 }
               ],
               "_postman_id": "29fb54b9-ed3d-46eb-b418-71d24104d4c1",
@@ -24002,7 +24065,7 @@
                 "auth": {
                   "type": "oauth2",
                   "oauth2": {
-                    "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSIsImtpZCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSJ9.eyJhdWQiOiJhcGk6Ly84MTE2N2QzZC04NTNmLTQyMDctODBmYS0zMjI1YTQ5MjdhY2EiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMvIiwiaWF0IjoxNTg2OTQ2NTIyLCJuYmYiOjE1ODY5NDY1MjIsImV4cCI6MTU4Njk1MDQyMiwiYWlvIjoiNDJkZ1lOanh2bi9tdEJOKzd6bTMvdnU0TDB5eUFnQT0iLCJhcHBpZCI6IjIxYjhmYmVmLTcyNmItNDdhNC04MTM1LTFiY2ZlMmJhOWE5OCIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5My8iLCJvaWQiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJzdWIiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJ0aWQiOiIzNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMiLCJ1dGkiOiJ0WW4tZGs3R1VVeTBYdHdFS204VUFBIiwidmVyIjoiMS4wIn0.CMZnv2CwV1eVhJFci-gwEjLoJA6EkKgkEcvmAbmL13KQcxBeDDBEls1s33mB2yPR989Dly271pyeIurBGRApNS9wZ4k8yT-0HBHgHyuHlKCvktoIFkVrHOLzNT8Dnw5gPbsgUZFeE2Bu5FFA855hGiu2wXniNn-KdqNC_d2CuN_4crOvKMzZ62VRFT1zXoLl4Nc-tHZFEVgcgm9pVUiG3_Cixt_uhVdkB7OyZJWrhxKYOiIbx01DaZzCW1gB58jzNXCnh3wGZu3uzTT3k5HbABqKJYN_E2DOjVllBSr8CQKaGXR2OIzkVw44kI7OeyF0NZiMaOlsEGtHJUZ_B5NXMg",
+                    "accessToken": "{{OAuth_Token}}",
                     "tokenType": "Bearer",
                     "addTokenTo": "header"
                   }
