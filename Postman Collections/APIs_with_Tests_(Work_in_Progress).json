@@ -39166,7 +39166,7 @@
                   "            \"udpName\": \"WRITE_DOWN\",",
                   "            \"displayName\": \"Write Down\",",
                   "            \"multiInstance\": false,",
-                  "            \"accessLevel\": \"ReadWrite\"",
+                  "            \"accessLevel\": \"RReadWrite\"",
                   "        }",
                   "    ]};",
                   "",
