@@ -25059,12 +25059,12 @@
                   "variable": [
                     {
                       "key": "consumerId",
-                      "value": "2771291",
+                      "value": "{{cnsmr_id}}",
                       "type": "string"
                     },
                     {
                       "key": "consumerAccountId",
-                      "value": "2752583",
+                      "value": "{{cnsmr_accnt_id}}",
                       "type": "string"
                     }
                   ]
