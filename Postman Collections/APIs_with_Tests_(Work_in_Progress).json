@@ -23391,7 +23391,19 @@
                       "    });",
                       "}",
                       "console.log(responseody);",
-                      "} catch (e) {}"
+                      "} catch (e) {",
+                      "    pm.test(\"TEST1: Status code Check\", function() {",
+                      "    pm.response.to.have.status(204);",
+                      "});",
+                      "",
+                      "pm.test(\"TEST2: Response Header Checks\", function() {",
+                      "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Set-Cookie', 'ARRAffinity=f598a5e67c332333c234dbc672c836a12d36737c036d6bf6d4b0058c249e5ed5;Path=/;HttpOnly;Domain=cabotapi-test-funcapp-consumer-ukwest.azurewebsites.net', 'Cache-Contro', 'no-cache, no-store', 'Date', '', 'Request-Context', '');",
+                      "});",
+                      "",
+                      "pm.test(\"TEST3: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "}"
                     ],
                     "type": "text/javascript"
                   }
