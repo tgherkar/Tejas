@@ -12496,7 +12496,7 @@
                       "var expectedObject ={",
                       "    \"sfsid\": null,",
                       "    \"groupID\": null,",
-                      "    \"consumerID\": \"{{cnsmrlc_id}}\",",
+                      "    \"consumerID\": \"{{cnsmr_id}}\",",
                       "    \"dateReceived\": null,",
                       "    \"statusCode\": 0,",
                       "    \"originalSFSID\": null,",
