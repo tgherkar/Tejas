@@ -12042,8 +12042,7 @@
                       {
                         "key": "Ocp-Apim-Subscription-Key-West",
                         "type": "text",
-                        "value": "{{Ocp-Apim-Subscription-Key-West}}",
-                        "disabled": true
+                        "value": "{{Ocp-Apim-Subscription-Key-West}}"
                       },
                       {
                         "key": "Correlation-Id",
@@ -18236,7 +18235,7 @@
                 "type": "text"
               }
             ],
-            "url": "https://cabotapi-test.cabotcm.com/sfs/consumer/1586369/residentialstatus"
+            "url": "https://cabotapi-test.cabotcm.com/sfs/consumer/{{cnsmrlc_id}}/residentialstatus"
           },
           "response": []
         },
@@ -18368,7 +18367,7 @@
               }
             ],
             "url": {
-              "raw": "https://cabotapi-test.cabotcm.com/sfs/consumer/1586369/employmentstatus",
+              "raw": "https://cabotapi-test.cabotcm.com/sfs/consumer/{{cnsmrlc_id}}/employmentstatus",
               "protocol": "https",
               "host": [
                 "cabotapi-test",
@@ -18378,7 +18377,7 @@
               "path": [
                 "sfs",
                 "consumer",
-                "1586369",
+                "{{cnsmrlc_id}}",
                 "employmentstatus"
               ],
               "query": [
