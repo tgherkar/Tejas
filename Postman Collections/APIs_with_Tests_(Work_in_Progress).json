@@ -18235,7 +18235,7 @@
                 "type": "text"
               }
             ],
-            "url": "https://cabotapi-test.cabotcm.com/sfs/consumer/{{cnsmrlc_id}}/residentialstatus"
+            "url": "https://cabotapi-test.cabotcm.com/sfs/consumer/{{cnsmrlc_Id}}/residentialstatus"
           },
           "response": []
         },
