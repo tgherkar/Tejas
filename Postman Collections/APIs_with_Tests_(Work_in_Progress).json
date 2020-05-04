@@ -14942,6 +14942,28 @@
                 },
                 {
                   "name": "deletesfs",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "id": "4a30dbbc-091a-4237-a925-24db9723c0da",
+                        "exec": [
+                          "    pm.test(\"TEST2: Status code Check\", function() {\r",
+                          "    pm.response.to.have.status(204);\r",
+                          "});\r",
+                          "\r",
+                          "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                          "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                          "});\r",
+                          "\r",
+                          "pm.test(\"TEST4: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
+                          "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                          "});"
+                        ],
+                        "type": "text/javascript"
+                      }
+                    }
+                  ],
                   "_postman_id": "b504abe5-88b4-4c02-9186-1037c14b2443",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
