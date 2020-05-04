@@ -14965,8 +14965,7 @@
                       {
                         "key": "Ocp-Apim-Subscription-Key-West",
                         "type": "text",
-                        "value": "{{Ocp-Apim-Subscription-Key-West}}",
-                        "disabled": true
+                        "value": "{{Ocp-Apim-Subscription-Key-West}}"
                       },
                       {
                         "key": "correlation-id",
