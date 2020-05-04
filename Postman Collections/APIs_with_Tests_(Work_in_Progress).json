@@ -12496,7 +12496,7 @@
                       "var expectedObject ={",
                       "    \"sfsid\": null,",
                       "    \"groupID\": null,",
-                      "    \"consumerID\": \"{{cnsmr_id}}\",",
+                      "    \"consumerID\": \"{{cnsmrlc_id}}\",",
                       "    \"dateReceived\": null,",
                       "    \"statusCode\": 0,",
                       "    \"originalSFSID\": null,",
@@ -17975,7 +17975,7 @@
             "auth": {
               "type": "oauth2",
               "oauth2": {
-                "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkN0VHVoTUptRDVNN0RMZHpEMnYyeDNRS1NSWSIsImtpZCI6IkN0VHVoTUptRDVNN0RMZHpEMnYyeDNRS1NSWSJ9.eyJhdWQiOiJhcGk6Ly84MTE2N2QzZC04NTNmLTQyMDctODBmYS0zMjI1YTQ5MjdhY2EiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMvIiwiaWF0IjoxNTg4NTgyODI0LCJuYmYiOjE1ODg1ODI4MjQsImV4cCI6MTU4ODU4NjcyNCwiYWlvIjoiNDJkZ1lGQ2I5ZkRFcXVrOHo3eWJlbjdlZkpjOUh3QT0iLCJhcHBpZCI6IjIxYjhmYmVmLTcyNmItNDdhNC04MTM1LTFiY2ZlMmJhOWE5OCIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5My8iLCJvaWQiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJyaCI6IjAuQVI4QTktbEhOZ1VEdGtxd2IwczJvMVNYay1fN3VDRnJjcVJIZ1RVYnotSzZtcGdmQUFBLiIsInN1YiI6IjhlZWYzODI5LTgwM2UtNDM3ZS1hNDk0LTU3NDU3NWQ1MGVlOCIsInRpZCI6IjM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5MyIsInV0aSI6IjRRU2NsTkF1SDBTSzJCbFdzaEptQUEiLCJ2ZXIiOiIxLjAifQ.lMVNf4xTq7RkTZ4GYPAUaUf4H2N3jcOClPGsIeHVA4DBh-Lg0Pd01nqXD6vDV6vWTKEo51FsVUGL8yGGqDsfMh15zGzg9MYxRjK01t2bSNlUPeDjKhlJPdMCao3Bmz9HNZANp1Muz8MnxyGTpOFyW6DM8FSbSNClR1yEbeRoL3yX1qMXEFUJuqpdPhYmt0MWcdmDaL6j7O--NCUKEzcur2lZFrGm2i7l_w49j8Lhtw1GcojQ9qNe6uyd0ciK0RhaTUlDkC9TYne8mRp3SUAA5t2DQKEvRtF1uMxRt2FRsm8VRK9y23n3wOIYEBLLCcFV7IHQlpcwy0NHTaIyPkUKsA",
+                "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkN0VHVoTUptRDVNN0RMZHpEMnYyeDNRS1NSWSIsImtpZCI6IkN0VHVoTUptRDVNN0RMZHpEMnYyeDNRS1NSWSJ9.eyJhdWQiOiJhcGk6Ly84MTE2N2QzZC04NTNmLTQyMDctODBmYS0zMjI1YTQ5MjdhY2EiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMvIiwiaWF0IjoxNTg4NTg1MDgyLCJuYmYiOjE1ODg1ODUwODIsImV4cCI6MTU4ODU4ODk4MiwiYWlvIjoiNDJkZ1lQZ3J0R016Uy94TFU2bk5MWGNuTS9XV0F3QT0iLCJhcHBpZCI6IjIxYjhmYmVmLTcyNmItNDdhNC04MTM1LTFiY2ZlMmJhOWE5OCIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5My8iLCJvaWQiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJyaCI6IjAuQVI4QTktbEhOZ1VEdGtxd2IwczJvMVNYay1fN3VDRnJjcVJIZ1RVYnotSzZtcGdmQUFBLiIsInN1YiI6IjhlZWYzODI5LTgwM2UtNDM3ZS1hNDk0LTU3NDU3NWQ1MGVlOCIsInRpZCI6IjM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5MyIsInV0aSI6Inh3cmQzeXZJdWtPc05JYXUzQ2htQUEiLCJ2ZXIiOiIxLjAifQ.bC4dEQDfbvv8X6OMYuMu6Bu_tskV-5dfo7uC5-KDm3rkIP3Zocq5fDW3ljpn_Yk31TLf_SBbVf1TYAqADjA2tHqF5Qs89QF8i-3xvZ98n6b82baNK1ps4H8hpAypZer4seMCUsbniSHJTY_dEln8iK7DymfwnjA8R8PLpB7L5zQ7dm0eMzdnmgdz5psZhDRZbuZlADWwAtWvIA21h2zY0EdwcuniU4-4Bj27y_k35mnUdchx75JNVEeObiyg-Vp3U9SNI1jT7s8X_TKvkt2PhehlC46pLJ89j7pllI4ggi3SA_E0TWUvmuVZrGOUhrpQpzqAoHwmIGqKHfOQg9T9Bg",
                 "tokenType": "Bearer",
                 "addTokenTo": "header"
               }
@@ -17990,8 +17990,7 @@
               {
                 "key": "Ocp-Apim-Subscription-Key-West",
                 "type": "text",
-                "value": "{{Ocp-Apim-Subscription-Key-West}}",
-                "disabled": true
+                "value": "{{Ocp-Apim-Subscription-Key-West}}"
               },
               {
                 "key": "Correlation-Id",
