@@ -16291,6 +16291,68 @@
         },
         {
           "name": "jointaccounts",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "3f27458b-a21d-4e04-92c2-a969fe74cfe5",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);\r",
+                  "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                  "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                  "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                  "var Ajv = require('ajv'),\r",
+                  "ajv = new Ajv({logger: console}),\r",
+                  "schema = \r",
+                  "{\r",
+                  "    \"items\": {\r",
+                  "        \"$id\": \"#/items\",\r",
+                  "        \"type\": \"string\"\r",
+                  "    },\r",
+                  "    \"$id\": \"http://example.org/root.json#\",\r",
+                  "    \"type\": \"array\",\r",
+                  "    \"definitions\": {},\r",
+                  "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                  "};\r",
+                  " pm.test(\"Ajv Test Schema Response: \", function() {\r",
+                  "        pm.expect(ajv.validate(schema, jsonData)).to.be.true;\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "pm.test(\"TEST2: Status code Check\", function() {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                  "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"TEST4: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "    ///NEGATIVE TESTS\r",
+                  "\r",
+                  "pm.test(\"Neg Test 01: Check SFSID isn't empty\", function () {\r",
+                  "     pm.expect(\"{{SFSID}}\").to.not.be.empty;\r",
+                  "});\r",
+                  " pm.test(\"Neg Test 02: Check if string is empty\", function () {\r",
+                  "     pm.expect('consumerID').to.not.be.empty;\r",
+                  "});\r",
+                  " pm.test(\"Neg Test 03: Check expenditureGroupCode isn't empty\", function () {\r",
+                  "     pm.expect('response').to.not.be.empty;\r",
+                  "});\r",
+                  "pm.test(\"Incorrect field examaple\", function() {\r",
+                  "    var expenGC = schema.required.sfsid;\r",
+                  "    var booleanV = Boolean;\r",
+                  "    pm.expect(expenGC).to.not.equal(booleanV);\r",
+                  "    console.log(jsonData.toString());\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
           "_postman_id": "01449ef0-d018-4c21-9fa6-ed41e37983e4",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
@@ -16337,7 +16399,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n        \"ownerSFSCopyModels\": [\n        {\n            \"consumerAccountOwner\": {\n                \"consumerAccountOwnerID\": \"1565855\",\n                \"consumerID\": \"1828952\",\n                \"legacyID\": \"424847\",\n                \"consumerName\": \"Clinton Gobbo\",\n                \"consumerBirthDate\": \"1999-08-14T00:00:00\",\n                \"ownership\": \"Primary Owner\",\n                \"type\": \"null\",\n                \"attachDate\": \"2013-04-12T19:01:13.857\"\n            },\n            \"sfsid\": \"null\",\n            \"copyNotes\": \"null\"\n        },\n        {\n            \"consumerAccountOwner\": {\n                \"consumerAccountOwnerID\": \"1565978\",\n                \"consumerID\": \"1583294\",\n                \"legacyID\": \"105606\",\n                \"consumerName\": \"Keven Seten\",\n                \"consumerBirthDate\": \"1998-08-15\",\n                \"ownership\": \"null\",\n                \"type\": \"null\",\n                \"attachDate\": \"2020-04-03\"\n            },\n            \"sfsid\": \"730F9CA5-29B5-E911-86DA-005056927C52\",\n            \"copyNotes\": \"null\"\n        }\n    ]\n}",
+              "raw": "{\r\n        \"ownerSFSCopyModels\": [\r\n        {\r\n            \"consumerAccountOwner\": {\r\n                \"consumerAccountOwnerID\": \"\",\r\n                \"consumerID\": \"1565921\",\r\n                \"legacyID\": \"105108\",\r\n                \"consumerName\": \"Marcellino Barufaldi\",\r\n                \"consumerBirthDate\": \"1927-06-25 00:00:00.000\",\r\n                \"ownership\": \"Primary Owner\",\r\n                \"type\": \"null\",\r\n                \"attachDate\": \"2013-04-12T19:01:13.857\"\r\n            },\r\n            \"sfsid\": \"c0e3bf90-f3f3-4598-a1de-f3c17d6c716d\",\r\n            \"copyNotes\": \"null\"\r\n        },\r\n        {\r\n            \"consumerAccountOwner\": {\r\n                \"consumerAccountOwnerID\": \"1565917\",\r\n                \"consumerID\": \"1583231\",\r\n                \"legacyID\": \"124886\",\r\n                \"consumerName\": \"Marquez Raburn\",\r\n                \"consumerBirthDate\": \"1926-09-20 00:00:00.000\",\r\n                \"ownership\": \"null\",\r\n                \"type\": \"null\",\r\n                \"attachDate\": \"2020-04-03\"\r\n            },\r\n            \"sfsid\": \"730F9CA5-29B5-E911-86DA-005056927C52\",\r\n            \"copyNotes\": \"null\"\r\n        }\r\n    ]\r\n}",
               "options": {
                 "raw": {}
               }
