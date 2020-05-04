@@ -9850,7 +9850,7 @@
                 "auth": {
                   "type": "oauth2",
                   "oauth2": {
-                    "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSIsImtpZCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSJ9.eyJhdWQiOiJhcGk6Ly84MTE2N2QzZC04NTNmLTQyMDctODBmYS0zMjI1YTQ5MjdhY2EiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMvIiwiaWF0IjoxNTg2ODY5NjI4LCJuYmYiOjE1ODY4Njk2MjgsImV4cCI6MTU4Njg3MzUyOCwiYWlvIjoiNDJkZ1lNaGI3bkRDeExabFMrNnI0T09wTmgrVUFRPT0iLCJhcHBpZCI6IjIxYjhmYmVmLTcyNmItNDdhNC04MTM1LTFiY2ZlMmJhOWE5OCIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5My8iLCJvaWQiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJzdWIiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJ0aWQiOiIzNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMiLCJ1dGkiOiJrMVNiend3b0FVcWZYNmRNRDl4UUFBIiwidmVyIjoiMS4wIn0.OZ3tuW5kF_5tSGOxWtdvXW-JqPkLNqWbICgPhlrRBI16resYKWm1lVx_-6nFZfdfOC5LHYtGHlTPhnZkLgLkGMVpKUNHky3urm_nbMB4jQM7T6ByP3utqWVSvTnO5jzwH__PsVlu2XJW-wU8feOx0eA73LogqeE4bSEIHzB6_P8D9RxN-zi2KrV8tNwABOTTaPkXC0jD3ISbwnMpKVsf-cJ7knck2_1j69yswBIPmLrhGje3xxUWPJeOO_SaCnl5BJVXDdkFR9FOP_d1cSm1AcFNS6cL5MyZgMqBWaOCd2q0uiHT3n4YmoA0de46vD4RWIixo11Cy5eHj6_W03GL7Q",
+                    "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkN0VHVoTUptRDVNN0RMZHpEMnYyeDNRS1NSWSIsImtpZCI6IkN0VHVoTUptRDVNN0RMZHpEMnYyeDNRS1NSWSJ9.eyJhdWQiOiJhcGk6Ly84MTE2N2QzZC04NTNmLTQyMDctODBmYS0zMjI1YTQ5MjdhY2EiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMvIiwiaWF0IjoxNTg4NTg1MDgyLCJuYmYiOjE1ODg1ODUwODIsImV4cCI6MTU4ODU4ODk4MiwiYWlvIjoiNDJkZ1lQZ3J0R016Uy94TFU2bk5MWGNuTS9XV0F3QT0iLCJhcHBpZCI6IjIxYjhmYmVmLTcyNmItNDdhNC04MTM1LTFiY2ZlMmJhOWE5OCIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5My8iLCJvaWQiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJyaCI6IjAuQVI4QTktbEhOZ1VEdGtxd2IwczJvMVNYay1fN3VDRnJjcVJIZ1RVYnotSzZtcGdmQUFBLiIsInN1YiI6IjhlZWYzODI5LTgwM2UtNDM3ZS1hNDk0LTU3NDU3NWQ1MGVlOCIsInRpZCI6IjM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5MyIsInV0aSI6Inh3cmQzeXZJdWtPc05JYXUzQ2htQUEiLCJ2ZXIiOiIxLjAifQ.bC4dEQDfbvv8X6OMYuMu6Bu_tskV-5dfo7uC5-KDm3rkIP3Zocq5fDW3ljpn_Yk31TLf_SBbVf1TYAqADjA2tHqF5Qs89QF8i-3xvZ98n6b82baNK1ps4H8hpAypZer4seMCUsbniSHJTY_dEln8iK7DymfwnjA8R8PLpB7L5zQ7dm0eMzdnmgdz5psZhDRZbuZlADWwAtWvIA21h2zY0EdwcuniU4-4Bj27y_k35mnUdchx75JNVEeObiyg-Vp3U9SNI1jT7s8X_TKvkt2PhehlC46pLJ89j7pllI4ggi3SA_E0TWUvmuVZrGOUhrpQpzqAoHwmIGqKHfOQg9T9Bg",
                     "tokenType": "Bearer",
                     "addTokenTo": "header"
                   }
@@ -9865,8 +9865,7 @@
                   {
                     "key": "Ocp-Apim-Subscription-Key-West",
                     "type": "text",
-                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
-                    "disabled": true
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}"
                   },
                   {
                     "key": "Correlation-Id",
