@@ -44686,6 +44686,7 @@
                   "//console.log(\"End of Pre-req script\");",
                   "",
                   "/*",
+                  "SELECT TOP (10) Debtorno, CRBReportingFlag FROM [RiskModel].[dbo].[WhiteData]",
                   "*/"
                 ],
                 "type": "text/javascript"
