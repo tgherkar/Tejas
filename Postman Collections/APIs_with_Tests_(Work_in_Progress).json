@@ -21346,7 +21346,7 @@
               "script": {
                 "id": "6630dd6c-957b-4501-93fc-b4255b0a871a",
                 "exec": [
-                  "if (!Date.now) {",
+                  "/*if (!Date.now) {",
                   "    console.log(Date.now());",
                   "    Date.now = function() { return new Date().getTime(); };",
                   "console.log(\"LegacyID that will be sent: \" + data.legacyID);",
@@ -21361,7 +21361,7 @@
                   "console.log(\"Auto Payment?: \" + data.Auto_paym);",
                   "",
                   "",
-                  "}",
+                  "}*/",
                   "",
                   "var payload = request.data;",
                   "console.log(\"Using payload as \" + payload);",
@@ -21441,14 +21441,6 @@
             "disableBodyPruning": true
           },
           "request": {
-            "auth": {
-              "type": "oauth2",
-              "oauth2": {
-                "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSIsImtpZCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSJ9.eyJhdWQiOiJhcGk6Ly84MTE2N2QzZC04NTNmLTQyMDctODBmYS0zMjI1YTQ5MjdhY2EiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMvIiwiaWF0IjoxNTg0MDk2MzU2LCJuYmYiOjE1ODQwOTYzNTYsImV4cCI6MTU4NDEwMDI1NiwiYWlvIjoiNDJOZ1lQakJQNjNyenlkek52Wk5YcStmKzZ3c0JRQT0iLCJhcHBpZCI6IjIxYjhmYmVmLTcyNmItNDdhNC04MTM1LTFiY2ZlMmJhOWE5OCIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5My8iLCJvaWQiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJzdWIiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJ0aWQiOiIzNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMiLCJ1dGkiOiJnMk5jZlhFdk8wcUx3dTlxN25xX0FBIiwidmVyIjoiMS4wIn0.GiQfHsIeiH85g4mRS7Ix3Sy6pg-bNAVHEnfJ7Tq3VJlSdzNpYREsbYVrSVjjNH32HHBSZpdaukij-b6ydxtPbCDQ5VyXpuICjxS79E-mJTEhRm_oL1qOZXayCtfN5drxRz0eTs8u-K_-7vWqGAwqyNIQwNuOPegrjfOFwMf3SBUKto8DzfyCOQvUGiEP8mJ1hwFjGvy-D5mrxgGBhcGxRfCjUp-OLnkwqHozBuI-AEkGTgzH40nHcTpJj-VL_HyHB5y_llrBtduzBk_bsD7Lp20n9ChZOINYbgg4xKqDPUS6Gm9-IoKHfhmdDWTLIY_y7228xZGd2y5tofMPGEwdww",
-                "tokenType": "Bearer",
-                "addTokenTo": "header"
-              }
-            },
             "method": "POST",
             "header": [
               {
@@ -21462,7 +21454,7 @@
                 "disabled": true
               },
               {
-                "key": "Correlation-Id",
+                "key": "correlation-id",
                 "value": "{{Correlation-Id}}"
               },
               {
