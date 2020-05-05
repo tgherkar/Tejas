@@ -44710,7 +44710,7 @@
                   "    }",
                   "});",
                   "",
-                  "if (data!=null){",
+                  "if (data.legacyID!=null){",
                   "    pm.test(\"TEST1A: CRBReporting Flag check\", function() {",
                   "        pm.expect(jsonData.crbReportingFlag).to.deep.equal(data.CRBReportingFlag);",
                   "    });",
@@ -44837,7 +44837,7 @@
               "variable": [
                 {
                   "key": "legacyID",
-                  "value": "{{legacyID}}",
+                  "value": "36743051",
                   "type": "string"
                 }
               ]
