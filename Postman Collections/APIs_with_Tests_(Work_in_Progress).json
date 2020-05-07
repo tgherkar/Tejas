@@ -13162,7 +13162,7 @@
                       }
                     ],
                     "url": {
-                      "raw": "{{BaseURL}}/sfs//consumer/4355562/account/4328099/sfs/F5C626AB-3B1F-4D4C-AA51-2F458181361E/owners",
+                      "raw": "{{BaseURL}}/sfs//consumer/:consumerID/account/:accountID/sfs/:sfsId/owners",
                       "host": [
                         "{{BaseURL}}"
                       ],
@@ -13170,11 +13170,11 @@
                         "sfs",
                         "",
                         "consumer",
-                        "4355562",
+                        ":consumerID",
                         "account",
-                        "4328099",
+                        ":accountID",
                         "sfs",
-                        "F5C626AB-3B1F-4D4C-AA51-2F458181361E",
+                        ":sfsId",
                         "owners"
                       ],
                       "query": [
@@ -13189,6 +13189,24 @@
                           "value": "",
                           "type": "text",
                           "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerID",
+                          "value": "1583440",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accountID",
+                          "value": "1566125",
+                          "type": "string"
+                        },
+                        {
+                          "key": "sfsId",
+                          "value": "1187D943-611B-45EA-B4EC-17168945DA98",
+                          "type": "string",
+                          "description": "\n\n"
                         }
                       ]
                     },
