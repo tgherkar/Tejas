@@ -12979,8 +12979,8 @@
                           "                    },",
                           "                    \"consumerBirthDate\": {",
                           "                        \"$id\": \"#/items/properties/consumerAccountOwner/properties/consumerBirthDate\",",
-                          "                        \"type\": \"string\"",
-                          "                    },",
+                          "                        \"type\": [\"string\", \"null\"]",
+                          "                        },",
                           "                    \"ownership\": {",
                           "                        \"$id\": \"#/items/properties/consumerAccountOwner/properties/ownership\",",
                           "                        \"type\": \"string\"",
@@ -13161,51 +13161,7 @@
                         "type": "text"
                       }
                     ],
-                    "url": {
-                      "raw": "{{BaseURL}}/sfs/consumer/:consumerId/account/:accountId/sfs/:sfsId/owners",
-                      "host": [
-                        "{{BaseURL}}"
-                      ],
-                      "path": [
-                        "sfs",
-                        "consumer",
-                        ":consumerId",
-                        "account",
-                        ":accountId",
-                        "sfs",
-                        ":sfsId",
-                        "owners"
-                      ],
-                      "variable": [
-                        {
-                          "key": "consumerId",
-                          "value": "1596523",
-                          "type": "string",
-                          "description": {
-                            "content": "",
-                            "type": "text/plain"
-                          }
-                        },
-                        {
-                          "key": "accountId",
-                          "value": "4237435",
-                          "type": "string",
-                          "description": {
-                            "content": "",
-                            "type": "text/plain"
-                          }
-                        },
-                        {
-                          "key": "sfsId",
-                          "value": "652E311B-8CB7-47AD-9761-506EF07C88BF",
-                          "type": "string",
-                          "description": {
-                            "content": "",
-                            "type": "text/plain"
-                          }
-                        }
-                      ]
-                    },
+                    "url": "{{BaseURL}}/sfs//consumer/4355562/account/4328099/sfs/F5C626AB-3B1F-4D4C-AA51-2F458181361E/owners",
                     "description": "Gets the account owner attached to the same sfs"
                   },
                   "response": [
