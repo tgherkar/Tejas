@@ -12999,7 +12999,7 @@
                           "            },",
                           "            \"sfsid\": {",
                           "                \"$id\": \"#/items/properties/sfsid\",",
-                          "                \"type\": \"null\"",
+                          "                \"type\": [\"string\", \"null\"]",
                           "            },",
                           "            \"copyNotes\": {",
                           "                \"$id\": \"#/items/properties/copyNotes\",",
@@ -13161,7 +13161,37 @@
                         "type": "text"
                       }
                     ],
-                    "url": "{{BaseURL}}/sfs//consumer/4355562/account/4328099/sfs/F5C626AB-3B1F-4D4C-AA51-2F458181361E/owners",
+                    "url": {
+                      "raw": "{{BaseURL}}/sfs//consumer/4355562/account/4328099/sfs/F5C626AB-3B1F-4D4C-AA51-2F458181361E/owners",
+                      "host": [
+                        "{{BaseURL}}"
+                      ],
+                      "path": [
+                        "sfs",
+                        "",
+                        "consumer",
+                        "4355562",
+                        "account",
+                        "4328099",
+                        "sfs",
+                        "F5C626AB-3B1F-4D4C-AA51-2F458181361E",
+                        "owners"
+                      ],
+                      "query": [
+                        {
+                          "key": "consumerId",
+                          "value": "",
+                          "type": "text",
+                          "disabled": true
+                        },
+                        {
+                          "key": "accountId",
+                          "value": "",
+                          "type": "text",
+                          "disabled": true
+                        }
+                      ]
+                    },
                     "description": "Gets the account owner attached to the same sfs"
                   },
                   "response": [
