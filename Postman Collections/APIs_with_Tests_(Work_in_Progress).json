@@ -26336,7 +26336,7 @@
                   "script": {
                     "id": "681705e0-a458-49df-94f7-6caa3fe6e672",
                     "exec": [
-                      "//pm.environment.set(\"OAuth_Timestamp\", null);\r",
+                      "pm.environment.set(\"OAuth_Timestamp\", null);\r",
                       "console.log(pm.environment.get(\"OAuth_Expiry\"));\r",
                       "console.log(pm.environment.get(\"OAuth_Timestamp\"));\r",
                       "console.log(pm.environment.get(\"OAuth_Token\"));\r",
