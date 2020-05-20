@@ -26336,7 +26336,7 @@
                   "script": {
                     "id": "681705e0-a458-49df-94f7-6caa3fe6e672",
                     "exec": [
-                      "pm.environment.set(\"OAuth_Timestamp\", null);\r",
+                      "//pm.environment.set(\"OAuth_Timestamp\", null);\r",
                       "console.log(pm.environment.get(\"OAuth_Expiry\"));\r",
                       "console.log(pm.environment.get(\"OAuth_Timestamp\"));\r",
                       "console.log(pm.environment.get(\"OAuth_Token\"));\r",
@@ -26351,7 +26351,7 @@
                       "if(!expiresInTime){\r",
                       "    expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
                       "}\r",
-                      "console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                      "console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime + \"and noDate value is :\"+noDate);\r",
                       "if((new Date() - tokenDate) >= expiresInTime || noDate==1) {\r",
                       "    let tokenUrl = pm.environment.get(\"tokenUrl\"); \r",
                       "    let clientId = pm.environment.get(\"clientId\"); \r",
