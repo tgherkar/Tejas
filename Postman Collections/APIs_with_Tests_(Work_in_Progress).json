@@ -42060,7 +42060,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"aggregateByFrequencyCode\": \"{{aggFreqCode}}\",\n    \"AmountByFrequencyCollection\": [\n        {\n            \"amount\": \"{{RandomAmount}}\",\n            \"frequencyCode\": \"{{FreqCode}}\"\n        },\n        {\n            \"amount\": \"{{RandomAmountTwo}}\",\n            \"frequencyCode\": \"{{FreqCodeTwo}}\"\n        }\n    ]\n\n}",
+              "raw": "{\n    \"aggregateByFrequencyCode\": \"{{aggFreqCode}}\",\n    \"AmountByFrequencyCollection\": [\n        {\n            \"amount\": \"238\",\n            \"frequencyCode\": \"2\"\n        },\n        {\n            \"amount\": \"250\",\n            \"frequencyCode\": \"4\"\n        }\n    ]\n\n}",
               "options": {
                 "raw": {}
               }
