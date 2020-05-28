@@ -41737,7 +41737,7 @@
                   "pm.globals.set(\"sfsStatusCode\", sfsStatusCode);\r",
                   "console.log(\"SFS Status Code: \" + sfsStatusCode.toString());\r",
                   "\r",
-                  "const numInHH = Math.floor((Math.random * 4) + 1);\r",
+                  "const numInHH = Math.floor(Math.random() * 5) + 1;\r",
                   "pm.globals.set(\"numInHH\", numInHH);\r",
                   "console.log(\"Number in Household: \" + numInHH.toString());\r",
                   "\r",
