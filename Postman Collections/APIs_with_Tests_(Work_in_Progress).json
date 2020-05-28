@@ -41958,6 +41958,12 @@
                   "const aggFreqCode = Math.floor((Math.random() * 4) + 1);\r",
                   "pm.globals.set(\"aggFreqCode\", aggFreqCode);\r",
                   "console.log(\"Frequency Code: \" + aggFreqCode.toString())\r",
+                  "\r",
+                  "const amountOne = Math.floor((Math.random() * 450 ) + 1);\r",
+                  "pm.globals.set(\"amountOne\", amountOne);\r",
+                  "console.log(\"Amount One: \" + amountOne.toString());\r",
+                  "\r",
+                  "\r",
                   ""
                 ],
                 "type": "text/javascript"
