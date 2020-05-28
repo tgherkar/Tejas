@@ -39023,7 +39023,7 @@
                       "            },",
                       "            \"originalSFSID\": {",
                       "                \"$id\": \"#/properties/originalSFSID\",",
-                      "                \"type\": \"null\"",
+                      "                \"type\": [\"null\", \"string\"]",
                       "            },",
                       "            \"copyType\": {",
                       "                \"$id\": \"#/properties/copyType\",",
