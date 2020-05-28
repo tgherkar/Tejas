@@ -41956,7 +41956,7 @@
                   "\r",
                   "\r",
                   "const aggFreqCode = Math.floor((Math.random() * 4) + 1);\r",
-                  "pm.environment.set(\"aggFreqCode\", aggFreqCode);\r",
+                  "pm.globals.set(\"aggFreqCode\", aggFreqCode);\r",
                   "console.log(\"Frequency Code: \" + aggFreqCode.toString())\r",
                   ""
                 ],
