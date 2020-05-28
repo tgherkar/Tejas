@@ -39096,7 +39096,7 @@
                       "                    },",
                       "                    \"numberOfChildrenUnder16\": {",
                       "                        \"$id\": \"#/properties/consumerDetail/properties/numberOfChildrenUnder16\",",
-                      "                        \"type\": \"integer\"",
+                      "                        \"type\": [\"integer\", \"null\"]",
                       "                    },",
                       "                    \"numberOfChildren16To18\": {",
                       "                        \"$id\": \"#/properties/consumerDetail/properties/numberOfChildren16To18\",",
