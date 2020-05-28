@@ -39373,7 +39373,7 @@
                       "                        },",
                       "                        \"notes\": {",
                       "                            \"$id\": \"#/properties/savings/items/properties/notes\",",
-                      "                            \"type\": \"null\"",
+                      "                            \"type\": [\"string\", \"null\"]",
                       "                        }",
                       "                    },",
                       "                    \"$id\": \"#/properties/savings/items\",",
