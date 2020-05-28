@@ -39328,7 +39328,7 @@
                       "                        },",
                       "                        \"amount\": {",
                       "                            \"$id\": \"#/properties/incomes/items/properties/amount\",",
-                      "                            \"type\": \"integer\"",
+                      "                            \"type\": [\"number\", \"null\"]",
                       "                        },",
                       "                        \"frequencyCode\": {",
                       "                            \"$id\": \"#/properties/incomes/items/properties/frequencyCode\",",
