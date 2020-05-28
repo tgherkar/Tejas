@@ -40739,22 +40739,21 @@
                       "script": {
                         "id": "e1524521-1625-43d1-afdf-7f02877c895c",
                         "exec": [
-                          "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
-                          "{\r",
+                          "if (pm.environment.get(\"OAuth_Timestamp\") == null) {\r",
                           "    console.log(\"OAuth timestamp null, check the environment\");\r",
                           "} else {\r",
-                          "    var tokenDate = new Date(2010,1,1);\r",
+                          "    var tokenDate = new Date(2010, 1, 1);\r",
                           "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
-                          "    if(tokenTimestamp){\r",
+                          "    if (tokenTimestamp) {\r",
                           "        tokenDate = Date.parse(tokenTimestamp);\r",
                           "    }\r",
                           "    //console.log(\"timestamp is\"+tokenDate);\r",
                           "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
-                          "    if(!expiresInTime){\r",
+                          "    if (!expiresInTime) {\r",
                           "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
                           "    }\r",
                           "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
-                          "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                          "    if ((new Date() - tokenDate) >= expiresInTime) {\r",
                           "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
                           "        let clientId = 'cc92e9b3-5045-4369-9105-5b085a45e247';\r",
                           "        let clientSecret = 'f3r6G:bq.2b:n:APJhUui18D=WVG_hHz';\r",
@@ -40781,18 +40780,25 @@
                           "\r",
                           "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
                           "            let jsonResponse = response.json(),\r",
-                          "            newAccessToken = jsonResponse.access_token;\r",
+                          "                newAccessToken = jsonResponse.access_token;\r",
                           "            //console.log({ err, jsonResponse, newAccessToken });\r",
                           "\r",
                           "            pm.environment.set('OAuth_Token', newAccessToken);\r",
-                          "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                          "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in * 1000);\r",
                           "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
                           "        });\r",
                           "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                           "    }\r",
                           "}\r",
                           "//console.log(\"End of Pre-req script\");\r",
-                          ""
+                          "\r",
+                          "\r",
+                          "/*\r",
+                          "SELECT TOP (10) [SFSID] as 'sfs_id'\r",
+                          "      ,[GroupID]\r",
+                          "      ,[OriginalConsumerID] AS 'cnsmr_id'\r",
+                          "FROM [dbo].[SFS]\r",
+                          "*/"
                         ],
                         "type": "text/javascript"
                       }
@@ -40856,9 +40862,8 @@
                       ],
                       "variable": [
                         {
-                          "id": "2505bc8b-9150-420d-b30b-005e68c75963",
                           "key": "id",
-                          "value": "",
+                          "value": "C6DDBF66-8579-404B-BC23-FF8DA4CE0D5D",
                           "type": "string",
                           "description": "uuid"
                         }
