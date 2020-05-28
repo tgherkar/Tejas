@@ -39518,26 +39518,7 @@
                       "\r",
                       "\r",
                       "\r",
-                      "/*\r",
-                      "SELECT TOP (10) [SFSID]\r",
-                      "      ,[GroupID]\r",
-                      "      ,[OriginalConsumerID]\r",
-                      "      ,[DateReceived]\r",
-                      "      ,[SFSStatusCode]\r",
-                      "      ,[OriginalSFSID] AS 'cnsmr_id'\r",
-                      "      ,[CopyType]\r",
-                      "      ,[CopyNotes]\r",
-                      "      ,[CreatedByUser]\r",
-                      "      ,[CreatedByHostName]\r",
-                      "      ,[CreatedDateTime]\r",
-                      "      ,[LastModifiedByUser]\r",
-                      "      ,[LastModifiedByHostName]\r",
-                      "      ,[LastModifiedDateTime]\r",
-                      "      ,[RowVersion]\r",
-                      "      ,[ModifiedCount]\r",
-                      "  FROM [dbo].[SFS]\r",
-                      "  WHERE SFSStatusCode = '2' --and CreatedDateTime LIKE '2020-05%'\r",
-                      "  ORDER BY CreatedDateTime DESC */"
+                      ""
                     ],
                     "type": "text/javascript"
                   }
