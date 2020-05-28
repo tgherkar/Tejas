@@ -37798,7 +37798,7 @@
                           "//SQL QUERY//\r",
                           "/*SELECT TOP (10) [SFSID]\r",
                           "      ,[GroupID]\r",
-                          "      ,[OriginalConsumerID]\r",
+                          "      ,[OriginalConsumerID] AS 'cnsmr_id'\r",
                           "      ,[DateReceived]\r",
                           "      ,[SFSStatusCode]\r",
                           "      ,[OriginalSFSID]\r",
