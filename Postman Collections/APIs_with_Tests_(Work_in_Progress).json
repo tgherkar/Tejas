@@ -39156,7 +39156,7 @@
                       "                    },",
                       "                    \"repayingDebtTypeCode\": {",
                       "                        \"$id\": \"#/properties/consumerDetail/properties/repayingDebtTypeCode\",",
-                      "                        \"type\": \"null\"",
+                      "                        \"type\": [\"integer\", \"null\"]",
                       "                    },",
                       "                    \"doYouHaveOutstandingDebt\": {",
                       "                        \"$id\": \"#/properties/consumerDetail/properties/doYouHaveOutstandingDebt\",",
