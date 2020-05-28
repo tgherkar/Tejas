@@ -39365,7 +39365,7 @@
                       "                        },",
                       "                        \"amount\": {",
                       "                            \"$id\": \"#/properties/savings/items/properties/amount\",",
-                      "                            \"type\": [\"number\", \"integer\"]",
+                      "                            \"type\": [\"number\", \"null\"]",
                       "                        },",
                       "                        \"frequencyCode\": {",
                       "                            \"$id\": \"#/properties/savings/items/properties/frequencyCode\",",
