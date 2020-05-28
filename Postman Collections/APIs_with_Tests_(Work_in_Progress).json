@@ -41751,7 +41751,7 @@
                   "\r",
                   "\r",
                   "const numOfVehicles = Math.floor(Math.random() * 2);\r",
-                  "pm.globals.set(\"numofVehicles\", numOfVehicles);\r",
+                  "pm.globals.set(\"numOfVehicles\", numOfVehicles);\r",
                   "console.log(\"Number of Vehicles: \" + numOfVehicles.toString());\r",
                   "\r",
                   "\r",
