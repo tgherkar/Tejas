@@ -41733,7 +41733,7 @@
                   "\r",
                   "\r",
                   "\r",
-                  "const sfsStatusCode = [0,1,2];\r",
+                  "const sfsStatusCode = Math.floor(Math.random() * 2);\r",
                   "pm.globals.set(\"sfsStatusCode\", sfsStatusCode);\r",
                   "console.log(\"SFS Status Code: \" + sfsStatusCode.toString());\r",
                   "\r",
