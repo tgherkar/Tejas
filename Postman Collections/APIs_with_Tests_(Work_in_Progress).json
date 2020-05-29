@@ -41804,7 +41804,7 @@
                   "}\r",
                   "else if (pesCode > 3) {\r",
                   "    const partnerEmploy = false;\r",
-                  "    pm.globals.set(\"pIsInPaidEmployment\", pIsInPaidEmployment);\r",
+                  "    pm.globals.set(\"parnerEmploy\", partnerEmploy);\r",
                   "    console.log(\"Is In Paid Employment?: \" + pIsInPaidEmployment);\r",
                   "    return pIsInPaidEmployment;\r",
                   "\r",
