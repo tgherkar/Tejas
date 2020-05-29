@@ -41801,7 +41801,7 @@
                   "    console.log(\"Is In Paid Employment?: \" + isInPaidEmployment);\r",
                   "    return isInPaidEmployment;\r",
                   "    \r",
-                  "    (pesCode > 3) \r",
+                  "   if (pesCode > 3) \r",
                   "    const partnerEmploy = false;\r",
                   "    pm.globals.set(\"partnerEmploy\", partnerEmploy);\r",
                   "    console.log(\"Is In Paid Employment?: \" + partnerEmploy.toString());\r",
