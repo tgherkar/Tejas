@@ -41794,7 +41794,7 @@
                   "    pm.globals.set(\"isInPaidEmployment\", isInPaidEmployment);\r",
                   "    console.log(\"Is In Paid Employment?: \" + isInPaidEmployment);\r",
                   "    return isInPaidEmployment;\r",
-                  "}\r",
+                  "\r",
                   "\r",
                   "if (pesCode < 4) {\r",
                   "    const partnerEmploy = true;\r",
@@ -41808,6 +41808,7 @@
                   "    console.log(\"Is In Paid Employment?: \" + partnerEmploy.toString());\r",
                   "    return partnerEmploy;\r",
                   "\r",
+                  "}\r",
                   "}"
                 ],
                 "type": "text/javascript"
