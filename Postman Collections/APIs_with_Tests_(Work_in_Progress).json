@@ -41762,6 +41762,11 @@
                   "pm.globals.set(\"hhContCode\", hhContCode);\r",
                   "console.log(\"Household Contributor Code: \" + hhContCode.toString());\r",
                   "\r",
+                  "const rsCode = Math.floor(Math.random() * 8);\r",
+                  "pm.globals.set(\"rsCode\", rsCode);\r",
+                  "console.log(\"Residence Status Code: \" + rsCode.toString());\r",
+                  "\r",
+                  "\r",
                   "\r",
                   "\r",
                   ""
