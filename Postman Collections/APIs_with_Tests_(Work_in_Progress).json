@@ -11130,7 +11130,7 @@
                       "        }",
                       "    });",
                       "    pm.test(\"TEST:TEST\", function(){",
-                      "        pm.expect(JSON.stringify(jsonData.fosStatus)).to.equal(\"NULL\");",
+                      "        pm.expect(JSON.stringify(jsonData.fosStatus).toUpperCase()).to.equal(\"NULL\");",
                       "    });",
                       "    ",
                       "    if (data.cnsmr_id != null) {",
