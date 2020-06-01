@@ -42286,7 +42286,7 @@
                   "//console.log(\"End of Pre-req script\");\r",
                   "\r",
                   "\r",
-                  "///////////////Consumer Details\r",
+                  "///////////////CONSUMER DETAILS////////\r",
                   "const sfsStatusCode = Math.floor(Math.random() * 2);\r",
                   "pm.globals.set(\"sfsStatusCode\", sfsStatusCode);\r",
                   "console.log(\"SFS Status Code: \" + sfsStatusCode.toString());\r",
