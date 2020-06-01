@@ -26503,11 +26503,12 @@
                       }
                     ],
                     "url": {
-                      "raw": "{{baseUrl}}/:consumerId/phone/highestscoring/landline",
+                      "raw": "{{baseUrl}}/consumer/:consumerId/phone/highestscoring/landline",
                       "host": [
                         "{{baseUrl}}"
                       ],
                       "path": [
+                        "consumer",
                         ":consumerId",
                         "phone",
                         "highestscoring",
