@@ -42362,7 +42362,7 @@
                   "    pm.globals.set(\"partnerEmploy\", partnerEmploy);\r",
                   "    console.log(\"Is In Paid Employment?: \" + partnerEmploy.toString());\r",
                   "    return partnerEmploy;\r",
-                  "\r",
+                  "}\r",
                   "    const doYouHaveOutstandingDebt = Math.random() >=0.5;\r",
                   "pm.globals.set(\"doYouHaveOutstandingDebt\", doYouHaveOutstandingDebt);\r",
                   "console.log(\"Do You Have Any Outstanding Debt?: \" + doYouHaveOutstandingDebt.toString());\r",
@@ -42379,7 +42379,6 @@
                   "         return outstandingDebt;\r",
                   "    }\r",
                   "\r",
-                  "}\r",
                   "}"
                 ],
                 "type": "text/javascript"
