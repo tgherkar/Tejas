@@ -42318,7 +42318,9 @@
                   "*/\r",
                   "\r",
                   "\r",
-                  "\r",
+                  "const doYouHaveOutstandingDebt = Math.random() >=0.5;\r",
+                  "pm.globals.set(\"doYouHaveOutstandingDebt\", doYouHaveOutstandingDebt);\r",
+                  "console.log(\"Do You Have Any Outstanding Debt?: \" + doYouHaveOutstandingDebt.toString());\r",
                   "\r",
                   "\r",
                   " \r",
@@ -42363,10 +42365,6 @@
                   "    console.log(\"Is In Paid Employment?: \" + partnerEmploy.toString());\r",
                   "    return partnerEmploy;\r",
                   "}\r",
-                  "    const doYouHaveOutstandingDebt = Math.random() >=0.5;\r",
-                  "pm.globals.set(\"doYouHaveOutstandingDebt\", doYouHaveOutstandingDebt);\r",
-                  "console.log(\"Do You Have Any Outstanding Debt?: \" + doYouHaveOutstandingDebt.toString());\r",
-                  "\r",
                   "if (doYouHaveOutstandingDebt ===true){\r",
                   "    const outstandingDebt = Math.floor((Math.random() * 10000) + 1);\r",
                   "pm.environment.set(\"outstandingDebt\", outstandingDebt);\r",
@@ -42379,7 +42377,8 @@
                   "         return outstandingDebt;\r",
                   "    }\r",
                   "\r",
-                  "}"
+                  "}\r",
+                  ""
                 ],
                 "type": "text/javascript"
               }
