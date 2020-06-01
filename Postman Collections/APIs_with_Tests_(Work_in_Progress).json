@@ -42486,7 +42486,7 @@
                   "    }\r",
                   "const secondRanIncGroupCode = Math.floor((Math.random() * 2 ) + 1);\r",
                   "console.log(\"Income Groupcode Generated: \" + secondRanIncGroupCode.toString());\r",
-                  "pm.environment.set(\"secondRanIncGroupCode\", secondRanIncGroupCode);\r",
+                  "pm.globals.set(\"secondRanIncGroupCode\", secondRanIncGroupCode);\r",
                   "\r",
                   "var secondIncTypeCode = 0;\r",
                   "\r",
