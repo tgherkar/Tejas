@@ -42388,7 +42388,7 @@
                   "\r",
                   "const expenGroupCode = Math.floor((Math.random() * 6 ) + 1);\r",
                   "console.log(\"Expenditure Groupcode Generated: \" + expenGroupCode.toString());\r",
-                  "pm.globals.set(\"ExpenGroupCode\", expenGroupCode);\r",
+                  "pm.globals.set(\"expenGroupCode\", expenGroupCode);\r",
                   "\r",
                   "var randomExpenTypeCode = 0;\r",
                   "\r",
