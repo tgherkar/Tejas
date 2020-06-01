@@ -26808,12 +26808,11 @@
                       }
                     ],
                     "url": {
-                      "raw": "{{baseUrl}}/consumer/:consumerId/phone/highestscoring/mobile",
+                      "raw": "{{baseUrl}}/:consumerId/phone/highestscoring/mobile",
                       "host": [
                         "{{baseUrl}}"
                       ],
                       "path": [
-                        "consumer",
                         ":consumerId",
                         "phone",
                         "highestscoring",
@@ -26821,6 +26820,7 @@
                       ],
                       "variable": [
                         {
+                          "id": "a197cf09-e755-4160-9444-c756c3b8d2a7",
                           "key": "consumerId",
                           "value": "<long>",
                           "type": "string",
