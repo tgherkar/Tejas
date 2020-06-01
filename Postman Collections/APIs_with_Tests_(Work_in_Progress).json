@@ -32442,6 +32442,7 @@
               "script": {
                 "id": "88c2670a-d888-4d71-8aa2-3e9b61d90d0b",
                 "exec": [
+                  "",
                   "try {",
                   "    pm.environment.set(\"response time\", (pm.response.responseTime) + Number(postman.getEnvironmentVariable(\"response time\")));",
                   "    pm.environment.set(\"responses\", 1 + Number(postman.getEnvironmentVariable(\"responses\")));",
