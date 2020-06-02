@@ -33515,7 +33515,7 @@
                   "    console.log(JSON.stringify(jsonData[0].title).toUpperCase());",
                   "    if (data.cnsmr_id != null) {",
                   "        pm.test(\"TEST1A: Title check\", function () {",
-                  "            pm.expect(JSON.stringify(jsonData[0].title).toUpperCase()).to.equal(data.title.toUpperCase());",
+                  "            pm.expect(jsonData[0].title).toUpperCase().to.equal(data.title.toUpperCase());",
                   "        });",
                   "        pm.test(\"TEST1B: legacyID check\", function () {",
                   "            pm.expect(jsonData[0].legacyID).to.equal(JSON.stringify(data.legacyID));",
