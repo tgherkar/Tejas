@@ -33525,7 +33525,7 @@
                   "            pm.expect(jsonData[0].legacyID).to.equal(JSON.stringify(data.legacyID));",
                   "        });",
                   "        pm.test(\"TEST1C: firstName check\", function () {",
-                  "            pm.expect(JSON.stringify(jsonData[0].firstName).toUpperCase()).to.equal(data.firstname.toUpperCase());",
+                  "            pm.expect(JSON.stringify(jsonData[0].firstName).toUpperCase()).to.equal((data.firstname).toUpperCase());",
                   "        });",
                   "        pm.test(\"TEST1D: lastName check\", function () {",
                   "            pm.expect(jsonData[0].lastName).to.equal(data.surname);",
