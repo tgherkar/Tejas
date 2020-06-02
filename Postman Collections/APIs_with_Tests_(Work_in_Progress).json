@@ -39965,7 +39965,7 @@
                 {
                   "listen": "test",
                   "script": {
-                    "id": "071d4436-3d97-490d-bb62-86b3e5aae986",
+                    "id": "7ba6bd4f-d3a4-4746-a085-086e9ba51247",
                     "exec": [
                       "var jsonData = JSON.parse(responseBody);",
                       "pm.environment.set(\"response time\", (pm.response.responseTime) + Number(postman.getEnvironmentVariable(\"response time\")));",
@@ -41067,7 +41067,7 @@
                 {
                   "listen": "prerequest",
                   "script": {
-                    "id": "ce5f7902-23fd-430e-88b6-b9d8cd3950c7",
+                    "id": "4e72d939-6738-4302-abba-5e82d4d2fb72",
                     "exec": [
                       "if (pm.environment.get(\"OAuth_Timestamp\") == null) {\r",
                       "    console.log(\"OAuth timestamp null, check the environment\");\r",
