@@ -33518,7 +33518,7 @@
                   "            if (jsonData[0].title === null) {",
                   "                pm.expect((data.title).toUpperCase()).to.equal(\"NULL\");",
                   "            } else {",
-                  "                pm.expect(jsonData[0].title).toUpperCase().to.equal(data.title);",
+                  "                pm.expect(jsonData[0].title).to.equal((data.title).toUpperCase());",
                   "            }",
                   "        });",
                   "        pm.test(\"TEST1B: legacyID check\", function () {",
