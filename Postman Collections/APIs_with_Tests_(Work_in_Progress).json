@@ -16263,7 +16263,7 @@
                           "        });",
                           "        pm.test(\"TEST1E: County check\", function () {",
                           "            if(jsonData.County===null){",
-                          "            pm.expect(data.County).to.deep.equal(\"NULL\");",
+                          "            pm.expect((data.County).toUpperCase()).to.deep.equal(\"NULL\");",
                           "            }else{",
                           "                pm.expect(jsonData.county).to.deep.equal(data.County);",
                           "            }",
