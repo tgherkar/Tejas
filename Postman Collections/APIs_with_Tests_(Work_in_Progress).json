@@ -33839,9 +33839,9 @@
                   "        pm.response.to.have.header('Content-Type', 'text/plain; charset=utf-8', 'Vary', 'Accept-Encoding', 'X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');",
                   "    });",
                   "    pm.test(\"Incorrect Consumer ID should be not found\", function () {",
-                  "        pm.expect(responseCode.code).to.equal(404);",
-                  "        //pm.expect(responseBody).to.equal(\"Unable to find consumer with consumerID: \" + query[5]);",
-                  "        //pm.expect(cid[1]).to.equal(\" \" + query[5]);",
+                  "        pm.expect(responseCode.code).to.equal(400);",
+                  "        pm.expect(responseBody).to.equal(\"Unable to find consumer with consumerID: \" + query[5]);",
+                  "        pm.expect(cid[1]).to.equal(\" \" + query[5]);",
                   "    });",
                   "}",
                   ""
@@ -33972,7 +33972,7 @@
               "variable": [
                 {
                   "key": "consumerId",
-                  "value": "{{cnsmr_id}}",
+                  "value": "202516",
                   "type": "string"
                 }
               ]
