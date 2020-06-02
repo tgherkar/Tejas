@@ -15484,7 +15484,6 @@
                           "        pm.expect(responseBody).to.equal(\"Unable to find correspondence address associated with consumerID: \" + query[4]);",
                           "        pm.expect(cid[1]).to.equal(\" \" + query[4]);",
                           "    });",
-                          "}",
                           "}"
                         ],
                         "type": "text/javascript"
