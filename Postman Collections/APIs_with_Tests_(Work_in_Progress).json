@@ -9470,7 +9470,7 @@
                       "        });",
                       "        pm.test(\"TEST1D: lastName check\", function () {",
                       "            if(jsonData.lastName===null){",
-                      "                pm.expect(JSON.stringify(jsonData.lastName).toUpperCase()).to.deep.equal(data.surname.toUpperCase());",
+                      "                pm.expect(data.surname.toUpperCase()).to.deep.equal(\"NULL\");",
                       "            }",
                       "            pm.expect(jsonData.lastName).to.deep.equal(data.surname);",
                       "        });",
