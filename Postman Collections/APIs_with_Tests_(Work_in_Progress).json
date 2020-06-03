@@ -9923,7 +9923,7 @@
                       "            }",
                       "        });",
                       "        pm.test(\"TEST1B: legacyID check\", function () {",
-                      "            pm.expect(jsonData.legacyID).to.equal(data.legacyID);",
+                      "            pm.expect(jsonData.legacyID).to.equal(JSON.stringify(data.legacyID));",
                       "        });",
                       "        pm.test(\"TEST1C: firstName check\", function () {",
                       "            pm.expect(jsonData.firstName).to.equal(data.firstname);",
