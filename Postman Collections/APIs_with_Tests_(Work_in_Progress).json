@@ -359,7 +359,7 @@
                   "            if (jsonData.linkedConsumerCount > 0) {",
                   "                console.log(\"linked account - can't verify consumer ID for linked account\")",
                   "            } else {",
-                  "                pm.expect(JSON.stringify(jsonData.consumerAccount.consumerID)).to.deep.equal(query[6]);",
+                  "                pm.expect(JSON.stringify(jsonData.consumerAccount.consumerID)).to.deep.equal(query[5]);",
                   "            }",
                   "            pm.expect(JSON.stringify(jsonData.preDefault.consumerID)).to.deep.equal(query[6]);",
                   "        } else {",
