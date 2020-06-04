@@ -348,7 +348,7 @@
                   "//console.log(req);",
                   "if (data.test_polarity == null || data.test_polarity == 1) {",
                   "    pm.test(\"TEST1: Consumer ID Check\", function () {",
-                  "        if (data.cnsmr_id !== null) {",
+                  "        if (data.cnsmr_id === null) {",
                   "            pm.expect(JSON.stringify(jsonData.consumerID)).to.deep.equal(query[5]);",
                   "            pm.expect(JSON.stringify(jsonData.consumerAddress.consumerID)).to.deep.equal(query[5]);",
                   "            if (jsonData.consumerPhoneNumbers != null) {",
