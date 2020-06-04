@@ -344,7 +344,7 @@
                   "var jsonData = JSON.parse(responseBody);",
                   "var req = request.url;",
                   "var query = request.url.split('/');",
-                  "console.log(query);",
+                  "console.log(query[5]);",
                   "//console.log(req);",
                   "if (data.test_polarity == null || data.test_polarity == 1) {",
                   "    pm.test(\"TEST1: Consumer ID Check\", function () {",
