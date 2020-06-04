@@ -361,7 +361,7 @@
                   "            } else {",
                   "                pm.expect(JSON.stringify(jsonData.consumerAccount.consumerID)).to.deep.equal(query[5]);",
                   "            }",
-                  "            pm.expect(JSON.stringify(jsonData.preDefault.consumerID)).to.deep.equal(query[6]);",
+                  "            pm.expect(JSON.stringify(jsonData.preDefault.consumerID)).to.deep.equal(query[5]);",
                   "        } else {",
                   "            pm.expect(jsonData.consumerID).to.deep.equal(data.cnsmr_id);",
                   "        }",
