@@ -531,7 +531,7 @@
               {
                 "key": "Origin",
                 "type": "text",
-                "value": "{{Origin}}"
+                "value": "Postman"
               }
             ],
             "body": {
