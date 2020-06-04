@@ -499,9 +499,9 @@
                 "id": "218b7a8c-e2cc-49dd-8070-990a6d9904ff",
                 "exec": [
                   "//pm.environment.set(\"OAuth_Timestamp\", null);\r",
-                  "console.log(pm.environment.get(\"OAuth_Expiry\"));\r",
-                  "console.log(pm.environment.get(\"OAuth_Timestamp\"));\r",
-                  "console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "//console.log(pm.environment.get(\"OAuth_Expiry\"));\r",
+                  "//console.log(pm.environment.get(\"OAuth_Timestamp\"));\r",
+                  "//console.log(pm.environment.get(\"OAuth_Token\"));\r",
                   "var noDate = 0;\r",
                   "var tokenDate = new Date(2010, 1, 1);\r",
                   "var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
