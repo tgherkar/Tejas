@@ -7953,7 +7953,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"Type\": \"Object\",\r\n    \"Data\": {\r\n            \"AccountReference\": \"9999\"\r\n    }\r\n}\r\n",
+              "raw": "{\r\n    \"Type\": \"Object\",\r\n    \"Data\": {\r\n            \"AccountReference\": \"{{legacyID}}\"\r\n    }\r\n}\r\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -8187,7 +8187,9 @@
                   "console.log(\"Reference: \" + data.legacyID);\r",
                   "console.log(\"Postcode: \" + data.PostCode);\r",
                   "\r",
-                  "var payload = request.data;\r",
+                  "//var payload = request.data;\r",
+                  "var\u00a0phn_num\u00a0=\u00a0pm.variables.get(\"phn_num\");\r",
+                  "var\u00a0payload\u00a0=\u00a0request.data.replace(\"{{phn_num}}\", phn_num); \r",
                   "console.log(\"Using payload as \" + payload);\r",
                   "console.log(environment.secret);\r",
                   "var hash = CryptoJS.HmacSHA256(payload, environment.secret).toString(CryptoJS.enc.Hex);\r",
@@ -8357,7 +8359,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"Type\": \"Object\",\r\n    \"Data\": {\r\n        \"PhoneNumber\": \"07780224211\"\r\n    }\r\n}\r\n",
+              "raw": "{\r\n    \"Type\": \"Object\",\r\n    \"Data\": {\r\n        \"PhoneNumber\": \"{{phn_num}}\"\r\n    }\r\n}\r\n",
               "options": {
                 "raw": {
                   "language": "json"
