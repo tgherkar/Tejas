@@ -8355,7 +8355,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"Type\": \"Object\",\r\n    \"Data\": {\r\n        \"PhoneNumber\": \"1234567\"\r\n    }\r\n}\r\n",
+              "raw": "{\r\n    \"Type\": \"Object\",\r\n    \"Data\": {\r\n        \"PhoneNumber\": \"07780224211\"\r\n    }\r\n}\r\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -8844,7 +8844,7 @@
               }
             },
             "url": {
-              "raw": "https://cabotapi-test.cabotcm.com/contentguru/stormivr/ivrcall/:reference/:phonenumber",
+              "raw": "https://cabotapi-test.cabotcm.com/stormivr/ivrcall/:reference/:phonenumber",
               "protocol": "https",
               "host": [
                 "cabotapi-test",
@@ -8852,7 +8852,6 @@
                 "com"
               ],
               "path": [
-                "contentguru",
                 "stormivr",
                 "ivrcall",
                 ":reference",
