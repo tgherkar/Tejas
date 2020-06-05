@@ -9126,7 +9126,7 @@
                   "try {var jsonData = JSON.parse(responseBody);}",
                   "catch(e){",
                   "    pm.test(\"Neg Test 04: Check incorrect DPA doesn't validate\", function () {",
-                  "     pm.expect(pm.response.code).to.be.oneOf([204]);",
+                  "     pm.expect(pm.response.code).to.be.oneOf([200]);",
                   "    });",
                   "}",
                   "",
@@ -9175,7 +9175,7 @@
                   "});",
                   "}",
                   "pm.test(\"Status code is 200\", function () {",
-                  "    pm.response.to.have.status(204);",
+                  "    pm.response.to.have.status(200);",
                   "});"
                 ],
                 "type": "text/javascript"
