@@ -8844,7 +8844,7 @@
               }
             },
             "url": {
-              "raw": "https://cabotapi-test.cabotcm.com/stormivr/ivrcall/:reference/:phonenumber",
+              "raw": "https://cabotapi-test.cabotcm.com/stormivr/ivrcall/:phonenumber/:reference",
               "protocol": "https",
               "host": [
                 "cabotapi-test",
@@ -8854,18 +8854,18 @@
               "path": [
                 "stormivr",
                 "ivrcall",
-                ":reference",
-                ":phonenumber"
+                ":phonenumber",
+                ":reference"
               ],
               "variable": [
                 {
-                  "key": "reference",
-                  "value": "135429",
+                  "key": "phonenumber",
+                  "value": "124567",
                   "type": "string"
                 },
                 {
-                  "key": "phonenumber",
-                  "value": "124567",
+                  "key": "reference",
+                  "value": "135429",
                   "type": "string"
                 }
               ]
