@@ -7745,7 +7745,9 @@
               "script": {
                 "id": "047327b1-fe59-4f3f-a061-98bf0d777891",
                 "exec": [
-                  "var payload = request.data;",
+                  "//var payload = request.data;",
+                  "var\u00a0legacyID\u00a0=\u00a0pm.variables.get(\"legacyID\");",
+                  "var\u00a0payload\u00a0=\u00a0request.data.replace(\"{{legacyID}}\",\u00a0legacyID); ",
                   "console.log(\"Using payload as \" + payload);",
                   "console.log(environment.secret);",
                   "var hash = CryptoJS.HmacSHA256(payload, environment.secret).toString(CryptoJS.enc.Hex);",
@@ -7951,7 +7953,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"Type\": \"Object\",\r\n    \"Data\": {\r\n            \"AccountReference\": \"4021\"\r\n    }\r\n}\r\n",
+              "raw": "{\r\n    \"Type\": \"Object\",\r\n    \"Data\": {\r\n            \"AccountReference\": \"9999\"\r\n    }\r\n}\r\n",
               "options": {
                 "raw": {
                   "language": "json"
