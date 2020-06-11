@@ -39801,7 +39801,9 @@
                           "INSERT INTO @test (OriginalConsumerID) SELECT DISTINCT TOP 5 OriginalConsumerID FROM dbo.SFS\r",
                           "WHERE SFSStatusCode = 1\r",
                           "INSERT INTO @test (OriginalConsumerID) SELECT DISTINCT TOP 5 OriginalConsumerID FROM dbo.SFS\r",
-                          "WHERE SFSStatusCode = 0*/"
+                          "WHERE SFSStatusCode = 0\r",
+                          "SELECT * FROM @test\r",
+                          "*/"
                         ],
                         "type": "text/javascript"
                       }
