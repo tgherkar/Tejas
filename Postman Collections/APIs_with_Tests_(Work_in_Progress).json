@@ -35545,10 +35545,16 @@
                   "script": {
                     "id": "5a998263-5c92-455c-8522-e9e7282ad6a3",
                     "exec": [
-                      "var jsonData = JSON.parse(responseBody);\r",
-                      "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
-                      "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
-                      "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                      "try {\r",
+                      "    pm.environment.set(\"response time\", (pm.response.responseTime) + Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                      "    pm.environment.set(\"responses\", 1 + Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                      "    console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                      "\r",
+                      "    let expectedCode = pm.iterationData.get(\"expectedHttpCode\");\r",
+                      "    var jsonData = JSON.parse(responseBody);\r",
+                      "    var req = request.url;\r",
+                      "    var query = request.url.split('/');\r",
+                      "    console.log(query);\r",
                       "\r",
                       "var Ajv = require('ajv'),\r",
                       "ajv = new Ajv({logger: console});\r",
@@ -36186,6 +36192,8 @@
                       "  pm.expect(ajv.validate(schema, jsonData, true, false)).to.be.true;\r",
                       "});\r",
                       "\r",
+                      "} catch (e) {\r",
+                      "\r",
                       "////////Negative Tests\r",
                       "pm.test(\"Check if array is empty\", function () {\r",
                       "     pm.expect([expectedObject]).to.not.be.empty;\r",
@@ -36203,7 +36211,7 @@
                       "\r",
                       "       \r",
                       "\r",
-                      "      "
+                      "}  "
                     ],
                     "type": "text/javascript"
                   }
