@@ -10686,7 +10686,7 @@
                       "            if(jsonData.title===null){",
                       "                pm.expect(JSON.stringify(jsonData.title).toUpperCase()).to.equal(data.title);",
                       "            }else{",
-                      "                pm.expect(JSON.stringify(jsonData.title)).to.equal(JSON.stringify(data.title));",
+                      "                pm.expect(jsonData.title).to.equal(data.title);",
                       "            }",
                       "        });",
                       "        pm.test(\"TEST1B: Consumer ID check\", function () {",
