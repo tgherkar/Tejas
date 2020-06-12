@@ -10696,7 +10696,11 @@
                       "            pm.expect(jsonData.firstName).to.equal(data.firstname);",
                       "        });",
                       "        pm.test(\"TEST1D: lastName check\", function () {",
-                      "            pm.expect(jsonData.lastName).to.equal(data.surname);",
+                      "            if (jsonData.lastName === null) {",
+                      "                pm.expect(data.surname.toUpperCase()).to.deep.equal(\"NULL\");",
+                      "            } else {",
+                      "                pm.expect(jsonData.lastName).to.deep.equal(data.surname);",
+                      "            }",
                       "        });",
                       "        pm.test(\"TEST1E: DOB check\", function () {",
                       "            pm.expect(jsonData.dateOfBirth.split('T')[0]).to.equal(data.dob);",
@@ -39851,7 +39855,7 @@
                       },
                       {
                         "key": "Username",
-                        "value": "LSimpson",
+                        "value": "Test-User",
                         "type": "text"
                       }
                     ],
