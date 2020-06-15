@@ -36282,6 +36282,15 @@
                       "    }\r",
                       "}\r",
                       "//console.log(\"End of Pre-req script\");\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      "/*\r",
+                      "\r",
+                      "SELECT * FROM dbo.ExpenditureType ET FULL JOIN dbo.ExpenditureGroup EG ON EG.ExpenditureGroupCode = ET.ExpenditureGroupCode\r",
+                      "\r",
+                      "*/\r",
                       ""
                     ],
                     "type": "text/javascript"
@@ -36325,13 +36334,13 @@
                   },
                   {
                     "key": "Origin",
-                    "value": "Postman",
-                    "type": "text"
+                    "type": "text",
+                    "value": "Postman"
                   },
                   {
                     "key": "Username",
-                    "value": "Test-User",
-                    "type": "text"
+                    "type": "text",
+                    "value": "Test-User"
                   }
                 ],
                 "url": "{{BaseURL}}/sfs/category/expenditure",
