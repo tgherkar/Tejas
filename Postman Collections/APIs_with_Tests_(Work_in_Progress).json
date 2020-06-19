@@ -46916,12 +46916,9 @@
               }
             ],
             "url": {
-              "raw": "https://cabotapi-test.cabotcm.com/sfs/consumer/:id/employmentstatus",
-              "protocol": "https",
+              "raw": "{{BaseURL}}/sfs/consumer/:id/employmentstatus",
               "host": [
-                "cabotapi-test",
-                "cabotcm",
-                "com"
+                "{{BaseURL}}"
               ],
               "path": [
                 "sfs",
@@ -46939,9 +46936,8 @@
               ],
               "variable": [
                 {
-                  "id": "50c785c8-a748-479f-9560-bbff090b2beb",
                   "key": "id",
-                  "value": "",
+                  "value": "{{cnsmrlc_id}}",
                   "type": "string"
                 }
               ]
