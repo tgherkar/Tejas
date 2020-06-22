@@ -41094,7 +41094,7 @@
                       "                    },",
                       "                    \"numberInHousehold\": {",
                       "                        \"$id\": \"#/properties/consumerDetail/properties/numberInHousehold\",",
-                      "                        \"type\": \"integer\"",
+                      "                        \"type\": [\"integer\", \"null\"]",
                       "                    },",
                       "                    \"numberOfChildrenUnder16\": {",
                       "                        \"$id\": \"#/properties/consumerDetail/properties/numberOfChildrenUnder16\",",
