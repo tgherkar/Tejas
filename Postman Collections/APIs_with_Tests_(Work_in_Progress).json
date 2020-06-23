@@ -42815,6 +42815,13 @@
                           "      ,[GroupID]\r",
                           "      ,[OriginalConsumerID] AS 'cnsmr_id'\r",
                           "FROM [dbo].[SFS]\r",
+                          "SELECT * FROM dbo.sfs S FULL JOIN dbo.SFSExpenditure ON SFSExpenditure.SFSID = S.SFSID\r",
+                          "--FULL JOIN dbo.SFSIncome I ON I.SFSID = S.SFSID\r",
+                          "--FULL JOIN dbo.SFSSaving SS ON SS.SFSID = S.SFSID\r",
+                          "--FULL JOIN dbo.SFSDescription D ON D.SFSID = S.SFSID\r",
+                          "--FULL JOIN dbo.SFSCreditor C ON C.SFSID = S.SFSID\r",
+                          "\r",
+                          "\r",
                           "*/"
                         ],
                         "type": "text/javascript"
@@ -42880,7 +42887,7 @@
                       "variable": [
                         {
                           "key": "id",
-                          "value": "C6DDBF66-8579-404B-BC23-FF8DA4CE0D5D",
+                          "value": "cac0f2a3-da5c-42b3-8b1a-3a0e73dc28ae",
                           "type": "string",
                           "description": "uuid"
                         }
