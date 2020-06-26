@@ -40247,21 +40247,18 @@
                       ],
                       "variable": [
                         {
-                          "id": "998d6890-7710-4c44-922c-f3d66cf1ab62",
                           "key": "consumerID",
                           "value": "1583440",
                           "type": "string"
                         },
                         {
-                          "id": "8377b3da-7b1d-488d-adee-eab5f33087d7",
                           "key": "accountID",
                           "value": "1566125",
                           "type": "string"
                         },
                         {
-                          "id": "4c0009a5-0eb0-45b8-9897-97f31fe55771",
                           "key": "sfsId",
-                          "value": "1187D943-611B-45EA-B4EC-17168945DA98",
+                          "value": "cac0f2a3-da5c-42b3-8b1a-3a0e73dc28ae",
                           "type": "string",
                           "description": "\n\n"
                         }
@@ -46957,6 +46954,11 @@
         }
       ],
       "_postman_id": "f1375192-5c15-4bf4-ab6b-514c4c7077b0"
+    },
+    {
+      "name": "CC_Interface",
+      "item": [],
+      "_postman_id": "cf20d8ed-6617-4ef3-9164-c612b14038f6"
     },
     {
       "name": "OAuth Renewal",
