@@ -46957,7 +46957,21 @@
     },
     {
       "name": "CC_Interface",
-      "item": [],
+      "item": [
+        {
+          "name": "Get Consumer Account",
+          "_postman_id": "6a80bbd7-8dd0-45e7-9a40-771c76b78d26",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": ""
+          },
+          "response": []
+        }
+      ],
       "_postman_id": "cf20d8ed-6617-4ef3-9164-c612b14038f6"
     },
     {
