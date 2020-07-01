@@ -44809,7 +44809,7 @@
                   "    pm.test(\"TEST1E: Last Modified By User check\", function() {",
                   "        pm.expect(jsonData[0].lastModifiedByUser.split('T')[0]).to.equal(data.lastModifiedByUser);",
                   "    });",
-                  "    pm.test(\"TEST1F: eLast Modified Date Time check\", function() {",
+                  "    pm.test(\"TEST1F: Last Modified Date Time check\", function() {",
                   "        pm.expect(jsonData[0].lastModifiedDateTime.split('T')[0]).to.equal(data.lastModifiedDateTime);",
                   "    });",
                   "",
