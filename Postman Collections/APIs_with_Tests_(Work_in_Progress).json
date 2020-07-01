@@ -45037,8 +45037,7 @@
                   "\r",
                   "\r",
                   "/*\r",
-                  "\r",
-                  "SELECT TOP (10) S.SFSID as 'sfs_id'\r",
+                  "SELECT DISTINCT TOP (100) S.SFSID as 'sfs_id'\r",
                   "\t  ,S.SFSStatusCode AS 'statusCode'\r",
                   "\t  ,S.OriginalConsumerID AS 'cnsmr_id'\r",
                   "\t  ,S.LastModifiedByUser AS 'lastModifiedByUser'\r",
@@ -45053,6 +45052,7 @@
                   "GROUP BY OriginalConsumerID\r",
                   "HAVING COUNT(*) > 1\r",
                   ")\r",
+                  "ORDER BY lastModifiedDateTime DESC \r",
                   "*/"
                 ],
                 "type": "text/javascript"
@@ -45119,7 +45119,7 @@
               "variable": [
                 {
                   "key": "consumerId",
-                  "value": "{{cnsmr_id}}",
+                  "value": "2141104",
                   "type": "string",
                   "description": {
                     "content": "",
