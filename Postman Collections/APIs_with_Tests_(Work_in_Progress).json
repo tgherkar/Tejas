@@ -45031,7 +45031,29 @@
                   "    }\r",
                   "}\r",
                   "//console.log(\"End of Pre-req script\");\r",
-                  ""
+                  "\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "/*\r",
+                  "\r",
+                  "SELECT TOP (10) S.SFSID as 'sfs_id'\r",
+                  "\t  ,S.SFSStatusCode AS 'statusCode'\r",
+                  "\t  ,S.OriginalConsumerID AS 'cnsmr_id'\r",
+                  "\t  ,S.LastModifiedByUser AS 'lastModifiedByUser'\r",
+                  "      ,S.LastModifiedDateTime AS 'lastModifiedDateTime'\r",
+                  "\t  ,E.Amount AS 'totalExpenditure'\r",
+                  "\t  , I.Amount AS 'totalIncome'\r",
+                  "FROM dbo.SFS S\r",
+                  "JOIN dbo.SFSExpenditure E ON E.SFSID = S.SFSID\r",
+                  "JOIN dbo.SFSIncome I ON I.SFSID = S.SFSID\r",
+                  "WHERE OriginalConsumerID IN (\r",
+                  "SELECT OriginalConsumerID FROM dbo.SFS S\r",
+                  "GROUP BY OriginalConsumerID\r",
+                  "HAVING COUNT(*) > 1\r",
+                  ")\r",
+                  "*/"
                 ],
                 "type": "text/javascript"
               }
@@ -45096,9 +45118,8 @@
               ],
               "variable": [
                 {
-                  "id": "3662ab77-3c2f-40d7-a095-3a86ec6971a5",
                   "key": "consumerId",
-                  "value": "",
+                  "value": "2361220",
                   "type": "string",
                   "description": {
                     "content": "",
@@ -46960,6 +46981,67 @@
       "item": [
         {
           "name": "Get Consumer Account",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "f7aa1889-2e19-40f5-8aa2-0a602c05eaca",
+                "exec": [
+                  "//pm.environment.set(\"OAuth_Timestamp\", null);\r",
+                  "console.log(pm.environment.get(\"OAuth_Expiry\"));\r",
+                  "console.log(pm.environment.get(\"OAuth_Timestamp\"));\r",
+                  "console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "var noDate = 0;\r",
+                  "var tokenDate = new Date(2010,1,1);\r",
+                  "var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "if(tokenTimestamp){\r",
+                  "    tokenDate = Date.parse(tokenTimestamp);\r",
+                  "}else {noDate = 1};\r",
+                  "    //console.log(\"timestamp is\"+tokenDate);\r",
+                  "var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "if(!expiresInTime){\r",
+                  "    expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "}\r",
+                  "//console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime + \"and noDate value is :\"+noDate);\r",
+                  "if((new Date() - tokenDate) >= expiresInTime || noDate==1) {\r",
+                  "    let tokenUrl = pm.environment.get(\"tokenUrl\"); \r",
+                  "    let clientId = pm.environment.get(\"clientId\"); \r",
+                  "    let clientSecret = pm.environment.get(\"clientSecret\"); \r",
+                  "    let scope = pm.environment.get(\"clientScope\"); \r",
+                  "    let getTokenRequest = {\r",
+                  "        method: 'POST',\r",
+                  "        url: tokenUrl,\r",
+                  "        auth: {\r",
+                  "            type: \"basic\",\r",
+                  "            basic: [\r",
+                  "                { key: \"username\", value: clientId },\r",
+                  "                { key: \"password\", value: clientSecret }\r",
+                  "            ]\r",
+                  "        },\r",
+                  "        body: {\r",
+                  "            mode: 'formdata',\r",
+                  "            formdata: [\r",
+                  "                { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                { key: 'scope', value: scope }\r",
+                  "            ]\r",
+                  "        }\r",
+                  "    };\r",
+                  "pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "    let jsonResponse = response.json(),\r",
+                  "        newAccessToken = jsonResponse.access_token;\r",
+                  "        //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "        pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "        pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "        pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "    });\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "}\r",
+                  "//console.log(\"End of Pre-req script\");"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
           "_postman_id": "6a80bbd7-8dd0-45e7-9a40-771c76b78d26",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
