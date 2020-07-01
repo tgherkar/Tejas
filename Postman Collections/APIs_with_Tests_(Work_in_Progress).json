@@ -45103,6 +45103,11 @@
                 "key": "Username",
                 "value": "LSimpson",
                 "type": "text"
+              },
+              {
+                "key": "Bearer",
+                "value": "{{OAuth_Token}}",
+                "type": "text"
               }
             ],
             "url": {
@@ -45119,7 +45124,7 @@
               "variable": [
                 {
                   "key": "consumerId",
-                  "value": "2141104",
+                  "value": "2048553",
                   "type": "string",
                   "description": {
                     "content": "",
