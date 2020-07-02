@@ -12881,6 +12881,7 @@
                       "pm.test(\"TEST3: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {",
                       "    pm.expect(pm.response.responseTime).to.be.below(5000);",
                       "});",
+                      "",
                       "pm.test(\"TEST4: Response body check\", function() {",
                       "   pm.expect(JSON.stringify(jsonData.consumerID)).to.deep.equal(query[4]); ",
                       "});",
