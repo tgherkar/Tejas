@@ -12875,7 +12875,7 @@
                       "});",
                       "",
                       "pm.test(\"TEST2: Response Header Checks\", function() {",
-                      "    pm.response.to.have.header('Content-Type', 'text/plain; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');",
+                      "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');",
                       "});",
                       "",
                       "pm.test(\"TEST3: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {",
