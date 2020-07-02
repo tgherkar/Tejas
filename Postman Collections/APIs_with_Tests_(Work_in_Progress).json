@@ -10814,7 +10814,7 @@
                       "            }",
                       "        });",
                       "        pm.test(\"TEST1F: email check\", function () {",
-                      "            pm.expect(jsonData.email.split('T')[0]).to.equal(data.email);",
+                      "            pm.expect(jsonData.email).to.equal(data.email);",
                       "        });",
                       "        pm.test(\"TEST1G: consumer address check\", function () {",
                       "            if (jsonData.consumerAddress != null) {",
