@@ -34543,16 +34543,14 @@
               ],
               "variable": [
                 {
-                  "id": "815dec5a-f728-4229-8a74-bddd93a21e56",
                   "key": "SearchById",
-                  "value": "6",
+                  "value": "{{searchByID}}",
                   "type": "string",
                   "description": "(Required) "
                 },
                 {
-                  "id": "6fd7cce5-1da6-4939-84c4-83ad963e183d",
                   "key": "SearchText",
-                  "value": "Kaweah",
+                  "value": "{{searchText}}",
                   "type": "string",
                   "description": "(Required) "
                 }
