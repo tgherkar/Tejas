@@ -47902,7 +47902,7 @@
               "pm.test(\"Neg Test 02: Check if string is empty\", function () {\r",
               "    pm.expect('id').to.not.be.empty;\r",
               "});\r",
-              "pm.test(\"Neg Test 03: Check keylinkID isn't empty\", function () {\r",
+              "pm.test(\"Neg Test 03: Check searchBy isn't empty\", function () {\r",
               "    pm.expect('searchBy').to.not.be.empty;\r",
               "});\r",
               "pm.test(\"Incorrect field examaple\", function () {\r",
