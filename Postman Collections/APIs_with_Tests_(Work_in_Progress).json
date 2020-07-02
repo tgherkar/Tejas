@@ -12055,16 +12055,21 @@
                   "script": {
                     "id": "ae51de6a-cc0a-4747-a57b-7836f206f222",
                     "exec": [
-                      "if (data.test_polarity==null || data.test_polarity==1){",
+                      "try{",
                       "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {",
                       "    pm.response.to.have.status(202);",
-                      "});}",
+                      "});",
                       "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {",
                       "    pm.expect(pm.response.responseTime).to.be.below(5000);",
                       "});",
                       "pm.test(\"TEST3: Response Header Checks\", function() {",
                       "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');",
-                      "});"
+                      "});",
+                      "}catch(e){",
+                      "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {",
+                      "    pm.response.to.have.status(400);",
+                      "});",
+                      "}"
                     ],
                     "type": "text/javascript"
                   }
