@@ -34196,14 +34196,12 @@
               ],
               "variable": [
                 {
-                  "id": "521765da-af4e-46a2-b6f7-d62b3c56c940",
                   "key": "SearchById",
                   "value": "5",
                   "type": "string",
                   "description": "(Required) "
                 },
                 {
-                  "id": "9ccdcc3e-5ef5-456d-bdb6-3403bd124fcf",
                   "key": "SearchText",
                   "value": "",
                   "type": "string",
@@ -47902,7 +47900,7 @@
               "    pm.expect(schema).to.not.be.empty;\r",
               "});\r",
               "pm.test(\"Neg Test 02: Check if string is empty\", function () {\r",
-              "    pm.expect('description').to.not.be.empty;\r",
+              "    pm.expect('id').to.not.be.empty;\r",
               "});\r",
               "pm.test(\"Neg Test 03: Check keylinkID isn't empty\", function () {\r",
               "    pm.expect('searchBy').to.not.be.empty;\r",
