@@ -14349,7 +14349,7 @@
                       "console.log(\"Average response time: \" + responseTime + \"ms\");",
                       "",
                       "let expectedCode = pm.iterationData.get(\"expectedHttpCode\");",
-                      "var jsonData[0] = JSON.parse(responseBody);",
+                      "var jsonData = JSON.parse(responseBody);",
                       "var req = request.url;",
                       "var query = request.url.split('/');",
                       "console.log(query);",
