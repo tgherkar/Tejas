@@ -14576,7 +14576,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/consumer/:consumerId/account/:consumerAccountId/owners",
+                  "raw": "{{baseUrl}}/consumer/:consumerId/account/:consumerAccountId/owner",
                   "host": [
                     "{{baseUrl}}"
                   ],
@@ -14585,17 +14585,17 @@
                     ":consumerId",
                     "account",
                     ":consumerAccountId",
-                    "owners"
+                    "owner"
                   ],
                   "variable": [
                     {
                       "key": "consumerId",
-                      "value": "{{cnsmr_id}}",
+                      "value": "1583176",
                       "type": "string"
                     },
                     {
                       "key": "consumerAccountId",
-                      "value": "{{cnsmr_accnt_id}}",
+                      "value": "1565861",
                       "type": "string"
                     }
                   ]
