@@ -14363,7 +14363,7 @@
                       "",
                       "if (data.cnsmr_id!=null){",
                       "    pm.test(\"TEST1A: AgencyID check\", function() {",
-                      "        pm.expect(jsonData[0].agencyID).to.deep.equal(data.agencyID);",
+                      "        pm.expect(jsonData[0][0].agencyID).to.deep.equal(data.agencyID);",
                       "    });",
                       "    pm.test(\"TEST1B: legacyID check\", function() {",
                       "        pm.expect(jsonData[0].legacyID).to.deep.equal(JSON.stringify(data.legacyID));",
@@ -14604,12 +14604,12 @@
                   "variable": [
                     {
                       "key": "consumerId",
-                      "value": "1583176",
+                      "value": "{{cnsmr_id}}",
                       "type": "string"
                     },
                     {
                       "key": "consumerAccountId",
-                      "value": "1565861",
+                      "value": "{{cnsmr_accnt_id}}",
                       "type": "string"
                     }
                   ]
