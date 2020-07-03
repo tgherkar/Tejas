@@ -34671,6 +34671,12 @@
                   "            pm.expect(jsonData[0].balanceInformation.currentBalance).to.equal(data.Curr_Bal);",
                   "            //pm.expect(jsonData[0].balanceInformation.totalPayment).to.equal(data.workgroupShortName);",
                   "        });",
+                  "        pm.test(\"TEST1N: SettlementOffer check\", function () {",
+                  "            pm.expect(jsonData[0].settlementOffer.amountSaved).to.equal(data.amnt_svd);",
+                  "            pm.expect(jsonData[0].settlementOffer.settlementOffer).to.equal(data.sment_offr);",
+                  "            pm.expect(jsonData[0].settlementOffer.settlementPercentage).to.equal(data.smet_pcnt);",
+                  "            pm.expect(jsonData[0].settlementOffer.amountToPay).to.equal(data.amnt_to_pay);",
+                  "        });",
                   "    }",
                   "",
                   "    pm.test(\"TEST2: Status code Check\", function () {",
@@ -35061,7 +35067,7 @@
               "variable": [
                 {
                   "key": "consumerId",
-                  "value": "{{cnsmr_id}}",
+                  "value": "1598939",
                   "type": "string"
                 }
               ]
