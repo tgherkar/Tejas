@@ -5880,7 +5880,10 @@
                     ],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                      "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {}
+                      }
                     },
                     "url": "{{baseUrl}}/actionresult/log/withrules",
                     "description": "Creates Action Result record in DM9, rules kicked off.  Sync - Waits for DM9 to respond before returning"
@@ -6025,7 +6028,10 @@
                     ],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                      "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {}
+                      }
                     },
                     "url": "{{baseUrl}}/actionresult/log/withrules/async",
                     "description": "Creates Action Result record in DM9, rules kicked off.  Async - Message handled by a queue, response returned once the message is logged on the queue"
@@ -6174,7 +6180,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                  "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": "{{baseUrl}}/actionresult/log",
                 "description": "Creates Action Result record in DM9, but does not kick off any rules for it.  Sync - Waits for DM9 to respond before returning"
@@ -6319,7 +6328,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                  "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": "{{baseUrl}}/actionresult/log/async",
                 "description": "Creates Action Result record in DM9, but does not kick off any rules for it.  Async - Message handled by a queue, response returned once the message is logged on the queue"
@@ -6464,7 +6476,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                  "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": "{{baseUrl}}/actionresult/log/async",
                 "description": "Creates Action Result record in DM9, but does not kick off any rules for it.  Async - Message handled by a queue, response returned once the message is logged on the queue"
@@ -6767,7 +6782,10 @@
                     ],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                      "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {}
+                      }
                     },
                     "url": "{{baseUrl}}/actionresult/log/withrules/async",
                     "description": "Creates Action Result record in DM9, rules kicked off.  Async - Message handled by a queue, response returned once the message is logged on the queue"
@@ -6916,7 +6934,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                  "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": "{{baseUrl}}/actionresult/log",
                 "description": "Creates Action Result record in DM9, but does not kick off any rules for it.  Sync - Waits for DM9 to respond before returning"
@@ -7061,7 +7082,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                  "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": "{{baseUrl}}/actionresult/log/async",
                 "description": "Creates Action Result record in DM9, but does not kick off any rules for it.  Async - Message handled by a queue, response returned once the message is logged on the queue"
@@ -7206,7 +7230,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}"
+                  "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": "{{baseUrl}}/actionresult/log/async",
                 "description": "Creates Action Result record in DM9, but does not kick off any rules for it.  Async - Message handled by a queue, response returned once the message is logged on the queue"
@@ -7902,7 +7929,10 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"htmlText\": {{htmlText}}\r\n}"
+              "raw": "{\r\n  \"htmlText\": {{htmlText}}\r\n}",
+              "options": {
+                "raw": {}
+              }
             },
             "url": "{{baseUrl}}/helper/removehtmltags"
           },
