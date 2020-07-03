@@ -4004,7 +4004,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\":{{legacyID}},\r\n        \"CustomerPrimaryId\":{{cnsmr_id}},\r\n        \"CustomerSecondaryId\":{{SecondaryConsumerId}},\r\n        \"PaymentAmount\":\"{{pay_amount}}\",\r\n        \"CardType\": \"{{card_type}}\",\r\n        \"TxtAuthNo\": \"{{TxtAuthNo}}\",\r\n        \"VendorTextCode\": null,\r\n        \"Title\": null,\r\n        \"Name\": null,\r\n        \"FirstName\":\"{{firstname}}\",\r\n        \"Surname\": \"{{surname}}\",\r\n        \"MiddleName\": null,\r\n        \"Address1\": \"{{AddressLine1}}\",\r\n        \"Address2\": \"{{AddressLine2}}\",\r\n        \"Address3\": \"{{County}}\",\r\n        \"Address4\": \"{{Country}}\",\r\n        \"PostCode\": \"{{PostCode}}\",\r\n        \"PhoneNumber\": null,\r\n        \"Email\":\"{{email}}\",\r\n        \"DateOfBirth\": \"{{dob}}\",\r\n        \"PromoCode\": null,\r\n        \"PaymentAt\":\"{{PaymentAt}}\",\r\n        \"SagepayTransactionID\": null,\r\n        \"PaymentBatchId\" : null,\r\n        \"SourceOfFunds\": null,\r\n        \"VendorCode\" : null,\r\n        \"CardNumber\" : null\r\n\t}\r\n}\r\n"
+                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\":{{legacyID}},\r\n        \"CustomerPrimaryId\":{{cnsmr_id}},\r\n        \"CustomerSecondaryId\":{{SecondaryConsumerId}},\r\n        \"PaymentAmount\":\"{{pay_amount}}\",\r\n        \"CardType\": \"{{card_type}}\",\r\n        \"TxtAuthNo\": \"{{TxtAuthNo}}\",\r\n        \"VendorTextCode\": null,\r\n        \"Title\": null,\r\n        \"Name\": null,\r\n        \"FirstName\":\"{{firstname}}\",\r\n        \"Surname\": \"{{surname}}\",\r\n        \"MiddleName\": null,\r\n        \"Address1\": \"{{AddressLine1}}\",\r\n        \"Address2\": \"{{AddressLine2}}\",\r\n        \"Address3\": \"{{County}}\",\r\n        \"Address4\": \"{{Country}}\",\r\n        \"PostCode\": \"{{PostCode}}\",\r\n        \"PhoneNumber\": null,\r\n        \"Email\":\"{{email}}\",\r\n        \"DateOfBirth\": \"{{dob}}\",\r\n        \"PromoCode\": null,\r\n        \"PaymentAt\":\"{{PaymentAt}}\",\r\n        \"SagepayTransactionID\": null,\r\n        \"PaymentBatchId\" : null,\r\n        \"SourceOfFunds\": null,\r\n        \"VendorCode\" : null,\r\n        \"CardNumber\" : null\r\n\t}\r\n}\r\n",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": {
                   "raw": "{{url}}/api/{{version}}/postPayment?Token={{Token}}",
@@ -4113,7 +4116,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\":10000,\r\n        \"CustomerPrimaryId\":4346549,\r\n        \"CustomerSecondaryId\":0,\r\n        \"PaymentAmount\":\"18.54\",\r\n        \"CardType\":null,\r\n        \"TxtAuthNo\":\"997793\",\r\n        \"VendorTextCode\":null,\r\n        \"Title\":null,\r\n        \"Name\":null,\r\n        \"FirstName\": \"Luna\",\r\n        \"Surname\":null,\r\n        \"MiddleName\":null,\r\n        \"Address1\":null,\r\n        \"Address2\":null,\r\n        \"Address3\":null,\r\n        \"Address4\":null,\r\n        \"PostCode\":null,\r\n        \"PhoneNumber\":null,\r\n        \"Email\":\"Luna_Plum@Cabot.com\",\r\n        \"DateOfBirth\":null,\r\n        \"PromoCode\":null,\r\n        \"PaymentAt\":\"2019-09-27\",\r\n        \"SagepayTransactionID\": null,\r\n        \"PaymentBatchId\" : null,\r\n        \"SourceOfFunds\": null,\r\n        \"VendorCode\" : null,\r\n        \"CardNumber\" : null\r\n\t}\r\n}\r\n"
+                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\":10000,\r\n        \"CustomerPrimaryId\":4346549,\r\n        \"CustomerSecondaryId\":0,\r\n        \"PaymentAmount\":\"18.54\",\r\n        \"CardType\":null,\r\n        \"TxtAuthNo\":\"997793\",\r\n        \"VendorTextCode\":null,\r\n        \"Title\":null,\r\n        \"Name\":null,\r\n        \"FirstName\": \"Luna\",\r\n        \"Surname\":null,\r\n        \"MiddleName\":null,\r\n        \"Address1\":null,\r\n        \"Address2\":null,\r\n        \"Address3\":null,\r\n        \"Address4\":null,\r\n        \"PostCode\":null,\r\n        \"PhoneNumber\":null,\r\n        \"Email\":\"Luna_Plum@Cabot.com\",\r\n        \"DateOfBirth\":null,\r\n        \"PromoCode\":null,\r\n        \"PaymentAt\":\"2019-09-27\",\r\n        \"SagepayTransactionID\": null,\r\n        \"PaymentBatchId\" : null,\r\n        \"SourceOfFunds\": null,\r\n        \"VendorCode\" : null,\r\n        \"CardNumber\" : null\r\n\t}\r\n}\r\n",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": {
                   "raw": "{{url}}/api/{{version}}/postPayment?Token={{Token}}",
@@ -4231,7 +4237,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\":{{AccountReferenceNumber}},\r\n        \"CustomerPrimaryId\":{{CustomerPrimaryId}},\r\n        \"CustomerSecondaryId\":{{CustomerSecondaryId}},\r\n        \"Amount\":\"{{Amount}}\",\r\n        \"Method\":\"{{Method}}\",\r\n        \"StartDate\": null,\r\n        \"BankName\":\"{{BankName}}\",\r\n        \"AccountName\": null,\r\n        \"AccountNumber\":\"{{AccountNumber}}\",\r\n        \"SortCode\": null,\r\n        \"Frequency\":\"{{Frequency}}\",\r\n        \"ClearedBalance\": null,\r\n        \"PhoneNumber\": null,\r\n        \"Email\":\"{{Email}}\",\r\n        \"PromoCode\": null,\r\n        \"SendNewPaymentCard\": null,\r\n        \"DurationMonths\": null,\r\n        \"SourceOfFunds\": null,\r\n        \"PriorityBillsUpToDate\": null,\r\n        \"SagepayTransactionID\": null,\r\n        \"Authorized\": \"{{Authorized}}\",\r\n        \"Day\": null,\r\n        \"OwnBankAccount\": null,\r\n        \"SingleSignatoryRequired\": null}\r\n}"
+                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\":{{AccountReferenceNumber}},\r\n        \"CustomerPrimaryId\":{{CustomerPrimaryId}},\r\n        \"CustomerSecondaryId\":{{CustomerSecondaryId}},\r\n        \"Amount\":\"{{Amount}}\",\r\n        \"Method\":\"{{Method}}\",\r\n        \"StartDate\": null,\r\n        \"BankName\":\"{{BankName}}\",\r\n        \"AccountName\": null,\r\n        \"AccountNumber\":\"{{AccountNumber}}\",\r\n        \"SortCode\": null,\r\n        \"Frequency\":\"{{Frequency}}\",\r\n        \"ClearedBalance\": null,\r\n        \"PhoneNumber\": null,\r\n        \"Email\":\"{{Email}}\",\r\n        \"PromoCode\": null,\r\n        \"SendNewPaymentCard\": null,\r\n        \"DurationMonths\": null,\r\n        \"SourceOfFunds\": null,\r\n        \"PriorityBillsUpToDate\": null,\r\n        \"SagepayTransactionID\": null,\r\n        \"Authorized\": \"{{Authorized}}\",\r\n        \"Day\": null,\r\n        \"OwnBankAccount\": null,\r\n        \"SingleSignatoryRequired\": null}\r\n}",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": "{{url}}/api/{{version}}/postPaymentPlan"
               },
@@ -4324,7 +4333,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\": 4293142,\r\n        \"CustomerPrimaryId\": 4273285,\r\n        \"CustomerSecondaryId\": 0,\r\n        \"Amount\":\"11.11\",\r\n        \"Method\":\"Direct Debit\",\r\n        \"StartDate\": null,\r\n        \"BankName\":\"Bank Du Keri\",\r\n        \"AccountName\": null,\r\n        \"AccountNumber\":\"55779911\",\r\n        \"SortCode\": null,\r\n        \"Frequency\":\"Monthly\",\r\n        \"ClearedBalance\": null,\r\n        \"PhoneNumber\": null,\r\n        \"Email\":\"TestNapple@Cabot.com\",\r\n        \"PromoCode\": null,\r\n        \"SendNewPaymentCard\": null,\r\n        \"DurationMonths\": null,\r\n        \"SourceOfFunds\": null,\r\n        \"PriorityBillsUpToDate\": null,\r\n        \"SagepayTransactionID\": null,\r\n        \"Authorized\": \"TRUE\",\r\n        \"Day\": null,\r\n        \"OwnBankAccount\": null,\r\n        \"SingleSignatoryRequired\": null}\r\n}\r\n"
+                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\": 4293142,\r\n        \"CustomerPrimaryId\": 4273285,\r\n        \"CustomerSecondaryId\": 0,\r\n        \"Amount\":\"11.11\",\r\n        \"Method\":\"Direct Debit\",\r\n        \"StartDate\": null,\r\n        \"BankName\":\"Bank Du Keri\",\r\n        \"AccountName\": null,\r\n        \"AccountNumber\":\"55779911\",\r\n        \"SortCode\": null,\r\n        \"Frequency\":\"Monthly\",\r\n        \"ClearedBalance\": null,\r\n        \"PhoneNumber\": null,\r\n        \"Email\":\"TestNapple@Cabot.com\",\r\n        \"PromoCode\": null,\r\n        \"SendNewPaymentCard\": null,\r\n        \"DurationMonths\": null,\r\n        \"SourceOfFunds\": null,\r\n        \"PriorityBillsUpToDate\": null,\r\n        \"SagepayTransactionID\": null,\r\n        \"Authorized\": \"TRUE\",\r\n        \"Day\": null,\r\n        \"OwnBankAccount\": null,\r\n        \"SingleSignatoryRequired\": null}\r\n}\r\n",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": {
                   "raw": "{{url}}/api/{{version}}/postPaymentPlan?Token={{Token}}",
@@ -4433,7 +4445,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"CustomerPrimaryId\": {{cnsmr_id}},\r\n        \"CustomerSecondaryId\": {{SecondaryConsumerId}},\r\n        \"AccountReferenceNumber\": {{legacyID}},\r\n        \"PaymentDate\": null,\r\n        \"PaymentAmount\": {{pay_amount}},\r\n        \"PhoneNumber\": null,\r\n        \"Email\": \"{{Email}}\",\r\n        \"ReasonForSettlement\": null,\r\n        \"SourceOfSettlementAmount\": null,\r\n        \"PromoCode\": null,\r\n        \"PriorityBillsUpToDate \": null\r\n\t}\r\n}\r\n\r\n"
+                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"CustomerPrimaryId\": {{cnsmr_id}},\r\n        \"CustomerSecondaryId\": {{SecondaryConsumerId}},\r\n        \"AccountReferenceNumber\": {{legacyID}},\r\n        \"PaymentDate\": null,\r\n        \"PaymentAmount\": {{pay_amount}},\r\n        \"PhoneNumber\": null,\r\n        \"Email\": \"{{Email}}\",\r\n        \"ReasonForSettlement\": null,\r\n        \"SourceOfSettlementAmount\": null,\r\n        \"PromoCode\": null,\r\n        \"PriorityBillsUpToDate \": null\r\n\t}\r\n}\r\n\r\n",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": "{{url}}/api/{{version}}/postSettlementOffer"
               },
