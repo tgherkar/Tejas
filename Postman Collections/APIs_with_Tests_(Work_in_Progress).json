@@ -33824,13 +33824,13 @@
               "variable": [
                 {
                   "key": "SearchById",
-                  "value": "5",
+                  "value": "{{id}}",
                   "type": "string",
                   "description": "(Required) "
                 },
                 {
                   "key": "SearchText",
-                  "value": "Juniper",
+                  "value": "{{txt}}",
                   "type": "string",
                   "description": "(Required) "
                 }
