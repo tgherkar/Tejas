@@ -26701,6 +26701,36 @@
                         ],
                         "type": "text/javascript"
                       }
+                    },
+                    {
+                      "listen": "test",
+                      "script": {
+                        "id": "d8c0456b-c0c9-4503-8a02-f1f7875afdf7",
+                        "exec": [
+                          "try{\r",
+                          "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                          "    pm.response.to.have.status(202);\r",
+                          "});\r",
+                          "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                          "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                          "});\r",
+                          "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                          "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                          "});\r",
+                          "}catch(e){\r",
+                          "    pm.test(\"TEST1: Response Code Check\", function () {\r",
+                          "        pm.response.to.have.status(400);\r",
+                          "    });\r",
+                          "    pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                          "        pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                          "    });\r",
+                          "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                          "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                          "});\r",
+                          "}"
+                        ],
+                        "type": "text/javascript"
+                      }
                     }
                   ],
                   "_postman_id": "4051380b-ae74-48d0-92a9-6bbf7d58bae9",
