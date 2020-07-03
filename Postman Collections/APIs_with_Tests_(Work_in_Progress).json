@@ -6119,7 +6119,7 @@
                     ],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\n    \"consumerId\": \"<long>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"message\": \"<string>\",\n    \"username\": \"<string>\",\n    \"applyToLinkedConsumers\": \"<boolean>\",\n    \"Correlation-Id\": \"<string>\",\n    \"Operation\": \"<string>\",\n    \"Origin\": \"<string>\"\n}",
+                      "raw": "{\n    \"consumerId\": {{cnsmr_id}},\n    \"actionCode\": \"{{Ac_Cd}}\",\n    \"resultCode\": \"{{Rs_Cd}}\",\n    \"message\": \"{{Message_Text}}\",\n    \"username\": \"Postman\",\n    \"applyToLinkedConsumers\": {{applyToLinkedConsumers}},\n    \"CorrelationId\": \"postman\",\n    \"Operation\": \"AR Stamp Testing\",\n    \"Origin\": \"SFSC\"\n}",
                       "options": {
                         "raw": {}
                       }
