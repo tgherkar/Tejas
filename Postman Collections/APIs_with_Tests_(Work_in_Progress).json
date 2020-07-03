@@ -5014,7 +5014,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"Token\":\"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\"Data\":{\"UserId\":194245,\"ActivationCode\":\"rMVpAo9dEqOoDEK4RJwVhXk25UCbRTf9\"}}"
+                  "raw": "{\"Token\":\"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\"Data\":{\"UserId\":194245,\"ActivationCode\":\"rMVpAo9dEqOoDEK4RJwVhXk25UCbRTf9\"}}",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": {
                   "raw": "{{url}}/api/{{version}}/postActivateUser?Token=8207186B-CA9E-4B6E-B033-1438DCC6E7D8",
@@ -5250,7 +5253,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"Token\":\"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\"Data\":{\"UserId\":194245,\"ActivationCode\":\"123456\",\"AccountReferenceNumber\":\"791230\",\"CustomerPrimaryId\":3184007,\"CustomerSecondaryId\":0,\"Email\":\"amiles@cabotcm.com\",\"ActivationURL\":\"www.bbc.co.uk\",\"FirstName\":\"Andy\"}}"
+                  "raw": "{\"Token\":\"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\"Data\":{\"UserId\":194245,\"ActivationCode\":\"123456\",\"AccountReferenceNumber\":\"791230\",\"CustomerPrimaryId\":3184007,\"CustomerSecondaryId\":0,\"Email\":\"amiles@cabotcm.com\",\"ActivationURL\":\"www.bbc.co.uk\",\"FirstName\":\"Andy\"}}",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": {
                   "raw": "{{url}}/api/v{{version}}/postSendActivationEmail?Token=8207186B-CA9E-4B6E-B033-1438DCC6E7D8",
