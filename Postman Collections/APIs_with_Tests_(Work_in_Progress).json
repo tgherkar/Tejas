@@ -7929,7 +7929,10 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"htmlText\": {{htmlText}}\r\n}"
+              "raw": "{\r\n  \"htmlText\": {{htmlText}}\r\n}",
+              "options": {
+                "raw": {}
+              }
             },
             "url": "{{baseUrl}}/helper/removehtmltags"
           },
