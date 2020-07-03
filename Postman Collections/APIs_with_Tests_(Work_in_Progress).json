@@ -34664,7 +34664,7 @@
                   "        });",
                   "        pm.test(\"TEST1M: Workgroup check\", function () {",
                   "            pm.expect(jsonData[0].workgroup.workgroupName).to.equal(data.workgroupName);",
-                  "            pm.expect(jsonData[0].workgroup.workgroupShortName).to.equal(JSON.stringify(data.workgroupShortName));",
+                  "            pm.expect(jsonData[0].workgroup.workgroupShortName).to.equal(data.workgroupShortName);",
                   "        });",
                   "        pm.test(\"TEST1N: Balance Information check\", function () {",
                   "            pm.expect(jsonData[0].balanceInformation.originalBalance).to.equal(data.Orig_Bal);",
