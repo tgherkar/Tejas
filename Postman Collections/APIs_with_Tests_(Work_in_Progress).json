@@ -32738,9 +32738,8 @@
                   ],
                   "variable": [
                     {
-                      "id": "286b2d21-06d5-40d0-a097-74ad69f78dce",
                       "key": "consumerId",
-                      "value": "1713794",
+                      "value": "{{cnsmr_id}}",
                       "type": "string",
                       "description": "(Required) "
                     }
