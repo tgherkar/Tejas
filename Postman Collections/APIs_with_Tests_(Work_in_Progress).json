@@ -23275,7 +23275,6 @@
                       "        pm.test(\"TEST1A: email check\", function () {",
                       "            pm.expect(jsonData.emailAddress).to.deep.equal(data.email);",
                       "        });",
-                      "        if (jsonData.validityCode != null) {",
                       "        pm.test(\"TEST1B: validity check\", function () {",
                       "            pm.expect(jsonData.validityCode).to.deep.equal(data.validityCode);",
                       "        });",
