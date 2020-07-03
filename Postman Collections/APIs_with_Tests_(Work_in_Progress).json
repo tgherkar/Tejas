@@ -26318,7 +26318,7 @@
                     ],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\n    \"consumerPhoneID\": {{consumerPhoneID}},\n    \"confirmedDate\": \"<dateTime>\",\n    \"consumerID\": {{cnsmr_id}},\n    \"applyToLinkedConsumers\": {{applyToLinkedConsumers}},\n    \"Correlation-Id\": \"{{$guid}}\",\n    \"Cache-Control\": \"no-cache\"\n}",
+                      "raw": "{\n    \"consumerPhoneID\": {{consumerPhoneID}},\n    \"confirmedDate\": \"{{current_timestamp}}\",\n    \"consumerID\": {{cnsmr_id}},\n    \"applyToLinkedConsumers\": {{applyToLinkedConsumers}},\n    \"Correlation-Id\": \"{{$guid}}\",\n    \"Cache-Control\": \"no-cache\"\n}",
                       "options": {
                         "raw": {}
                       }
