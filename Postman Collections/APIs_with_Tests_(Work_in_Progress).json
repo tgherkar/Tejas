@@ -34419,13 +34419,13 @@
               "variable": [
                 {
                   "key": "SearchById",
-                  "value": "9",
+                  "value": "{{id}}",
                   "type": "string",
                   "description": "(Required) "
                 },
                 {
                   "key": "SearchText",
-                  "value": "7756",
+                  "value": "{{txt}}",
                   "type": "string",
                   "description": "(Required) "
                 }
