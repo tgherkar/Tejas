@@ -34645,6 +34645,7 @@
                   "        pm.test(\"TEST1I: consumer Accounts check\", function () {",
                   "            pm.expect(jsonData[0].balanceInformation.currentBalance).to.equal(data.Curr_Bal);",
                   "            pm.expect(jsonData[0].balanceInformation.originalBalance).to.equal(data.Orig_Bal);",
+                  "            pm.expect(jsonData[0].balanceInformation.totalPayment).to.equal(data.Total_Payment);",
                   "        });",
                   "        pm.test(\"TEST1J: Account Type/status check\", function () {",
                   "            if (data.AccountType === 1) { pm.expect(jsonData[0].jointAccountType).to.equal(\"Primary\"); }",
