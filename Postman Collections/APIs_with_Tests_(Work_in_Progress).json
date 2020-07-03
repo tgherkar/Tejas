@@ -34672,10 +34672,26 @@
                   "            //pm.expect(jsonData[0].balanceInformation.totalPayment).to.equal(data.workgroupShortName);",
                   "        });",
                   "        pm.test(\"TEST1N: SettlementOffer check\", function () {",
+                  "            if (jsonData[0].settlementOffer.amountSaved===null){",
+                  "                pm.expect(data.amnt_svd.toUpperCase()).to.equal(\"NULL\");",
+                  "            }else{",
                   "            pm.expect(jsonData[0].settlementOffer.amountSaved).to.equal(data.amnt_svd);",
+                  "            }",
+                  "            if (jsonData[0].settlementOffer.settlementOffer===null){",
+                  "                pm.expect(data.sment_offr.toUpperCase()).to.equal(\"NULL\");",
+                  "            }else{",
                   "            pm.expect(jsonData[0].settlementOffer.settlementOffer).to.equal(data.sment_offr);",
+                  "            }",
+                  "            if (jsonData[0].settlementOffer.settlementPercentage===null){",
+                  "                pm.expect(data.smet_pcnt.toUpperCase()).to.equal(\"NULL\");",
+                  "            }else{",
                   "            pm.expect(jsonData[0].settlementOffer.settlementPercentage).to.equal(data.smet_pcnt);",
+                  "            }",
+                  "            if (jsonData[0].settlementOffer.amountToPay===null){",
+                  "                pm.expect(data.amnt_to_pay.toUpperCase()).to.equal(\"NULL\");",
+                  "            }else{",
                   "            pm.expect(jsonData[0].settlementOffer.amountToPay).to.equal(data.amnt_to_pay);",
+                  "            }",
                   "        });",
                   "    }",
                   "",
@@ -35067,7 +35083,7 @@
               "variable": [
                 {
                   "key": "consumerId",
-                  "value": "1598939",
+                  "value": "{{cnsmr_id}}",
                   "type": "string"
                 }
               ]
