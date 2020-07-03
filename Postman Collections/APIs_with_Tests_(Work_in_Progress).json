@@ -34206,49 +34206,6 @@
           ]
         },
         {
-          "name": "/swagger Copy",
-          "_postman_id": "17fb2e15-bf4d-4031-9a0d-d39a35bcc4f7",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "GET",
-            "header": [
-              {
-                "key": "Ocp-Apim-Subscription-Key-South",
-                "value": ""
-              }
-            ],
-            "url": "{{baseUrl}}/swagger"
-          },
-          "response": [
-            {
-              "id": "3d0e7348-bba8-44b7-9374-4855a1038315",
-              "name": "Success",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "url": "{{baseUrl}}/swagger"
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "text",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "cookie": [],
-              "responseTime": null,
-              "body": ""
-            }
-          ]
-        },
-        {
           "name": "Get Consumer Details",
           "event": [
             {
