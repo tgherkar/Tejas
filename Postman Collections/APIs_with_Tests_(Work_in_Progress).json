@@ -26196,7 +26196,7 @@
                         "exec": [
                           "try{",
                           "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {",
-                          "    pm.response.to.have.status([202, 400]);",
+                          "    pm.response.to.have.status(202);",
                           "});",
                           "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {",
                           "    pm.expect(pm.response.responseTime).to.be.below(5000);",
