@@ -2089,10 +2089,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "SELECT TOP 10 CAO.cnsmr_id, CAO.cnsmr_accnt_id, CD.cnsmr_addrss_ln_1_txt AS 'AddressLine1', CD.cnsmr_addrss_ln_2_txt AS 'AddressLine2', \r\nCD.cnsmr_addrss_ln_3_txt AS 'AddressLine3', CD.cnsmr_addrss_city_txt AS 'City', CD.cnsmr_addrss_st_txt, CD.cnsmr_addrss_cnty_txt AS 'County', \r\nCD.cnsmr_addrss_pstl_cd_txt AS 'PostCode', RCC.cntry_val_txt AS 'Country', RSC.addrss_src_val_txt AS 'Source', CAO.cnsmr_accnt_ownrs_id, \r\nC.cnsmr_idntfr_lgcy_txt AS 'legacyID'\r\nFROM [crs5_oltp].[dbo].[cnsmr] AS C\r\nLEFT JOIN [dbo].[cnsmr_accnt_ownrs] AS CAO ON CAO.cnsmr_id=C.cnsmr_id\r\nLEFT JOIN [dbo].[cnsmr_addrss] AS CD ON CD.cnsmr_id=C.cnsmr_id\r\nINNER JOIN [dbo].[Ref_cntry_cd] AS RCC ON RCC.cntry_cd=CD.cnsmr_addrss_cntry_cd\r\nINNER JOIN [dbo].[Ref_addrss_src_cd] AS RSC ON RSC.addrss_src_cd=CD.cnsmr_addrss_src_cd\r\n--WHERE C.cnsmr_idntfr_lgcy_txt=940\r\n--WHERE C.cnsmr_id=121321\r\n--WHERE CAO.cnsmr_accnt_id=1572329",
-              "options": {
-                "raw": {}
-              }
+              "raw": "SELECT TOP 10 CAO.cnsmr_id, CAO.cnsmr_accnt_id, CD.cnsmr_addrss_ln_1_txt AS 'AddressLine1', CD.cnsmr_addrss_ln_2_txt AS 'AddressLine2', \r\nCD.cnsmr_addrss_ln_3_txt AS 'AddressLine3', CD.cnsmr_addrss_city_txt AS 'City', CD.cnsmr_addrss_st_txt, CD.cnsmr_addrss_cnty_txt AS 'County', \r\nCD.cnsmr_addrss_pstl_cd_txt AS 'PostCode', RCC.cntry_val_txt AS 'Country', RSC.addrss_src_val_txt AS 'Source', CAO.cnsmr_accnt_ownrs_id, \r\nC.cnsmr_idntfr_lgcy_txt AS 'legacyID'\r\nFROM [crs5_oltp].[dbo].[cnsmr] AS C\r\nLEFT JOIN [dbo].[cnsmr_accnt_ownrs] AS CAO ON CAO.cnsmr_id=C.cnsmr_id\r\nLEFT JOIN [dbo].[cnsmr_addrss] AS CD ON CD.cnsmr_id=C.cnsmr_id\r\nINNER JOIN [dbo].[Ref_cntry_cd] AS RCC ON RCC.cntry_cd=CD.cnsmr_addrss_cntry_cd\r\nINNER JOIN [dbo].[Ref_addrss_src_cd] AS RSC ON RSC.addrss_src_cd=CD.cnsmr_addrss_src_cd\r\n--WHERE C.cnsmr_idntfr_lgcy_txt=940\r\n--WHERE C.cnsmr_id=121321\r\n--WHERE CAO.cnsmr_accnt_id=1572329"
             },
             "url": ""
           },
