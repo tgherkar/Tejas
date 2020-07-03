@@ -34657,7 +34657,7 @@
                   "        pm.test(\"TEST1K: creditor check\", function () {",
                   "            pm.expect(jsonData[0].regarding).to.equal(data.regarding);",
                   "            pm.expect(jsonData[0].productType).to.equal(data.productType);",
-                  "            pm.expect(jsonData[0].vendor).to.equal(data.productType);",
+                  "            pm.expect(jsonData[0].vendor).to.equal(data.vendor);",
                   "        });",
                   "        pm.test(\"TEST1L: Strategy check\", function () {",
                   "            pm.expect(JSON.stringify(jsonData[0].strategy.strategyName).toUpperCase()).to.equal(data.strategyName);",
@@ -35084,7 +35084,7 @@
               "variable": [
                 {
                   "key": "consumerId",
-                  "value": "1598958",
+                  "value": "{{cnsmr_id}}",
                   "type": "string"
                 }
               ]
