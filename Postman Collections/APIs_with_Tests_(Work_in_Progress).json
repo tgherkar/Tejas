@@ -33382,7 +33382,7 @@
                   "",
                   "",
                   "} catch (e){",
-                  "    var jsonData = JSON.parse(responseBody);",
+                  "   /* var jsonData = JSON.parse(responseBody);",
                   "    //var req = JSON.parse(request.data);",
                   "    //console.log(req);",
                   "    var cid = responseBody.split(':');",
@@ -33392,8 +33392,7 @@
                   "        //pm.expect(cid[1]).to.deep.equal(\" \" + query[4]);",
                   "    });",
                   "}",
-                  "",
-                  ""
+                  "*/"
                 ],
                 "type": "text/javascript"
               }
