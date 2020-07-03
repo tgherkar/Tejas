@@ -33390,6 +33390,12 @@
                   "        pm.expect(responseBody).to.equal(\"User Account Record not found for consumerID: \" + req.fromConsumerID);",
                   "        pm.expect(cid[1]).to.deep.equal(\" \" + req.fromConsumerID);",
                   "    });",
+                  "        pm.test(\"Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {",
+                  "        pm.expect(pm.response.responseTime).to.be.below(5000);",
+                  "    });",
+                  "    pm.test(\"Response Header Checks\", function () {",
+                  "        pm.response.to.have.header('Content-Type', 'text/plain; charset=utf-8', 'Vary', 'Accept-Encoding', 'X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');",
+                  "    });",
                   "}",
                   ""
                 ],
