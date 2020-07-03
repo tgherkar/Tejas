@@ -33027,6 +33027,65 @@
                     ],
                     "type": "text/javascript"
                   }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "502e8eeb-137c-4cb0-9a59-3eddce9018b4",
+                    "exec": [
+                      "//pm.environment.set(\"OAuth_Timestamp\", null);\r",
+                      "console.log(pm.environment.get(\"OAuth_Expiry\"));\r",
+                      "console.log(pm.environment.get(\"OAuth_Timestamp\"));\r",
+                      "console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                      "var noDate = 0;\r",
+                      "var tokenDate = new Date(2010, 1, 1);\r",
+                      "var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                      "if (tokenTimestamp) {\r",
+                      "    tokenDate = Date.parse(tokenTimestamp);\r",
+                      "} else { noDate = 1 };\r",
+                      "//console.log(\"timestamp is\"+tokenDate);\r",
+                      "var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                      "if (!expiresInTime) {\r",
+                      "    expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                      "}\r",
+                      "//console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime + \"and noDate value is :\"+noDate);\r",
+                      "if ((new Date() - tokenDate) >= expiresInTime || noDate == 1) {\r",
+                      "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
+                      "    let clientId = pm.environment.get(\"clientId\");\r",
+                      "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
+                      "    let scope = pm.environment.get(\"clientScope\");\r",
+                      "    let getTokenRequest = {\r",
+                      "        method: 'POST',\r",
+                      "        url: tokenUrl,\r",
+                      "        auth: {\r",
+                      "            type: \"basic\",\r",
+                      "            basic: [\r",
+                      "                { key: \"username\", value: clientId },\r",
+                      "                { key: \"password\", value: clientSecret }\r",
+                      "            ]\r",
+                      "        },\r",
+                      "        body: {\r",
+                      "            mode: 'formdata',\r",
+                      "            formdata: [\r",
+                      "                { key: 'grant_type', value: 'client_credentials' },\r",
+                      "                { key: 'scope', value: scope }\r",
+                      "            ]\r",
+                      "        }\r",
+                      "    };\r",
+                      "    pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                      "        let jsonResponse = response.json(),\r",
+                      "            newAccessToken = jsonResponse.access_token;\r",
+                      "        //console.log({ err, jsonResponse, newAccessToken });\r",
+                      "        pm.environment.set('OAuth_Token', newAccessToken);\r",
+                      "        pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in * 1000);\r",
+                      "        pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                      "    });\r",
+                      "    //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                      "}\r",
+                      "//console.log(\"End of Pre-req script\");"
+                    ],
+                    "type": "text/javascript"
+                  }
                 }
               ],
               "_postman_id": "cc7d46cd-f55c-4378-b0e0-b1aeccca772c",
@@ -33037,7 +33096,7 @@
                 "auth": {
                   "type": "oauth2",
                   "oauth2": {
-                    "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSIsImtpZCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSJ9.eyJhdWQiOiJhcGk6Ly84MTE2N2QzZC04NTNmLTQyMDctODBmYS0zMjI1YTQ5MjdhY2EiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMvIiwiaWF0IjoxNTg3MTA4MjQwLCJuYmYiOjE1ODcxMDgyNDAsImV4cCI6MTU4NzExMjE0MCwiYWlvIjoiNDJkZ1lManIyZjlSZHZxRlZkbTcvM3l6MVhxMkJnQT0iLCJhcHBpZCI6IjIxYjhmYmVmLTcyNmItNDdhNC04MTM1LTFiY2ZlMmJhOWE5OCIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5My8iLCJvaWQiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJzdWIiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJ0aWQiOiIzNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMiLCJ1dGkiOiJoMUFOTUFlZHRFaWx0cXI0WHIwb0FBIiwidmVyIjoiMS4wIn0.Q3-mDcmXBgJEqlRhcQHhSLqZ5npR4TY_WDMX8Ct4qOGRoBXCRVT4eoXYoAQ_UZLccsiM50a8che9O5x9R2WF0UsRXwxjmfD1vr4apAjtd5I3m8zdBWkr43B4iFRPl7U7HlbFc_n-dxDpdmdnKrTM2q2gSfqyJPi8KIbZwwbjsX2mxMNJmGTtYGG5sdUUj0dFig7K7yy23RE2l09IK2rxJ3ncBGBTLnm-20tzHCNXg-IAywy8bgr4elESkFQ1KsrNy3CencMxn5rVQ1fV-UV0pO4Ume6IQMvRo_Gu7EopFIqcioowZ4AfDIGrfk-a67OziPwKrG_Ol8ebW0gNAw5p8Q",
+                    "accessToken": "{{OAuth_Token}}",
                     "tokenType": "Bearer",
                     "addTokenTo": "header"
                   }
@@ -33088,11 +33147,9 @@
                   ],
                   "variable": [
                     {
-                      "id": "28a0acc7-2f54-4165-8ac1-ef3eb0f0651d",
                       "key": "consumerId",
-                      "value": "2005366",
-                      "type": "string",
-                      "description": "(Required) "
+                      "value": "{{cnsmr_id}}",
+                      "type": "string"
                     }
                   ]
                 },
