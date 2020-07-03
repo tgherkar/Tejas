@@ -6130,6 +6130,23 @@
                         ],
                         "type": "text/javascript"
                       }
+                    },
+                    {
+                      "listen": "test",
+                      "script": {
+                        "id": "e7c011a7-73ab-4541-86cd-0305d515327c",
+                        "exec": [
+                          "if (data.test_polarity==null || data.test_polarity==1){\r",
+                          "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                          "    pm.response.to.have.status(202);\r",
+                          "});}\r",
+                          "\r",
+                          "pm.test(\"TEST5: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                          "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+                          "});"
+                        ],
+                        "type": "text/javascript"
+                      }
                     }
                   ],
                   "_postman_id": "9b842e6f-d533-4811-8d7e-eadef24daad8",
