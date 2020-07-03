@@ -13590,7 +13590,7 @@
                       "    if (jsonData[0].reference != null){",
                       "    pm.expect(jsonData[0].reference).to.equal(data.TPD_Ref);}",
                       "    if (jsonData[0].startDate != null){",
-                      "    pm.expect(jsonData[0].startDate).to.equal(data.TPD_st_dt);}",
+                      "    pm.expect(jsonData[0].startDate.split('T')[0]).to.equal(data.TPD_st_dt.split(' ')[0]);}",
                       "    if (jsonData[0].endDate != null){",
                       "    pm.expect(jsonData[0].endDate).to.equal(data.TPD_end_dt);}",
                       "    if (jsonData[0].expiryDate != null){",
