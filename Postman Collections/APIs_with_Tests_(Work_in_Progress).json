@@ -28504,7 +28504,7 @@
                       "            },\r",
                       "            \"consentFlag\": {\r",
                       "                \"$id\": \"#/items/properties/consentFlag\",\r",
-                      "                \"type\": [\"integer\",\"null\"]\r",
+                      "                \"type\": [\"boolean\",\"null\"]\r",
                       "            },\r",
                       "            \"consentDate\": {\r",
                       "                \"$id\": \"#/items/properties/consentDate\",\r",
