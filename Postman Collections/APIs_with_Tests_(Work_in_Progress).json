@@ -33383,7 +33383,7 @@
                   "",
                   "} catch (e){",
                   "    var jsonData = JSON.parse(responseBody);",
-                  "    var req = JSON.parse(request);",
+                  "    var req = JSON.parse(request.data);",
                   "    console.log(req);",
                   "    var cid = responseBody.split(':');",
                   "    pm.test(\"Incorrect Consumer ID should be not found\", function () {",
