@@ -34891,7 +34891,7 @@
                   "        });",
                   "        pm.test(\"TEST1K: creditor check\", function () {",
                   "            pm.expect(jsonData[0].regarding).to.equal(data.regarding);",
-                  "            pm.expect(jsonData[0].vendor).to.equal(data.regarding);",
+                  "            //pm.expect(jsonData[0].vendor).to.equal(data.regarding);",
                   "        });",
                   "        pm.test(\"TEST1L: Strategy check\", function () {",
                   "            pm.expect(JSON.stringify(jsonData[0].strategy.strategyName).toUpperCase()).to.equal(data.strategyName);",
