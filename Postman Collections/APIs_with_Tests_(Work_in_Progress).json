@@ -3132,7 +3132,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n  \"username\": \"5548FFD9-DFEF-407B-A7BC-99F8326BD101\",\r\n  \"password\":\"74DB2D64-F683-4A80-9FDD-A3BE3CEC0E8B\"\r\n}"
+                  "raw": "{\r\n  \"username\": \"5548FFD9-DFEF-407B-A7BC-99F8326BD101\",\r\n  \"password\":\"74DB2D64-F683-4A80-9FDD-A3BE3CEC0E8B\"\r\n}",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": "{{url}}/api/{{version}}/Authenticate"
               },
@@ -3756,7 +3759,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\":\"{{legacyID}}\",\r\n        \"CustomerPrimaryId\":{{cnsmr_id}},\r\n        \"CustomerSecondaryId\":{{SecondaryConsumerId}},\r\n        \"Email\":\"{{email}}\",\r\n        \"Password\":\"Cabot123!\",\r\n        \"ActivationCode\":\"456456456\",\r\n        \"TelephoneNumber\":\"07879548777\",\r\n        \"RegistrationMethod\":\"Website\",\r\n        \"Nickname\": \"Nick\"\r\n\t\t}\r\n}"
+                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\":\"{{legacyID}}\",\r\n        \"CustomerPrimaryId\":{{cnsmr_id}},\r\n        \"CustomerSecondaryId\":{{SecondaryConsumerId}},\r\n        \"Email\":\"{{email}}\",\r\n        \"Password\":\"Cabot123!\",\r\n        \"ActivationCode\":\"456456456\",\r\n        \"TelephoneNumber\":\"07879548777\",\r\n        \"RegistrationMethod\":\"Website\",\r\n        \"Nickname\": \"Nick\"\r\n\t\t}\r\n}",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": "{{url}}/api/{{version}}/postRegisterUser"
               },
@@ -3880,7 +3886,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\":\"{{legacyID}}\",\r\n        \"CustomerPrimaryId\":{{cnsmr_id}},\r\n        \"CustomerSecondaryId\":{{SecondaryConsumerId}},\r\n        \"Email\":\"{{email}}\",\r\n        \"Password\":\"Cabot123!\",\r\n        \"ActivationCode\":\"456456456\",\r\n        \"TelephoneNumber\":\"07879548777\",\r\n        \"RegistrationMethod\":\"Website\",\r\n        \"Nickname\": \"Nick\",\r\n        \"NotificationConsentEMailGiven\": true,\r\n        \"NotificationConsentSmsGiven\": false\r\n\t\t}\r\n}"
+                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\":\"{{legacyID}}\",\r\n        \"CustomerPrimaryId\":{{cnsmr_id}},\r\n        \"CustomerSecondaryId\":{{SecondaryConsumerId}},\r\n        \"Email\":\"{{email}}\",\r\n        \"Password\":\"Cabot123!\",\r\n        \"ActivationCode\":\"456456456\",\r\n        \"TelephoneNumber\":\"07879548777\",\r\n        \"RegistrationMethod\":\"Website\",\r\n        \"Nickname\": \"Nick\",\r\n        \"NotificationConsentEMailGiven\": true,\r\n        \"NotificationConsentSmsGiven\": false\r\n\t\t}\r\n}",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": "{{url}}/api/{{version}}/postRegisterUser"
               },
@@ -3995,7 +4004,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\":{{legacyID}},\r\n        \"CustomerPrimaryId\":{{cnsmr_id}},\r\n        \"CustomerSecondaryId\":{{SecondaryConsumerId}},\r\n        \"PaymentAmount\":\"{{pay_amount}}\",\r\n        \"CardType\": \"{{card_type}}\",\r\n        \"TxtAuthNo\": \"{{TxtAuthNo}}\",\r\n        \"VendorTextCode\": null,\r\n        \"Title\": null,\r\n        \"Name\": null,\r\n        \"FirstName\":\"{{firstname}}\",\r\n        \"Surname\": \"{{surname}}\",\r\n        \"MiddleName\": null,\r\n        \"Address1\": \"{{AddressLine1}}\",\r\n        \"Address2\": \"{{AddressLine2}}\",\r\n        \"Address3\": \"{{County}}\",\r\n        \"Address4\": \"{{Country}}\",\r\n        \"PostCode\": \"{{PostCode}}\",\r\n        \"PhoneNumber\": null,\r\n        \"Email\":\"{{email}}\",\r\n        \"DateOfBirth\": \"{{dob}}\",\r\n        \"PromoCode\": null,\r\n        \"PaymentAt\":\"{{PaymentAt}}\",\r\n        \"SagepayTransactionID\": null,\r\n        \"PaymentBatchId\" : null,\r\n        \"SourceOfFunds\": null,\r\n        \"VendorCode\" : null,\r\n        \"CardNumber\" : null\r\n\t}\r\n}\r\n"
+                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\":{{legacyID}},\r\n        \"CustomerPrimaryId\":{{cnsmr_id}},\r\n        \"CustomerSecondaryId\":{{SecondaryConsumerId}},\r\n        \"PaymentAmount\":\"{{pay_amount}}\",\r\n        \"CardType\": \"{{card_type}}\",\r\n        \"TxtAuthNo\": \"{{TxtAuthNo}}\",\r\n        \"VendorTextCode\": null,\r\n        \"Title\": null,\r\n        \"Name\": null,\r\n        \"FirstName\":\"{{firstname}}\",\r\n        \"Surname\": \"{{surname}}\",\r\n        \"MiddleName\": null,\r\n        \"Address1\": \"{{AddressLine1}}\",\r\n        \"Address2\": \"{{AddressLine2}}\",\r\n        \"Address3\": \"{{County}}\",\r\n        \"Address4\": \"{{Country}}\",\r\n        \"PostCode\": \"{{PostCode}}\",\r\n        \"PhoneNumber\": null,\r\n        \"Email\":\"{{email}}\",\r\n        \"DateOfBirth\": \"{{dob}}\",\r\n        \"PromoCode\": null,\r\n        \"PaymentAt\":\"{{PaymentAt}}\",\r\n        \"SagepayTransactionID\": null,\r\n        \"PaymentBatchId\" : null,\r\n        \"SourceOfFunds\": null,\r\n        \"VendorCode\" : null,\r\n        \"CardNumber\" : null\r\n\t}\r\n}\r\n",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": {
                   "raw": "{{url}}/api/{{version}}/postPayment?Token={{Token}}",
@@ -4104,7 +4116,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\":10000,\r\n        \"CustomerPrimaryId\":4346549,\r\n        \"CustomerSecondaryId\":0,\r\n        \"PaymentAmount\":\"18.54\",\r\n        \"CardType\":null,\r\n        \"TxtAuthNo\":\"997793\",\r\n        \"VendorTextCode\":null,\r\n        \"Title\":null,\r\n        \"Name\":null,\r\n        \"FirstName\": \"Luna\",\r\n        \"Surname\":null,\r\n        \"MiddleName\":null,\r\n        \"Address1\":null,\r\n        \"Address2\":null,\r\n        \"Address3\":null,\r\n        \"Address4\":null,\r\n        \"PostCode\":null,\r\n        \"PhoneNumber\":null,\r\n        \"Email\":\"Luna_Plum@Cabot.com\",\r\n        \"DateOfBirth\":null,\r\n        \"PromoCode\":null,\r\n        \"PaymentAt\":\"2019-09-27\",\r\n        \"SagepayTransactionID\": null,\r\n        \"PaymentBatchId\" : null,\r\n        \"SourceOfFunds\": null,\r\n        \"VendorCode\" : null,\r\n        \"CardNumber\" : null\r\n\t}\r\n}\r\n"
+                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\":10000,\r\n        \"CustomerPrimaryId\":4346549,\r\n        \"CustomerSecondaryId\":0,\r\n        \"PaymentAmount\":\"18.54\",\r\n        \"CardType\":null,\r\n        \"TxtAuthNo\":\"997793\",\r\n        \"VendorTextCode\":null,\r\n        \"Title\":null,\r\n        \"Name\":null,\r\n        \"FirstName\": \"Luna\",\r\n        \"Surname\":null,\r\n        \"MiddleName\":null,\r\n        \"Address1\":null,\r\n        \"Address2\":null,\r\n        \"Address3\":null,\r\n        \"Address4\":null,\r\n        \"PostCode\":null,\r\n        \"PhoneNumber\":null,\r\n        \"Email\":\"Luna_Plum@Cabot.com\",\r\n        \"DateOfBirth\":null,\r\n        \"PromoCode\":null,\r\n        \"PaymentAt\":\"2019-09-27\",\r\n        \"SagepayTransactionID\": null,\r\n        \"PaymentBatchId\" : null,\r\n        \"SourceOfFunds\": null,\r\n        \"VendorCode\" : null,\r\n        \"CardNumber\" : null\r\n\t}\r\n}\r\n",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": {
                   "raw": "{{url}}/api/{{version}}/postPayment?Token={{Token}}",
@@ -4222,7 +4237,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\":{{AccountReferenceNumber}},\r\n        \"CustomerPrimaryId\":{{CustomerPrimaryId}},\r\n        \"CustomerSecondaryId\":{{CustomerSecondaryId}},\r\n        \"Amount\":\"{{Amount}}\",\r\n        \"Method\":\"{{Method}}\",\r\n        \"StartDate\": null,\r\n        \"BankName\":\"{{BankName}}\",\r\n        \"AccountName\": null,\r\n        \"AccountNumber\":\"{{AccountNumber}}\",\r\n        \"SortCode\": null,\r\n        \"Frequency\":\"{{Frequency}}\",\r\n        \"ClearedBalance\": null,\r\n        \"PhoneNumber\": null,\r\n        \"Email\":\"{{Email}}\",\r\n        \"PromoCode\": null,\r\n        \"SendNewPaymentCard\": null,\r\n        \"DurationMonths\": null,\r\n        \"SourceOfFunds\": null,\r\n        \"PriorityBillsUpToDate\": null,\r\n        \"SagepayTransactionID\": null,\r\n        \"Authorized\": \"{{Authorized}}\",\r\n        \"Day\": null,\r\n        \"OwnBankAccount\": null,\r\n        \"SingleSignatoryRequired\": null}\r\n}"
+                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\":{{AccountReferenceNumber}},\r\n        \"CustomerPrimaryId\":{{CustomerPrimaryId}},\r\n        \"CustomerSecondaryId\":{{CustomerSecondaryId}},\r\n        \"Amount\":\"{{Amount}}\",\r\n        \"Method\":\"{{Method}}\",\r\n        \"StartDate\": null,\r\n        \"BankName\":\"{{BankName}}\",\r\n        \"AccountName\": null,\r\n        \"AccountNumber\":\"{{AccountNumber}}\",\r\n        \"SortCode\": null,\r\n        \"Frequency\":\"{{Frequency}}\",\r\n        \"ClearedBalance\": null,\r\n        \"PhoneNumber\": null,\r\n        \"Email\":\"{{Email}}\",\r\n        \"PromoCode\": null,\r\n        \"SendNewPaymentCard\": null,\r\n        \"DurationMonths\": null,\r\n        \"SourceOfFunds\": null,\r\n        \"PriorityBillsUpToDate\": null,\r\n        \"SagepayTransactionID\": null,\r\n        \"Authorized\": \"{{Authorized}}\",\r\n        \"Day\": null,\r\n        \"OwnBankAccount\": null,\r\n        \"SingleSignatoryRequired\": null}\r\n}",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": "{{url}}/api/{{version}}/postPaymentPlan"
               },
@@ -4315,7 +4333,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\": 4293142,\r\n        \"CustomerPrimaryId\": 4273285,\r\n        \"CustomerSecondaryId\": 0,\r\n        \"Amount\":\"11.11\",\r\n        \"Method\":\"Direct Debit\",\r\n        \"StartDate\": null,\r\n        \"BankName\":\"Bank Du Keri\",\r\n        \"AccountName\": null,\r\n        \"AccountNumber\":\"55779911\",\r\n        \"SortCode\": null,\r\n        \"Frequency\":\"Monthly\",\r\n        \"ClearedBalance\": null,\r\n        \"PhoneNumber\": null,\r\n        \"Email\":\"TestNapple@Cabot.com\",\r\n        \"PromoCode\": null,\r\n        \"SendNewPaymentCard\": null,\r\n        \"DurationMonths\": null,\r\n        \"SourceOfFunds\": null,\r\n        \"PriorityBillsUpToDate\": null,\r\n        \"SagepayTransactionID\": null,\r\n        \"Authorized\": \"TRUE\",\r\n        \"Day\": null,\r\n        \"OwnBankAccount\": null,\r\n        \"SingleSignatoryRequired\": null}\r\n}\r\n"
+                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"AccountReferenceNumber\": 4293142,\r\n        \"CustomerPrimaryId\": 4273285,\r\n        \"CustomerSecondaryId\": 0,\r\n        \"Amount\":\"11.11\",\r\n        \"Method\":\"Direct Debit\",\r\n        \"StartDate\": null,\r\n        \"BankName\":\"Bank Du Keri\",\r\n        \"AccountName\": null,\r\n        \"AccountNumber\":\"55779911\",\r\n        \"SortCode\": null,\r\n        \"Frequency\":\"Monthly\",\r\n        \"ClearedBalance\": null,\r\n        \"PhoneNumber\": null,\r\n        \"Email\":\"TestNapple@Cabot.com\",\r\n        \"PromoCode\": null,\r\n        \"SendNewPaymentCard\": null,\r\n        \"DurationMonths\": null,\r\n        \"SourceOfFunds\": null,\r\n        \"PriorityBillsUpToDate\": null,\r\n        \"SagepayTransactionID\": null,\r\n        \"Authorized\": \"TRUE\",\r\n        \"Day\": null,\r\n        \"OwnBankAccount\": null,\r\n        \"SingleSignatoryRequired\": null}\r\n}\r\n",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": {
                   "raw": "{{url}}/api/{{version}}/postPaymentPlan?Token={{Token}}",
@@ -4424,7 +4445,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"CustomerPrimaryId\": {{cnsmr_id}},\r\n        \"CustomerSecondaryId\": {{SecondaryConsumerId}},\r\n        \"AccountReferenceNumber\": {{legacyID}},\r\n        \"PaymentDate\": null,\r\n        \"PaymentAmount\": {{pay_amount}},\r\n        \"PhoneNumber\": null,\r\n        \"Email\": \"{{Email}}\",\r\n        \"ReasonForSettlement\": null,\r\n        \"SourceOfSettlementAmount\": null,\r\n        \"PromoCode\": null,\r\n        \"PriorityBillsUpToDate \": null\r\n\t}\r\n}\r\n\r\n"
+                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"CustomerPrimaryId\": {{cnsmr_id}},\r\n        \"CustomerSecondaryId\": {{SecondaryConsumerId}},\r\n        \"AccountReferenceNumber\": {{legacyID}},\r\n        \"PaymentDate\": null,\r\n        \"PaymentAmount\": {{pay_amount}},\r\n        \"PhoneNumber\": null,\r\n        \"Email\": \"{{Email}}\",\r\n        \"ReasonForSettlement\": null,\r\n        \"SourceOfSettlementAmount\": null,\r\n        \"PromoCode\": null,\r\n        \"PriorityBillsUpToDate \": null\r\n\t}\r\n}\r\n\r\n",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": "{{url}}/api/{{version}}/postSettlementOffer"
               },
@@ -4517,7 +4541,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"CustomerPrimaryId\": 4424332,\r\n        \"CustomerSecondaryId\": 0,\r\n        \"AccountReferenceNumber\": 4466606,\r\n        \"PaymentDate\": null,\r\n        \"PaymentAmount\": 10.50,\r\n        \"PhoneNumber\": null,\r\n        \"Email\": \"TestRaul@cabot.com\",\r\n        \"ReasonForSettlement\": null,\r\n        \"SourceOfSettlementAmount\": null,\r\n        \"PromoCode\": null,\r\n        \"PriorityBillsUpToDate \": null }\r\n}\r\n"
+                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\"CustomerPrimaryId\": 4424332,\r\n        \"CustomerSecondaryId\": 0,\r\n        \"AccountReferenceNumber\": 4466606,\r\n        \"PaymentDate\": null,\r\n        \"PaymentAmount\": 10.50,\r\n        \"PhoneNumber\": null,\r\n        \"Email\": \"TestRaul@cabot.com\",\r\n        \"ReasonForSettlement\": null,\r\n        \"SourceOfSettlementAmount\": null,\r\n        \"PromoCode\": null,\r\n        \"PriorityBillsUpToDate \": null }\r\n}\r\n",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": {
                   "raw": "{{url}}/api/{{version}}/postSettlementOffer?Token={{Token}}",
@@ -4632,7 +4659,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\r\n        \"CustomerPrimaryId\": {{CustomerPrimaryId}},\r\n        \"CustomerSecondaryId\": {{CustomerSecondaryId}},\r\n        \"AccountReferenceNumber\": {{AccountReferenceNumber}},\r\n        \"InstalmentDate1\" : \"{{InstalmentDate1}}\",\t\t\r\n        \"InstalmentAmount1\": {{InstalmentAmount1}},\r\n        \"InstalmentDate2\" : \"{{InstalmentDate2}}\",\r\n        \"InstalmentAmount2\": {{InstalmentAmount2}},\r\n        \"InstalmentDate3\" : \"{{InstalmentDate3}}\",\r\n        \"InstalmentAmount3\": {{InstalmentAmount3}},\r\n        \"PhoneNumber\": {{PhoneNumber}},\r\n        \"Email\": \"{{Email}}\",\r\n        \"ReasonForSettlement\": \"{{ReasonForSettlement}}\",\r\n        \"BankName\": \"{{BankName}}\",\r\n        \"AccountName\": \"{{AccountName}}\",\r\n        \"AccountNumber\": \"{{AccountNumber}}\",\r\n        \"SortCode\": \"{{SortCode}}\",\r\n        \"SettlementPercentage\" : {{SettlementPercentage}},\r\n        \"Method\": \"{{Method}}\",\r\n        \"SourceOfSettlementAmount\": \"{{SourceOfSettlementAmount}}\",\r\n        \"PriorityBillsUpToDate\": {{PriorityBillsUpToDate}},\r\n        \"Pending\": {{Pending}},\r\n        \"Authorized\": {{Authorized}},\r\n        \"SFTransferred\": {{SFTransferred}},\r\n        \"PaymentPlanHistoryId\": null,\r\n        \"SagepayTransactionID\": \"{{SagepayTransactionID}}\",\r\n        \"OwnBankAccount\": {{OwnBankAccount}},\r\n        \"SingleSignatoryRequired\": {{SingleSignatoryRequired}} \r\n       }\r\n}\r\n"
+                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\r\n        \"CustomerPrimaryId\": {{CustomerPrimaryId}},\r\n        \"CustomerSecondaryId\": {{CustomerSecondaryId}},\r\n        \"AccountReferenceNumber\": {{AccountReferenceNumber}},\r\n        \"InstalmentDate1\" : \"{{InstalmentDate1}}\",\t\t\r\n        \"InstalmentAmount1\": {{InstalmentAmount1}},\r\n        \"InstalmentDate2\" : \"{{InstalmentDate2}}\",\r\n        \"InstalmentAmount2\": {{InstalmentAmount2}},\r\n        \"InstalmentDate3\" : \"{{InstalmentDate3}}\",\r\n        \"InstalmentAmount3\": {{InstalmentAmount3}},\r\n        \"PhoneNumber\": {{PhoneNumber}},\r\n        \"Email\": \"{{Email}}\",\r\n        \"ReasonForSettlement\": \"{{ReasonForSettlement}}\",\r\n        \"BankName\": \"{{BankName}}\",\r\n        \"AccountName\": \"{{AccountName}}\",\r\n        \"AccountNumber\": \"{{AccountNumber}}\",\r\n        \"SortCode\": \"{{SortCode}}\",\r\n        \"SettlementPercentage\" : {{SettlementPercentage}},\r\n        \"Method\": \"{{Method}}\",\r\n        \"SourceOfSettlementAmount\": \"{{SourceOfSettlementAmount}}\",\r\n        \"PriorityBillsUpToDate\": {{PriorityBillsUpToDate}},\r\n        \"Pending\": {{Pending}},\r\n        \"Authorized\": {{Authorized}},\r\n        \"SFTransferred\": {{SFTransferred}},\r\n        \"PaymentPlanHistoryId\": null,\r\n        \"SagepayTransactionID\": \"{{SagepayTransactionID}}\",\r\n        \"OwnBankAccount\": {{OwnBankAccount}},\r\n        \"SingleSignatoryRequired\": {{SingleSignatoryRequired}} \r\n       }\r\n}\r\n",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": "{{url}}/api/{{version}}/postSettlementPaymentPlan"
               },
@@ -4731,7 +4761,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\r\n        \"CustomerPrimaryId\": 2156096,\r\n        \"CustomerSecondaryId\": 0,\r\n        \"AccountReferenceNumber\": 1655797,\r\n        \"InstalmentDate1\" : \"27/10/2019\",\t\t\r\n        \"InstalmentAmount1\": 70.57,\r\n        \"InstalmentDate2\" : \"2019-11-27\",\r\n        \"InstalmentAmount2\": 70.57,\r\n        \"InstalmentDate3\" : \"2019-12-27\",\r\n        \"InstalmentAmount3\": 70.57,\r\n        \"PhoneNumber\": 07792661138,\r\n        \"Email\": \"cabot_auto+user443@outlook.com\",\r\n        \"ReasonForSettlement\": \"Happiness\",\r\n        \"BankName\" : \"Bank du Keri\",\r\n        \"AccountName\" : \"Testing\",\r\n        \"AccountNumber\" : \"55779911\",\r\n        \"SortCode\": \"20-00-00\",\r\n        \"SettlementPercentage\" : 97,\r\n        \"Method\" :\"Credit card\",\r\n        \"SourceOfSettlementAmount\": \"Gifted\",\r\n        \"PriorityBillsUpToDate\": true,\r\n        \"Pending\": true,\r\n        \"Authorized\" : true,\r\n        \"SFTransferred\" : false,\r\n        \"PaymentPlanHistoryId\" : null,\r\n        \"SagepayTransactionID\" : \"39AA1A05-804E-7A3D-743F-5B7F2A8D11F0\",\r\n        \"OwnBankAccount\": 1,\r\n        \"SingleSignatoryRequired\": 1 \r\n       }\r\n}\r\n"
+                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\r\n        \"CustomerPrimaryId\": 2156096,\r\n        \"CustomerSecondaryId\": 0,\r\n        \"AccountReferenceNumber\": 1655797,\r\n        \"InstalmentDate1\" : \"27/10/2019\",\t\t\r\n        \"InstalmentAmount1\": 70.57,\r\n        \"InstalmentDate2\" : \"2019-11-27\",\r\n        \"InstalmentAmount2\": 70.57,\r\n        \"InstalmentDate3\" : \"2019-12-27\",\r\n        \"InstalmentAmount3\": 70.57,\r\n        \"PhoneNumber\": 07792661138,\r\n        \"Email\": \"cabot_auto+user443@outlook.com\",\r\n        \"ReasonForSettlement\": \"Happiness\",\r\n        \"BankName\" : \"Bank du Keri\",\r\n        \"AccountName\" : \"Testing\",\r\n        \"AccountNumber\" : \"55779911\",\r\n        \"SortCode\": \"20-00-00\",\r\n        \"SettlementPercentage\" : 97,\r\n        \"Method\" :\"Credit card\",\r\n        \"SourceOfSettlementAmount\": \"Gifted\",\r\n        \"PriorityBillsUpToDate\": true,\r\n        \"Pending\": true,\r\n        \"Authorized\" : true,\r\n        \"SFTransferred\" : false,\r\n        \"PaymentPlanHistoryId\" : null,\r\n        \"SagepayTransactionID\" : \"39AA1A05-804E-7A3D-743F-5B7F2A8D11F0\",\r\n        \"OwnBankAccount\": 1,\r\n        \"SingleSignatoryRequired\": 1 \r\n       }\r\n}\r\n",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": "{{url}}/api/{{version}}/postSettlementPaymentPlan"
               },
@@ -4830,7 +4863,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\r\n        \"CustomerPrimaryId\": {{CustomerPrimaryId}},\r\n        \"CustomerSecondaryId\": {{CustomerSecondaryId}},\r\n        \"AccountReferenceNumber\": {{AccountReferenceNumber}},\r\n        \"InstalmentDate1\" : \"{{InstalmentDate1}}\",        \r\n        \"InstalmentAmount1\": {{InstalmentAmount1}},\r\n        \"InstalmentDate2\" : \"{{InstalmentDate2}}\",\r\n        \"InstalmentAmount2\": {{InstalmentAmount2}},\r\n        \"InstalmentDate3\" : \"{{InstalmentDate3}}\",\r\n        \"InstalmentAmount3\": {{InstalmentAmount3}},\r\n        \"PhoneNumber\": {{PhoneNumber}},\r\n        \"Email\": \"{{Email}}\",\r\n        \"ReasonForSettlement\": \"{{ReasonForSettlement}}\",\r\n        \"BankName\": \"{{BankName}}\",\r\n        \"AccountName\": \"{{AccountName}}\",\r\n        \"AccountNumber\": \"{{AccountNumber}}\",\r\n        \"SortCode\": \"{{SortCode}}\",\r\n        \"SettlementPercentage\" : {{SettlementPercentage}},\r\n        \"Method\": \"{{Method}}\",\r\n        \"SourceOfSettlementAmount\": \"{{SourceOfSettlementAmount}}\",\r\n        \"PriorityBillsUpToDate\": {{PriorityBillsUpToDate}},\r\n        \"Pending\": {{Pending}},\r\n        \"Authorized\": {{Authorized}},\r\n        \"SFTransferred\": {{SFTransferred}},\r\n        \"PaymentPlanHistoryId\": {{PaymentPlanHistoryId}},\r\n        \"SagepayTransactionID\": \"{{SagepayTransactionID}}\",\r\n        \"OwnBankAccount\": {{OwnBankAccount}},\r\n        \"SingleSignatoryRequired\": {{SingleSignatoryRequired}}\r\n       }\r\n}\r\n\r\n"
+                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\r\n        \"CustomerPrimaryId\": {{CustomerPrimaryId}},\r\n        \"CustomerSecondaryId\": {{CustomerSecondaryId}},\r\n        \"AccountReferenceNumber\": {{AccountReferenceNumber}},\r\n        \"InstalmentDate1\" : \"{{InstalmentDate1}}\",        \r\n        \"InstalmentAmount1\": {{InstalmentAmount1}},\r\n        \"InstalmentDate2\" : \"{{InstalmentDate2}}\",\r\n        \"InstalmentAmount2\": {{InstalmentAmount2}},\r\n        \"InstalmentDate3\" : \"{{InstalmentDate3}}\",\r\n        \"InstalmentAmount3\": {{InstalmentAmount3}},\r\n        \"PhoneNumber\": {{PhoneNumber}},\r\n        \"Email\": \"{{Email}}\",\r\n        \"ReasonForSettlement\": \"{{ReasonForSettlement}}\",\r\n        \"BankName\": \"{{BankName}}\",\r\n        \"AccountName\": \"{{AccountName}}\",\r\n        \"AccountNumber\": \"{{AccountNumber}}\",\r\n        \"SortCode\": \"{{SortCode}}\",\r\n        \"SettlementPercentage\" : {{SettlementPercentage}},\r\n        \"Method\": \"{{Method}}\",\r\n        \"SourceOfSettlementAmount\": \"{{SourceOfSettlementAmount}}\",\r\n        \"PriorityBillsUpToDate\": {{PriorityBillsUpToDate}},\r\n        \"Pending\": {{Pending}},\r\n        \"Authorized\": {{Authorized}},\r\n        \"SFTransferred\": {{SFTransferred}},\r\n        \"PaymentPlanHistoryId\": {{PaymentPlanHistoryId}},\r\n        \"SagepayTransactionID\": \"{{SagepayTransactionID}}\",\r\n        \"OwnBankAccount\": {{OwnBankAccount}},\r\n        \"SingleSignatoryRequired\": {{SingleSignatoryRequired}}\r\n       }\r\n}\r\n\r\n",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": "{{url}}/api/{{version}}/postSettlementPaymentPlan"
               },
@@ -4929,7 +4965,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\r\n        \"CustomerPrimaryId\": 4424362,\r\n        \"CustomerSecondaryId\": 0,\r\n        \"AccountReferenceNumber\": 4466638,\r\n        \"InstalmentDate1\" : \"2019-09-27\",                   \r\n        \"InstalmentAmount1\": 98,\r\n        \"InstalmentDate2\" : null,\r\n        \"InstalmentAmount2\": null,\r\n        \"InstalmentDate3\" :null,\r\n        \"InstalmentAmount3\": null,\r\n        \"PhoneNumber\": null,\r\n        \"Email\": null,\r\n        \"ReasonForSettlement\": null,\r\n        \"BankName\" : null,\r\n        \"AccountName\" : \"Testing\",\r\n        \"AccountNumber\" : 55779911,\r\n        \"SortCode\": \"20-00-00\",\r\n        \"SettlementPercentage\" : 98,\r\n        \"Method\" :\"Direct Debit\",\r\n        \"SourceOfSettlementAmount\": null,\r\n        \"PriorityBillsUpToDate\":true,\r\n        \"Pending\" : null,\r\n        \"Authorized\" : true,\r\n        \"SFTransferred\" : null,\r\n        \"PaymentPlanHistoryId\" : null,\r\n        \"SagepayTransactionID\" : null,\r\n        \"OwnBankAccount\": null,\r\n        \"SingleSignatoryRequired\": null \r\n       }\r\n}\r\n\r\n"
+                  "raw": "{\r\n\"Token\": \"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\r\n\"Data\":{\r\n        \"CustomerPrimaryId\": 4424362,\r\n        \"CustomerSecondaryId\": 0,\r\n        \"AccountReferenceNumber\": 4466638,\r\n        \"InstalmentDate1\" : \"2019-09-27\",                   \r\n        \"InstalmentAmount1\": 98,\r\n        \"InstalmentDate2\" : null,\r\n        \"InstalmentAmount2\": null,\r\n        \"InstalmentDate3\" :null,\r\n        \"InstalmentAmount3\": null,\r\n        \"PhoneNumber\": null,\r\n        \"Email\": null,\r\n        \"ReasonForSettlement\": null,\r\n        \"BankName\" : null,\r\n        \"AccountName\" : \"Testing\",\r\n        \"AccountNumber\" : 55779911,\r\n        \"SortCode\": \"20-00-00\",\r\n        \"SettlementPercentage\" : 98,\r\n        \"Method\" :\"Direct Debit\",\r\n        \"SourceOfSettlementAmount\": null,\r\n        \"PriorityBillsUpToDate\":true,\r\n        \"Pending\" : null,\r\n        \"Authorized\" : true,\r\n        \"SFTransferred\" : null,\r\n        \"PaymentPlanHistoryId\" : null,\r\n        \"SagepayTransactionID\" : null,\r\n        \"OwnBankAccount\": null,\r\n        \"SingleSignatoryRequired\": null \r\n       }\r\n}\r\n\r\n",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": "{{url}}/api/{{version}}/postSettlementPaymentPlan"
               },
@@ -4975,7 +5014,10 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\"Token\":\"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\"Data\":{\"UserId\":194245,\"ActivationCode\":\"rMVpAo9dEqOoDEK4RJwVhXk25UCbRTf9\"}}"
+                  "raw": "{\"Token\":\"8207186B-CA9E-4B6E-B033-1438DCC6E7D8\",\"Data\":{\"UserId\":194245,\"ActivationCode\":\"rMVpAo9dEqOoDEK4RJwVhXk25UCbRTf9\"}}",
+                  "options": {
+                    "raw": {}
+                  }
                 },
                 "url": {
                   "raw": "{{url}}/api/{{version}}/postActivateUser?Token=8207186B-CA9E-4B6E-B033-1438DCC6E7D8",
