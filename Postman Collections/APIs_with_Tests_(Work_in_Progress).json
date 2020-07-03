@@ -34416,13 +34416,13 @@
               "variable": [
                 {
                   "key": "SearchById",
-                  "value": "6",
+                  "value": "{{id}}",
                   "type": "string",
                   "description": "(Required) "
                 },
                 {
                   "key": "SearchText",
-                  "value": "Kaweah",
+                  "value": "{{txt}}",
                   "type": "string",
                   "description": "(Required) "
                 }
