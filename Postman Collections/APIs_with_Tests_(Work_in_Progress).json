@@ -34632,10 +34632,9 @@
                   "                pm.expect(JSON.stringify(jsonData[0].consumerAddress.country).toUpperCase()).to.equal(data.Country.toUpperCase());",
                   "            }",
                   "        });",
-                  "        /*pm.test(\"TEST1H: consumer Phones check\", function() {",
-                  "            if(jsonData[0].consumerPhones!=null){",
-                  "                for(var i=0;  i<(jsonData[0].consumerPhones.length); i++) {",
-                  "                    pm.expect(jsonData[0].consumerPhones[i].consumerPhoneID).to.equal(JSON.stringify(data.consumerPhoneID));",
+                  "        /*pm.test(\"TEST1H: Third Party check\", function() {",
+                  "            if(jsonData[0].thirdPartyInformation.thirdPartyName!=null){",
+                  "                    pm.expect(jsonData[0].thirdPartyInformation.thirdPartyName).to.equal(data.TPA_nm);",
                   "                    pm.expect(jsonData[0].consumerPhones[i].number).to.equal(JSON.stringify(data.phn_num));",
                   "                    pm.expect(jsonData[0].consumerPhones[i].softDeleteFlag).to.equal(JSON.stringify(data.softDeleteFlag));",
                   "                }",
@@ -35096,7 +35095,7 @@
               "variable": [
                 {
                   "key": "consumerId",
-                  "value": "2109114",
+                  "value": "4377713",
                   "type": "string"
                 }
               ]
