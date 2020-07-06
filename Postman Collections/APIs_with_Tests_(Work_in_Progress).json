@@ -34617,7 +34617,8 @@
                   "        });",
                   "        pm.test(\"TEST1F: BookOn Date check\", function () {",
                   "            pm.expect(jsonData[0].bookOnDate.split('T')[0]).to.equal(data.bookondt);",
-                  "            pm.expect(jsonData[0].terminationDate.split('T')[0]).to.equal(data.terminationdt);",
+                  "            pm.expect(jsonData[0].terminationDate.split('T')[0]).to.equal(data.terminationdt);  lastPaymentDate",
+                  "            pm.expect(jsonData[0].lastPaymentDate.split('T')[0]).to.equal(data.lastPaymentDate);",
                   "        });",
                   "        pm.test(\"TEST1G: consumer address check\", function () {",
                   "            if (jsonData[0].consumerAddress != null) {",
@@ -35095,7 +35096,7 @@
               "variable": [
                 {
                   "key": "consumerId",
-                  "value": "4304716",
+                  "value": "2109114",
                   "type": "string"
                 }
               ]
