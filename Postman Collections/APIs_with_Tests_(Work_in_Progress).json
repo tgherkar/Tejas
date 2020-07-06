@@ -34633,7 +34633,11 @@
                   "            }",
                   "        });",
                   "        pm.test(\"TEST1H: Third Party check\", function() {",
-                  "            pm.expect(jsonData[0].thirdPartyInformation.thirdPartyName.toUpperCase()).to.equal(data.TPA_nm.toUpperCase());",
+                  "            if(jsonData[0].thirdPartyInformation.thirdPartyName===null){",
+                  "                pm.expect(JSON.stringify(jsonData[0].thirdPartyInformation.thirdPartyName).toUpperCase()).to.equal(data.TPA_nm.toUpperCase);",
+                  "            } else{",
+                  "                pm.expect(jsonData[0].thirdPartyInformation.thirdPartyName.toUpperCase()).to.equal(data.TPA_nm.toUpperCase);    ",
+                  "            }",
                   "        });",
                   "        pm.test(\"TEST1I: consumer Accounts check\", function () {",
                   "            pm.expect(jsonData[0].balanceInformation.currentBalance).to.equal(data.Curr_Bal);",
@@ -35090,7 +35094,7 @@
               "variable": [
                 {
                   "key": "consumerId",
-                  "value": "4377713",
+                  "value": "4412017",
                   "type": "string"
                 }
               ]
