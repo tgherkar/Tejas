@@ -34662,6 +34662,7 @@
                   "        pm.test(\"TEST1L: Strategy check\", function () {",
                   "            pm.expect(JSON.stringify(jsonData[0].strategy.strategyName).toUpperCase()).to.equal(data.strategyName);",
                   "            pm.expect(JSON.stringify(jsonData[0].strategy.strategyDescription).toUpperCase()).to.equal(data.strategyDescription);",
+                  "",
                   "        });",
                   "        pm.test(\"TEST1M: Workgroup check\", function () {",
                   "            pm.expect(jsonData[0].workgroup.workgroupName).to.equal(data.workgroupName);",
@@ -34692,6 +34693,18 @@
                   "                pm.expect(data.amnt_to_pay.toUpperCase()).to.equal(\"NULL\");",
                   "            }else{",
                   "            pm.expect(jsonData[0].settlementOffer.amountToPay).to.equal(data.amnt_to_pay);",
+                  "            }",
+                  "        });",
+                  "        pm.test(\"TEST1P: Interest and Remediation check\", function () {",
+                  "            if (data.tot_interest===null){",
+                  "                pm.expect(jsonData[0].totalInterestApplied).to.equal(0.0);",
+                  "            }else{",
+                  "                pm.expect(jsonData[0].totalInterestApplied).to.equal(data.tot_interest);",
+                  "            }",
+                  "            if (data.tot_interest===null){",
+                  "                pm.expect(jsonData[0].totalRemediationApplied).to.equal(0.0);",
+                  "            }else{",
+                  "                pm.expect(jsonData[0].totalRemediationApplied).to.equal(data.tot_interest);",
                   "            }",
                   "        });",
                   "    }",
@@ -35084,7 +35097,7 @@
               "variable": [
                 {
                   "key": "consumerId",
-                  "value": "{{cnsmr_id}}",
+                  "value": "4304716",
                   "type": "string"
                 }
               ]
