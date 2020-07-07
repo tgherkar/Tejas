@@ -47858,11 +47858,12 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/account/consumerID/:consumerID",
+              "raw": "{{baseUrl}}/webregistration/account/consumerID/:consumerID",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
+                "webregistration",
                 "account",
                 "consumerID",
                 ":consumerID"
