@@ -47870,7 +47870,7 @@
               "variable": [
                 {
                   "key": "consumerID",
-                  "value": "{{cnsmr_id}}",
+                  "value": "100233",
                   "type": "string"
                 }
               ]
@@ -47962,50 +47962,49 @@
             "header": [
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
-                "value": "{{Ocp-Apim-Subscription-Key-South}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}"
               },
               {
                 "key": "Ocp-Apim-Subscription-Key-West",
-                "value": "{{Ocp-Apim-Subscription-Key-West}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}"
               },
               {
                 "key": "Correlation-Id",
-                "value": "{{$guid}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{$guid}}"
               },
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
+                "type": "text",
+                "value": "application/json"
               },
               {
                 "key": "Origin",
-                "value": "Postman",
-                "type": "text"
+                "type": "text",
+                "value": "Postman"
               },
               {
                 "key": "Username",
-                "value": "{{$randomUserName}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{$randomUserName}}"
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/account/consumerID/:consumerID",
+              "raw": "{{baseUrl}}/account/legacyid/:legacyID",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "account",
-                "consumerID",
-                ":consumerID"
+                "legacyid",
+                ":legacyID"
               ],
               "variable": [
                 {
-                  "id": "4b0bb6d3-9786-421a-8622-4d1af6698c45",
-                  "key": "consumerID",
-                  "value": "{{cnsmr_id}}",
+                  "key": "legacyID",
+                  "value": "{{legacyID}}",
                   "type": "string"
                 }
               ]
