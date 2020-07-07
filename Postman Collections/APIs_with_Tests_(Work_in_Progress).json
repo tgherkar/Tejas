@@ -47879,7 +47879,7 @@
           "response": []
         },
         {
-          "name": "Get Consumer Account Copy",
+          "name": "Get legacyID Account",
           "event": [
             {
               "listen": "prerequest",
