@@ -30694,7 +30694,7 @@
                   "});",
                   "if(data != null)",
                   "{console.log(\"This is data\");",
-                  "console.log(data[i]);}",
+                  "console.log(data);}",
                   "/*pm.test(\"TEST6: Data check\", function(){",
                   "    for(var i=0; i<jsonData.udpTables.length; i++){",
                   "        pm.expect(jsonData.udpTables[i].udpid).to.equal(data[i].agncy_dfnd_tbl_id);",
