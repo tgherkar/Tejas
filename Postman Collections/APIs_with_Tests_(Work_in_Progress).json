@@ -34834,7 +34834,7 @@
                   "                    },",
                   "                    \"accountOwnership\": {",
                   "                        \"$id\": \"#/items/properties/accountOwnership\",",
-                  "                        \"type\": [\"string\", \"null\"]",
+                  "                        \"type\": [\"object\", \"null\"]",
                   "                    },",
                   "                    \"workgroup\": {",
                   "                        \"required\": [",
