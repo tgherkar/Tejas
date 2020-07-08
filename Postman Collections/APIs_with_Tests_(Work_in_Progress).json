@@ -30275,7 +30275,6 @@
                   "var jsonData = JSON.parse(responseBody);",
                   "var req = request.url;",
                   "var query = request.url.split('/');",
-                  "console.log(query);",
                   "let expectedresponse = {",
                   "    \"udpTables\": [",
                   "        {",
