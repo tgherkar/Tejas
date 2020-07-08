@@ -9383,10 +9383,16 @@
                       "    }\r",
                       "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
                       "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                      "        /* for Test\r",
                       "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
                       "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
                       "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
                       "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                      "        */\r",
+                      "        let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
+                      "        let clientId = pm.environment.get(\"clientid\");\r",
+                      "        let clientSecret = pm.environment.get(\"clientsecret\");\r",
+                      "        let scope = pm.environment.get(\"clientscope\");\r",
                       "\r",
                       "        let getTokenRequest = {\r",
                       "            method: 'POST',\r",
@@ -34601,7 +34607,7 @@
                   "            pm.expect(jsonData[0].consumerID).to.equal(data.cnsmr_id);",
                   "        }",
                   "    });",
-                  "    console.log(JSON.stringify(jsonData[0].title).toUpperCase());",
+                  "    //console.log(JSON.stringify(jsonData[0].title).toUpperCase());",
                   "    if (data.cnsmr_id != null) {",
                   "        pm.test(\"TEST1A: Title check\", function () {",
                   "            if (jsonData[0].title === null) {",
@@ -35109,7 +35115,7 @@
               "variable": [
                 {
                   "key": "consumerId",
-                  "value": "{{cnsmr_id}}",
+                  "value": "1645735",
                   "type": "string"
                 }
               ]
