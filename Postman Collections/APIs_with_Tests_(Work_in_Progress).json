@@ -30268,7 +30268,7 @@
                   "try{",
                   "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));",
                   "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));",
-                  "console.log(\"Average response time: \" + responseTime + \"ms\");",
+                  "//console.log(\"Average response time: \" + responseTime + \"ms\");",
                   "",
                   "/////////////////////////////////////////////////////////////////////////////////////",
                   "let expectedCode = pm.iterationData.get(\"expectedHttpCode\");",
