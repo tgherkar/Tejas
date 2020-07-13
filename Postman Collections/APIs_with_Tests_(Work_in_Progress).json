@@ -268,7 +268,7 @@
                   "                    },",
                   "                    \"technologyTypeCode\": {",
                   "                        \"$id\": \"#/properties/consumerPhones/items/properties/technologyTypeCode\",",
-                  "                        \"type\": \"null\"",
+                  "                        \"type\": [\"integer\", \"null\"]",
                   "                    },",
                   "                    \"technologyTypeValueText\": {",
                   "                        \"$id\": \"#/properties/consumerPhones/items/properties/technologyTypeValueText\",",
