@@ -625,7 +625,7 @@
               "variable": [
                 {
                   "key": "cnsmr_id",
-                  "value": "4175745",
+                  "value": "{{cnsmr_id}}",
                   "type": "string"
                 }
               ]
