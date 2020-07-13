@@ -474,7 +474,7 @@
                   "    \"definitions\": {},",
                   "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"",
                   "};",
-                  "    pm.test(\"ajv test consumer address\", function () {",
+                  "    pm.test(\"TEST5: ajv test consumer address\", function () {",
                   "        pm.expect(ajv.validate(schema, jsonData.consumerAddress)).to.be.true;",
                   "    });",
                   "    //console.log(jsonData.consumerPhones.length);",
