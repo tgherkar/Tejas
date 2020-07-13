@@ -442,7 +442,7 @@
                   "var query = request.url.split('/');",
                   "//console.log(req);",
                   "    pm.test(\"TEST1: Consumer ID Check\", function () {",
-                  "        if (data.cnsmr_id == null) {",
+                  "        if (data.cnsmr_id === null) {",
                   "            console.log(query[5]);",
                   "            pm.expect(JSON.stringify(jsonData.consumerID)).to.deep.equal(query[5]);",
                   "            pm.expect(JSON.stringify(jsonData.consumerAddress.consumerID)).to.deep.equal(query[5]);",
