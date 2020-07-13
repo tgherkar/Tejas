@@ -612,7 +612,24 @@
                 "raw": {}
               }
             },
-            "url": "{{baseUrl}}/consumer/GetByConsumerId/{{cnsmr_id}}"
+            "url": {
+              "raw": "{{baseUrl}}/consumer/GetByConsumerId/:cnsmr_id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "consumer",
+                "GetByConsumerId",
+                ":cnsmr_id"
+              ],
+              "variable": [
+                {
+                  "key": "cnsmr_id",
+                  "value": "4175745",
+                  "type": "string"
+                }
+              ]
+            }
           },
           "response": [
             {
