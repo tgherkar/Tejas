@@ -260,7 +260,7 @@
                   "                    },",
                   "                    \"consentFlag\": {",
                   "                        \"$id\": \"#/properties/consumerPhones/items/properties/consentFlag\",",
-                  "                        \"type\": \"null\"",
+                  "                        \"type\": [\"string\", \"null\"]",
                   "                    },",
                   "                    \"consentDate\": {",
                   "                        \"$id\": \"#/properties/consumerPhones/items/properties/consentDate\",",
