@@ -475,7 +475,7 @@
                   "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"",
                   "};",
                   "    pm.test(\"TEST5: ajv test consumer address\", function () {",
-                  "        pm.expect(ajv.validate(schema, jsonData.consumerAddress)).to.be.true;",
+                  "        pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
                   "    });",
                   "} catch (e){",
                   "    //negative TESTS",
