@@ -1033,7 +1033,23 @@
                 "type": "text"
               }
             ],
-            "url": "{{baseUrl}}/GetActiveConsumerAccountOwner/{{cnsmr_accnt_id}}"
+            "url": {
+              "raw": "{{baseUrl}}/GetActiveConsumerAccountOwner/:cnsmr_accnt_id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "GetActiveConsumerAccountOwner",
+                ":cnsmr_accnt_id"
+              ],
+              "variable": [
+                {
+                  "key": "cnsmr_accnt_id",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            }
           },
           "response": [
             {
