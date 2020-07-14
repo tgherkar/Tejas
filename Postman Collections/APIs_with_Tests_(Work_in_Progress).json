@@ -328,7 +328,7 @@
                   "                }",
                   "            },",
                   "            \"$id\": \"#/properties/consumerAccount\",",
-                  "            \"type\": \"object\"",
+                  "            \"type\": [\"object\", \"null\"]",
                   "        },",
                   "        \"preDefault\": {",
                   "            \"required\": [",
