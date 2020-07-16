@@ -47893,7 +47893,7 @@
                 "addTokenTo": "header"
               }
             },
-            "method": "POST",
+            "method": "PUT",
             "header": [
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
@@ -47933,7 +47933,7 @@
                 "raw": {}
               }
             },
-            "url": "{{baseUrl}}/webregistration/user/instance/cc"
+            "url": "{{baseUrl}}/webregistration/user/instance/twofamethod"
           },
           "response": []
         },
