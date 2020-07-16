@@ -47681,7 +47681,7 @@
               "variable": [
                 {
                   "key": "email",
-                  "value": "TesterLarge@cabotcm.com",
+                  "value": "{{email}}",
                   "type": "string"
                 }
               ]
