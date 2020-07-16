@@ -30537,7 +30537,7 @@
                   "                    },",
                   "                    \"KeyUDPColumnID\": {",
                   "                        \"$id\": \"#/properties/UDPColumns/items/properties/KeyUDPColumnID\",",
-                  "                        \"type\": \"null\"",
+                  "                        \"type\": [\"integer\", \"null\"]",
                   "                    },",
                   "                    \"ReferenceUDPColumnID\": {",
                   "                        \"$id\": \"#/properties/UDPColumns/items/properties/ReferenceUDPColumnID\",",
