@@ -46974,6 +46974,11 @@
       "_postman_id": "cf20d8ed-6617-4ef3-9164-c612b14038f6"
     },
     {
+      "name": "Third_Party_Authority",
+      "item": [],
+      "_postman_id": "22605258-9535-461d-9e1f-731f539e9873"
+    },
+    {
       "name": "OAuth Renewal",
       "event": [
         {
