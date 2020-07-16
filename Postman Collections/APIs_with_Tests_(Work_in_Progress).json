@@ -46975,7 +46975,21 @@
     },
     {
       "name": "Third_Party_Authority",
-      "item": [],
+      "item": [
+        {
+          "name": "Post TPA",
+          "_postman_id": "fe392150-26cb-4408-aa3d-b82a86fbdff8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": ""
+          },
+          "response": []
+        }
+      ],
       "_postman_id": "22605258-9535-461d-9e1f-731f539e9873"
     },
     {
