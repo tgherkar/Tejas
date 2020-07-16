@@ -47322,10 +47322,6 @@
               "script": {
                 "id": "f7aa1889-2e19-40f5-8aa2-0a602c05eaca",
                 "exec": [
-                  "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
-                  "{\r",
-                  "    console.log(\"OAuth timestamp null, check the environment\");\r",
-                  "} else {\r",
                   "    var tokenDate = new Date(2010,1,1);\r",
                   "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
                   "    if(tokenTimestamp){\r",
@@ -47376,7 +47372,6 @@
                   "\r",
                   "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                   "    }\r",
-                  "}\r",
                   "//console.log(\"End of Pre-req script\");"
                 ],
                 "type": "text/javascript"
