@@ -47769,7 +47769,7 @@
                 "addTokenTo": "header"
               }
             },
-            "method": "GET",
+            "method": "PUT",
             "header": [
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
@@ -47802,26 +47802,7 @@
                 "value": "{{$randomUserName}}"
               }
             ],
-            "url": {
-              "raw": "{{baseUrl}}/webregistration/email/:email/checkdomain",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "webregistration",
-                "email",
-                ":email",
-                "checkdomain"
-              ],
-              "variable": [
-                {
-                  "id": "f69509b4-ed7d-464b-92c2-b6892bc27f6c",
-                  "key": "email",
-                  "value": "{{email}}",
-                  "type": "string"
-                }
-              ]
-            }
+            "url": "{{baseUrl}}/webregistration/user/instance/cc"
           },
           "response": []
         },
