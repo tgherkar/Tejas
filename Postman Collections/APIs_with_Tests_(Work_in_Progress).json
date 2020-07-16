@@ -15742,24 +15742,26 @@
                       "script": {
                         "id": "0dd73714-6ae9-4c43-9769-a8a385b2f86f",
                         "exec": [
+                          "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                          "{\r",
+                          "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                          "} else {\r",
                           "    var tokenDate = new Date(2010,1,1);\r",
                           "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
                           "    if(tokenTimestamp){\r",
                           "        tokenDate = Date.parse(tokenTimestamp);\r",
-                          "    }else{\r",
-                          "        tokenDate = Date.parse(\"2018-03-29T13:34:00.000\");\r",
                           "    }\r",
-                          "    console.log(\"timestamp is: \"+tokenDate +\" new time is: \"+Date.parse(new Date()));\r",
+                          "    //console.log(\"timestamp is\"+tokenDate);\r",
                           "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
                           "    if(!expiresInTime){\r",
                           "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
                           "    }\r",
                           "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
                           "    if((new Date() - tokenDate) >= expiresInTime) {\r",
-                          "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
-                          "    let clientId = pm.environment.get(\"clientId\");\r",
-                          "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
-                          "    let scope = pm.environment.get(\"clientScope\");\r",
+                          "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                          "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                          "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                          "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
                           "\r",
                           "        let getTokenRequest = {\r",
                           "            method: 'POST',\r",
@@ -15792,6 +15794,7 @@
                           "\r",
                           "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                           "    }\r",
+                          "}\r",
                           "//console.log(\"End of Pre-req script\");"
                         ],
                         "type": "text/javascript"
@@ -16114,24 +16117,25 @@
                       "script": {
                         "id": "72633d46-75d3-4a18-9c6b-dbce70c56e6e",
                         "exec": [
-                          "    var tokenDate = new Date(2010,1,1);\r",
+                          "if (pm.environment.get(\"OAuth_Timestamp\") == null) {\r",
+                          "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                          "} else {\r",
+                          "    var tokenDate = new Date(2010, 1, 1);\r",
                           "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
-                          "    if(tokenTimestamp){\r",
+                          "    if (tokenTimestamp) {\r",
                           "        tokenDate = Date.parse(tokenTimestamp);\r",
-                          "    }else{\r",
-                          "        tokenDate = Date.parse(\"2018-03-29T13:34:00.000\");\r",
                           "    }\r",
-                          "    console.log(\"timestamp is: \"+tokenDate +\" new time is: \"+Date.parse(new Date()));\r",
+                          "    //console.log(\"timestamp is\"+tokenDate);\r",
                           "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
-                          "    if(!expiresInTime){\r",
+                          "    if (!expiresInTime) {\r",
                           "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
                           "    }\r",
                           "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
-                          "    if((new Date() - tokenDate) >= expiresInTime) {\r",
-                          "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
-                          "    let clientId = pm.environment.get(\"clientId\");\r",
-                          "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
-                          "    let scope = pm.environment.get(\"clientScope\");\r",
+                          "    if ((new Date() - tokenDate) >= expiresInTime) {\r",
+                          "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                          "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                          "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                          "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
                           "\r",
                           "        let getTokenRequest = {\r",
                           "            method: 'POST',\r",
@@ -16154,16 +16158,17 @@
                           "\r",
                           "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
                           "            let jsonResponse = response.json(),\r",
-                          "            newAccessToken = jsonResponse.access_token;\r",
+                          "                newAccessToken = jsonResponse.access_token;\r",
                           "            //console.log({ err, jsonResponse, newAccessToken });\r",
                           "\r",
                           "            pm.environment.set('OAuth_Token', newAccessToken);\r",
-                          "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                          "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in * 1000);\r",
                           "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
                           "        });\r",
                           "\r",
                           "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                           "    }\r",
+                          "}\r",
                           "//console.log(\"End of Pre-req script\");"
                         ],
                         "type": "text/javascript"
@@ -16517,24 +16522,26 @@
                       "script": {
                         "id": "8d6fd154-c390-4853-8779-7e0d3472e613",
                         "exec": [
+                          "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                          "{\r",
+                          "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                          "} else {\r",
                           "    var tokenDate = new Date(2010,1,1);\r",
                           "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
                           "    if(tokenTimestamp){\r",
                           "        tokenDate = Date.parse(tokenTimestamp);\r",
-                          "    }else{\r",
-                          "        tokenDate = Date.parse(\"2018-03-29T13:34:00.000\");\r",
                           "    }\r",
-                          "    console.log(\"timestamp is: \"+tokenDate +\" new time is: \"+Date.parse(new Date()));\r",
+                          "    //console.log(\"timestamp is\"+tokenDate);\r",
                           "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
                           "    if(!expiresInTime){\r",
                           "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
                           "    }\r",
                           "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
                           "    if((new Date() - tokenDate) >= expiresInTime) {\r",
-                          "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
-                          "    let clientId = pm.environment.get(\"clientId\");\r",
-                          "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
-                          "    let scope = pm.environment.get(\"clientScope\");\r",
+                          "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                          "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                          "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                          "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
                           "\r",
                           "        let getTokenRequest = {\r",
                           "            method: 'POST',\r",
@@ -16567,6 +16574,7 @@
                           "\r",
                           "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                           "    }\r",
+                          "}\r",
                           "//console.log(\"End of Pre-req script\");"
                         ],
                         "type": "text/javascript"
@@ -16984,24 +16992,26 @@
                   "script": {
                     "id": "542e53d9-a61f-4a6f-be55-125615a932d0",
                     "exec": [
+                      "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                      "{\r",
+                      "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                      "} else {\r",
                       "    var tokenDate = new Date(2010,1,1);\r",
                       "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
                       "    if(tokenTimestamp){\r",
                       "        tokenDate = Date.parse(tokenTimestamp);\r",
-                      "    }else{\r",
-                      "        tokenDate = Date.parse(\"2018-03-29T13:34:00.000\");\r",
                       "    }\r",
-                      "    console.log(\"timestamp is: \"+tokenDate +\" new time is: \"+Date.parse(new Date()));\r",
+                      "    //console.log(\"timestamp is\"+tokenDate);\r",
                       "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
                       "    if(!expiresInTime){\r",
                       "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
                       "    }\r",
                       "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
                       "    if((new Date() - tokenDate) >= expiresInTime) {\r",
-                      "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
-                      "    let clientId = pm.environment.get(\"clientId\");\r",
-                      "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
-                      "    let scope = pm.environment.get(\"clientScope\");\r",
+                      "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                      "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                      "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                      "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
                       "\r",
                       "        let getTokenRequest = {\r",
                       "            method: 'POST',\r",
@@ -17034,6 +17044,7 @@
                       "\r",
                       "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                       "    }\r",
+                      "}\r",
                       "//console.log(\"End of Pre-req script\");"
                     ],
                     "type": "text/javascript"
@@ -20032,6 +20043,80 @@
                   "cookie": [],
                   "responseTime": null,
                   "body": "{\n \"countryCode\": \"<integer>\",\n \"valueText\": \"<string>\",\n \"description\": \"<string>\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "/address/swagger/json",
+              "_postman_id": "2cdc8a2d-d464-4731-aabf-0c2eeb0be7cc",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSIsImtpZCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSJ9.eyJhdWQiOiJhcGk6Ly84MTE2N2QzZC04NTNmLTQyMDctODBmYS0zMjI1YTQ5MjdhY2EiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMvIiwiaWF0IjoxNTg3MDM5MDc3LCJuYmYiOjE1ODcwMzkwNzcsImV4cCI6MTU4NzA0Mjk3NywiYWlvIjoiNDJkZ1lDaHdhbGdiWU9QOGgzOGg2MUhaN0hVbUFBPT0iLCJhcHBpZCI6IjIxYjhmYmVmLTcyNmItNDdhNC04MTM1LTFiY2ZlMmJhOWE5OCIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5My8iLCJvaWQiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJzdWIiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJ0aWQiOiIzNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMiLCJ1dGkiOiJ5QU9oZmtXbWxFdTViM0tHR1ljU0FBIiwidmVyIjoiMS4wIn0.G5xXEQNgXKLq5ARJl1tGIcnCZkn-jamqhkuUuDl69ZBYgAieA4QaWFbnQ29GIuQbX8Geiyq79-XzmrGVyMGGbSVJaQV9MxBgJ3Pzp_-WCrHef1CevHBlumj2L5NTTWAct3_ShBo7qPv16nU2XBE-7YTSOCCFOj_HQW2stx9x-yukiGFSHHr86uUTBpII2HRauepBFIxOhof8DOyuSdw7vZvG7uvTkL7_t1NssPnH4IopnAt0XIESMCskc7ZREezQE1FiNJaKzyq7YgIfPnZiNdzWEdxEEHmAuBVQjKXmWvPZC9oRToogCM7bh2Bph3bpiiX3VTVZK0XzOuWsQ_nRbA",
+                    "tokenType": "Bearer",
+                    "addTokenTo": "header"
+                  }
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "Postman",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Username",
+                    "value": "{{$randomUserName}}",
+                    "type": "text"
+                  }
+                ],
+                "url": "{{baseUrl}}/consumer/address/swagger/json"
+              },
+              "response": [
+                {
+                  "id": "44cc2a10-70fc-4c7e-a166-074e7d9ab544",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{baseUrl}}/address/swagger/json"
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
                 }
               ]
             }
