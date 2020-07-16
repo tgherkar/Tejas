@@ -48141,7 +48141,7 @@
                 "addTokenTo": "header"
               }
             },
-            "method": "PUT",
+            "method": "POST",
             "header": [
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
@@ -48181,7 +48181,7 @@
                 "raw": {}
               }
             },
-            "url": "{{baseUrl}}/webregistration/user/instance/email/cc"
+            "url": "{{baseUrl}}/webregistration/user/resendactivationemail/cc"
           },
           "response": []
         },
