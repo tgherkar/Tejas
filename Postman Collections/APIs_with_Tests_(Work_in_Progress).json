@@ -47938,7 +47938,7 @@
           "response": []
         },
         {
-          "name": "Set 2FA method Copy",
+          "name": "Update Customer Email",
           "event": [
             {
               "listen": "prerequest",
