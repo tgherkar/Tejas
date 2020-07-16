@@ -15246,7 +15246,7 @@
                     ],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\n    \"consumerID\": \"{{cnsmr_id}}\",\n    \"applyToLinkedConsumers\": \"false\",\n    \"Correlation-Id\": \"{{$guid}}\",\n    \"Cache-Control\": \"no-cache\"\n}",
+                      "raw": "{\n    \"consumerID\": \"{{cnsmr_id}}\",\n    \"applyToLinkedConsumers\": \"{{applyToLinkedConsumers}}\",\n    \"Correlation-Id\": \"{{$guid}}\",\n    \"Cache-Control\": \"no-cache\"\n}",
                       "options": {
                         "raw": {}
                       }
