@@ -47814,7 +47814,7 @@
           "response": []
         },
         {
-          "name": "Register User Copy",
+          "name": "Set 2FA method",
           "event": [
             {
               "listen": "prerequest",
