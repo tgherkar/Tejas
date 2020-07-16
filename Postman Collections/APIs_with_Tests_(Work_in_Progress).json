@@ -30525,7 +30525,7 @@
                   "                        \"$id\": \"#/properties/udpColumns/items/properties/columnType\",",
                   "                        \"type\": \"string\"",
                   "                    },",
-                  "                    \"columnLenght\": {",
+                  "                    \"columnLength\": {",
                   "                        \"$id\": \"#/properties/udpColumns/items/properties/columnLenght\",",
                   "                        \"type\": [\"string\", \"null\"]",
                   "                    },",
@@ -30724,7 +30724,30 @@
                 "type": "text"
               }
             ],
-            "url": "{{BaseURL}}/udp/udptable/285/1583175",
+            "url": {
+              "raw": "{{BaseURL}}/udp/udptable/:udpid/:cnsmr_id",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "udp",
+                "udptable",
+                ":udpid",
+                ":cnsmr_id"
+              ],
+              "variable": [
+                {
+                  "key": "udpid",
+                  "value": "{{udp_id}}",
+                  "type": "string"
+                },
+                {
+                  "key": "cnsmr_id",
+                  "value": "{{cnsmr_id}}",
+                  "type": "string"
+                }
+              ]
+            },
             "description": "Gets column definition and data for given UDP and Consumer ID"
           },
           "response": [
