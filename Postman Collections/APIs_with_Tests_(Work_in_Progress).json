@@ -47338,7 +47338,7 @@
                   "    if(!expiresInTime){\r",
                   "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
                   "    }\r",
-                  "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                  "    console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
                   "    if((new Date() - tokenDate) >= expiresInTime) {\r",
                   "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
                   "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
