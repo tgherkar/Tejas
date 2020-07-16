@@ -31623,49 +31623,6 @@
               "body": ""
             }
           ]
-        },
-        {
-          "name": "/swagger",
-          "_postman_id": "ab72006e-1a42-4595-be06-b6fb0e4c2e5b",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "GET",
-            "header": [
-              {
-                "key": "Ocp-Apim-Subscription-Key-South",
-                "value": ""
-              }
-            ],
-            "url": "{{baseUrl}}/swagger"
-          },
-          "response": [
-            {
-              "id": "9b296812-fefb-4b9e-9c56-8c02d85be490",
-              "name": "Success",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "url": "{{baseUrl}}/swagger"
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "text",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "cookie": [],
-              "responseTime": null,
-              "body": ""
-            }
-          ]
         }
       ],
       "_postman_id": "10a5c421-9e41-4edb-ac8a-27dc55f4fdd9"
