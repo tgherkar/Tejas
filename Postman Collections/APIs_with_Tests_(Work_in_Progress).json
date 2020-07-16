@@ -47669,22 +47669,20 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/webregistration//consumer/:consumerId/registeredUserAccount",
+              "raw": "{{baseUrl}}/webregistration/email/:email/checkdomain",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "webregistration",
-                "",
-                "consumer",
-                ":consumerId",
-                "registeredUserAccount"
+                "email",
+                ":email",
+                "checkdomain"
               ],
               "variable": [
                 {
-                  "id": "aa0b705a-bbc6-45c1-bff5-ae00263fb44d",
-                  "key": "consumerId",
-                  "value": "{{cnsmr_id}}",
+                  "key": "email",
+                  "value": "",
                   "type": "string"
                 }
               ]
