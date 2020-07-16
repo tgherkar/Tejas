@@ -47333,7 +47333,7 @@
                   "    }else{\r",
                   "        tokenDate = Date.parse(01-01-2000);\r",
                   "    }\r",
-                  "    //console.log(\"timestamp is\"+tokenDate);\r",
+                  "    console.log(\"timestamp is\"+tokenDate);\r",
                   "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
                   "    if(!expiresInTime){\r",
                   "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
