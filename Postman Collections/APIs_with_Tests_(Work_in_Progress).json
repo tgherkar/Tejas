@@ -46983,8 +46983,15 @@
             "disableBodyPruning": true
           },
           "request": {
-            "method": "GET",
+            "method": "POST",
             "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"thirdPartyAuthorityId\": 0,\r\n  \"accountReferenceNumber\": \"string\",\r\n  \"customerPrimaryId\": 0,\r\n  \"customerSecondaryId\": 0,\r\n  \"title\": \"string\",\r\n  \"name\": \"string\",\r\n  \"firstName\": \"string\",\r\n  \"surname\": \"string\",\r\n  \"middleName\": \"string\",\r\n  \"address1\": \"string\",\r\n  \"address2\": \"string\",\r\n  \"address3\": \"string\",\r\n  \"address4\": \"string\",\r\n  \"postCode\": \"string\",\r\n  \"phoneNumber\": \"string\",\r\n  \"email\": \"string\",\r\n  \"dateOfBirth\": \"2020-07-16T18:11:32.432Z\",\r\n  \"createdAt\": \"2020-07-16T18:11:32.432Z\",\r\n  \"relationship\": \"string\",\r\n  \"customerTitle\": \"string\",\r\n  \"customerFirstName\": \"string\",\r\n  \"customerSurname\": \"string\",\r\n  \"customerEmail\": \"string\",\r\n  \"applyToAllAccounts\": true,\r\n  \"cubeDocumentId\": \"string\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
             "url": ""
           },
           "response": []
