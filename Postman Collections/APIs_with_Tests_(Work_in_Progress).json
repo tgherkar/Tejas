@@ -48062,7 +48062,7 @@
           "response": []
         },
         {
-          "name": "Update Customer Email Copy",
+          "name": "Resend Activation Email",
           "event": [
             {
               "listen": "prerequest",
