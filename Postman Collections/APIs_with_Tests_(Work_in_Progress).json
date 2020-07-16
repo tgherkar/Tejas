@@ -46983,6 +46983,14 @@
             "disableBodyPruning": true
           },
           "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
             "method": "POST",
             "header": [],
             "body": {
@@ -46992,7 +47000,7 @@
                 "raw": {}
               }
             },
-            "url": ""
+            "url": "{{baseUrl}}/thirdparty"
           },
           "response": []
         }
