@@ -48141,7 +48141,7 @@
                 "addTokenTo": "header"
               }
             },
-            "method": "PUT",
+            "method": "POST",
             "header": [
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
@@ -48176,7 +48176,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"userID\": 55746\r\n}",
+              "raw": "{\r\n  \"userID\": \"abc\"\r\n}",
               "options": {
                 "raw": {}
               }
