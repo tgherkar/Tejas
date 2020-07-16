@@ -47533,13 +47533,12 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/webregistration//consumer/:consumerId/registeredUserAccount",
+              "raw": "{{baseUrl}}/webregistration/consumer/:consumerId/registeredUserAccount",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "webregistration",
-                "",
                 "consumer",
                 ":consumerId",
                 "registeredUserAccount"
