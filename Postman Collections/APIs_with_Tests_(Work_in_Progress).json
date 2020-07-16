@@ -47332,6 +47332,7 @@
                   "        tokenDate = Date.parse(tokenTimestamp);\r",
                   "    }else{\r",
                   "        tokenDate = \"2018-03-29T13:34:00.000\";\r",
+                  "        console.log(\"YES\");\r",
                   "    }\r",
                   "    console.log(\"timestamp is: \"+tokenDate +\" new time is: \"+Date.parse(new Date()));\r",
                   "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
