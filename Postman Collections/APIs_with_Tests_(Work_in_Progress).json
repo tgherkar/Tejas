@@ -47099,7 +47099,7 @@
           "response": []
         },
         {
-          "name": "Post TPA Copy",
+          "name": "Put TPA",
           "event": [
             {
               "listen": "prerequest",
@@ -47176,7 +47176,7 @@
                 "addTokenTo": "header"
               }
             },
-            "method": "POST",
+            "method": "PUT",
             "header": [
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
@@ -47216,7 +47216,129 @@
                 "raw": {}
               }
             },
-            "url": "{{baseUrl}}/thirdparty"
+            "url": "{{baseUrl}}/thirdparty/"
+          },
+          "response": []
+        },
+        {
+          "name": "Put TPA Copy",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "7c0e5cbd-6def-4add-9708-757cc3df81c6",
+                "exec": [
+                  "    var tokenDate = new Date(2010,1,1);\r",
+                  "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "    if(tokenTimestamp){\r",
+                  "        tokenDate = Date.parse(tokenTimestamp);\r",
+                  "    }else{\r",
+                  "        tokenDate = Date.parse(\"2018-03-29T13:34:00.000\");\r",
+                  "    }\r",
+                  "    console.log(\"timestamp is: \"+tokenDate +\" new time is: \"+Date.parse(new Date()));\r",
+                  "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "    if(!expiresInTime){\r",
+                  "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "    }\r",
+                  "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                  "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                  "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
+                  "    let clientId = pm.environment.get(\"clientId\");\r",
+                  "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
+                  "    let scope = pm.environment.get(\"clientScope\");\r",
+                  "\r",
+                  "        let getTokenRequest = {\r",
+                  "            method: 'POST',\r",
+                  "            url: tokenUrl,\r",
+                  "            auth: {\r",
+                  "                type: \"basic\",\r",
+                  "                basic: [\r",
+                  "                    { key: \"username\", value: clientId },\r",
+                  "                    { key: \"password\", value: clientSecret }\r",
+                  "                ]\r",
+                  "            },\r",
+                  "            body: {\r",
+                  "                mode: 'formdata',\r",
+                  "                formdata: [\r",
+                  "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                    { key: 'scope', value: scope }\r",
+                  "                ]\r",
+                  "            }\r",
+                  "        };\r",
+                  "\r",
+                  "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "            let jsonResponse = response.json(),\r",
+                  "            newAccessToken = jsonResponse.access_token;\r",
+                  "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "\r",
+                  "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "        });\r",
+                  "\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "    }\r",
+                  "//console.log(\"End of Pre-req script\");"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "cc32b6f4-ad0b-4ec1-b451-576e828eb2d8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true,
+            "disabledSystemHeaders": {}
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
+              },
+              {
+                "key": "Correlation-Id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Origin",
+                "value": "Postman",
+                "type": "text"
+              },
+              {
+                "key": "Username",
+                "value": "{{$randomUserName}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"thirdPartyAuthorityId\": 0,\r\n  \"accountReferenceNumber\": \"{{legacyID}}\",\r\n  \"customerPrimaryId\": {{cnsmr_id}},\r\n  \"customerSecondaryId\": {{SecondaryConsumerId}},\r\n  \"title\": \"Mr\",\r\n  \"name\": \"Test_Name\",\r\n  \"firstName\": \"Test_Name\",\r\n  \"surname\": \"Test_Surname\",\r\n  \"middleName\": \"T\",\r\n  \"address1\": \"Test_AL1\",\r\n  \"address2\": \"Test_AL2\",\r\n  \"address3\": \"Test_AL3\",\r\n  \"address4\": \"Test_AL4\",\r\n  \"postCode\": \"TE573ER\",\r\n  \"phoneNumber\": \"02020220202\",\r\n  \"email\": \"test@cabotcm.com\",\r\n  \"dateOfBirth\": \"2020-07-16T18:11:32.432Z\",\r\n  \"createdAt\": \"2020-07-16T18:11:32.432Z\",\r\n  \"relationship\": \"Test_relation\",\r\n  \"customerTitle\": \"{{title}}\",\r\n  \"customerFirstName\": \"{{firstname}}\",\r\n  \"customerSurname\": \"{{surname}}\",\r\n  \"customerEmail\": \"{{email}}\",\r\n  \"applyToAllAccounts\": {{applyToLinkedConsumers}},\r\n  \"cubeDocumentId\": \"string\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "{{baseUrl}}/thirdparty/"
           },
           "response": []
         }
