@@ -30501,7 +30501,7 @@
       "_postman_id": "291d380c-1eb3-4c33-9087-1bc55336b018"
     },
     {
-      "name": "Linked Consumer",
+      "name": "Linked_Consumer",
       "item": [
         {
           "name": "consumer/{consumer Id}",
