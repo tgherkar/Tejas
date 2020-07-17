@@ -49746,6 +49746,397 @@
           ],
           "_postman_id": "a8f8625f-5a98-4ee0-a38b-dc5112142e48",
           "_postman_isSubFolder": true
+        },
+        {
+          "name": "Returns Payment Reminders Preference for Consumer",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "bf692b90-7e4e-443f-94c8-f7be43fafe5a",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);\r",
+                  "pm.environment.set(\"response time\", (pm.response.responseTime) + Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                  "pm.environment.set(\"responses\", 1 + Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                  "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                  "var Ajv = require('ajv'),\r",
+                  "    ajv = new Ajv({ logger: console }),\r",
+                  "    schema =\r",
+                  "    {\r",
+                  "        \"required\": [\r",
+                  "            \"name\",\r",
+                  "            \"consumerId\",\r",
+                  "            \"description\",\r",
+                  "            \"value\"\r",
+                  "        ],\r",
+                  "        \"properties\": {\r",
+                  "            \"name\": {\r",
+                  "                \"$id\": \"#/properties/name\",\r",
+                  "                \"type\": \"string\"\r",
+                  "            },\r",
+                  "            \"consumerId\": {\r",
+                  "                \"$id\": \"#/properties/consumerId\",\r",
+                  "                \"type\": \"number\"\r",
+                  "            },\r",
+                  "            \"description\": {\r",
+                  "                \"$id\": \"#/properties/description\",\r",
+                  "                \"type\": \"string\"\r",
+                  "            },\r",
+                  "            \"value\": {\r",
+                  "                \"$id\": \"#/properties/value\",\r",
+                  "                \"type\": \"string\"\r",
+                  "            }\r",
+                  "        },\r",
+                  "        \"$id\": \"http://example.org/root.json#\",\r",
+                  "        \"type\": \"object\",\r",
+                  "        \"definitions\": {},\r",
+                  "        \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                  "    };\r",
+                  "pm.test(\"TEST01: Status Code Check\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"TEST02: Response Header Checks\", function () {\r",
+                  "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"TEST03: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "pm.test(\"TEST04: Response Schema is valid\", function () {\r",
+                  "    pm.expect(ajv.validate(jsonData, schema, true, false)).to.be.true;\r",
+                  "});\r",
+                  "///NEGATIVE TESTS\r",
+                  "\r",
+                  "pm.test(\"Neg Test 01: Check if array is empty\", function () {\r",
+                  "    pm.expect(schema).to.not.be.empty;\r",
+                  "});\r",
+                  "pm.test(\"Neg Test 02: Check if string is empty\", function () {\r",
+                  "    pm.expect('{{cnsmr_id}}').to.not.be.empty;\r",
+                  "});\r",
+                  "pm.test(\"Neg Test 03: Check expenditureGroupCode isn't empty\", function () {\r",
+                  "    pm.expect('expenditureGroupCode').to.not.be.empty;\r",
+                  "});\r",
+                  "pm.test(\"Incorrect field examaple\", function () {\r",
+                  "    var expenGC = schema.properties.appSettingId;\r",
+                  "    var booleanV = Boolean;\r",
+                  "    pm.expect(expenGC).to.not.equal(booleanV);\r",
+                  "    console.log(jsonData.toString());\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "0767c0bb-a87d-40bd-81e9-bbf4ebbb9b7c",
+                "exec": [
+                  "//pm.environment.set(\"OAuth_Timestamp\", null);\r",
+                  "console.log(pm.environment.get(\"OAuth_Expiry\"));\r",
+                  "console.log(pm.environment.get(\"OAuth_Timestamp\"));\r",
+                  "console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "var noDate = 0;\r",
+                  "var tokenDate = new Date(2010,1,1);\r",
+                  "var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "if(tokenTimestamp){\r",
+                  "    tokenDate = Date.parse(tokenTimestamp);\r",
+                  "}else {noDate = 1};\r",
+                  "    //console.log(\"timestamp is\"+tokenDate);\r",
+                  "var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "if(!expiresInTime){\r",
+                  "    expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "}\r",
+                  "//console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime + \"and noDate value is :\"+noDate);\r",
+                  "if((new Date() - tokenDate) >= expiresInTime || noDate==1) {\r",
+                  "    let tokenUrl = pm.environment.get(\"tokenUrl\"); \r",
+                  "    let clientId = pm.environment.get(\"clientId\"); \r",
+                  "    let clientSecret = pm.environment.get(\"clientSecret\"); \r",
+                  "    let scope = pm.environment.get(\"clientScope\"); \r",
+                  "    let getTokenRequest = {\r",
+                  "        method: 'POST',\r",
+                  "        url: tokenUrl,\r",
+                  "        auth: {\r",
+                  "           type: \"basic\",\r",
+                  "            basic: [\r",
+                  "                { key: \"username\", value: clientId },\r",
+                  "                { key: \"password\", value: clientSecret }\r",
+                  "            ]\r",
+                  "        },\r",
+                  "        body: {\r",
+                  "            mode: 'formdata',\r",
+                  "            formdata: [\r",
+                  "                { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                { key: 'scope', value: scope }\r",
+                  "            ]\r",
+                  "        }\r",
+                  "    };\r",
+                  "pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "    let jsonResponse = response.json(),\r",
+                  "        newAccessToken = jsonResponse.access_token;\r",
+                  "        //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "        pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "        pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "        pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "    });\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "}\r",
+                  "//console.log(\"End of Pre-req script\");\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "1e356ba2-3949-462e-b15d-1b6450a5918d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
+              },
+              {
+                "key": "Origin",
+                "value": "Postman",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Correlation-Id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Username",
+                "value": "Test-User",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/preference/paymentReminders/:consumerId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "preference",
+                "paymentReminders",
+                ":consumerId"
+              ],
+              "variable": [
+                {
+                  "id": "467c87b5-c982-4103-ab61-b2085f9c2fa7",
+                  "key": "consumerId",
+                  "value": "{{cnsmr_id}}",
+                  "type": "string",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "57e0bedb-80bd-4a46-8fb5-11d812d2b6a3",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/paymentReminders/:consumerId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "paymentReminders",
+                    ":consumerId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerId"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "a4e535d4-017c-4885-ad9d-d0d393d1a48b",
+              "name": "Service unavailable",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/paymentReminders/:consumerId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "paymentReminders",
+                    ":consumerId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerId"
+                    }
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "d35b07e9-1ec7-4337-ab42-9615c2441b75",
+              "name": "Bad ConsumerId",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/paymentReminders/:consumerId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "paymentReminders",
+                    ":consumerId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerId"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "d5a9d886-2c6b-4486-8a0b-9fbfc629336d",
+              "name": "ConsumerId not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/paymentReminders/:consumerId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "paymentReminders",
+                    ":consumerId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerId"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "efec432d-e5b8-495b-b7e5-6521e35015ce",
+              "name": "Primary Preference Options",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/paymentReminders/:consumerId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "paymentReminders",
+                    ":consumerId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerId"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n \"name\": \"<string>\",\n \"consumerId\": \"<int64>\",\n \"description\": \"<string>\",\n \"value\": \"<string>\"\n}"
+            }
+          ]
         }
       ],
       "_postman_id": "6039695a-b59e-4bd1-84ce-ce0863d32f82"
