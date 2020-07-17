@@ -8684,7 +8684,7 @@
       "_postman_id": "c39b8dbc-7d41-401d-a099-da6a813aeb0c"
     },
     {
-      "name": "New consumer APIs",
+      "name": "consumer",
       "item": [
         {
           "name": "{consumer Id}",
@@ -14223,7 +14223,7 @@
       "_postman_id": "2b19ae9d-4eb3-48c8-bf8b-059ce134493f"
     },
     {
-      "name": "Consumer Address",
+      "name": "Consumer_Address",
       "item": [
         {
           "name": "{consumer Id}/address",
