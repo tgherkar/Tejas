@@ -47176,7 +47176,7 @@
                 "addTokenTo": "header"
               }
             },
-            "method": "POST",
+            "method": "PUT",
             "header": [
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
