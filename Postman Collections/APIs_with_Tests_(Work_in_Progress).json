@@ -47099,7 +47099,7 @@
           "response": []
         },
         {
-          "name": "Post TPA Copy",
+          "name": "Put TPA",
           "event": [
             {
               "listen": "prerequest",
