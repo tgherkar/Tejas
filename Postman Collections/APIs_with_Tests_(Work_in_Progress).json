@@ -22757,7 +22757,7 @@
       "_postman_id": "b87c240e-1495-48b8-b03f-45c966849822"
     },
     {
-      "name": "Consumer Phone",
+      "name": "Consumer_Phone",
       "item": [
         {
           "name": "{consumer Id}/phone",
