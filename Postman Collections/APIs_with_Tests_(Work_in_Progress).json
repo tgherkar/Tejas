@@ -48078,6 +48078,681 @@
           ],
           "_postman_id": "d2d3d6c7-2110-40ad-9e73-6b9e45310aba",
           "_postman_isSubFolder": true
+        },
+        {
+          "name": "documentconsent",
+          "item": [
+            {
+              "name": "Updates consumer document consent preferences",
+              "_postman_id": "8a178186-dcd4-4043-abe3-9f7c1b8add71",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": ""
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"value\": \"<string>\",\n    \"consumerId\": \"<long>\",\n    \"applyToLinkedConsumers\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {}
+                  }
+                },
+                "url": "{{baseUrl}}/documentconsent"
+              },
+              "response": [
+                {
+                  "id": "265c2120-e9f0-44e2-8082-6308a3bd8318",
+                  "name": "Updated sucessfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "url": "{{baseUrl}}/documentconsent"
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                },
+                {
+                  "id": "981cb602-798a-4ad5-b774-3cf26172742f",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "url": "{{baseUrl}}/documentconsent"
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<object>\""
+                },
+                {
+                  "id": "998d2b08-0de8-489a-93e8-da7884ac9900",
+                  "name": "Service Unavailable",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "url": "{{baseUrl}}/documentconsent"
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                },
+                {
+                  "id": "cf5b1d57-5ce6-4db1-b80e-22c387f98f12",
+                  "name": "bad input command",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "url": "{{baseUrl}}/documentconsent"
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "name": "Returns Document Consent Options",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "012ddf99-72a3-48f2-9788-7eb98df7fbfa",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "cb91ab5e-90b8-48c4-846e-d6c2d019b225",
+                    "exec": [
+                      "var jsonData = JSON.parse(responseBody);\r",
+                      "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                      "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                      "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                      "var Ajv = require('ajv'),\r",
+                      "ajv = new Ajv({logger: console}),\r",
+                      "schema = \r",
+                      "{\r",
+                      "    \"required\": [\r",
+                      "        \"name\",\r",
+                      "        \"consumerId\",\r",
+                      "        \"description\",\r",
+                      "        \"values\"\r",
+                      "    ],\r",
+                      "    \"properties\": {\r",
+                      "        \"name\": {\r",
+                      "            \"$id\": \"#/properties/name\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"consumerId\": {\r",
+                      "            \"$id\": \"#/properties/consumerId\",\r",
+                      "            \"type\": \"number\"\r",
+                      "        },\r",
+                      "        \"description\": {\r",
+                      "            \"$id\": \"#/properties/description\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"values\": {\r",
+                      "            \"items\": {\r",
+                      "                \"required\": [\r",
+                      "                    \"name\",\r",
+                      "                    \"description\",\r",
+                      "                    \"order\"\r",
+                      "                ],\r",
+                      "                \"properties\": {\r",
+                      "                    \"name\": {\r",
+                      "                        \"$id\": \"#/properties/values/items/properties/name\",\r",
+                      "                        \"type\": \"string\"\r",
+                      "                    },\r",
+                      "                    \"description\": {\r",
+                      "                        \"$id\": \"#/properties/values/items/properties/description\",\r",
+                      "                        \"type\": \"string\"\r",
+                      "                    },\r",
+                      "                    \"order\": {\r",
+                      "                        \"$id\": \"#/properties/values/items/properties/order\",\r",
+                      "                        \"type\": \"number\"\r",
+                      "                    }\r",
+                      "                },\r",
+                      "                \"$id\": \"#/properties/values/items\",\r",
+                      "                \"type\": \"object\"\r",
+                      "            },\r",
+                      "            \"$id\": \"#/properties/values\",\r",
+                      "            \"type\": \"array\"\r",
+                      "        }\r",
+                      "    },\r",
+                      "    \"$id\": \"http://example.org/root.json#\",\r",
+                      "    \"type\": \"object\",\r",
+                      "    \"definitions\": {},\r",
+                      "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                      "};\r",
+                      "pm.test(\"TEST01: Status Code Check\", function() {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST02: Response Header Checks\", function() {\r",
+                      "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST03: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                      "});\r",
+                      "pm.test(\"TEST04: Response Schema is valid\", function() {\r",
+                      "  pm.expect(ajv.validate(jsonData, schema, true, false)).to.be.true;\r",
+                      "});\r",
+                      "///NEGATIVE TESTS\r",
+                      "\r",
+                      "pm.test(\"Neg Test 01: Check if array is empty\", function () {\r",
+                      "     pm.expect(schema).to.not.be.empty;\r",
+                      "});\r",
+                      " pm.test(\"Neg Test 02: Check if string is empty\", function () {\r",
+                      "     pm.expect('isActive').to.not.be.empty;\r",
+                      "});\r",
+                      " pm.test(\"Neg Test 03: Check expenditureGroupCode isn't empty\", function () {\r",
+                      "     pm.expect('expenditureGroupCode').to.not.be.empty;\r",
+                      "});\r",
+                      "pm.test(\"Incorrect field examaple\", function() {\r",
+                      "    var expenGC = schema.properties.appSettingId;\r",
+                      "    var booleanV = Boolean;\r",
+                      "    pm.expect(expenGC).to.not.equal(booleanV);\r",
+                      "    console.log(jsonData.toString());\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "_postman_id": "27db4b91-8656-4ec4-93fd-3043fb819b48",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "addTokenTo": "header",
+                    "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSIsImtpZCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSJ9.eyJhdWQiOiJhcGk6Ly84MTE2N2QzZC04NTNmLTQyMDctODBmYS0zMjI1YTQ5MjdhY2EiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMvIiwiaWF0IjoxNTg1MzIzMjk1LCJuYmYiOjE1ODUzMjMyOTUsImV4cCI6MTU4NTMyNzE5NSwiYWlvIjoiNDJkZ1lQaFYzVEl6N1lKYWJsMzV2TFBibm0yckFBQT0iLCJhcHBpZCI6IjIxYjhmYmVmLTcyNmItNDdhNC04MTM1LTFiY2ZlMmJhOWE5OCIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5My8iLCJvaWQiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJzdWIiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJ0aWQiOiIzNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMiLCJ1dGkiOiJ4WUItYnZ3Q2EwNkVTNXo0VDBjWUFBIiwidmVyIjoiMS4wIn0.H9cexc8ZWC7rioWSn6ehlwt984UNtqSqsqvlS00ZOxbdKjBZA1ukr19YOrpZA_BuayH0an-_ffYSDmJOjyQpq_uqEMw7GLKqUCwKDB7kEwOCNF42uqh1A6Ka_WlyrsnTA9UQWTp-33sMiwEHsYEhb4VyNvlw2Iq2OmmIRtdrkq392p2iWvRrrYFnYgRLIlyuN-KHz52oqPbjvrHcG_OqKVDsSvaqMqDPF3uqYJp4Ya5DxiN4hgnoWCxdrS4GKs-Vj5_6rizlAz_JUTVlmv7NHBBAOkgCFaf1FGTuQzaRxu2Cna2S4Tdu54avRBtMkGvQH8xfLRBxEvdthtyyT9fLRw",
+                    "tokenType": "Bearer"
+                  }
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "Postman",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Username",
+                    "value": "Test User",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  }
+                ],
+                "url": "{{baseUrl}}/documentconsent"
+              },
+              "response": [
+                {
+                  "id": "927946dc-423c-4925-b057-be03b975c1c3",
+                  "name": "Service unavailable",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{baseUrl}}/documentconsent"
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                },
+                {
+                  "id": "c849a1ed-a67a-4fb1-8541-aa30c80b4fd6",
+                  "name": "Preference Options",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{baseUrl}}/documentconsent"
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n \"name\": \"<string>\",\n \"consumerId\": \"<int64>\",\n \"description\": \"<string>\",\n \"values\": [\n  {\n   \"name\": \"<string>\",\n   \"description\": \"<string>\",\n   \"order\": \"<int32>\"\n  },\n  {\n   \"name\": \"<string>\",\n   \"description\": \"<string>\",\n   \"order\": \"<int32>\"\n  }\n ]\n}"
+                },
+                {
+                  "id": "d2f4e0ee-d98b-476e-99cd-b28df4b69ced",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{baseUrl}}/documentconsent"
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "name": "Returns Document Consent Preference for Consumer",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "56c59bde-bf24-463a-b508-de302ff69376",
+                    "exec": [
+                      "var jsonData = JSON.parse(responseBody);\r",
+                      "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                      "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                      "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                      "var Ajv = require('ajv'),\r",
+                      "ajv = new Ajv({logger: console}),\r",
+                      "schema = \r",
+                      "{\r",
+                      "    \"required\": [\r",
+                      "        \"name\",\r",
+                      "        \"consumerId\",\r",
+                      "        \"description\",\r",
+                      "        \"value\"\r",
+                      "    ],\r",
+                      "    \"properties\": {\r",
+                      "        \"name\": {\r",
+                      "            \"$id\": \"#/properties/name\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"consumerId\": {\r",
+                      "            \"$id\": \"#/properties/consumerId\",\r",
+                      "            \"type\": \"number\"\r",
+                      "        },\r",
+                      "        \"description\": {\r",
+                      "            \"$id\": \"#/properties/description\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"value\": {\r",
+                      "            \"$id\": \"#/properties/value\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        }\r",
+                      "    },\r",
+                      "    \"$id\": \"http://example.org/root.json#\",\r",
+                      "    \"type\": \"object\",\r",
+                      "    \"definitions\": {},\r",
+                      "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                      "};\r",
+                      "pm.test(\"TEST01: Status Code Check\", function() {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST02: Response Header Checks\", function() {\r",
+                      "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST03: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                      "});\r",
+                      "pm.test(\"TEST04: Response Schema is valid\", function() {\r",
+                      "  pm.expect(ajv.validate(jsonData, schema, true, false)).to.be.true;\r",
+                      "});\r",
+                      "///NEGATIVE TESTS\r",
+                      "\r",
+                      "pm.test(\"Neg Test 01: Check if array is empty\", function () {\r",
+                      "     pm.expect(schema).to.not.be.empty;\r",
+                      "});\r",
+                      " pm.test(\"Neg Test 02: Check if string is empty\", function () {\r",
+                      "     pm.expect('{{cnsmr_id}}').to.not.be.empty;\r",
+                      "});\r",
+                      " pm.test(\"Neg Test 03: Check expenditureGroupCode isn't empty\", function () {\r",
+                      "     pm.expect('expenditureGroupCode').to.not.be.empty;\r",
+                      "});\r",
+                      "pm.test(\"Incorrect field examaple\", function() {\r",
+                      "    var expenGC = schema.properties.appSettingId;\r",
+                      "    var booleanV = Boolean;\r",
+                      "    pm.expect(expenGC).to.not.equal(booleanV);\r",
+                      "    console.log(jsonData.toString());\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "_postman_id": "3bc233bb-0ecc-49fa-8959-4c6cf39e0b4d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "addTokenTo": "header",
+                    "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSIsImtpZCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSJ9.eyJhdWQiOiJhcGk6Ly84MTE2N2QzZC04NTNmLTQyMDctODBmYS0zMjI1YTQ5MjdhY2EiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMvIiwiaWF0IjoxNTg1MzIzMjk1LCJuYmYiOjE1ODUzMjMyOTUsImV4cCI6MTU4NTMyNzE5NSwiYWlvIjoiNDJkZ1lQaFYzVEl6N1lKYWJsMzV2TFBibm0yckFBQT0iLCJhcHBpZCI6IjIxYjhmYmVmLTcyNmItNDdhNC04MTM1LTFiY2ZlMmJhOWE5OCIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5My8iLCJvaWQiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJzdWIiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJ0aWQiOiIzNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMiLCJ1dGkiOiJ4WUItYnZ3Q2EwNkVTNXo0VDBjWUFBIiwidmVyIjoiMS4wIn0.H9cexc8ZWC7rioWSn6ehlwt984UNtqSqsqvlS00ZOxbdKjBZA1ukr19YOrpZA_BuayH0an-_ffYSDmJOjyQpq_uqEMw7GLKqUCwKDB7kEwOCNF42uqh1A6Ka_WlyrsnTA9UQWTp-33sMiwEHsYEhb4VyNvlw2Iq2OmmIRtdrkq392p2iWvRrrYFnYgRLIlyuN-KHz52oqPbjvrHcG_OqKVDsSvaqMqDPF3uqYJp4Ya5DxiN4hgnoWCxdrS4GKs-Vj5_6rizlAz_JUTVlmv7NHBBAOkgCFaf1FGTuQzaRxu2Cna2S4Tdu54avRBtMkGvQH8xfLRBxEvdthtyyT9fLRw",
+                    "tokenType": "Bearer"
+                  }
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "Postman",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Username",
+                    "value": "Test User",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/documentconsent/:consumerId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "documentconsent",
+                    ":consumerId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "306177b6-1c69-4c8f-a3ae-c122317440d6",
+                      "key": "consumerId",
+                      "value": "{{cnsmr_id}}",
+                      "type": "string",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "0c50edf0-a6c2-4562-b458-8fbec3e75003",
+                  "name": "Service unavailable",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/documentconsent/:consumerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "documentconsent",
+                        ":consumerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                },
+                {
+                  "id": "31c0315e-f048-4496-82c7-578cfcf7f662",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/documentconsent/:consumerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "documentconsent",
+                        ":consumerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                },
+                {
+                  "id": "7bb0552f-a85e-4eea-8238-b59e15eb861a",
+                  "name": "Bad ConsumerId",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/documentconsent/:consumerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "documentconsent",
+                        ":consumerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                },
+                {
+                  "id": "aa50adf2-1345-4599-9184-9db2642da6ab",
+                  "name": "Consumer Preference",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/documentconsent/:consumerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "documentconsent",
+                        ":consumerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n \"name\": \"<string>\",\n \"consumerId\": \"<int64>\",\n \"description\": \"<string>\",\n \"value\": \"<string>\"\n}"
+                },
+                {
+                  "id": "ad1f6ef5-71ff-43f9-a735-bc2e98fdca3a",
+                  "name": "ConsumerId not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/documentconsent/:consumerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "documentconsent",
+                        ":consumerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                }
+              ]
+            }
+          ],
+          "_postman_id": "702ae056-84ee-4671-b410-dcb7c132da5e",
+          "_postman_isSubFolder": true
         }
       ],
       "_postman_id": "6039695a-b59e-4bd1-84ce-ce0863d32f82"
