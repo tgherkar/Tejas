@@ -47347,7 +47347,739 @@
     },
     {
       "name": "Preference",
-      "item": [],
+      "item": [
+        {
+          "name": "primary",
+          "item": [
+            {
+              "name": "Updates customers primary preference",
+              "_postman_id": "fd541769-6431-4764-a61a-38b0768e5f22",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": ""
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"value\": \"<string>\",\n    \"consumerId\": \"<long>\",\n    \"applyToLinkedConsumers\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {}
+                  }
+                },
+                "url": "{{baseUrl}}/primary"
+              },
+              "response": [
+                {
+                  "id": "15459d59-96ed-4e7a-8b01-47530c8abaf6",
+                  "name": "bad input command",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "url": "{{baseUrl}}/primary"
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                },
+                {
+                  "id": "52217003-c036-4193-8879-993eb57ce808",
+                  "name": "Service Unavailable",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "url": "{{baseUrl}}/primary"
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                },
+                {
+                  "id": "99c6d328-131d-454e-8407-c8d9cb7f5e4a",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "url": "{{baseUrl}}/primary"
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\"<object>\""
+                },
+                {
+                  "id": "e192c2d8-dfd9-4e4e-bb66-93f80e1c7455",
+                  "name": "Updated sucessfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "url": "{{baseUrl}}/primary"
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "name": "Returns Primary Preference Options",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "d9034d90-4f7b-4ce7-a6a7-3ad7d0617bd2",
+                    "exec": [
+                      "var jsonData = JSON.parse(responseBody);",
+                      "pm.environment.set(\"response time\", (pm.response.responseTime) + Number(postman.getEnvironmentVariable(\"response time\")));",
+                      "pm.environment.set(\"responses\", 1 + Number(postman.getEnvironmentVariable(\"responses\")));",
+                      "console.log(\"Average response time: \" + responseTime + \"ms\");",
+                      "var Ajv = require('ajv'),",
+                      "    ajv = new Ajv({ logger: console }),",
+                      "    schema =",
+                      "    {",
+                      "        \"required\": [",
+                      "            \"name\",",
+                      "            \"consumerId\",",
+                      "            \"description\",",
+                      "            \"values\"",
+                      "        ],",
+                      "        \"properties\": {",
+                      "            \"name\": {",
+                      "                \"$id\": \"#/properties/name\",",
+                      "                \"type\": \"string\"",
+                      "            },",
+                      "            \"consumerId\": {",
+                      "                \"$id\": \"#/properties/consumerId\",",
+                      "                \"type\": \"number\"",
+                      "            },",
+                      "            \"description\": {",
+                      "                \"$id\": \"#/properties/description\",",
+                      "                \"type\": \"string\"",
+                      "            },",
+                      "            \"values\": {",
+                      "                \"items\": {",
+                      "                    \"required\": [",
+                      "                        \"name\",",
+                      "                        \"description\",",
+                      "                        \"order\"",
+                      "                    ],",
+                      "                    \"properties\": {",
+                      "                        \"name\": {",
+                      "                            \"$id\": \"#/properties/values/items/properties/name\",",
+                      "                            \"type\": \"string\"",
+                      "                        },",
+                      "                        \"description\": {",
+                      "                            \"$id\": \"#/properties/values/items/properties/description\",",
+                      "                            \"type\": \"string\"",
+                      "                        },",
+                      "                        \"order\": {",
+                      "                            \"$id\": \"#/properties/values/items/properties/order\",",
+                      "                            \"type\": \"number\"",
+                      "                        }",
+                      "                    },",
+                      "                    \"$id\": \"#/properties/values/items\",",
+                      "                    \"type\": \"object\"",
+                      "                },",
+                      "                \"$id\": \"#/properties/values\",",
+                      "                \"type\": \"array\"",
+                      "            }",
+                      "        },",
+                      "        \"$id\": \"http://example.org/root.json#\",",
+                      "        \"type\": \"object\",",
+                      "        \"definitions\": {},",
+                      "        \"$schema\": \"http://json-schema.org/draft-07/schema#\"",
+                      "    };",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "pm.test(\"TEST01: Status Code Check\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"TEST02: Response Header Checks\", function () {",
+                      "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');",
+                      "});",
+                      "",
+                      "pm.test(\"TEST03: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "pm.test(\"TEST04: Response Schema is valid\", function () {",
+                      "    pm.expect(ajv.validate(jsonData, schema, true, false)).to.be.true;",
+                      "});",
+                      "///NEGATIVE TESTS",
+                      "",
+                      "pm.test(\"Neg Test 01: Check if array is empty\", function () {",
+                      "    pm.expect(schema).to.not.be.empty;",
+                      "});",
+                      "pm.test(\"Neg Test 02: Check if string is empty\", function () {",
+                      "    pm.expect('isActive').to.not.be.empty;",
+                      "});",
+                      "pm.test(\"Neg Test 03: Check expenditureGroupCode isn't empty\", function () {",
+                      "    pm.expect('expenditureGroupCode').to.not.be.empty;",
+                      "});",
+                      "pm.test(\"Incorrect field examaple\", function () {",
+                      "    var expenGC = schema.properties.appSettingId;",
+                      "    var booleanV = Boolean;",
+                      "    pm.expect(expenGC).to.not.equal(booleanV);",
+                      "    console.log(jsonData.toString());",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "5114227a-0b6b-4579-afc8-cf6df1b95f4a",
+                    "exec": [
+                      "//pm.environment.set(\"OAuth_Timestamp\", null);\r",
+                      "console.log(pm.environment.get(\"OAuth_Expiry\"));\r",
+                      "console.log(pm.environment.get(\"OAuth_Timestamp\"));\r",
+                      "console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                      "var noDate = 0;\r",
+                      "var tokenDate = new Date(2010,1,1);\r",
+                      "var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                      "if(tokenTimestamp){\r",
+                      "    tokenDate = Date.parse(tokenTimestamp);\r",
+                      "}else {noDate = 1};\r",
+                      "    //console.log(\"timestamp is\"+tokenDate);\r",
+                      "var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                      "if(!expiresInTime){\r",
+                      "    expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                      "}\r",
+                      "//console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime + \"and noDate value is :\"+noDate);\r",
+                      "if((new Date() - tokenDate) >= expiresInTime || noDate==1) {\r",
+                      "    let tokenUrl = pm.environment.get(\"tokenUrl\"); \r",
+                      "    let clientId = pm.environment.get(\"clientId\"); \r",
+                      "    let clientSecret = pm.environment.get(\"clientSecret\"); \r",
+                      "    let scope = pm.environment.get(\"clientScope\"); \r",
+                      "    let getTokenRequest = {\r",
+                      "        method: 'POST',\r",
+                      "        url: tokenUrl,\r",
+                      "        auth: {\r",
+                      "           type: \"basic\",\r",
+                      "            basic: [\r",
+                      "                { key: \"username\", value: clientId },\r",
+                      "                { key: \"password\", value: clientSecret }\r",
+                      "            ]\r",
+                      "        },\r",
+                      "        body: {\r",
+                      "            mode: 'formdata',\r",
+                      "            formdata: [\r",
+                      "                { key: 'grant_type', value: 'client_credentials' },\r",
+                      "                { key: 'scope', value: scope }\r",
+                      "            ]\r",
+                      "        }\r",
+                      "    };\r",
+                      "pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                      "    let jsonResponse = response.json(),\r",
+                      "        newAccessToken = jsonResponse.access_token;\r",
+                      "        //console.log({ err, jsonResponse, newAccessToken });\r",
+                      "        pm.environment.set('OAuth_Token', newAccessToken);\r",
+                      "        pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                      "        pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                      "    });\r",
+                      "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                      "}\r",
+                      "//console.log(\"End of Pre-req script\");\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "_postman_id": "cc6efd26-d050-49bc-bc39-cafb81f98362",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "accessToken": "{{OAuth_Token}}",
+                    "tokenType": "Bearer",
+                    "addTokenTo": "header"
+                  }
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "Postman",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Username",
+                    "value": "Test User",
+                    "type": "text"
+                  }
+                ],
+                "url": "{{baseUrl}}/preference/primary"
+              },
+              "response": [
+                {
+                  "id": "02e08347-997a-40d6-a688-07679688b11e",
+                  "name": "Service unavailable",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{baseUrl}}/primary"
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                },
+                {
+                  "id": "405ef65b-7614-448c-a541-3629fd6790e7",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{baseUrl}}/primary"
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                },
+                {
+                  "id": "cbdfdf47-392b-49e2-946b-c43102deb917",
+                  "name": "Preference Options",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{baseUrl}}/primary"
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n \"name\": \"<string>\",\n \"consumerId\": \"<int64>\",\n \"description\": \"<string>\",\n \"values\": [\n  {\n   \"name\": \"<string>\",\n   \"description\": \"<string>\",\n   \"order\": \"<int32>\"\n  },\n  {\n   \"name\": \"<string>\",\n   \"description\": \"<string>\",\n   \"order\": \"<int32>\"\n  }\n ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "Returns Primary Preference for Consumer",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "2ad21f5c-b9f1-4f8b-94ab-2a97169d29ca",
+                    "exec": [
+                      "var jsonData = JSON.parse(responseBody);\r",
+                      "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                      "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                      "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                      "var Ajv = require('ajv'),\r",
+                      "ajv = new Ajv({logger: console}),\r",
+                      "schema = \r",
+                      "{\r",
+                      "    \"required\": [\r",
+                      "        \"name\",\r",
+                      "        \"consumerId\",\r",
+                      "        \"description\",\r",
+                      "        \"value\"\r",
+                      "    ],\r",
+                      "    \"properties\": {\r",
+                      "        \"name\": {\r",
+                      "            \"$id\": \"#/properties/name\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"consumerId\": {\r",
+                      "            \"$id\": \"#/properties/consumerId\",\r",
+                      "            \"type\": \"number\"\r",
+                      "        },\r",
+                      "        \"description\": {\r",
+                      "            \"$id\": \"#/properties/description\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"value\": {\r",
+                      "            \"$id\": \"#/properties/value\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        }\r",
+                      "    },\r",
+                      "    \"$id\": \"http://example.org/root.json#\",\r",
+                      "    \"type\": \"object\",\r",
+                      "    \"definitions\": {},\r",
+                      "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                      "};\r",
+                      "pm.test(\"TEST01: Status Code Check\", function() {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST02: Response Header Checks\", function() {\r",
+                      "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST03: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                      "});\r",
+                      "pm.test(\"TEST04: Response Schema is valid\", function() {\r",
+                      "  pm.expect(ajv.validate(jsonData, schema, true, false)).to.be.true;\r",
+                      "});\r",
+                      "///NEGATIVE TESTS\r",
+                      "\r",
+                      "pm.test(\"Neg Test 01: Check if array is empty\", function () {\r",
+                      "     pm.expect(schema).to.not.be.empty;\r",
+                      "});\r",
+                      " pm.test(\"Neg Test 02: Check if string is empty\", function () {\r",
+                      "     pm.expect('{{cnsmr_id}}').to.not.be.empty;\r",
+                      "});\r",
+                      " pm.test(\"Neg Test 03: Check expenditureGroupCode isn't empty\", function () {\r",
+                      "     pm.expect('expenditureGroupCode').to.not.be.empty;\r",
+                      "});\r",
+                      "pm.test(\"Incorrect field examaple\", function() {\r",
+                      "    var expenGC = schema.properties.appSettingId;\r",
+                      "    var booleanV = Boolean;\r",
+                      "    pm.expect(expenGC).to.not.equal(booleanV);\r",
+                      "    console.log(jsonData.toString());\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "_postman_id": "cae28cc6-c4e1-4ff9-b4ef-2e28f1d2b45f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "addTokenTo": "header",
+                    "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSIsImtpZCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSJ9.eyJhdWQiOiJhcGk6Ly84MTE2N2QzZC04NTNmLTQyMDctODBmYS0zMjI1YTQ5MjdhY2EiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMvIiwiaWF0IjoxNTg1MzIzMjk1LCJuYmYiOjE1ODUzMjMyOTUsImV4cCI6MTU4NTMyNzE5NSwiYWlvIjoiNDJkZ1lQaFYzVEl6N1lKYWJsMzV2TFBibm0yckFBQT0iLCJhcHBpZCI6IjIxYjhmYmVmLTcyNmItNDdhNC04MTM1LTFiY2ZlMmJhOWE5OCIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5My8iLCJvaWQiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJzdWIiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJ0aWQiOiIzNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMiLCJ1dGkiOiJ4WUItYnZ3Q2EwNkVTNXo0VDBjWUFBIiwidmVyIjoiMS4wIn0.H9cexc8ZWC7rioWSn6ehlwt984UNtqSqsqvlS00ZOxbdKjBZA1ukr19YOrpZA_BuayH0an-_ffYSDmJOjyQpq_uqEMw7GLKqUCwKDB7kEwOCNF42uqh1A6Ka_WlyrsnTA9UQWTp-33sMiwEHsYEhb4VyNvlw2Iq2OmmIRtdrkq392p2iWvRrrYFnYgRLIlyuN-KHz52oqPbjvrHcG_OqKVDsSvaqMqDPF3uqYJp4Ya5DxiN4hgnoWCxdrS4GKs-Vj5_6rizlAz_JUTVlmv7NHBBAOkgCFaf1FGTuQzaRxu2Cna2S4Tdu54avRBtMkGvQH8xfLRBxEvdthtyyT9fLRw",
+                    "tokenType": "Bearer"
+                  }
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Username",
+                    "value": "Test User",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "Postman",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/primary/:consumerId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "primary",
+                    ":consumerId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "38d3fc41-aebd-4642-9258-1378823bd03b",
+                      "key": "consumerId",
+                      "value": "{{cnsmr_id}}",
+                      "type": "string",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "1e66b3cb-b959-4ecd-bece-3d26ca3ef615",
+                  "name": "Bad ConsumerId",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/primary/:consumerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "primary",
+                        ":consumerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                },
+                {
+                  "id": "5055e928-81c3-4a2d-bdf4-741502ec7088",
+                  "name": "ConsumerId not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/primary/:consumerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "primary",
+                        ":consumerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                },
+                {
+                  "id": "9382e88c-2005-4526-a823-7eca1326208c",
+                  "name": "Service unavailable",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/primary/:consumerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "primary",
+                        ":consumerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                },
+                {
+                  "id": "aa5e4f57-004f-453b-bb11-d51122d65cbb",
+                  "name": "Consumer Preference",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/primary/:consumerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "primary",
+                        ":consumerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n \"name\": \"<string>\",\n \"consumerId\": \"<int64>\",\n \"description\": \"<string>\",\n \"value\": \"<string>\"\n}"
+                },
+                {
+                  "id": "b865f547-85b7-4731-a813-7d829272e3af",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/primary/:consumerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "primary",
+                        ":consumerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                }
+              ]
+            }
+          ],
+          "_postman_id": "d2d3d6c7-2110-40ad-9e73-6b9e45310aba",
+          "_postman_isSubFolder": true
+        }
+      ],
       "_postman_id": "6039695a-b59e-4bd1-84ce-ce0863d32f82"
     },
     {
