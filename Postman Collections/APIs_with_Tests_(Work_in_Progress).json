@@ -46974,7 +46974,7 @@
       "_postman_id": "cf20d8ed-6617-4ef3-9164-c612b14038f6"
     },
     {
-      "name": "Third_Party_Authority",
+      "name": "Third_Party_Authority_Obsolete",
       "item": [
         {
           "name": "Post TPA",
@@ -47298,7 +47298,7 @@
                 "addTokenTo": "header"
               }
             },
-            "method": "PUT",
+            "method": "DELETE",
             "header": [
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
