@@ -47099,7 +47099,7 @@
           "response": []
         },
         {
-          "name": "Put TPA",
+          "name": "Post TPA Copy",
           "event": [
             {
               "listen": "prerequest",
@@ -47176,7 +47176,7 @@
                 "addTokenTo": "header"
               }
             },
-            "method": "PUT",
+            "method": "POST",
             "header": [
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
@@ -47216,7 +47216,7 @@
                 "raw": {}
               }
             },
-            "url": "{{baseUrl}}/thirdparty/"
+            "url": "{{baseUrl}}/thirdparty"
           },
           "response": []
         }
