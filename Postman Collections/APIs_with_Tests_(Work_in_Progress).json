@@ -5296,7 +5296,7 @@
       "_postman_id": "0eb50e14-38f8-48e1-b91f-e171c40b7296"
     },
     {
-      "name": "Action Result",
+      "name": "Action_Result",
       "item": [
         {
           "name": "log",
@@ -32572,7 +32572,7 @@
       "_postman_id": "232f4bdd-4882-44ce-b228-f77b830d27fd"
     },
     {
-      "name": "Account Information",
+      "name": "Account_Information",
       "item": [
         {
           "name": "Get Consumer Account information",
