@@ -45931,6 +45931,20 @@
                   "        pm.test(\"TEST1D: lastActivatedEmail check\", function () {\r",
                   "            pm.expect(data.email).to.deep.equal(jsonData.lastActivatedEmail);\r",
                   "        });\r",
+                  "        pm.test(\"TEST1D: twoFAPhoneNumber check\", function () {\r",
+                  "            if(jsonData.twoFAPhoneNumber==null){\r",
+                  "                pm.expect(data.TFA_Phone.toUpperCase()).to.deep.equal(JSON.stringify(jsonData.twoFAPhoneNumber).toUpperCase());\r",
+                  "            }else{\r",
+                  "                pm.expect(data.TFA_Phone).to.deep.equal(jsonData.twoFAPhoneNumber);\r",
+                  "            }\r",
+                  "        });\r",
+                  "        pm.test(\"TEST1D: twoFA Preference check\", function () {\r",
+                  "            if(jsonData.twoFAPreference==null){\r",
+                  "                pm.expect(data.TFA_Method.toUpperCase()).to.deep.equal(JSON.stringify(jsonData.twoFAPreference).toUpperCase());\r",
+                  "            }else{\r",
+                  "                pm.expect(data.TFA_Method).to.deep.equal(jsonData.twoFAPreference);\r",
+                  "            }\r",
+                  "        });\r",
                   "    }\r",
                   "\r",
                   "    pm.test(\"TEST2: Status code Check\", function () {\r",
@@ -46100,7 +46114,7 @@
               "variable": [
                 {
                   "key": "consumerID",
-                  "value": "1583231",
+                  "value": "1583288",
                   "type": "string"
                 }
               ]
