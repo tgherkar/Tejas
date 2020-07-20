@@ -45896,7 +45896,7 @@
                   "    console.log(query);\r",
                   "    pm.test(\"TEST1: Consumer ID Check\", function () {\r",
                   "        if (data.cnsmr_id == null) {\r",
-                  "            pm.expect(JSON.stringify(jsonData.consumerID)).to.deep.equal(query[4]);\r",
+                  "            pm.expect(JSON.stringify(jsonData.consumerID)).to.deep.equal(query[6]);\r",
                   "        } else {\r",
                   "            pm.expect(jsonData.consumerID).to.deep.equal(data.cnsmr_id);\r",
                   "        }\r",
