@@ -53284,7 +53284,1901 @@
     },
     {
       "name": "Interaction",
-      "item": [],
+      "item": [
+        {
+          "name": "category",
+          "item": [
+            {
+              "name": "{category Id}",
+              "item": [
+                {
+                  "name": "/category/:categoryId",
+                  "_postman_id": "39b4e76f-0767-4901-b1a2-1733717d1abf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json,v1.0.0"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"categoryID\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {}
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/category/:categoryId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "category",
+                        ":categoryId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "75f9b0d4-d025-4047-ae71-b6d31626dcba",
+                          "key": "categoryId",
+                          "value": "<string>",
+                          "type": "string",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Delete interaction category"
+                  },
+                  "response": [
+                    {
+                      "id": "0e7ec87d-87d0-420f-a6c0-fe6476ac7978",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "2d5b4adf-1c95-4866-96dd-bb992b352cc7",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "49b1f2aa-a954-4e59-bc6f-ae9277c777cc",
+                      "name": "Server Error",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "69b78181-ef1e-497a-9677-130892766fb7",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>"
+                    },
+                    {
+                      "id": "def8ab5e-5d85-4600-abbc-8bac353fabdf",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "f50e306b-7e7e-45dd-8927-f4d52810f801",
+                      "name": "Server Error",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    }
+                  ]
+                },
+                {
+                  "name": "/category/:categoryId",
+                  "_postman_id": "a5d9e497-5291-4244-8f3b-3da9e858525a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json,v1.0.0"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"categoryID\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"sourceID\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {}
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/category/:categoryId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "category",
+                        ":categoryId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f4993da3-f23f-4322-a2ae-e1cd1aab025f",
+                          "key": "categoryId",
+                          "value": "<string>",
+                          "type": "string",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Update interaction category"
+                  },
+                  "response": [
+                    {
+                      "id": "9449fede-ebb8-46de-a883-80d72fda603f",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryID\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"sourceID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": ""
+                    },
+                    {
+                      "id": "96b2f153-259a-4d21-97b7-3043e4e41206",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryID\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"sourceID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "ae6e032d-4191-47cd-8bdf-49a04cd08b82",
+                      "name": "Server Error",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryID\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"sourceID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "bebc3e31-2aa4-447b-95d7-1a076cf013fd",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryID\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"sourceID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "e0b4aa09-02da-46ec-b0af-f30e0483b7a8",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryID\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"sourceID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>"
+                    },
+                    {
+                      "id": "e76969f7-75db-4ef8-b3e0-bbf5cf35b274",
+                      "name": "Server Error",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryID\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"sourceID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    }
+                  ]
+                },
+                {
+                  "name": "/category/:categoryId/rule/:categoryRuleId",
+                  "_postman_id": "f22b8514-a3c5-4405-b460-db70fa5c57bf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json,v1.0.0"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {}
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "category",
+                        ":categoryId",
+                        "rule",
+                        ":categoryRuleId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "b14b392f-b140-403e-987d-e11ab94d8525",
+                          "key": "categoryId",
+                          "value": "<string>",
+                          "type": "string",
+                          "description": "(Required) "
+                        },
+                        {
+                          "id": "6a7f8db3-6cfb-4eeb-a6b3-42754a85629a",
+                          "key": "categoryRuleId",
+                          "value": "<string>",
+                          "type": "string",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Delete interaction category rule"
+                  },
+                  "response": [
+                    {
+                      "id": "55660cc6-cae9-482f-854a-2c7771bec3a7",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId",
+                            "rule",
+                            ":categoryRuleId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            },
+                            {
+                              "key": "categoryRuleId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "6ae4d9c0-f076-4d43-8372-a678107753f0",
+                      "name": "Server Error",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId",
+                            "rule",
+                            ":categoryRuleId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            },
+                            {
+                              "key": "categoryRuleId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "7dcc9703-a3a0-4162-87c7-96647799dda3",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId",
+                            "rule",
+                            ":categoryRuleId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            },
+                            {
+                              "key": "categoryRuleId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "c1f7b357-a1f6-4fba-972f-f4f23932b8cc",
+                      "name": "Server Error",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId",
+                            "rule",
+                            ":categoryRuleId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            },
+                            {
+                              "key": "categoryRuleId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "cf77c564-dcf0-4def-bc18-3fb5f83c564d",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId",
+                            "rule",
+                            ":categoryRuleId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            },
+                            {
+                              "key": "categoryRuleId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "e96e1dbb-788a-4392-94c7-254603c1dcea",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId",
+                            "rule",
+                            ":categoryRuleId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            },
+                            {
+                              "key": "categoryRuleId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>"
+                    }
+                  ]
+                },
+                {
+                  "name": "/category/:categoryId/source/:categorySourceId",
+                  "_postman_id": "78fab8b3-f302-4725-9425-e40394939356",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json,v1.0.0"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"categorySourceID\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {}
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/category/:categoryId/source/:categorySourceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "category",
+                        ":categoryId",
+                        "source",
+                        ":categorySourceId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4c5a3175-87bd-4a90-9b54-0af49a4b2ea5",
+                          "key": "categoryId",
+                          "value": "<string>",
+                          "type": "string",
+                          "description": "(Required) "
+                        },
+                        {
+                          "id": "efefb1f8-d155-40ff-bf4e-9a00908f120e",
+                          "key": "categorySourceId",
+                          "value": "<string>",
+                          "type": "string",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Delete interaction category source"
+                  },
+                  "response": [
+                    {
+                      "id": "42c2f350-6e6d-4aeb-88da-8dea3c95d1e7",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categorySourceID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId/source/:categorySourceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId",
+                            "source",
+                            ":categorySourceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            },
+                            {
+                              "key": "categorySourceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>"
+                    },
+                    {
+                      "id": "571588e5-22bd-44b7-856b-781f1d56538c",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categorySourceID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId/source/:categorySourceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId",
+                            "source",
+                            ":categorySourceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            },
+                            {
+                              "key": "categorySourceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "6335ea43-b084-4af5-a79c-0471be2c8a01",
+                      "name": "Server Error",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categorySourceID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId/source/:categorySourceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId",
+                            "source",
+                            ":categorySourceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            },
+                            {
+                              "key": "categorySourceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "7278d0cd-a809-417a-a128-6d0c3d4d1368",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categorySourceID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId/source/:categorySourceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId",
+                            "source",
+                            ":categorySourceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            },
+                            {
+                              "key": "categorySourceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "cb38b808-b732-4085-820f-c5d314b03ee2",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categorySourceID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId/source/:categorySourceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId",
+                            "source",
+                            ":categorySourceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            },
+                            {
+                              "key": "categorySourceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "d189c2af-3b93-4fba-93e7-7bcbb2e51d05",
+                      "name": "Server Error",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categorySourceID\": \"<uuid>\"\n}"
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/category/:categoryId/source/:categorySourceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "category",
+                            ":categoryId",
+                            "source",
+                            ":categorySourceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId"
+                            },
+                            {
+                              "key": "categorySourceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    }
+                  ]
+                }
+              ],
+              "_postman_id": "35fac89a-c9f7-46c2-b24e-937b5b77a1ec",
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "source",
+              "item": [
+                {
+                  "name": "/category/source",
+                  "_postman_id": "5db923ba-2ee5-4135-b3d3-3ccf14fa67b5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json,v1.0.0"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}",
+                      "options": {
+                        "raw": {}
+                      }
+                    },
+                    "url": "{{baseUrl}}/category/source",
+                    "description": "Create interaction category source"
+                  },
+                  "response": [
+                    {
+                      "id": "20fe0cad-0681-47d6-81e8-3da113b359d2",
+                      "name": "Server Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                        },
+                        "url": "{{baseUrl}}/category/source"
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "5f3350b6-ba4b-4799-8b63-3f3cf24b17f7",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                        },
+                        "url": "{{baseUrl}}/category/source"
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": ""
+                    },
+                    {
+                      "id": "85301378-ac56-47b6-82c2-4c37171f1036",
+                      "name": "Server Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                        },
+                        "url": "{{baseUrl}}/category/source"
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "a1dba319-00d0-4e39-92cc-3d1bfd4d82fe",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                        },
+                        "url": "{{baseUrl}}/category/source"
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "e3799394-d4ce-4b9c-9d9e-2e2d84df2806",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                        },
+                        "url": "{{baseUrl}}/category/source"
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>"
+                    },
+                    {
+                      "id": "e46803b4-fb5f-42b1-a462-49c9a8ede115",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                        },
+                        "url": "{{baseUrl}}/category/source"
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    }
+                  ]
+                },
+                {
+                  "name": "/category/source",
+                  "_postman_id": "27a1f2e2-8a5c-4c37-adce-20e7a77d9c52",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{baseUrl}}/category/source",
+                    "description": "Get all category sources"
+                  },
+                  "response": [
+                    {
+                      "id": "069e1e5d-554c-4cbd-926b-1805626ab1f0",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "{{baseUrl}}/category/source"
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "2c1afad2-3a2d-4972-abf2-1b2738c67dab",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "{{baseUrl}}/category/source"
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": ""
+                    },
+                    {
+                      "id": "70d43d8d-e97c-49e8-a5ec-efb8ba8959e7",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "{{baseUrl}}/category/source"
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "9204f414-8e1e-407c-9f75-673dff7a82df",
+                      "name": "Server Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "{{baseUrl}}/category/source"
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "b0fcef06-4959-43d4-84ec-a5a2f9fc538e",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "{{baseUrl}}/category/source"
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>"
+                    },
+                    {
+                      "id": "b3b753f6-9b41-4eaa-b6ed-35eb1bab688b",
+                      "name": "Server Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "{{baseUrl}}/category/source"
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    },
+                    {
+                      "id": "e22c6364-586a-431e-9663-9a4bdd460745",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "{{baseUrl}}/category/source"
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json,v1.0.0"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<object>"
+                    }
+                  ]
+                }
+              ],
+              "_postman_id": "3eaa6e65-acd9-41ff-b85d-5bdf47c801dd",
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "/category",
+              "_postman_id": "d2aedbe4-7b02-4358-9b03-a40976e7c151",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json,v1.0.0"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}",
+                  "options": {
+                    "raw": {}
+                  }
+                },
+                "url": "{{baseUrl}}/category",
+                "description": "Create interaction category"
+              },
+              "response": [
+                {
+                  "id": "2d8ead2e-2672-46c3-a645-cd84aaeead99",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                    },
+                    "url": "{{baseUrl}}/category"
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                },
+                {
+                  "id": "30cc1e75-c883-41c6-935f-2edefbf3b33c",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                    },
+                    "url": "{{baseUrl}}/category"
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<object>"
+                },
+                {
+                  "id": "687e42b4-e378-44ac-a0c2-cdc8433c5fdd",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                    },
+                    "url": "{{baseUrl}}/category"
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<object>"
+                },
+                {
+                  "id": "6a5aad8f-672b-4a51-b1cf-d0df3d70cfe1",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                    },
+                    "url": "{{baseUrl}}/category"
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<object>"
+                },
+                {
+                  "id": "6adf2923-9454-4f1b-9ba9-d345016327fa",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                    },
+                    "url": "{{baseUrl}}/category"
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>"
+                },
+                {
+                  "id": "c6aeffcf-a1af-472f-b1c3-422d66aaae52",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                    },
+                    "url": "{{baseUrl}}/category"
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<object>"
+                }
+              ]
+            },
+            {
+              "name": "/category",
+              "_postman_id": "5343ca50-a53b-4a12-9ccc-3ac1cd249471",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/category",
+                "description": "Get all categories"
+              },
+              "response": [
+                {
+                  "id": "082e98e0-7a74-4eb0-aa9a-92ecd8d366e9",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{baseUrl}}/category"
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<object>"
+                },
+                {
+                  "id": "0fa59bc0-e1a9-4038-b326-e26ddf65e40c",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{baseUrl}}/category"
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                },
+                {
+                  "id": "68a774b9-9baf-495d-9903-cdc8a2487220",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{baseUrl}}/category"
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<object>"
+                },
+                {
+                  "id": "7d1fbc10-4387-44bd-801b-3d84ca3ebe1d",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{baseUrl}}/category"
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<object>"
+                },
+                {
+                  "id": "c5750166-13b6-49ff-ab1e-1b3bd936b9b4",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{baseUrl}}/category"
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<object>"
+                },
+                {
+                  "id": "d736260e-1ed5-473a-a54a-96aecd097a7a",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{baseUrl}}/category"
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<object>"
+                },
+                {
+                  "id": "f7fd7d33-fd87-4a78-997f-fcc3b2f62187",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{baseUrl}}/category"
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>"
+                }
+              ]
+            }
+          ],
+          "_postman_id": "8e008999-62f7-4ce7-afed-8adea10d1dd2",
+          "_postman_isSubFolder": true
+        }
+      ],
       "_postman_id": "539e715b-a0d6-4f29-b30b-74750b425a17"
     },
     {
