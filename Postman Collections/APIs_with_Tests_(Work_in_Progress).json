@@ -55177,9 +55177,517 @@
           ],
           "_postman_id": "8e008999-62f7-4ce7-afed-8adea10d1dd2",
           "_postman_isSubFolder": true
+        },
+        {
+          "name": "consumer/{consumer Id}",
+          "item": [
+            {
+              "name": "/consumer/:consumerId/lastrpc",
+              "_postman_id": "f572a123-9c65-4b79-bb74-c61477d98f2b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerId/lastrpc",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerId",
+                    "lastrpc"
+                  ],
+                  "variable": [
+                    {
+                      "id": "a14a2d15-6986-4790-94a7-3700978ea8a2",
+                      "key": "consumerId",
+                      "value": "<string>",
+                      "type": "string",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Get consumers last RPC"
+              },
+              "response": [
+                {
+                  "id": "271b0fe7-52f6-4ea9-a945-ad87595ac7cb",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/:consumerId/lastrpc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        ":consumerId",
+                        "lastrpc"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<object>"
+                },
+                {
+                  "id": "33a3b10f-01d9-44c1-9744-3720d9214068",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/:consumerId/lastrpc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        ":consumerId",
+                        "lastrpc"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<object>"
+                },
+                {
+                  "id": "5a66ea6b-5eb1-4520-9c00-a06f23ef737c",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/:consumerId/lastrpc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        ":consumerId",
+                        "lastrpc"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<object>"
+                },
+                {
+                  "id": "b06795da-7f51-41bf-a4ad-4c73878f916e",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/:consumerId/lastrpc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        ":consumerId",
+                        "lastrpc"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<object>"
+                },
+                {
+                  "id": "b416064b-28fd-436f-8507-c697157f0e62",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/:consumerId/lastrpc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        ":consumerId",
+                        "lastrpc"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>"
+                },
+                {
+                  "id": "d83d61e4-9386-4696-b9ca-9a122d617c76",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/:consumerId/lastrpc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        ":consumerId",
+                        "lastrpc"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                },
+                {
+                  "id": "f70bc25a-009d-474d-8a50-4e15b8ed113e",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/:consumerId/lastrpc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        ":consumerId",
+                        "lastrpc"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<object>"
+                }
+              ]
+            },
+            {
+              "name": "/consumer/:consumerId/interactions/:categoryId/skip/:skip/take/:take",
+              "_postman_id": "3f38b5ab-6f12-45d4-b90c-24f230fc319e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerId/interactions/:categoryId/skip/:skip/take/:take",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerId",
+                    "interactions",
+                    ":categoryId",
+                    "skip",
+                    ":skip",
+                    "take",
+                    ":take"
+                  ],
+                  "variable": [
+                    {
+                      "id": "948681da-3de9-42e5-a253-fb8c20dc02bb",
+                      "key": "consumerId",
+                      "value": "<string>",
+                      "type": "string",
+                      "description": "(Required) "
+                    },
+                    {
+                      "id": "6ce34e18-5dab-4a59-854a-a7e1211fdf27",
+                      "key": "skip",
+                      "value": "<string>",
+                      "type": "string",
+                      "description": "(Required) "
+                    },
+                    {
+                      "id": "dff475da-ef45-4668-bb83-66334e7c0b74",
+                      "key": "take",
+                      "value": "<string>",
+                      "type": "string",
+                      "description": "(Required) "
+                    },
+                    {
+                      "id": "b59749ea-1f96-49fc-a382-9972ce850bd9",
+                      "key": "categoryId",
+                      "value": "<string>",
+                      "type": "string",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Gets the requested interactions"
+              },
+              "response": [
+                {
+                  "id": "96639573-7443-4f80-b5c3-690a08046577",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/:consumerId/interactions/:categoryId/skip/:skip/take/:take",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        ":consumerId",
+                        "interactions",
+                        ":categoryId",
+                        "skip",
+                        ":skip",
+                        "take",
+                        ":take"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        },
+                        {
+                          "key": "categoryId"
+                        },
+                        {
+                          "key": "skip"
+                        },
+                        {
+                          "key": "take"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>"
+                },
+                {
+                  "id": "c1e5a4bf-04ff-4429-933d-a3d79d54d5f8",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/:consumerId/interactions/:categoryId/skip/:skip/take/:take",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        ":consumerId",
+                        "interactions",
+                        ":categoryId",
+                        "skip",
+                        ":skip",
+                        "take",
+                        ":take"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        },
+                        {
+                          "key": "categoryId"
+                        },
+                        {
+                          "key": "skip"
+                        },
+                        {
+                          "key": "take"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>"
+                },
+                {
+                  "id": "fde989d6-d4fb-418e-9275-deee6d3c1ba6",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/:consumerId/interactions/:categoryId/skip/:skip/take/:take",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        ":consumerId",
+                        "interactions",
+                        ":categoryId",
+                        "skip",
+                        ":skip",
+                        "take",
+                        ":take"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        },
+                        {
+                          "key": "categoryId"
+                        },
+                        {
+                          "key": "skip"
+                        },
+                        {
+                          "key": "take"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                }
+              ]
+            }
+          ],
+          "_postman_id": "00ca8250-d60d-4730-8adf-2ffcc140473a",
+          "_postman_isSubFolder": true
         }
       ],
       "_postman_id": "539e715b-a0d6-4f29-b30b-74750b425a17"
+    },
+    {
+      "name": "Key_Links",
+      "item": [],
+      "_postman_id": "b82b1d7a-123c-4e17-a18a-f5b2b6d97d15"
     },
     {
       "name": "OAuth Renewal",
