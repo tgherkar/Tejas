@@ -45915,12 +45915,8 @@
                   "        pm.test(\"TEST1C: userId check\", function () {\r",
                   "            pm.expect(jsonData.userId).to.deep.equal(data.userId);\r",
                   "        });\r",
-                  "        pm.test(\"TEST1D: lastName check\", function () {\r",
-                  "            if(jsonData.lastName===null){\r",
-                  "                pm.expect(data.surname.toUpperCase()).to.deep.equal(\"NULL\");\r",
-                  "            }else{\r",
-                  "            pm.expect(jsonData.lastName).to.deep.equal(data.surname);\r",
-                  "            }\r",
+                  "        pm.test(\"TEST1D: isActivated check\", function () {\r",
+                  "            pm.expect(data.Act_Status).to.deep.equal(jsonData.isActivated);\r",
                   "        });\r",
                   "        pm.test(\"TEST1E: DOB check\", function () {\r",
                   "            if (jsonData.dateOfBirth === null){\r",
@@ -46098,7 +46094,7 @@
               "variable": [
                 {
                   "key": "consumerID",
-                  "value": "123456",
+                  "value": "1583231",
                   "type": "string"
                 }
               ]
