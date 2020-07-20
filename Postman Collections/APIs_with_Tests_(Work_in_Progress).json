@@ -47199,7 +47199,7 @@
                   "    console.log(query);\r",
                   "    pm.test(\"TEST1: Consumer ID Check\", function () {\r",
                   "        if (data.cnsmr_id == null) {\r",
-                  "            pm.expect(jsonData.legacyID).to.deep.equal(query[6]);\r",
+                  "            pm.expect(JSON.stringify(jsonData.legacyID)).to.deep.equal(query[6]);\r",
                   "        } else {\r",
                   "            pm.expect(jsonData.legacyID).to.deep.equal(JSON.stringify(data.legacyID));\r",
                   "        }\r",
