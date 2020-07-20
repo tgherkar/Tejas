@@ -52300,7 +52300,986 @@
     },
     {
       "name": "Historic_Events",
-      "item": [],
+      "item": [
+        {
+          "name": "/consumer/:consumerID",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "e383d3ec-ab34-409e-ad30-cd5d892e339a",
+                "exec": [
+                  "//pm.environment.set(\"OAuth_Timestamp\", null);\r",
+                  "console.log(pm.environment.get(\"OAuth_Expiry\"));\r",
+                  "console.log(pm.environment.get(\"OAuth_Timestamp\"));\r",
+                  "console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "var noDate = 0;\r",
+                  "var tokenDate = new Date(2010,1,1);\r",
+                  "var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "if(tokenTimestamp){\r",
+                  "    tokenDate = Date.parse(tokenTimestamp);\r",
+                  "}else {noDate = 1};\r",
+                  "    //console.log(\"timestamp is\"+tokenDate);\r",
+                  "var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "if(!expiresInTime){\r",
+                  "    expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "}\r",
+                  "//console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime + \"and noDate value is :\"+noDate);\r",
+                  "if((new Date() - tokenDate) >= expiresInTime || noDate==1) {\r",
+                  "    let tokenUrl = pm.environment.get(\"tokenUrl\"); \r",
+                  "    let clientId = pm.environment.get(\"clientId\"); \r",
+                  "    let clientSecret = pm.environment.get(\"clientSecret\"); \r",
+                  "    let scope = pm.environment.get(\"clientScope\"); \r",
+                  "    let getTokenRequest = {\r",
+                  "        method: 'POST',\r",
+                  "        url: tokenUrl,\r",
+                  "        auth: {\r",
+                  "           type: \"basic\",\r",
+                  "            basic: [\r",
+                  "                { key: \"username\", value: clientId },\r",
+                  "                { key: \"password\", value: clientSecret }\r",
+                  "            ]\r",
+                  "        },\r",
+                  "        body: {\r",
+                  "            mode: 'formdata',\r",
+                  "            formdata: [\r",
+                  "                { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                { key: 'scope', value: scope }\r",
+                  "            ]\r",
+                  "        }\r",
+                  "    };\r",
+                  "pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "    let jsonResponse = response.json(),\r",
+                  "        newAccessToken = jsonResponse.access_token;\r",
+                  "        //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "        pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "        pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "        pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "    });\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "}\r",
+                  "//console.log(\"End of Pre-req script\");\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "/*\r",
+                  "SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED\r",
+                  "SELECT TOP 100 \r",
+                  "C.cnsmr_id,\r",
+                  "C.cnsmr_idntfr_lgcy_txt,\r",
+                  "AC.actn_cd_shrt_val_txt, RC.rslt_cd_shrt_val_txt,\r",
+                  "CAAL.upsrt_dttm AS Hold_Start_Date, DATEADD(DAY, (CAST(RC.rslt_cd_shrt_val_txt AS INT)), CAAL.upsrt_dttm) AS Hold_End_Date\r",
+                  "FROM dbo.cnsmr C\r",
+                  "JOIN dbo.cnsmr_accnt_ar_log CAAL ON CAAL.cnsmr_id = C.cnsmr_id\r",
+                  "JOIN dbo.actn_Cd AC ON AC.actn_Cd = CAAL.actn_cd\r",
+                  "JOIN dbo.rslt_Cd RC ON RC.rslt_Cd = CAAL.rslt_Cd\r",
+                  "WHERE\r",
+                  "AC.actn_cd_shrt_val_txt = 'HOLD'\r",
+                  "AND ISNUMERIC(RC.rslt_cd_shrt_val_txt) = 1\r",
+                  "AND C.upsrt_dttm > DATEADD(MONTH, -13, GETDATE())\r",
+                  "ORDER BY CAAL.cnsmr_accnt_ar_log_id DESC */"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "9da318f6-09bc-49a5-b6f9-4cbe999f5559",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);\r",
+                  "pm.environment.set(\"response time\", (pm.response.responseTime) + Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                  "pm.environment.set(\"responses\", 1 + Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                  "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                  "var Ajv = require('ajv'),\r",
+                  "    ajv = new Ajv({ logger: console }),\r",
+                  "schema = \r",
+                  "{\r",
+                  "    \"required\": [\r",
+                  "        \"eventName\",\r",
+                  "        \"value\"\r",
+                  "    ],\r",
+                  "    \"properties\": {\r",
+                  "        \"eventName\": {\r",
+                  "            \"$id\": \"#/properties/eventName\",\r",
+                  "            \"type\": \"string\"\r",
+                  "        },\r",
+                  "        \"value\": {\r",
+                  "            \"$id\": \"#/properties/value\",\r",
+                  "            \"type\": \"integer\"\r",
+                  "        }\r",
+                  "    },\r",
+                  "    \"$id\": \"http://example.org/root.json#\",\r",
+                  "    \"type\": \"array\",\r",
+                  "    \"definitions\": {},\r",
+                  "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                  "}\r",
+                  "pm.test(\"TEST01: Status Code Check\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"TEST02: Response Header Checks\", function () {\r",
+                  "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"TEST03: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "pm.test(\"TEST04: Response Schema is valid\", function () {\r",
+                  "    pm.expect(ajv.validate(schema, jsonData, true, false)).to.be.true;\r",
+                  "});\r",
+                  "///NEGATIVE TESTS\r",
+                  "\r",
+                  "pm.test(\"Neg Test 01: Check if array is empty\", function () {\r",
+                  "    pm.expect(schema).to.not.be.empty;\r",
+                  "});\r",
+                  "pm.test(\"Neg Test 02: Check if string is empty\", function () {\r",
+                  "    pm.expect('description').to.not.be.empty;\r",
+                  "});\r",
+                  "pm.test(\"Neg Test 03: Check keylinkID isn't empty\", function () {\r",
+                  "    pm.expect('searchBy').to.not.be.empty;\r",
+                  "});\r",
+                  "pm.test(\"Incorrect field examaple\", function () {\r",
+                  "    var pID = schema.properties.value;\r",
+                  "    var booleanV = Boolean;\r",
+                  "    pm.expect(pID).to.not.equal(booleanV);\r",
+                  "    console.log(jsonData.toString());\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "882a61d5-1907-48e8-9342-268fc9582beb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
+              },
+              {
+                "key": "Origin",
+                "value": "Postman",
+                "type": "text"
+              },
+              {
+                "key": "Username",
+                "value": "Test-User",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Correlation-Id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/historicevents/consumer/:consumerID",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "historicevents",
+                "consumer",
+                ":consumerID"
+              ],
+              "variable": [
+                {
+                  "id": "4c072bec-1f5f-4f08-8af1-40fc21bb4d61",
+                  "key": "consumerID",
+                  "value": "{{cnsmr_id}}",
+                  "type": "string",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "description": "Gets Total Number Of All Events By ConsumerID"
+          },
+          "response": [
+            {
+              "id": "35f03514-4db6-4ef6-a871-01175b0750bf",
+              "name": "Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<object>"
+            },
+            {
+              "id": "57163abf-e4e5-484e-b732-1eff1964e1a4",
+              "name": "Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<object>"
+            },
+            {
+              "id": "b966f0b2-d783-4ec9-8281-5ef20d5c9672",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<object>"
+            },
+            {
+              "id": "cbdb59a5-91b9-424d-9e82-69924edf9ebb",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<string>"
+            },
+            {
+              "id": "e0e57f50-fa4e-43c5-91eb-2af7c1a79c69",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<object>"
+            },
+            {
+              "id": "f0ad49d8-588d-415a-8be0-6d9a2117a76e",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "ff407aa6-205c-48b4-af37-78184cedf765",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<object>"
+            }
+          ]
+        },
+        {
+          "name": "/:event/consumer/:consumerID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "1cbc266a-c401-4232-bab1-7428b6fd404f",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);\r",
+                  "pm.environment.set(\"response time\", (pm.response.responseTime) + Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                  "pm.environment.set(\"responses\", 1 + Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                  "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                  "var Ajv = require('ajv'),\r",
+                  "    ajv = new Ajv({ logger: console }),\r",
+                  "schema = \r",
+                  "{\r",
+                  "    \"required\": [\r",
+                  "        \"eventName\",\r",
+                  "        \"value\"\r",
+                  "    ],\r",
+                  "    \"properties\": {\r",
+                  "        \"eventName\": {\r",
+                  "            \"$id\": \"#/properties/eventName\",\r",
+                  "            \"type\": \"integer\"\r",
+                  "        },\r",
+                  "        \"value\": {\r",
+                  "            \"$id\": \"#/properties/value\",\r",
+                  "            \"type\": \"integer\"\r",
+                  "        }\r",
+                  "    },\r",
+                  "    \"$id\": \"http://example.org/root.json#\",\r",
+                  "    \"type\": \"array\",\r",
+                  "    \"definitions\": {},\r",
+                  "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                  "}\r",
+                  "pm.test(\"TEST01: Status Code Check\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"TEST02: Response Header Checks\", function () {\r",
+                  "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"TEST03: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "pm.test(\"TEST04: Response Schema is valid\", function () {\r",
+                  "    pm.expect(ajv.validate(schema, jsonData, true, false)).to.be.true;\r",
+                  "});\r",
+                  "///NEGATIVE TESTS\r",
+                  "\r",
+                  "pm.test(\"Neg Test 01: Check if array is empty\", function () {\r",
+                  "    pm.expect(schema).to.not.be.empty;\r",
+                  "});\r",
+                  "pm.test(\"Neg Test 02: Check if string is empty\", function () {\r",
+                  "    pm.expect('description').to.not.be.empty;\r",
+                  "});\r",
+                  "pm.test(\"Neg Test 03: Check keylinkID isn't empty\", function () {\r",
+                  "    pm.expect('searchBy').to.not.be.empty;\r",
+                  "});\r",
+                  "pm.test(\"Incorrect field examaple\", function () {\r",
+                  "    var pID = schema.properties.eventName;\r",
+                  "    var booleanV = Boolean;\r",
+                  "    pm.expect(pID).to.not.equal(booleanV);\r",
+                  "    console.log(jsonData.toString());\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "52c766f5-06a3-4930-ba98-912f6b8ff441",
+                "exec": [
+                  "//pm.environment.set(\"OAuth_Timestamp\", null);\r",
+                  "console.log(pm.environment.get(\"OAuth_Expiry\"));\r",
+                  "console.log(pm.environment.get(\"OAuth_Timestamp\"));\r",
+                  "console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "var noDate = 0;\r",
+                  "var tokenDate = new Date(2010,1,1);\r",
+                  "var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "if(tokenTimestamp){\r",
+                  "    tokenDate = Date.parse(tokenTimestamp);\r",
+                  "}else {noDate = 1};\r",
+                  "    //console.log(\"timestamp is\"+tokenDate);\r",
+                  "var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "if(!expiresInTime){\r",
+                  "    expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "}\r",
+                  "//console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime + \"and noDate value is :\"+noDate);\r",
+                  "if((new Date() - tokenDate) >= expiresInTime || noDate==1) {\r",
+                  "    let tokenUrl = pm.environment.get(\"tokenUrl\"); \r",
+                  "    let clientId = pm.environment.get(\"clientId\"); \r",
+                  "    let clientSecret = pm.environment.get(\"clientSecret\"); \r",
+                  "    let scope = pm.environment.get(\"clientScope\"); \r",
+                  "    let getTokenRequest = {\r",
+                  "        method: 'POST',\r",
+                  "        url: tokenUrl,\r",
+                  "        auth: {\r",
+                  "           type: \"basic\",\r",
+                  "            basic: [\r",
+                  "                { key: \"username\", value: clientId },\r",
+                  "                { key: \"password\", value: clientSecret }\r",
+                  "            ]\r",
+                  "        },\r",
+                  "        body: {\r",
+                  "            mode: 'formdata',\r",
+                  "            formdata: [\r",
+                  "                { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                { key: 'scope', value: scope }\r",
+                  "            ]\r",
+                  "        }\r",
+                  "    };\r",
+                  "pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "    let jsonResponse = response.json(),\r",
+                  "        newAccessToken = jsonResponse.access_token;\r",
+                  "        //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "        pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "        pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "        pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "    });\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "}\r",
+                  "//console.log(\"End of Pre-req script\");\r",
+                  "\r",
+                  "\r",
+                  "var eventRandom = [ \r",
+                  "    'BrokenPlans',\r",
+                  "    'NumberOfHolds'\r",
+                  "];\r",
+                  "var randomNumber = Math.floor(Math.random() * eventRandom.length);\r",
+                  "pm.globals.set('randomNumber', randomNumber);\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "/*\r",
+                  "SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED\r",
+                  "SELECT TOP 100 \r",
+                  "C.cnsmr_id,\r",
+                  "C.cnsmr_idntfr_lgcy_txt,\r",
+                  "AC.actn_cd_shrt_val_txt, RC.rslt_cd_shrt_val_txt,\r",
+                  "CAAL.upsrt_dttm AS Hold_Start_Date, DATEADD(DAY, (CAST(RC.rslt_cd_shrt_val_txt AS INT)), CAAL.upsrt_dttm) AS Hold_End_Date\r",
+                  "FROM dbo.cnsmr C\r",
+                  "JOIN dbo.cnsmr_accnt_ar_log CAAL ON CAAL.cnsmr_id = C.cnsmr_id\r",
+                  "JOIN dbo.actn_Cd AC ON AC.actn_Cd = CAAL.actn_cd\r",
+                  "JOIN dbo.rslt_Cd RC ON RC.rslt_Cd = CAAL.rslt_Cd\r",
+                  "WHERE\r",
+                  "AC.actn_cd_shrt_val_txt = 'HOLD'\r",
+                  "AND ISNUMERIC(RC.rslt_cd_shrt_val_txt) = 1\r",
+                  "AND C.upsrt_dttm > DATEADD(MONTH, -13, GETDATE())\r",
+                  "ORDER BY CAAL.cnsmr_accnt_ar_log_id DESC */"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "ced16604-fe25-4a75-9092-5b860246b20e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
+              },
+              {
+                "key": "Username",
+                "value": "Test-User",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Correlation-Id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Origin",
+                "value": "Postman",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/historicevents/:event/consumer/:consumerID",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "historicevents",
+                ":event",
+                "consumer",
+                ":consumerID"
+              ],
+              "variable": [
+                {
+                  "id": "562af312-f37f-4a0d-863b-4905fd57b817",
+                  "key": "event",
+                  "value": "{{randomNumber}}",
+                  "type": "string"
+                },
+                {
+                  "id": "dcb63110-4243-4984-b6ab-5429ed60d832",
+                  "key": "consumerID",
+                  "value": "{{cnsmr_id}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Gets Total Number Of Specific Event By ConsumerID"
+          },
+          "response": [
+            {
+              "id": "30e58410-d89a-429f-b3e3-e2d2134f0995",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/:event/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":event",
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "event"
+                    },
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<object>"
+            },
+            {
+              "id": "4e406372-0433-46d7-8f13-aef770bba3a8",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/:event/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":event",
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "event"
+                    },
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "56ef1eff-1726-4a8d-93b9-9d850ae65432",
+              "name": "Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/:event/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":event",
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "event"
+                    },
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<object>"
+            },
+            {
+              "id": "8f9b6626-6479-4387-8ad8-4592f48504d9",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/:event/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":event",
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "event"
+                    },
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<string>"
+            },
+            {
+              "id": "b1cb0ec8-79eb-44a5-a97e-9fbe404c32f0",
+              "name": "Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/:event/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":event",
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "event"
+                    },
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<object>"
+            },
+            {
+              "id": "da4facea-a9b6-46f1-8304-ae3de4e2cb09",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/:event/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":event",
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "event"
+                    },
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<object>"
+            },
+            {
+              "id": "f14073a7-964f-4210-9c97-8606858c6a56",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/:event/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":event",
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "event"
+                    },
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<object>"
+            }
+          ]
+        }
+      ],
       "_postman_id": "73468653-778a-4402-ae36-9e2a538bab7b"
     },
     {
