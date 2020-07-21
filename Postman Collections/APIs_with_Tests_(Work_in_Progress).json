@@ -45904,10 +45904,11 @@
                   "\r",
                   "    if (data.cnsmr_id != null) {\r",
                   "        pm.test(\"TEST1A: isRegisteredOnWebSite check\", function () {\r",
-                  "            if(data.Reg_status==null || data.Reg_status=='Y'){\r",
-                  "                pm.expect(jsonData.isRegisteredOnWebSite).to.deep.equal(true);\r",
+                  "            if(data.Reg_status==1 && data.Act_status==1){\r",
+                  "                pm.expect(jsonData.isRegisteredOnWebSite).to.deep.equal(false);\r",
+                  "            }else{\r",
+                  "                pm.expect(jsonData.isRegisteredOnWebSite).to.deep.equal(false);\r",
                   "            }\r",
-                  "            pm.expect(jsonData.isRegisteredOnWebSite).to.deep.equal(data.isRegisteredOnWebSite);\r",
                   "        });\r",
                   "        pm.test(\"TEST1B: legacyID check\", function () {\r",
                   "            pm.expect(jsonData.legacyID).to.deep.equal(JSON.stringify(data.legacyID));\r",
@@ -46114,7 +46115,7 @@
               "variable": [
                 {
                   "key": "consumerID",
-                  "value": "1583288",
+                  "value": "1589237",
                   "type": "string"
                 }
               ]
