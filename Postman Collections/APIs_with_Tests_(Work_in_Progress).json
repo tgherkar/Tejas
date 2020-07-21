@@ -45953,8 +45953,8 @@
                   "            }\r",
                   "        });\r",
                   "        pm.test(\"TEST1D: twoFA Preference check\", function () {\r",
-                  "            if(jsonData.twoFAPreference==\"None\"){\r",
-                  "                pm.expect(data.TFA_Method.toUpperCase()).to.deep.equal(\"NULL\");\r",
+                  "            if(jsonData.twoFAPreference==null){\r",
+                  "                pm.expect(data.TFA_Method.toUpperCase()).to.deep.equal(JSON.stringify(jsonData.twoFAPreference).toUpperCase());\r",
                   "            }else{\r",
                   "                pm.expect(data.TFA_Method).to.deep.equal(jsonData.twoFAPreference);\r",
                   "            }\r",
@@ -46128,7 +46128,7 @@
               "variable": [
                 {
                   "key": "consumerID",
-                  "value": "1583186",
+                  "value": "1589237",
                   "type": "string"
                 }
               ]
