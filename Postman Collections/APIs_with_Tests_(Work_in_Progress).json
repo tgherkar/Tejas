@@ -46433,9 +46433,9 @@
                 "id": "ba508acc-f859-41c0-bf0a-f29aca7e9b19",
                 "exec": [
                   "//console.log(pm.response.status);\r",
-                  "var x = pm.responseCode.code;\r",
+                  "var x = responseCode.code;\r",
                   "console.log(x);\r",
-                  "if(pm.response.status=='OK') {\r",
+                  "if(x==200) {\r",
                   "    pm.environment.set(\"response time\", (pm.response.responseTime) + Number(postman.getEnvironmentVariable(\"response time\")));\r",
                   "    pm.environment.set(\"responses\", 1 + Number(postman.getEnvironmentVariable(\"responses\")));\r",
                   "    console.log(\"Average response time: \" + responseTime + \"ms\");\r",
