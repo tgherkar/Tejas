@@ -46439,7 +46439,7 @@
                   "pm.environment.set(\"responses\", 1 + Number(postman.getEnvironmentVariable(\"responses\")));\r",
                   "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
                   "var jsonData = JSON.parse(responseBody);\r",
-                  "if(true) {\r",
+                  "if(1==1) {\r",
                   "    pm.test(\"TEST1: Response Check\", function () {\r",
                   "        pm.expect(jsonData).to.deep.equal(\"Valid\");\r",
                   "    });\r",
