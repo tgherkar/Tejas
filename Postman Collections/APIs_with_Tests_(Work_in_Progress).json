@@ -46624,9 +46624,8 @@
               "script": {
                 "id": "d38478e7-d513-43e0-bed9-543059d587e3",
                 "exec": [
-                  "try{\r",
                   "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
-                  "    pm.response.to.have.status(204);\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
                   "});\r",
                   "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
                   "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
@@ -46634,11 +46633,7 @@
                   "pm.test(\"TEST3: Response Header Checks\", function() {\r",
                   "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
                   "});\r",
-                  "}catch(e){\r",
-                  "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
-                  "    pm.response.to.have.status(400);\r",
-                  "});\r",
-                  "}"
+                  ""
                 ],
                 "type": "text/javascript"
               }
