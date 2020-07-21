@@ -46440,7 +46440,6 @@
                   "\r",
                   "    let expectedCode = pm.iterationData.get(\"expectedHttpCode\");\r",
                   "    var jsonData = JSON.parse(responseBody);\r",
-                  "    console.log(query);\r",
                   "    pm.test(\"TEST1: Response Check\", function () {\r",
                   "        pm.expect(jsonData).to.deep.equal(\"Valid\");\r",
                   "    });\r",
