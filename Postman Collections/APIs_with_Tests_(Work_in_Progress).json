@@ -46531,7 +46531,7 @@
               "variable": [
                 {
                   "key": "email",
-                  "value": "trg6669@hotmail.com",
+                  "value": "{{email}}",
                   "type": "string"
                 }
               ]
