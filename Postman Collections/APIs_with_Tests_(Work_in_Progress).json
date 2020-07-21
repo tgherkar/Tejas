@@ -45939,7 +45939,6 @@
                   "            pm.expect(data.AllowPaymentPlan).to.deep.equal(jsonData.allowPaymentPlan);\r",
                   "        });\r",
                   "        pm.test(\"TEST1D: lastActivatedEmail check\", function () {\r",
-                  "            pm.expect(data.email).to.deep.equal(jsonData.lastActivatedEmail);\r",
                   "            if(jsonData.lastActivatedEmail==null){\r",
                   "                pm.expect(data.email.toUpperCase()).to.deep.equal(\"NULL\");\r",
                   "            } else{\r",
@@ -45954,8 +45953,8 @@
                   "            }\r",
                   "        });\r",
                   "        pm.test(\"TEST1D: twoFA Preference check\", function () {\r",
-                  "            if(jsonData.twoFAPreference==null){\r",
-                  "                pm.expect(data.TFA_Method.toUpperCase()).to.deep.equal(JSON.stringify(jsonData.twoFAPreference).toUpperCase());\r",
+                  "            if(jsonData.twoFAPreference==\"None\"){\r",
+                  "                pm.expect(data.TFA_Method.toUpperCase()).to.deep.equal(\"NULL\");\r",
                   "            }else{\r",
                   "                pm.expect(data.TFA_Method).to.deep.equal(jsonData.twoFAPreference);\r",
                   "            }\r",
@@ -46129,7 +46128,7 @@
               "variable": [
                 {
                   "key": "consumerID",
-                  "value": "1589237",
+                  "value": "1583186",
                   "type": "string"
                 }
               ]
