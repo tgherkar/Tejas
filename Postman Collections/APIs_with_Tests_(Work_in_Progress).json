@@ -45885,7 +45885,7 @@
                 "id": "a6cc79bf-1ddb-4473-84b5-c797a51a6de9",
                 "exec": [
                   "try {\r",
-                  "    if(false || true){console.log(\"yay\");}\r",
+                  "    if(false || false){console.log(\"yay\");}\r",
                   "    pm.environment.set(\"response time\", (pm.response.responseTime) + Number(postman.getEnvironmentVariable(\"response time\")));\r",
                   "    pm.environment.set(\"responses\", 1 + Number(postman.getEnvironmentVariable(\"responses\")));\r",
                   "    console.log(\"Average response time: \" + responseTime + \"ms\");\r",
