@@ -46008,7 +46008,7 @@
                   "        },\r",
                   "        \"userId\": {\r",
                   "            \"$id\": \"#/properties/userId\",\r",
-                  "            \"type\": \"integer\"\r",
+                  "            \"type\": [\"integer\",\"null\"]\r",
                   "        },\r",
                   "        \"lastActivatedEmail\": {\r",
                   "            \"$id\": \"#/properties/lastActivatedEmail\",\r",
