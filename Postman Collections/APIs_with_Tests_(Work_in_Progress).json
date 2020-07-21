@@ -59130,6 +59130,7 @@
                   "script": {
                     "id": "c32df6d6-7b65-47ba-8a6e-9c9447cfafce",
                     "exec": [
+                      "try{\r",
                       "var jsonData = JSON.parse(responseBody);\r",
                       "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
                       "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
@@ -59232,7 +59233,7 @@
                       "  pm.expect(ajv.validate(schema, jsonData, true, false)).to.be.true;\r",
                       "});\r",
                       "///NEGATIVE TESTS\r",
-                      "\r",
+                      "}catch(e){\r",
                       "pm.test(\"Neg Test 01: Check if array is empty\", function () {\r",
                       "     pm.expect(schema).to.not.be.empty;\r",
                       "});\r",
@@ -59247,7 +59248,8 @@
                       "    var booleanV = Boolean;\r",
                       "    pm.expect(pID).to.not.equal(booleanV);\r",
                       "    console.log(jsonData.toString());\r",
-                      "});"
+                      "});\r",
+                      "}"
                     ],
                     "type": "text/javascript"
                   }
@@ -59311,9 +59313,8 @@
                   ],
                   "variable": [
                     {
-                      "id": "f0d5746c-9241-4f11-bea9-e32f864768a3",
                       "key": "DocumentTemplateId",
-                      "value": "{{dcmnt_tmplt_id}}",
+                      "value": "88",
                       "type": "string",
                       "description": " "
                     }
