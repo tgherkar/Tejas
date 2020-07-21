@@ -46625,7 +46625,7 @@
                 "id": "d38478e7-d513-43e0-bed9-543059d587e3",
                 "exec": [
                   "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
-                  "    pm.expect(pm.response.code).to.be.oneOf([204,202, 400]);\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
                   "});\r",
                   "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
                   "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
