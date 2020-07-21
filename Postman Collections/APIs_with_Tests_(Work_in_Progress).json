@@ -47040,7 +47040,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"userID\": 55746\r\n}",
+              "raw": "{\r\n  \"userID\": {{userId}}\r\n}",
               "options": {
                 "raw": {}
               }
