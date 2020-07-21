@@ -45994,7 +45994,7 @@
                   "        },\r",
                   "        \"activationCode\": {\r",
                   "            \"$id\": \"#/properties/activationCode\",\r",
-                  "            \"type\": [\"integer\",\"null\"]\r",
+                  "            \"type\": [\"string\",\"null\"]\r",
                   "        },\r",
                   "        \"allowPaymentPlan\": {\r",
                   "            \"$id\": \"#/properties/allowPaymentPlan\",\r",
