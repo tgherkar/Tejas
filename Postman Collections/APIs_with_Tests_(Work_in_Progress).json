@@ -46432,6 +46432,7 @@
               "script": {
                 "id": "ba508acc-f859-41c0-bf0a-f29aca7e9b19",
                 "exec": [
+                  "console.log(pm.response.status);\r",
                   "if(responseCode.code===200) {\r",
                   "    pm.environment.set(\"response time\", (pm.response.responseTime) + Number(postman.getEnvironmentVariable(\"response time\")));\r",
                   "    pm.environment.set(\"responses\", 1 + Number(postman.getEnvironmentVariable(\"responses\")));\r",
@@ -46457,7 +46458,9 @@
                   "        pm.expect(ajv.validate(schema, jsonData)).to.be.true;\r",
                   "    });\r",
                   "} else {\r",
+                  "\r",
                   "    //negative Tests\r",
+                  "\r",
                   "    var req = request.url;\r",
                   "    var query = request.url.split('/');\r",
                   "    var cid = responseBody.split(':');\r",
