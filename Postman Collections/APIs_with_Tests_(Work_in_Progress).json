@@ -46235,7 +46235,7 @@
                   "        });\r",
                   "        pm.test(\"TEST1C: createdDate check\", function () {\r",
                   "            if (jsonData.createdDate === null){\r",
-                  "                pm.expect(data.createdDate).to.equal(\"NULL\");\r",
+                  "                pm.expect(data.createdDate.toUpperCase()).to.equal(\"NULL\");\r",
                   "            }else{\r",
                   "                pm.expect(jsonData.createdDate.split('T')[0]).to.deep.equal(data.createdDate.split(' ')[0]);\r",
                   "            }\r",
