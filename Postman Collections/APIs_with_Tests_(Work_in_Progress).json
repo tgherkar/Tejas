@@ -45895,6 +45895,7 @@
                   "    var query = request.url.split('/');\r",
                   "    console.log(query);\r",
                   "    pm.test(\"TEST1: Consumer ID Check\", function () {\r",
+                  "        pm.expect(\"abc\").to.match(/^sfabcfg/);\r",
                   "        if (data.cnsmr_id == null) {\r",
                   "            pm.expect(JSON.stringify(jsonData.consumerID)).to.deep.equal(query[6]);\r",
                   "        } else {\r",
