@@ -47126,7 +47126,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"userID\": {{userId}},\r\n  \"twoFAPreference\": {{2FA_pref}},\r\n  \"phoneNumber\": \"{{phn_num}}\"\r\n}",
+              "raw": "{\r\n  \"userID\": {{userId}},\r\n  \"twoFAPreference\": {{TFA_pref}},\r\n  \"phoneNumber\": \"{{phn_num}}\"\r\n}",
               "options": {
                 "raw": {}
               }
