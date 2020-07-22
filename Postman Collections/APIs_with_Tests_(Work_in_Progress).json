@@ -46682,7 +46682,7 @@
               "variable": [
                 {
                   "key": "consumerId",
-                  "value": "123456",
+                  "value": "{{cnsmr_id}}",
                   "type": "string"
                 }
               ]
