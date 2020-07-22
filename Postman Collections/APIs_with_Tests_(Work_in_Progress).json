@@ -46124,7 +46124,7 @@
               "variable": [
                 {
                   "key": "consumerID",
-                  "value": "{{cnsmr_id}}",
+                  "value": "1583363",
                   "type": "string"
                 }
               ]
@@ -46226,7 +46226,7 @@
                   "            if(data.Reg_status==1 && data.Act_status==1){\r",
                   "                pm.expect(jsonData.isRegisteredOnWebSite).to.deep.equal(false);\r",
                   "            }else{\r",
-                  "                pm.expect(jsonData.isRegisteredOnWebSite).to.deep.equal(true);\r",
+                  "                pm.expect(jsonData.isRegisteredOnWebSite).to.deep.equal(false);\r",
                   "            }\r",
                   "        });\r",
                   "        pm.test(\"TEST1B: consumer check\", function () {\r",
