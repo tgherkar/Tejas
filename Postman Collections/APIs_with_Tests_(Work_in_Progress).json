@@ -47076,6 +47076,24 @@
                 ],
                 "type": "text/javascript"
               }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "73c73101-5ea9-4ff3-ac6b-9d7b3f513985",
+                "exec": [
+                  "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
+                  "});\r",
+                  "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                  "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
             }
           ],
           "_postman_id": "f30c67fe-00ec-4d7f-9f4f-e091a00bea29",
@@ -47126,7 +47144,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"userID\": {{userId}},\r\n  \"twoFAPreference\": {{TFA_pref}},\r\n  \"phoneNumber\": \"{{phn_num}}\"\r\n}",
+              "raw": "{\r\n  \"userID\": {{userId}},\r\n  \"twoFAPreference\": \"{{TFA_pref}}\",\r\n  \"phoneNumber\": \"{{phn_num}}\"\r\n}",
               "options": {
                 "raw": {}
               }
