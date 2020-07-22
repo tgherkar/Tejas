@@ -45945,7 +45945,7 @@
                   "            if(jsonData.twoFAPhoneNumber==null){\r",
                   "                pm.expect(data.TFA_Phone.toUpperCase()).to.deep.equal(JSON.stringify(jsonData.twoFAPhoneNumber).toUpperCase());\r",
                   "            }else{\r",
-                  "                pm.expect(JSON.stringify(data.TFA_Phone).slice(1)).to.deep.equal(jsonData.twoFAPhoneNumber);\r",
+                  "                pm.expect(JSON.stringify(data.TFA_Phone)).to.deep.equal(jsonData.twoFAPhoneNumber.slice(1));\r",
                   "            }\r",
                   "        });\r",
                   "        pm.test(\"TEST1D: twoFA Preference check\", function () {\r",
