@@ -45894,7 +45894,6 @@
                   "    var req = request.url;\r",
                   "    var query = request.url.split('/');\r",
                   "    console.log(query);\r",
-                  "    pm.expect(jsonData.legacyID).to.eql(\"216\");\r",
                   "    pm.test(\"TEST1: Consumer ID Check\", function () {\r",
                   "        if (data.cnsmr_id == null) {\r",
                   "            pm.expect(JSON.stringify(jsonData.consumerID)).to.deep.equal(query[6]);\r",
