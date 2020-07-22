@@ -60361,6 +60361,1782 @@
       "_postman_id": "f456ff3e-4fd2-4938-ac01-0437bd3e7292"
     },
     {
+      "name": "CC_Interface Copy",
+      "item": [
+        {
+          "name": "Get Consumer Account",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "0c55e893-da5b-4fde-a8f3-0120e0889c81",
+                "exec": [
+                  "    var tokenDate = new Date(2010,1,1);\r",
+                  "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "    if(tokenTimestamp){\r",
+                  "        tokenDate = Date.parse(tokenTimestamp);\r",
+                  "    }else{\r",
+                  "        tokenDate = Date.parse(\"2018-03-29T13:34:00.000\");\r",
+                  "    }\r",
+                  "    console.log(\"timestamp is: \"+tokenDate +\" new time is: \"+Date.parse(new Date()));\r",
+                  "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "    if(!expiresInTime){\r",
+                  "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "    }\r",
+                  "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                  "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                  "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
+                  "    let clientId = pm.environment.get(\"clientId\");\r",
+                  "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
+                  "    let scope = pm.environment.get(\"clientScope\");\r",
+                  "\r",
+                  "        let getTokenRequest = {\r",
+                  "            method: 'POST',\r",
+                  "            url: tokenUrl,\r",
+                  "            auth: {\r",
+                  "                type: \"basic\",\r",
+                  "                basic: [\r",
+                  "                    { key: \"username\", value: clientId },\r",
+                  "                    { key: \"password\", value: clientSecret }\r",
+                  "                ]\r",
+                  "            },\r",
+                  "            body: {\r",
+                  "                mode: 'formdata',\r",
+                  "                formdata: [\r",
+                  "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                    { key: 'scope', value: scope }\r",
+                  "                ]\r",
+                  "            }\r",
+                  "        };\r",
+                  "\r",
+                  "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "            let jsonResponse = response.json(),\r",
+                  "            newAccessToken = jsonResponse.access_token;\r",
+                  "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "\r",
+                  "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "        });\r",
+                  "\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "    }\r",
+                  "//console.log(\"End of Pre-req script\");"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "3c1de31c-e5eb-4a2d-8aa0-88b5a9f50890",
+                "exec": [
+                  "try {\r",
+                  "    pm.environment.set(\"response time\", (pm.response.responseTime) + Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                  "    pm.environment.set(\"responses\", 1 + Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                  "    console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                  "\r",
+                  "    let expectedCode = pm.iterationData.get(\"expectedHttpCode\");\r",
+                  "    var jsonData = JSON.parse(responseBody);\r",
+                  "    var req = request.url;\r",
+                  "    var query = request.url.split('/');\r",
+                  "    console.log(query);\r",
+                  "    pm.test(\"TEST1: Consumer ID Check\", function () {\r",
+                  "        if (data.cnsmr_id == null) {\r",
+                  "            pm.expect(JSON.stringify(jsonData.consumerID)).to.deep.equal(query[6]);\r",
+                  "        } else {\r",
+                  "            pm.expect(jsonData.consumerID).to.deep.equal(data.cnsmr_id);\r",
+                  "        }\r",
+                  "    });\r",
+                  "\r",
+                  "    if (data.cnsmr_id != null) {\r",
+                  "        pm.test(\"TEST1A: isRegisteredOnWebSite check\", function () {\r",
+                  "            if(data.Reg_status==1 && data.Act_status==1){\r",
+                  "                pm.expect(jsonData.isRegisteredOnWebSite).to.deep.equal(false);\r",
+                  "            }else{\r",
+                  "                pm.expect(jsonData.isRegisteredOnWebSite).to.deep.equal(false);\r",
+                  "            }\r",
+                  "        });\r",
+                  "        pm.test(\"TEST1B: legacyID check\", function () {\r",
+                  "            pm.expect(jsonData.legacyID).to.deep.equal(JSON.stringify(data.legacyID));\r",
+                  "        });\r",
+                  "        pm.test(\"TEST1C: userId check\", function () {\r",
+                  "            if(jsonData.userId==null){\r",
+                  "                pm.expect(data.userId.toUpperCase()).to.deep.equal(\"NULL\");\r",
+                  "            } else{\r",
+                  "                pm.expect(jsonData.userId).to.deep.equal(data.userId);\r",
+                  "            }\r",
+                  "        });\r",
+                  "        pm.test(\"TEST1D: isActivated check\", function () {\r",
+                  "            pm.expect(data.Act_Status).to.deep.equal(jsonData.isActivated);\r",
+                  "            if((data.Reg_status==0 || data.Reg_status==null) && data.Act_status==1){\r",
+                  "                pm.expect(jsonData.isActivated).to.deep.equal(true);\r",
+                  "            }else{\r",
+                  "                pm.expect(jsonData.isActivated).to.deep.equal(false);\r",
+                  "            }\r",
+                  "        });\r",
+                  "        pm.test(\"TEST1E: DOB check\", function () {\r",
+                  "            if (jsonData.dateOfBirth === null){\r",
+                  "                pm.expect(data.dob).to.equal(\"NULL\");\r",
+                  "            }else{\r",
+                  "                pm.expect(jsonData.dateOfBirth.split('T')[0]).to.deep.equal(data.dob.split(' ')[0]);\r",
+                  "            }\r",
+                  "        });\r",
+                  "        pm.test(\"TEST1D: allowPaymentPlan check\", function () {\r",
+                  "            pm.expect(data.AllowPaymentPlan).to.deep.equal(jsonData.allowPaymentPlan);\r",
+                  "        });\r",
+                  "        pm.test(\"TEST1D: lastActivatedEmail check\", function () {\r",
+                  "            if(jsonData.lastActivatedEmail==null){\r",
+                  "                pm.expect(data.email.toUpperCase()).to.deep.equal(\"NULL\");\r",
+                  "            } else{\r",
+                  "                pm.expect(jsonData.lastActivatedEmail).to.deep.equal(data.email);\r",
+                  "            }\r",
+                  "        });\r",
+                  "        pm.test(\"TEST1D: twoFAPhoneNumber check\", function () {\r",
+                  "            if(jsonData.twoFAPhoneNumber==null){\r",
+                  "                pm.expect(data.TFA_Phone.toUpperCase()).to.deep.equal(JSON.stringify(jsonData.twoFAPhoneNumber).toUpperCase());\r",
+                  "            }else{\r",
+                  "                pm.expect(data.TFA_Phone).to.deep.equal(jsonData.twoFAPhoneNumber);\r",
+                  "            }\r",
+                  "        });\r",
+                  "        pm.test(\"TEST1D: twoFA Preference check\", function () {\r",
+                  "            if(jsonData.twoFAPreference==\"None\"){\r",
+                  "                pm.expect(data.TFA_Method.toUpperCase()).to.deep.equal(\"NULL\");\r",
+                  "            }else{\r",
+                  "                pm.expect(data.TFA_Method).to.deep.equal(jsonData.twoFAPreference);\r",
+                  "            }\r",
+                  "        });\r",
+                  "    }\r",
+                  "\r",
+                  "    pm.test(\"TEST2: Status code Check\", function () {\r",
+                  "        pm.response.to.have.status(200);\r",
+                  "    });\r",
+                  "\r",
+                  "    pm.test(\"TEST3: Response Header Checks\", function () {\r",
+                  "        pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                  "    });\r",
+                  "\r",
+                  "    pm.test(\"TEST4: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {\r",
+                  "        pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "    });\r",
+                  "\r",
+                  "    var Ajv = require('ajv'),\r",
+                  "        ajv = new Ajv({ logger: console }),\r",
+                  "        schema = {\r",
+                  "    \"required\": [\r",
+                  "        \"consumerID\",\r",
+                  "        \"legacyID\",\r",
+                  "        \"isRegisteredOnWebSite\",\r",
+                  "        \"isActivated\",\r",
+                  "        \"activationCode\",\r",
+                  "        \"allowPaymentPlan\",\r",
+                  "        \"userId\",\r",
+                  "        \"lastActivatedEmail\",\r",
+                  "        \"lastUnactivatedEmail\",\r",
+                  "        \"twoFAPhoneNumber\",\r",
+                  "        \"twoFAPreference\"\r",
+                  "    ],\r",
+                  "    \"properties\": {\r",
+                  "        \"consumerID\": {\r",
+                  "            \"$id\": \"#/properties/consumerID\",\r",
+                  "            \"type\": \"integer\"\r",
+                  "        },\r",
+                  "        \"legacyID\": {\r",
+                  "            \"$id\": \"#/properties/legacyID\",\r",
+                  "            \"type\": \"string\"\r",
+                  "        },\r",
+                  "        \"isRegisteredOnWebSite\": {\r",
+                  "            \"$id\": \"#/properties/isRegisteredOnWebSite\",\r",
+                  "            \"type\": \"boolean\"\r",
+                  "        },\r",
+                  "        \"isActivated\": {\r",
+                  "            \"$id\": \"#/properties/isActivated\",\r",
+                  "            \"type\": \"boolean\"\r",
+                  "        },\r",
+                  "        \"activationCode\": {\r",
+                  "            \"$id\": \"#/properties/activationCode\",\r",
+                  "            \"type\": [\"string\",\"null\"]\r",
+                  "        },\r",
+                  "        \"allowPaymentPlan\": {\r",
+                  "            \"$id\": \"#/properties/allowPaymentPlan\",\r",
+                  "            \"type\": \"boolean\"\r",
+                  "        },\r",
+                  "        \"userId\": {\r",
+                  "            \"$id\": \"#/properties/userId\",\r",
+                  "            \"type\": [\"integer\",\"null\"]\r",
+                  "        },\r",
+                  "        \"lastActivatedEmail\": {\r",
+                  "            \"$id\": \"#/properties/lastActivatedEmail\",\r",
+                  "            \"type\": [\"string\", \"null\"]\r",
+                  "        },\r",
+                  "        \"lastUnactivatedEmail\": {\r",
+                  "            \"$id\": \"#/properties/lastUnactivatedEmail\",\r",
+                  "            \"type\": [\"string\", \"null\"]\r",
+                  "        },\r",
+                  "        \"twoFAPhoneNumber\": {\r",
+                  "            \"$id\": \"#/properties/twoFAPhoneNumber\",\r",
+                  "            \"type\": [\"string\", \"null\"]\r",
+                  "        },\r",
+                  "        \"twoFAPreference\": {\r",
+                  "            \"$id\": \"#/properties/twoFAPreference\",\r",
+                  "            \"type\": [\"string\", \"null\"]\r",
+                  "        }\r",
+                  "    },\r",
+                  "    \"$id\": \"http://example.org/root.json#\",\r",
+                  "    \"type\": \"object\",\r",
+                  "    \"definitions\": {},\r",
+                  "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                  "};\r",
+                  "    pm.test(\"TEST5: Schema Test\", function () {\r",
+                  "        pm.expect(ajv.validate(schema, jsonData)).to.be.true;\r",
+                  "    });\r",
+                  "} catch (e) {\r",
+                  "\r",
+                  "    //negative Tests\r",
+                  "\r",
+                  "    var req = request.url;\r",
+                  "    var query = request.url.split('/');\r",
+                  "    var cid = responseBody.split(':');\r",
+                  "    pm.test(\"Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {\r",
+                  "        pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "    });\r",
+                  "    pm.test(\"Response Header Checks\", function () {\r",
+                  "        pm.response.to.have.header('Content-Type', 'text/plain; charset=utf-8', 'Vary', 'Accept-Encoding', 'X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                  "    });\r",
+                  "    pm.test(\"Incorrect Consumer ID should be not found\", function () {\r",
+                  "        pm.expect(responseCode.code).to.equal(400);\r",
+                  "        pm.expect(responseBody).to.equal(\"Unable to find consumer with consumerId: \" + query[4]);\r",
+                  "        pm.expect(cid[1]).to.deep.equal(\" \" + query[6]);\r",
+                  "    });\r",
+                  "}\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "2dd4b444-56fb-4302-a394-cd8d9e6bc4da",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
+              },
+              {
+                "key": "Correlation-Id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Origin",
+                "value": "Postman",
+                "type": "text"
+              },
+              {
+                "key": "Username",
+                "value": "{{$randomUserName}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/webregistration/account/consumerID/:consumerID",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webregistration",
+                "account",
+                "consumerID",
+                ":consumerID"
+              ],
+              "variable": [
+                {
+                  "id": "b1d12df4-3742-4f53-a836-b108a18b0fc1",
+                  "key": "consumerID",
+                  "value": "1583186",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get legacyID Account",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "593cf1c6-2717-4168-8671-12d2e741e1b2",
+                "exec": [
+                  "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                  "{\r",
+                  "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                  "} else {\r",
+                  "    var tokenDate = new Date(2010,1,1);\r",
+                  "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "    if(tokenTimestamp){\r",
+                  "        tokenDate = Date.parse(tokenTimestamp);\r",
+                  "    }\r",
+                  "    //console.log(\"timestamp is\"+tokenDate);\r",
+                  "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "    if(!expiresInTime){\r",
+                  "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "    }\r",
+                  "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                  "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                  "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                  "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                  "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                  "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                  "\r",
+                  "        let getTokenRequest = {\r",
+                  "            method: 'POST',\r",
+                  "            url: tokenUrl,\r",
+                  "            auth: {\r",
+                  "                type: \"basic\",\r",
+                  "                basic: [\r",
+                  "                    { key: \"username\", value: clientId },\r",
+                  "                    { key: \"password\", value: clientSecret }\r",
+                  "                ]\r",
+                  "            },\r",
+                  "            body: {\r",
+                  "                mode: 'formdata',\r",
+                  "                formdata: [\r",
+                  "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                    { key: 'scope', value: scope }\r",
+                  "                ]\r",
+                  "            }\r",
+                  "        };\r",
+                  "\r",
+                  "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "            let jsonResponse = response.json(),\r",
+                  "            newAccessToken = jsonResponse.access_token;\r",
+                  "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "\r",
+                  "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "        });\r",
+                  "\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "    }\r",
+                  "}\r",
+                  "//console.log(\"End of Pre-req script\");"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "49b21c81-8556-4c00-b5fd-6dab3534bfe7",
+                "exec": [
+                  "try {\r",
+                  "    pm.environment.set(\"response time\", (pm.response.responseTime) + Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                  "    pm.environment.set(\"responses\", 1 + Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                  "    console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                  "\r",
+                  "    let expectedCode = pm.iterationData.get(\"expectedHttpCode\");\r",
+                  "    var jsonData = JSON.parse(responseBody);\r",
+                  "    var req = request.url;\r",
+                  "    var query = request.url.split('/');\r",
+                  "    console.log(query);\r",
+                  "    pm.test(\"TEST1: legacy ID Check\", function () {\r",
+                  "        if (data.cnsmr_id == null) {\r",
+                  "            pm.expect(jsonData.legacyID).to.deep.equal(query[6]);\r",
+                  "        } else {\r",
+                  "            pm.expect(jsonData.legacyID).to.deep.equal(JSON.stringify(data.legacyID));\r",
+                  "        }\r",
+                  "    });\r",
+                  "\r",
+                  "    if (data.cnsmr_id != null) {\r",
+                  "        pm.test(\"TEST1A: isRegisteredOnWebSite check\", function () {\r",
+                  "            if(data.Reg_status==1 && data.Act_status==1){\r",
+                  "                pm.expect(jsonData.isRegisteredOnWebSite).to.deep.equal(false);\r",
+                  "            }else{\r",
+                  "                pm.expect(jsonData.isRegisteredOnWebSite).to.deep.equal(false);\r",
+                  "            }\r",
+                  "        });\r",
+                  "        pm.test(\"TEST1B: consumer check\", function () {\r",
+                  "            pm.expect(jsonData.consumerID).to.deep.equal(data.cnsmr_id);\r",
+                  "        });\r",
+                  "        pm.test(\"TEST1C: userId check\", function () {\r",
+                  "            pm.expect(jsonData.userId).to.deep.equal(data.userId);\r",
+                  "        });\r",
+                  "        pm.test(\"TEST1D: isActivated check\", function () {\r",
+                  "            pm.expect(data.Act_Status).to.deep.equal(jsonData.isActivated);\r",
+                  "            if((data.Reg_status==0 || data.Reg_status==null) && data.Act_status==1){\r",
+                  "                pm.expect(jsonData.isActivated).to.deep.equal(true);\r",
+                  "            }else{\r",
+                  "                pm.expect(jsonData.isActivated).to.deep.equal(false);\r",
+                  "            }\r",
+                  "        });\r",
+                  "        pm.test(\"TEST1E: DOB check\", function () {\r",
+                  "            if (jsonData.dateOfBirth === null){\r",
+                  "                pm.expect(data.dob).to.equal(\"NULL\");\r",
+                  "            }else{\r",
+                  "                pm.expect(jsonData.dateOfBirth.split('T')[0]).to.deep.equal(data.dob.split(' ')[0]);\r",
+                  "            }\r",
+                  "        });\r",
+                  "        pm.test(\"TEST1D: allowPaymentPlan check\", function () {\r",
+                  "            pm.expect(data.AllowPaymentPlan).to.deep.equal(jsonData.allowPaymentPlan);\r",
+                  "        });\r",
+                  "        pm.test(\"TEST1D: lastActivatedEmail check\", function () {\r",
+                  "            pm.expect(data.email).to.deep.equal(jsonData.lastActivatedEmail);\r",
+                  "        });\r",
+                  "        pm.test(\"TEST1D: twoFAPhoneNumber check\", function () {\r",
+                  "            if(jsonData.twoFAPhoneNumber==null){\r",
+                  "                pm.expect(data.TFA_Phone.toUpperCase()).to.deep.equal(JSON.stringify(jsonData.twoFAPhoneNumber).toUpperCase());\r",
+                  "            }else{\r",
+                  "                pm.expect(data.TFA_Phone).to.deep.equal(jsonData.twoFAPhoneNumber);\r",
+                  "            }\r",
+                  "        });\r",
+                  "        pm.test(\"TEST1D: twoFA Preference check\", function () {\r",
+                  "            if(jsonData.twoFAPreference==null){\r",
+                  "                pm.expect(data.TFA_Method.toUpperCase()).to.deep.equal(JSON.stringify(jsonData.twoFAPreference).toUpperCase());\r",
+                  "            }else{\r",
+                  "                pm.expect(data.TFA_Method).to.deep.equal(jsonData.twoFAPreference);\r",
+                  "            }\r",
+                  "        });\r",
+                  "    }\r",
+                  "\r",
+                  "    pm.test(\"TEST2: Status code Check\", function () {\r",
+                  "        pm.response.to.have.status(200);\r",
+                  "    });\r",
+                  "\r",
+                  "    pm.test(\"TEST3: Response Header Checks\", function () {\r",
+                  "        pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                  "    });\r",
+                  "\r",
+                  "    pm.test(\"TEST4: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {\r",
+                  "        pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "    });\r",
+                  "\r",
+                  "    var Ajv = require('ajv'),\r",
+                  "        ajv = new Ajv({ logger: console }),\r",
+                  "        schema = {\r",
+                  "    \"required\": [\r",
+                  "        \"consumerID\",\r",
+                  "        \"legacyID\",\r",
+                  "        \"isRegisteredOnWebSite\",\r",
+                  "        \"isActivated\",\r",
+                  "        \"activationCode\",\r",
+                  "        \"allowPaymentPlan\",\r",
+                  "        \"userId\",\r",
+                  "        \"lastActivatedEmail\",\r",
+                  "        \"lastUnactivatedEmail\",\r",
+                  "        \"twoFAPhoneNumber\",\r",
+                  "        \"twoFAPreference\"\r",
+                  "    ],\r",
+                  "    \"properties\": {\r",
+                  "        \"consumerID\": {\r",
+                  "            \"$id\": \"#/properties/consumerID\",\r",
+                  "            \"type\": \"integer\"\r",
+                  "        },\r",
+                  "        \"legacyID\": {\r",
+                  "            \"$id\": \"#/properties/legacyID\",\r",
+                  "            \"type\": \"string\"\r",
+                  "        },\r",
+                  "        \"isRegisteredOnWebSite\": {\r",
+                  "            \"$id\": \"#/properties/isRegisteredOnWebSite\",\r",
+                  "            \"type\": \"boolean\"\r",
+                  "        },\r",
+                  "        \"isActivated\": {\r",
+                  "            \"$id\": \"#/properties/isActivated\",\r",
+                  "            \"type\": \"boolean\"\r",
+                  "        },\r",
+                  "        \"activationCode\": {\r",
+                  "            \"$id\": \"#/properties/activationCode\",\r",
+                  "            \"type\": [\"string\",\"null\"]\r",
+                  "        },\r",
+                  "        \"allowPaymentPlan\": {\r",
+                  "            \"$id\": \"#/properties/allowPaymentPlan\",\r",
+                  "            \"type\": \"boolean\"\r",
+                  "        },\r",
+                  "        \"userId\": {\r",
+                  "            \"$id\": \"#/properties/userId\",\r",
+                  "            \"type\": \"integer\"\r",
+                  "        },\r",
+                  "        \"lastActivatedEmail\": {\r",
+                  "            \"$id\": \"#/properties/lastActivatedEmail\",\r",
+                  "            \"type\": [\"string\", \"null\"]\r",
+                  "        },\r",
+                  "        \"lastUnactivatedEmail\": {\r",
+                  "            \"$id\": \"#/properties/lastUnactivatedEmail\",\r",
+                  "            \"type\": [\"string\", \"null\"]\r",
+                  "        },\r",
+                  "        \"twoFAPhoneNumber\": {\r",
+                  "            \"$id\": \"#/properties/twoFAPhoneNumber\",\r",
+                  "            \"type\": [\"string\", \"null\"]\r",
+                  "        },\r",
+                  "        \"twoFAPreference\": {\r",
+                  "            \"$id\": \"#/properties/twoFAPreference\",\r",
+                  "            \"type\": [\"string\", \"null\"]\r",
+                  "        }\r",
+                  "    },\r",
+                  "    \"$id\": \"http://example.org/root.json#\",\r",
+                  "    \"type\": \"object\",\r",
+                  "    \"definitions\": {},\r",
+                  "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                  "};\r",
+                  "    pm.test(\"TEST5: Schema Test\", function () {\r",
+                  "        pm.expect(ajv.validate(schema, jsonData)).to.be.true;\r",
+                  "    });\r",
+                  "} catch (e) {\r",
+                  "\r",
+                  "    //negative Tests\r",
+                  "\r",
+                  "    var req = request.url;\r",
+                  "    var query = request.url.split('/');\r",
+                  "    var cid = responseBody.split(':');\r",
+                  "    pm.test(\"Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {\r",
+                  "        pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "    });\r",
+                  "    pm.test(\"Response Header Checks\", function () {\r",
+                  "        pm.response.to.have.header('Content-Type', 'text/plain; charset=utf-8', 'Vary', 'Accept-Encoding', 'X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                  "    });\r",
+                  "    pm.test(\"Incorrect Consumer ID should be not found\", function () {\r",
+                  "        pm.expect(responseCode.code).to.equal(400);\r",
+                  "        pm.expect(responseBody).to.equal(\"Unable to find consumer with consumerId: \" + query[4]);\r",
+                  "        pm.expect(cid[1]).to.deep.equal(\" \" + query[6]);\r",
+                  "    });\r",
+                  "}\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "f9b98576-c118-4e76-83f2-a27bcd4f2385",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}"
+              },
+              {
+                "key": "Correlation-Id",
+                "type": "text",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Origin",
+                "type": "text",
+                "value": "Postman"
+              },
+              {
+                "key": "Username",
+                "type": "text",
+                "value": "{{$randomUserName}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/webregistration/account/legacyid/:legacyID",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webregistration",
+                "account",
+                "legacyid",
+                ":legacyID"
+              ],
+              "variable": [
+                {
+                  "id": "07082048-69dc-4dcb-ab0b-69453bd1d35a",
+                  "key": "legacyID",
+                  "value": "122747",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get registeredUserAccount",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "5f9ac113-3df9-43f0-8ee6-19667e418be3",
+                "exec": [
+                  "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                  "{\r",
+                  "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                  "} else {\r",
+                  "    var tokenDate = new Date(2010,1,1);\r",
+                  "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "    if(tokenTimestamp){\r",
+                  "        tokenDate = Date.parse(tokenTimestamp);\r",
+                  "    }\r",
+                  "    //console.log(\"timestamp is\"+tokenDate);\r",
+                  "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "    if(!expiresInTime){\r",
+                  "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "    }\r",
+                  "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                  "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                  "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                  "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                  "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                  "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                  "\r",
+                  "        let getTokenRequest = {\r",
+                  "            method: 'POST',\r",
+                  "            url: tokenUrl,\r",
+                  "            auth: {\r",
+                  "                type: \"basic\",\r",
+                  "                basic: [\r",
+                  "                    { key: \"username\", value: clientId },\r",
+                  "                    { key: \"password\", value: clientSecret }\r",
+                  "                ]\r",
+                  "            },\r",
+                  "            body: {\r",
+                  "                mode: 'formdata',\r",
+                  "                formdata: [\r",
+                  "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                    { key: 'scope', value: scope }\r",
+                  "                ]\r",
+                  "            }\r",
+                  "        };\r",
+                  "\r",
+                  "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "            let jsonResponse = response.json(),\r",
+                  "            newAccessToken = jsonResponse.access_token;\r",
+                  "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "\r",
+                  "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "        });\r",
+                  "\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "    }\r",
+                  "}\r",
+                  "//console.log(\"End of Pre-req script\");"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "57818211-6481-41cb-a095-a1478be25f48",
+                "exec": [
+                  "try {\r",
+                  "    pm.environment.set(\"response time\", (pm.response.responseTime) + Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                  "    pm.environment.set(\"responses\", 1 + Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                  "    console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                  "\r",
+                  "    let expectedCode = pm.iterationData.get(\"expectedHttpCode\");\r",
+                  "    var jsonData = JSON.parse(responseBody);\r",
+                  "    var req = request.url;\r",
+                  "    var query = request.url.split('/');\r",
+                  "    console.log(query);\r",
+                  "    pm.test(\"TEST1: Consumer ID Check\", function () {\r",
+                  "        if (data.cnsmr_id == null) {\r",
+                  "            pm.expect(JSON.stringify(jsonData.consumerID)).to.deep.equal(query[5]);\r",
+                  "        } else {\r",
+                  "            pm.expect(jsonData.consumerID).to.deep.equal(data.cnsmr_id);\r",
+                  "        }\r",
+                  "    });\r",
+                  "\r",
+                  "    if (data.cnsmr_id != null) {\r",
+                  "        pm.test(\"TEST1A: Email check\", function () {\r",
+                  "            if(jsonData.emailAddress==null){\r",
+                  "                pm.expect(data.email.toUpperCase()).to.deep.equal(JSON.stringify(jsonData.emailAddress).toUpperCase());\r",
+                  "            }else{\r",
+                  "                pm.expect(data.email).to.deep.equal(jsonData.emailAddress);\r",
+                  "            }\r",
+                  "        });\r",
+                  "        pm.test(\"TEST1B: createdDate check\", function () {\r",
+                  "            if (jsonData.createdDate === null){\r",
+                  "                pm.expect(data.createdDate.toUpperCase()).to.equal(\"NULL\");\r",
+                  "            }else{\r",
+                  "                pm.expect(jsonData.createdDate.split('T')[0]).to.deep.equal(data.createdDate.split(' ')[0]);\r",
+                  "            }\r",
+                  "        });\r",
+                  "    }\r",
+                  "\r",
+                  "    pm.test(\"TEST2: Status code Check\", function () {\r",
+                  "        pm.response.to.have.status(200);\r",
+                  "    });\r",
+                  "\r",
+                  "    pm.test(\"TEST3: Response Header Checks\", function () {\r",
+                  "        pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                  "    });\r",
+                  "\r",
+                  "    pm.test(\"TEST4: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {\r",
+                  "        pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "    });\r",
+                  "\r",
+                  "    var Ajv = require('ajv'),\r",
+                  "        ajv = new Ajv({ logger: console }),\r",
+                  "        schema = {\r",
+                  "    \"required\": [\r",
+                  "        \"consumerID\",\r",
+                  "        \"emailAddress\",\r",
+                  "        \"createdDate\"\r",
+                  "    ],\r",
+                  "    \"properties\": {\r",
+                  "        \"consumerID\": {\r",
+                  "            \"$id\": \"#/properties/consumerID\",\r",
+                  "            \"type\": \"integer\"\r",
+                  "        },\r",
+                  "        \"emailAddress\": {\r",
+                  "            \"$id\": \"#/properties/emailAddress\",\r",
+                  "            \"type\": [\"string\", \"null\"]\r",
+                  "        },\r",
+                  "        \"createdDate\": {\r",
+                  "            \"$id\": \"#/properties/createdDate\",\r",
+                  "            \"type\": [\"string\", \"null\"]\r",
+                  "        }\r",
+                  "    },\r",
+                  "    \"$id\": \"http://example.org/root.json#\",\r",
+                  "    \"type\": \"object\",\r",
+                  "    \"definitions\": {},\r",
+                  "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                  "};\r",
+                  "    pm.test(\"TEST5: Schema Test\", function () {\r",
+                  "        pm.expect(ajv.validate(schema, jsonData)).to.be.true;\r",
+                  "    });\r",
+                  "} catch (e) {\r",
+                  "\r",
+                  "    //negative Tests\r",
+                  "\r",
+                  "    var req = request.url;\r",
+                  "    var query = request.url.split('/');\r",
+                  "    var cid = responseBody.split(':');\r",
+                  "    pm.test(\"Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {\r",
+                  "        pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "    });\r",
+                  "    pm.test(\"Response Header Checks\", function () {\r",
+                  "        pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Cache-Control', 'no-cache, no-store', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                  "    });\r",
+                  "    pm.test(\"Incorrect Consumer ID should be not found\", function () {\r",
+                  "        pm.expect(responseCode.code).to.equal(204);\r",
+                  "    });\r",
+                  "}\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "732587f5-4d91-4101-9dfc-63d60b88faf4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}"
+              },
+              {
+                "key": "Correlation-Id",
+                "type": "text",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Origin",
+                "type": "text",
+                "value": "Postman"
+              },
+              {
+                "key": "Username",
+                "type": "text",
+                "value": "{{$randomUserName}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/webregistration/consumer/:consumerId/registeredUserAccount",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webregistration",
+                "consumer",
+                ":consumerId",
+                "registeredUserAccount"
+              ],
+              "variable": [
+                {
+                  "id": "532e22ea-cafe-48e7-a58f-a7066127a929",
+                  "key": "consumerId",
+                  "value": "123456",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "check Email domain",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "7b3b2021-810d-4fb8-8e13-f45533ce3f2c",
+                "exec": [
+                  "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                  "{\r",
+                  "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                  "} else {\r",
+                  "    var tokenDate = new Date(2010,1,1);\r",
+                  "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "    if(tokenTimestamp){\r",
+                  "        tokenDate = Date.parse(tokenTimestamp);\r",
+                  "    }\r",
+                  "    //console.log(\"timestamp is\"+tokenDate);\r",
+                  "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "    if(!expiresInTime){\r",
+                  "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "    }\r",
+                  "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                  "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                  "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                  "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                  "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                  "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                  "\r",
+                  "        let getTokenRequest = {\r",
+                  "            method: 'POST',\r",
+                  "            url: tokenUrl,\r",
+                  "            auth: {\r",
+                  "                type: \"basic\",\r",
+                  "                basic: [\r",
+                  "                    { key: \"username\", value: clientId },\r",
+                  "                    { key: \"password\", value: clientSecret }\r",
+                  "                ]\r",
+                  "            },\r",
+                  "            body: {\r",
+                  "                mode: 'formdata',\r",
+                  "                formdata: [\r",
+                  "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                    { key: 'scope', value: scope }\r",
+                  "                ]\r",
+                  "            }\r",
+                  "        };\r",
+                  "\r",
+                  "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "            let jsonResponse = response.json(),\r",
+                  "            newAccessToken = jsonResponse.access_token;\r",
+                  "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "\r",
+                  "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "        });\r",
+                  "\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "    }\r",
+                  "}\r",
+                  "//console.log(\"End of Pre-req script\");"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "33736b61-7c54-4666-a234-90181f642597",
+                "exec": [
+                  "var x = responseCode.code;\r",
+                  "if(responseCode.code==200){\r",
+                  "    pm.environment.set(\"response time\", (pm.response.responseTime) + Number (postman.getEnvironmentVariable(\"response time\")));\r",
+                  "    pm.environment.set(\"responses\", 1 + Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                  "    console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                  "    pm.test(\"TEST1: Response Check\", function () {\r",
+                  "        pm.expect(responseBody).to.deep.equal(\"Valid\");\r",
+                  "    });\r",
+                  "\r",
+                  "    pm.test(\"TEST2: Status code Check\", function () {\r",
+                  "        pm.response.to.have.status(200);\r",
+                  "    });\r",
+                  "\r",
+                  "    pm.test(\"TEST3: Response Header Checks\", function () {\r",
+                  "        pm.response.to.have.header('Content-Type', 'text/plain; charset=utf-8', 'Vary', 'Accept-Encoding', 'Cache-Control', 'no-cache, no-store', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '', 'Set-Cookie', '', 'X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains');\r",
+                  "    });\r",
+                  "\r",
+                  "    pm.test(\"TEST4: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {\r",
+                  "        pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "    });\r",
+                  "} else {\r",
+                  "\r",
+                  "    //negative Tests\r",
+                  "    pm.test(\"Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {\r",
+                  "        pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "    });\r",
+                  "    pm.test(\"Response Header Checks\", function () {\r",
+                  "        pm.response.to.have.header('Content-Type', 'text/plain; charset=utf-8', 'Vary', 'Accept-Encoding', 'X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                  "    });\r",
+                  "    pm.test(\"Response Check\", function () {\r",
+                  "        pm.expect(responseCode.code).to.equal(404);\r",
+                  "        pm.expect(responseBody).to.equal(\"Email Address is not valid\");\r",
+                  "    });\r",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "8e00be9b-5ffb-4c4f-87d8-0502f80783fc",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}"
+              },
+              {
+                "key": "Correlation-Id",
+                "type": "text",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Origin",
+                "type": "text",
+                "value": "Postman"
+              },
+              {
+                "key": "Username",
+                "type": "text",
+                "value": "{{$randomUserName}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/webregistration/email/:email/checkdomain",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webregistration",
+                "email",
+                ":email",
+                "checkdomain"
+              ],
+              "variable": [
+                {
+                  "id": "395e2c44-e998-4601-b336-2dbd98757533",
+                  "key": "email",
+                  "value": "{{email}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register User",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "780d2746-6895-49f0-96f3-a10166abf720",
+                "exec": [
+                  "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                  "{\r",
+                  "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                  "} else {\r",
+                  "    var tokenDate = new Date(2010,1,1);\r",
+                  "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "    if(tokenTimestamp){\r",
+                  "        tokenDate = Date.parse(tokenTimestamp);\r",
+                  "    }\r",
+                  "    //console.log(\"timestamp is\"+tokenDate);\r",
+                  "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "    if(!expiresInTime){\r",
+                  "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "    }\r",
+                  "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                  "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                  "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                  "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                  "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                  "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                  "\r",
+                  "        let getTokenRequest = {\r",
+                  "            method: 'POST',\r",
+                  "            url: tokenUrl,\r",
+                  "            auth: {\r",
+                  "                type: \"basic\",\r",
+                  "                basic: [\r",
+                  "                    { key: \"username\", value: clientId },\r",
+                  "                    { key: \"password\", value: clientSecret }\r",
+                  "                ]\r",
+                  "            },\r",
+                  "            body: {\r",
+                  "                mode: 'formdata',\r",
+                  "                formdata: [\r",
+                  "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                    { key: 'scope', value: scope }\r",
+                  "                ]\r",
+                  "            }\r",
+                  "        };\r",
+                  "\r",
+                  "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "            let jsonResponse = response.json(),\r",
+                  "            newAccessToken = jsonResponse.access_token;\r",
+                  "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "\r",
+                  "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "        });\r",
+                  "\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "    }\r",
+                  "}\r",
+                  "//console.log(\"End of Pre-req script\");"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "25eb2641-ed13-4d4a-80d7-49c2f41b183e",
+                "exec": [
+                  "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
+                  "});\r",
+                  "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                  "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "3cd86e86-dcf1-49a4-9c28-7ff1333d52b4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}"
+              },
+              {
+                "key": "Correlation-Id",
+                "type": "text",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Origin",
+                "type": "text",
+                "value": "Postman"
+              },
+              {
+                "key": "Username",
+                "type": "text",
+                "value": "{{$randomUserName}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"legacyID\": \"{{legacyID}}\",\r\n  \"consumerID\": {{cnsmr_id}},\r\n  \"email\": \"{{TFA_email}}\",\r\n  \"telephoneNumber\": \"{{phn_num}}\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "{{baseUrl}}/webregistration/user/instance/cc"
+          },
+          "response": []
+        },
+        {
+          "name": "Set 2FA method",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "51317623-71b0-4c69-9d3e-4e2fce2fbfd2",
+                "exec": [
+                  "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                  "{\r",
+                  "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                  "} else {\r",
+                  "    var tokenDate = new Date(2010,1,1);\r",
+                  "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "    if(tokenTimestamp){\r",
+                  "        tokenDate = Date.parse(tokenTimestamp);\r",
+                  "    }\r",
+                  "    //console.log(\"timestamp is\"+tokenDate);\r",
+                  "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "    if(!expiresInTime){\r",
+                  "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "    }\r",
+                  "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                  "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                  "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                  "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                  "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                  "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                  "\r",
+                  "        let getTokenRequest = {\r",
+                  "            method: 'POST',\r",
+                  "            url: tokenUrl,\r",
+                  "            auth: {\r",
+                  "                type: \"basic\",\r",
+                  "                basic: [\r",
+                  "                    { key: \"username\", value: clientId },\r",
+                  "                    { key: \"password\", value: clientSecret }\r",
+                  "                ]\r",
+                  "            },\r",
+                  "            body: {\r",
+                  "                mode: 'formdata',\r",
+                  "                formdata: [\r",
+                  "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                    { key: 'scope', value: scope }\r",
+                  "                ]\r",
+                  "            }\r",
+                  "        };\r",
+                  "\r",
+                  "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "            let jsonResponse = response.json(),\r",
+                  "            newAccessToken = jsonResponse.access_token;\r",
+                  "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "\r",
+                  "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "        });\r",
+                  "\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "    }\r",
+                  "}\r",
+                  "//console.log(\"End of Pre-req script\");"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "9c2312e4-0205-469b-9c4f-f9a4d70e7d3f",
+                "exec": [
+                  "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
+                  "});\r",
+                  "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                  "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "9d05e0ef-5ba2-4592-865e-f3b3a34240d5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}"
+              },
+              {
+                "key": "Correlation-Id",
+                "type": "text",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Origin",
+                "type": "text",
+                "value": "Postman"
+              },
+              {
+                "key": "Username",
+                "type": "text",
+                "value": "{{$randomUserName}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userID\": {{userId}},\r\n  \"twoFAPreference\": \"{{TFA_pref}}\",\r\n  \"phoneNumber\": \"{{phn_num}}\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "{{baseUrl}}/webregistration/user/instance/twofamethod"
+          },
+          "response": []
+        },
+        {
+          "name": "Resend Activation Email",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "ffb5d997-c255-475d-8707-02cf542a7cf6",
+                "exec": [
+                  "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                  "{\r",
+                  "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                  "} else {\r",
+                  "    var tokenDate = new Date(2010,1,1);\r",
+                  "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "    if(tokenTimestamp){\r",
+                  "        tokenDate = Date.parse(tokenTimestamp);\r",
+                  "    }\r",
+                  "    //console.log(\"timestamp is\"+tokenDate);\r",
+                  "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "    if(!expiresInTime){\r",
+                  "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "    }\r",
+                  "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                  "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                  "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                  "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                  "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                  "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                  "\r",
+                  "        let getTokenRequest = {\r",
+                  "            method: 'POST',\r",
+                  "            url: tokenUrl,\r",
+                  "            auth: {\r",
+                  "                type: \"basic\",\r",
+                  "                basic: [\r",
+                  "                    { key: \"username\", value: clientId },\r",
+                  "                    { key: \"password\", value: clientSecret }\r",
+                  "                ]\r",
+                  "            },\r",
+                  "            body: {\r",
+                  "                mode: 'formdata',\r",
+                  "                formdata: [\r",
+                  "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                    { key: 'scope', value: scope }\r",
+                  "                ]\r",
+                  "            }\r",
+                  "        };\r",
+                  "\r",
+                  "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "            let jsonResponse = response.json(),\r",
+                  "            newAccessToken = jsonResponse.access_token;\r",
+                  "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "\r",
+                  "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "        });\r",
+                  "\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "    }\r",
+                  "}\r",
+                  "//console.log(\"End of Pre-req script\");"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "7a563ffa-bfbe-4b88-99ca-99885e66f0fe",
+                "exec": [
+                  "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
+                  "});\r",
+                  "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                  "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "5e872ddb-a386-448f-99cd-c4ab25c83924",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}"
+              },
+              {
+                "key": "Correlation-Id",
+                "type": "text",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Origin",
+                "type": "text",
+                "value": "Postman"
+              },
+              {
+                "key": "Username",
+                "type": "text",
+                "value": "{{$randomUserName}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": 59513\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "{{baseUrl}}/webregistration/user/resendactivationemail/cc"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Customer Email",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "19b87505-df6e-43b2-aafd-adbe40355b02",
+                "exec": [
+                  "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                  "{\r",
+                  "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                  "} else {\r",
+                  "    var tokenDate = new Date(2010,1,1);\r",
+                  "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "    if(tokenTimestamp){\r",
+                  "        tokenDate = Date.parse(tokenTimestamp);\r",
+                  "    }\r",
+                  "    //console.log(\"timestamp is\"+tokenDate);\r",
+                  "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "    if(!expiresInTime){\r",
+                  "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "    }\r",
+                  "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                  "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                  "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                  "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                  "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                  "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                  "\r",
+                  "        let getTokenRequest = {\r",
+                  "            method: 'POST',\r",
+                  "            url: tokenUrl,\r",
+                  "            auth: {\r",
+                  "                type: \"basic\",\r",
+                  "                basic: [\r",
+                  "                    { key: \"username\", value: clientId },\r",
+                  "                    { key: \"password\", value: clientSecret }\r",
+                  "                ]\r",
+                  "            },\r",
+                  "            body: {\r",
+                  "                mode: 'formdata',\r",
+                  "                formdata: [\r",
+                  "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                    { key: 'scope', value: scope }\r",
+                  "                ]\r",
+                  "            }\r",
+                  "        };\r",
+                  "\r",
+                  "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "            let jsonResponse = response.json(),\r",
+                  "            newAccessToken = jsonResponse.access_token;\r",
+                  "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "\r",
+                  "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "        });\r",
+                  "\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "    }\r",
+                  "}\r",
+                  "//console.log(\"End of Pre-req script\");"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "ea13c600-6917-4b5b-8bc8-f04088c8c8cb",
+                "exec": [
+                  "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
+                  "});\r",
+                  "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                  "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "ae7cf6b3-5b93-45cb-a5e6-8de0154c879f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}"
+              },
+              {
+                "key": "Correlation-Id",
+                "type": "text",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Origin",
+                "type": "text",
+                "value": "Postman"
+              },
+              {
+                "key": "Username",
+                "type": "text",
+                "value": "{{$randomUserName}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"legacyID\": \"{{legacyID}}\",\r\n  \"consumerID\": {{cnsmr_id}},\r\n  \"email\": \"{{email}}\",\r\n  \"telephoneNumber\": \"{{phn_num}}\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "{{baseUrl}}/webregistration/user/instance/email/cc"
+          },
+          "response": []
+        },
+        {
+          "name": "Unregister User",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "36a641fd-d911-4b36-b473-27731f1953c1",
+                "exec": [
+                  "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                  "{\r",
+                  "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                  "} else {\r",
+                  "    var tokenDate = new Date(2010,1,1);\r",
+                  "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "    if(tokenTimestamp){\r",
+                  "        tokenDate = Date.parse(tokenTimestamp);\r",
+                  "    }\r",
+                  "    //console.log(\"timestamp is\"+tokenDate);\r",
+                  "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "    if(!expiresInTime){\r",
+                  "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "    }\r",
+                  "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                  "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                  "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                  "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                  "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                  "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                  "\r",
+                  "        let getTokenRequest = {\r",
+                  "            method: 'POST',\r",
+                  "            url: tokenUrl,\r",
+                  "            auth: {\r",
+                  "                type: \"basic\",\r",
+                  "                basic: [\r",
+                  "                    { key: \"username\", value: clientId },\r",
+                  "                    { key: \"password\", value: clientSecret }\r",
+                  "                ]\r",
+                  "            },\r",
+                  "            body: {\r",
+                  "                mode: 'formdata',\r",
+                  "                formdata: [\r",
+                  "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                    { key: 'scope', value: scope }\r",
+                  "                ]\r",
+                  "            }\r",
+                  "        };\r",
+                  "\r",
+                  "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "            let jsonResponse = response.json(),\r",
+                  "            newAccessToken = jsonResponse.access_token;\r",
+                  "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "\r",
+                  "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "        });\r",
+                  "\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "    }\r",
+                  "}\r",
+                  "//console.log(\"End of Pre-req script\");"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "286425b4-e94a-4b7d-a182-f722a82bd95a",
+                "exec": [
+                  "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([204,200,400]);\r",
+                  "});\r",
+                  "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                  "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "dd96927d-ae97-404a-b9f8-f44063342916",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}"
+              },
+              {
+                "key": "Correlation-Id",
+                "type": "text",
+                "value": "{{$guid}}"
+              },
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Origin",
+                "type": "text",
+                "value": "Postman"
+              },
+              {
+                "key": "Username",
+                "type": "text",
+                "value": "{{$randomUserName}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userID\": 59448\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "{{baseUrl}}/webregistration/user/unregister"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "ce79bbc2-2128-4cf1-afef-d63c11b288aa"
+    },
+    {
       "name": "OAuth Renewal",
       "event": [
         {
