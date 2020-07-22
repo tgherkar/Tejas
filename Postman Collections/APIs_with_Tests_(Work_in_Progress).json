@@ -45907,7 +45907,7 @@
                   "            if(data.Reg_status==1 && data.Act_status==1){\r",
                   "                pm.expect(jsonData.isRegisteredOnWebSite).to.deep.equal(false);\r",
                   "            }else{\r",
-                  "                pm.expect(jsonData.isRegisteredOnWebSite).to.deep.equal(false);\r",
+                  "                pm.expect(jsonData.isRegisteredOnWebSite).to.deep.equal(true);\r",
                   "            }\r",
                   "        });\r",
                   "        pm.test(\"TEST1B: legacyID check\", function () {\r",
@@ -45945,7 +45945,7 @@
                   "            if(jsonData.twoFAPhoneNumber==null){\r",
                   "                pm.expect(data.TFA_Phone.toUpperCase()).to.deep.equal(JSON.stringify(jsonData.twoFAPhoneNumber).toUpperCase());\r",
                   "            }else{\r",
-                  "                pm.expect(JSON.stringify(data.TFA_Phone).slice(1)).to.deep.equal(jsonData.twoFAPhoneNumber);\r",
+                  "                pm.expect(JSON.stringify(data.TFA_Phone)).to.deep.equal(jsonData.twoFAPhoneNumber.slice(1));\r",
                   "            }\r",
                   "        });\r",
                   "        pm.test(\"TEST1D: twoFA Preference check\", function () {\r",
@@ -46124,7 +46124,7 @@
               "variable": [
                 {
                   "key": "consumerID",
-                  "value": "{{cnsmr_id}}",
+                  "value": "1583363",
                   "type": "string"
                 }
               ]
@@ -46265,7 +46265,7 @@
                   "            if(jsonData.twoFAPhoneNumber==null){\r",
                   "                pm.expect(data.TFA_Phone.toUpperCase()).to.deep.equal(JSON.stringify(jsonData.twoFAPhoneNumber).toUpperCase());\r",
                   "            }else{\r",
-                  "                pm.expect(JSON.stringify(data.TFA_Phone).slice(1)).to.deep.equal(jsonData.twoFAPhoneNumber);\r",
+                  "                pm.expect(JSON.stringify(data.TFA_Phone)).to.deep.equal(jsonData.twoFAPhoneNumber.slice(1));\r",
                   "            }\r",
                   "        });\r",
                   "        pm.test(\"TEST1D: twoFA Preference check\", function () {\r",
