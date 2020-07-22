@@ -47579,7 +47579,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"userID\": 59448\r\n}",
+              "raw": "{\r\n  \"userID\": {{userId}}\r\n}",
               "options": {
                 "raw": {}
               }
