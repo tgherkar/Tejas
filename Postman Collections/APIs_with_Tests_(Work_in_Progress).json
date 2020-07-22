@@ -45937,8 +45937,11 @@
                   "        });\r",
                   "        pm.test(\"TEST1D: lastActivatedEmail check\", function () {\r",
                   "            if(jsonData.lastActivatedEmail==null){\r",
-                  "                pm.expect(data.email.toUpperCase()).to.deep.equal(\"NULL\");\r",
+                  "                if(jsonData.lastUnactivatedEmail==null){\r",
+                  "                    pm.expect(data.email.toUpperCase()).to.deep.equal(\"NULL\");\r",
                   "            } else{\r",
+                  "                pm.expect(jsonData.lastUnactivatedEmail).to.deep.equal(data.email);\r",
+                  "            }}else{\r",
                   "                pm.expect(jsonData.lastActivatedEmail).to.deep.equal(data.email);\r",
                   "            }\r",
                   "        });\r",
@@ -46125,7 +46128,7 @@
               "variable": [
                 {
                   "key": "consumerID",
-                  "value": "{{cnsmr_id}}",
+                  "value": "1583288",
                   "type": "string"
                 }
               ]
