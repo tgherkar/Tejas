@@ -45893,7 +45893,7 @@
                   "    var jsonData = JSON.parse(responseBody);\r",
                   "    var req = request.url;\r",
                   "    var query = request.url.split('/');\r",
-                  "    var x=slice(query,1);\r",
+                  "    var x=query[6].slice(1);\r",
                   "    console.log(x);\r",
                   "    pm.test(\"TEST1: Consumer ID Check\", function () {\r",
                   "        if (data.cnsmr_id == null) {\r",
