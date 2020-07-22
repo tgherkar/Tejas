@@ -45894,7 +45894,7 @@
                   "    var req = request.url;\r",
                   "    var query = request.url.split('/');\r",
                   "    console.log(query);\r",
-                  "    if((1==1 || 2==4) && 3==3){console.log(\"yay\");} else{console.log(\"nay\");}\r",
+                  "    if((1==1 || 2==4) && 3==4){console.log(\"yay\");} else{console.log(\"nay\");}\r",
                   "    pm.test(\"TEST1: Consumer ID Check\", function () {\r",
                   "        if (data.cnsmr_id == null) {\r",
                   "            pm.expect(JSON.stringify(jsonData.consumerID)).to.deep.equal(query[6]);\r",
