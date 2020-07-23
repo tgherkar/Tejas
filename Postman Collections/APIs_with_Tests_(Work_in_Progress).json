@@ -41536,7 +41536,7 @@
                           "        pm.expect(jsonData[0].statusCode.split('T')[0]).to.equal(data.sfs_status_code);\r",
                           "    });\r",
                           "    pm.test(\"TEST1E: Document Template Finalized Flag check\", function() {\r",
-                          "        pm.expect(jsonData[0].documentTemplateFinalizedFlag).to.equal(data.documentTemplateFinalizedFlag);\r",
+                          "        pm.expect(jsonData[0].originalSFSID).to.equal(data.original_sfs_id);\r",
                           "    });\r",
                           "\r",
                           "    pm.test(\"TEST1F: Document Template Source File Blog check\", function() {\r",
