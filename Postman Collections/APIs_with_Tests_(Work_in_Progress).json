@@ -44150,6 +44150,8 @@
                           "\r",
                           "            pm.expect(jsonData[0].consumerDetail.doesAnyoneElseProvideIncome).to.equal(data.does_anyone_else_provide_income);\r",
                           "\r",
+                          "            pm.expect(jsonData[0].consumerDetail.doHouseContributorsHaveBenefits).to.equal(data.do_house_cont_have_benefits);\r",
+                          "\r",
                           "\r",
                           "\r",
                           "            \r",
