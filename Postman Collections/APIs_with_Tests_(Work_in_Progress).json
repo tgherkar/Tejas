@@ -49144,7 +49144,7 @@
               "script": {
                 "id": "9bba3ed5-a466-40d9-b3cd-5a897148340f",
                 "exec": [
-                  "var jsonData = JSON.parse(responseBody);",
+                  "try{",
                   "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));",
                   "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));",
                   "console.log(\"Average response time: \" + responseTime + \"ms\");",
