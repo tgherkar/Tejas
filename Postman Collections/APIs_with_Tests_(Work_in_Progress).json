@@ -30601,26 +30601,26 @@
               },
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
-                "value": "{{Ocp-Apim-Subscription-Key-South}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}"
               },
               {
                 "key": "ocp-apim-subscription-key-West",
-                "value": "{{Ocp-Apim-Subscription-Key-West}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}"
               },
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
+                "type": "text",
+                "value": "application/json"
               },
               {
                 "key": "username",
-                "value": "Mike",
-                "type": "text"
+                "type": "text",
+                "value": "Mike"
               }
             ],
-            "url": "{{BaseURL}}/udp/referencevalues/70",
+            "url": "{{BaseURL}}/udp/fullreferencevalues/70",
             "description": "Get list of UDP Reference Values"
           },
           "response": [
