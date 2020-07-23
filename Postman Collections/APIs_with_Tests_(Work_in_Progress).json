@@ -55031,6 +55031,22 @@
                 ],
                 "type": "text/javascript"
               }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "90c9d5fb-341f-49e0-9125-71848db3b1d7",
+                "exec": [
+                  "pm.test(\"TEST01: Status Code Check\", function () {\r",
+                  "    pm.response.to.have.status(204);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"TEST03: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
             }
           ],
           "_postman_id": "a7246058-3507-4260-8c8e-19c389f0617c",
@@ -55084,7 +55100,7 @@
           "response": []
         },
         {
-          "name": "post consumer link Copy",
+          "name": "post consumer link",
           "event": [
             {
               "listen": "prerequest",
