@@ -54914,6 +54914,23 @@
                 ],
                 "type": "text/javascript"
               }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "b4f072b4-7450-464b-8d94-99beccb88618",
+                "exec": [
+                  "pm.test(\"TEST01: Status Code Check\", function () {\r",
+                  "    pm.response.to.have.status(204);\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "pm.test(\"TEST03: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
             }
           ],
           "_postman_id": "38d3d227-8980-46b3-9184-8c687f4c60e8",
