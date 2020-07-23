@@ -41556,7 +41556,7 @@
                           "    });\r",
                           "\r",
                           "    pm.test(\"TEST1J: upsertTransactionNumber check\", function() {\r",
-                          "        pm.expect(jsonData[0].upsertTransactionNumber).to.equal(JSON.stringify(data.upsrt_trnsctn_nmbr));\r",
+                          "        pm.expect(jsonData[0].savingTypeCode).to.equal(JSON.stringify(data.saving_type));\r",
                           "    });\r",
                           "\r",
                           "    pm.test(\"TEST1K: Document Upsert User ID check\", function() {\r",
