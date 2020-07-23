@@ -45557,6 +45557,27 @@
                           "    }\r",
                           "}\r",
                           "//console.log(\"End of Pre-req script\");\r",
+                          "\r",
+                          "\r",
+                          "\r",
+                          "\r",
+                          "\r",
+                          "/*\r",
+                          "SET NOCOUNT ON\r",
+                          "IF OBJECT_ID('tempdb.dbo.@test', 'U') IS NOT NULL\r",
+                          "  DROP TABLE test; \r",
+                          "DECLARE @test TABLE\r",
+                          "(\r",
+                          "    SFSID int NULL\r",
+                          ");\r",
+                          "INSERT INTO @test (SFSID) SELECT DISTINCT TOP 5 OriginalConsumerID FROM dbo.SFS\r",
+                          "WHERE SFSStatusCode= 2\r",
+                          "INSERT INTO @test (SFSID) SELECT DISTINCT TOP 5 OriginalConsumerID FROM dbo.SFS\r",
+                          "WHERE SFSStatusCode = 1\r",
+                          "INSERT INTO @test (SFSID) SELECT DISTINCT TOP 5 OriginalConsumerID FROM dbo.SFS\r",
+                          "WHERE SFSStatusCode = 0\r",
+                          "SELECT * FROM @test\r",
+                          "*/\r",
                           ""
                         ],
                         "type": "text/javascript"
@@ -45622,7 +45643,7 @@
                       "variable": [
                         {
                           "key": "id",
-                          "value": "{{sfsid_delete}}",
+                          "value": "{{SFSID}}",
                           "type": "string",
                           "description": {
                             "content": "",
