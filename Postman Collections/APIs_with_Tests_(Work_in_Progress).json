@@ -41566,7 +41566,7 @@
                           "       pm.test(\"TEST1G: Consumer Detail check\", function() {\r",
                           "        if(jsonData[0].consumerDetail!=null){\r",
                           "            pm.expect(jsonData[0].consumerDetail.sfsConsumerDetailID).to.equal(data.sfs_consumer_detail_id);\r",
-                          "            pm.expect(jsonData[0].consumerDetail.outstandingDebt).to.equal(data.outstanding_debt);\r",
+                          "            pm.expect(jsonData[0].consumerDetail.outstandingDebt).to.equal(JSON.stringify(data.outstanding_debt));\r",
                           "            pm.expect(jsonData[0].consumerDetail.amount).to.equal(data.saving_amount);\r",
                           "            pm.expect(jsonData[0].consumerDetail.frequencyCode).to.equal(data.saving_frequency);\r",
                           "            pm.expect(jsonData[0].consumerDetail.notes).to.equal(data.saving_notes);\r",
