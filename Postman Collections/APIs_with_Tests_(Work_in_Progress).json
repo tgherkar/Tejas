@@ -38540,12 +38540,8 @@
                           "*/\r",
                           "\r",
                           "///NEGATIVE TESTS\r",
-                          "/*pm.test(\"Incorrect field examaple\", function() {\r",
-                          "    jsonData.phoneNuber === \"Red\";\r",
-                          "    console.log(phoneNumber);\r",
-                          "});*/\r",
                           "pm.test(\"Check if array is empty\", function () {\r",
-                          "     pm.expect(\"{{cnsmrlc_id}}\").to.not.be.empty;\r",
+                          "     pm.expect(\"{{cnsmr_id}}\").to.not.be.empty;\r",
                           "});\r",
                           " pm.test(\"Check if string is empty\", function () {\r",
                           "     pm.expect('statusCode').to.not.be.empty;\r",
@@ -38694,7 +38690,7 @@
                       "variable": [
                         {
                           "key": "consumerId",
-                          "value": "{{cnsmrlc_id}}",
+                          "value": "{{cnsmr_id}}",
                           "type": "string",
                           "description": {
                             "content": "",
@@ -41109,7 +41105,7 @@
                       "variable": [
                         {
                           "key": "id",
-                          "value": "cac0f2a3-da5c-42b3-8b1a-3a0e73dc28ae",
+                          "value": "90A3AAED-3093-E911-8298-005056927C52",
                           "type": "string",
                           "description": "uuid"
                         }
