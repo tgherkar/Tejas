@@ -10816,8 +10816,8 @@
                 "id": "6630dd6c-957b-4501-93fc-b4255b0a871a",
                 "exec": [
                   "/*if (!Date.now) {",
-                  "    console.log(Date.now());",
-                  "    Date.now = function() { return new Date().getTime(); };",
+                  "console.log(Date.now());",
+                  "Date.now = function() { return new Date().getTime(); };",
                   "console.log(\"LegacyID that will be sent: \" + data.legacyID);",
                   "console.log(\"Call Date that will be sent: \" + data.Call_dt);",
                   "console.log(\"Call Time that will be sent: \" + data.Call_tm);",
