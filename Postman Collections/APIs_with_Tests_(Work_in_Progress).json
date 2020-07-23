@@ -41552,7 +41552,7 @@
                           "    });\r",
                           "\r",
                           "\r",
-                          "    pm.test(\"TEST1G: consumer address check\", function() {\r",
+                          "    pm.test(\"TEST1G: Savings check\", function() {\r",
                           "        if(jsonData[0].savings!=null){\r",
                           "            pm.expect(jsonData[0].savings.sfsSavingID).to.equal(data.sfs_saving_id);\r",
                           "            pm.expect(jsonData[0].savings.savingTypeCode).to.equal(data.saving_type);\r",
