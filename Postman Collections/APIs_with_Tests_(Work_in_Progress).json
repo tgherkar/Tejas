@@ -49364,6 +49364,7 @@
                   " pm.test(\"Check consumerID variable isn't empty\", function () {",
                   "     pm.expect('consumerID').to.not.be.empty;",
                   "});",
+                  "}",
                   ""
                 ],
                 "type": "text/javascript"
