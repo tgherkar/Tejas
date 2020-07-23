@@ -41552,7 +41552,7 @@
                           "    });\r",
                           "       \r",
                           "    pm.test(\"TEST1I: Document upsertSoftCompId check\", function() {\r",
-                          "        pm.expect(jsonData[0].upsertSoftCompId).to.equal(JSON.stringify(data.upsrt_soft_comp_id));\r",
+                          "        pm.expect(jsonData[0].sfsSavingID).to.equal(JSON.stringify(data.sfs_saving_id));\r",
                           "    });\r",
                           "\r",
                           "    pm.test(\"TEST1J: upsertTransactionNumber check\", function() {\r",
