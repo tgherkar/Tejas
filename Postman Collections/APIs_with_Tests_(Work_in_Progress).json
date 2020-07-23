@@ -41557,7 +41557,7 @@
                           "            pm.expect(jsonData[0].savings.sfsSavingID).to.equal(data.sfs_saving_id);\r",
                           "            pm.expect(jsonData[0].savings.savingTypeCode).to.equal(data.saving_type);\r",
                           "            pm.expect(jsonData[0].savings.amount).to.equal(data.saving_amount);\r",
-                          "            pm.expect(jsonData[0].savings.city).to.equal(data.City);\r",
+                          "            pm.expect(jsonData[0].savings.frequencyCode).to.equal(data.saving_frequency);\r",
                           "            pm.expect(jsonData[0].savings.notes).to.equal(data.saving_notes);\r",
                           "        }\r",
                           "    });\r",
