@@ -41544,7 +41544,7 @@
                           "    });\r",
                           "\r",
                           "    pm.test(\"TEST1G: Document Template Version Soft Delete Flag check\", function() {\r",
-                          "        pm.expect(jsonData[0].documentTemplateVersionSoftDeleteFlag).to.equal(data.documentTemplateVersionSoftDeleteFlag);\r",
+                          "        pm.expect(jsonData[0].copyNotes).to.equal(data.copy_notes);\r",
                           "    });\r",
                           "\r",
                           "    pm.test(\"TEST1H: Document upsertDateTime\", function() {\r",
