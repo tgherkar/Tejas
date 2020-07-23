@@ -44114,6 +44114,7 @@
                           "            pm.expect(jsonData[0].consumerDetail.nameOfEmployer).to.equal(data.name_of_employer);\r",
                           "            pm.expect(jsonData[0].consumerDetail.partnersEmploymentStatusCode).to.equal(JSON.stringify(data.part_employment_code));\r",
                           "            pm.expect(jsonData[0].consumerDetail.houseContributorEmploymentStatusCode).to.equal(JSON.stringify(data.household_cont_employment_code));\r",
+                          "            pm.expect(jsonData[0].consumerDetail.isInPaidEmployment).to.equal(JSON.stringify(data.is_in_paid_employment));\r",
                           "            \r",
                           "        }\r",
                           "    });\r",
