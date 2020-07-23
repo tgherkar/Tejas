@@ -49366,7 +49366,7 @@
                   "    });",
                   "",
                   "    pm.test(\"TEST1D: Default check\", function() {",
-                  "        pm.expect(jsonData[0].isDefault).to.equal(JSON.stringify(data.residence_default));",
+                  "        pm.expect(jsonData[0].isDefault).to.equal(JSON.stringify(data.employ_default));",
                   "    });",
                   "",
                   "",
