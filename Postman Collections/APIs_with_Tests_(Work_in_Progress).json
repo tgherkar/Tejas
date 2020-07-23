@@ -41540,7 +41540,7 @@
                           "    });\r",
                           "\r",
                           "    pm.test(\"TEST1F: Document Template Source File Blog check\", function() {\r",
-                          "        pm.expect(jsonData[0].documentTemplateSourceFileBlob).to.equal(data.documentTemplateSourceFileBlob);\r",
+                          "        pm.expect(jsonData[0].copyType).to.equal(data.copy_type);\r",
                           "    });\r",
                           "\r",
                           "    pm.test(\"TEST1G: Document Template Version Soft Delete Flag check\", function() {\r",
