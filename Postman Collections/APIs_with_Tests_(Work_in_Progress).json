@@ -55112,7 +55112,7 @@
                 "type": "text"
               }
             ],
-            "url": "{{BaseURL}}/linkedconsumer/suggestion/981a07dc-a458-4452-b108-005cc204ddef/undelete"
+            "url": "{{BaseURL}}/linkedconsumer/suggestion/{{sugg_link_id}}/undelete"
           },
           "response": []
         },
