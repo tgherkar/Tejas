@@ -44136,6 +44136,8 @@
                           "\r",
                           "            pm.expect(jsonData[0].consumerDetail.mortgageAmount).to.equal(JSON.stringify(data.mortgage_amount));\r",
                           "\r",
+                          "            pm.expect(jsonData[0].consumerDetail.repayingDebtTypeCode).to.equal(JSON.stringify(data.repaying_debt_type));\r",
+                          "\r",
                           "            \r",
                           "            \r",
                           "\r",
