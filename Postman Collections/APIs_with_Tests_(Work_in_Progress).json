@@ -54615,6 +54615,20 @@
                   "    }\r",
                   "}\r",
                   "//console.log(\"End of Pre-req script\");\r",
+                  "\r",
+                  "\r",
+                  "/*\r",
+                  "\r",
+                  "SELECT DISTINCT TOP 20 SLC.ConsumerID, SL.*\r",
+                  "FROM dbo.SuggestedLinkConsumer SLC\r",
+                  "JOIN dbo.SuggestedLink SL ON SL.SuggestedLinkID = SLC.SuggestedLinkID\r",
+                  "WHERE SL.DeletedDate IS NULL AND SL.MatchCount = '4'\r",
+                  "--AND SuggestedLinkID = 'FF83A71A-01F7-4DEF-A4C5-001676E1D1FD'\r",
+                  "\r",
+                  "*/\r",
+                  "\r",
+                  "\r",
+                  "\r",
                   ""
                 ],
                 "type": "text/javascript"
@@ -54825,7 +54839,7 @@
               }
             ],
             "url": {
-              "raw": "https://cabotapi-test.cabotcm.com/linkedconsumer/consumer/2585947/suggestions",
+              "raw": "https://cabotapi-test.cabotcm.com/linkedconsumer/consumer/{{cnsmr_id}}/suggestions",
               "protocol": "https",
               "host": [
                 "cabotapi-test",
@@ -54835,7 +54849,7 @@
               "path": [
                 "linkedconsumer",
                 "consumer",
-                "2585947",
+                "{{cnsmr_id}}",
                 "suggestions"
               ],
               "query": [
