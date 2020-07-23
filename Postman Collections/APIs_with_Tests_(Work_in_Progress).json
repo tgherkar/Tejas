@@ -44134,6 +44134,8 @@
                           "\r",
                           "            pm.expect(jsonData[0].consumerDetail.propertyValue).to.equal(JSON.stringify(data.property_value));\r",
                           "\r",
+                          "            pm.expect(jsonData[0].consumerDetail.mortgageAmount).to.equal(JSON.stringify(data.mortgage_amount));\r",
+                          "\r",
                           "            \r",
                           "            \r",
                           "\r",
