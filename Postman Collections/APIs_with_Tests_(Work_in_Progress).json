@@ -41550,6 +41550,17 @@
                           "    pm.test(\"TEST1H: Document upsertDateTime\", function() {\r",
                           "        pm.expect(jsonData[0].upsertDateTime.split('T')[0]).to.equal(data.upstrt_dttm);\r",
                           "    });\r",
+                          "\r",
+                          "\r",
+                          "    pm.test(\"TEST1G: consumer address check\", function() {\r",
+                          "        if(jsonData[0].savings!=null){\r",
+                          "            pm.expect(jsonData[0].consumerAddress.addressLine1).to.equal(data.AddressLine1);\r",
+                          "            pm.expect(jsonData[0].consumerAddress.addressLine2).to.equal(data.AddressLine2);\r",
+                          "            pm.expect(jsonData[0].consumerAddress.addressLine3).to.equal(data.AddressLine3);\r",
+                          "            pm.expect(jsonData[0].consumerAddress.city).to.equal(data.City);\r",
+                          "            pm.expect(jsonData[0].consumerAddress.state).to.equal(data.saving_notes);\r",
+                          "        }\r",
+                          "    });\r",
                           "       \r",
                           "    pm.test(\"TEST1I: Document upsertSoftCompId check\", function() {\r",
                           "        pm.expect(jsonData[0].sfsSavingID).to.equal(JSON.stringify(data.sfs_saving_id));\r",
@@ -41560,7 +41571,7 @@
                           "    });\r",
                           "\r",
                           "    pm.test(\"TEST1K: Document Upsert User ID check\", function() {\r",
-                          "        pm.expect(jsonData[0].upsertUserId).to.equal(JSON.stringify(data.upsrt_usr_id));\r",
+                          "        pm.expect(jsonData[0].frequencyCode).to.equal(JSON.stringify(data.saving_frequency));\r",
                           "    });\r",
                           "\r",
                           "\r",
@@ -41742,7 +41753,7 @@
                       "variable": [
                         {
                           "key": "id",
-                          "value": "90A3AAED-3093-E911-8298-005056927C52",
+                          "value": "15591CC1-59B4-E911-86DA-005056927C52",
                           "type": "string",
                           "description": "uuid"
                         }
