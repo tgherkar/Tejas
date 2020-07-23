@@ -49192,7 +49192,7 @@
                   "    });",
                   "",
                   "    pm.test(\"TEST1D: Default check\", function() {",
-                  "        pm.expect(jsonData[0].isDefault).to.equal(JSON.stringify(data.date_received));",
+                  "        pm.expect(jsonData[0].isDefault).to.equal(JSON.stringify(data.residence_default));",
                   "    });",
                   "",
                   "",
