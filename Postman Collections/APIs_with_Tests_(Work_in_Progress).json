@@ -30450,7 +30450,55 @@
           ]
         },
         {
-          "name": "getfullreferencelist",
+          "name": "/swagger",
+          "_postman_id": "54ee8516-0ed6-4aa4-b333-88910c9e9bde",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSIsImtpZCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSJ9.eyJhdWQiOiJhcGk6Ly84MTE2N2QzZC04NTNmLTQyMDctODBmYS0zMjI1YTQ5MjdhY2EiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMvIiwiaWF0IjoxNTg2Mjc1Nzk0LCJuYmYiOjE1ODYyNzU3OTQsImV4cCI6MTU4NjI3OTY5NCwiYWlvIjoiNDJkZ1lFaGsvT2E1TWR4eGxweDJRS1RZdi9CUEFBPT0iLCJhcHBpZCI6IjIxYjhmYmVmLTcyNmItNDdhNC04MTM1LTFiY2ZlMmJhOWE5OCIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5My8iLCJvaWQiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJzdWIiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJ0aWQiOiIzNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMiLCJ1dGkiOiIwbEZqUHQ1ZnFrYXUzVXQ1aFZRYUFBIiwidmVyIjoiMS4wIn0.JYl7DKA7lGq3rsg_XXiv9Z14DbCnJDe7xG1Yjtk6vvZEIs72oFh4gxl9eK8gs0A-RHnMkMp8ZW60jFRqS7sZJfvkcWx7W5DGxbfmfYmHB6cJ2QM2BY1cYPvo9HU5mTL7fWf1-JqNHxPUyFAfpFKRoefF6vG-_cuF1A864etxhZiROvG-LVMpVNWVrfa3Zzge1dLgiKNI1cWZijFn2N2jroBoqd7kC98xob5O4eDaHlRH-Z_E3V8rnDhR4T7aScRjSr3Urw-kE9exVEowe6aMSklVBAyVSkW3SDc1gze0dlAkOCj1s6wVysSIp1NvarNAz1nFCRdYbgjwl7n3XcFRkA",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": ""
+              }
+            ],
+            "url": "{{BaseURL}}/udp/swagger"
+          },
+          "response": [
+            {
+              "id": "3acc986b-e2a6-4e0a-9a91-fb07de86dc75",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/swagger"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "getreferencelist Copy",
           "event": [
             {
               "listen": "test",
@@ -30601,26 +30649,26 @@
               },
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
-                "type": "text",
-                "value": "{{Ocp-Apim-Subscription-Key-South}}"
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
               },
               {
                 "key": "ocp-apim-subscription-key-West",
-                "type": "text",
-                "value": "{{Ocp-Apim-Subscription-Key-West}}"
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
               },
               {
                 "key": "Content-Type",
-                "type": "text",
-                "value": "application/json"
+                "value": "application/json",
+                "type": "text"
               },
               {
                 "key": "username",
-                "type": "text",
-                "value": "Mike"
+                "value": "Mike",
+                "type": "text"
               }
             ],
-            "url": "{{BaseURL}}/udp/fullreferencevalues/70",
+            "url": "{{BaseURL}}/udp/referencevalues/70",
             "description": "Get list of UDP Reference Values"
           },
           "response": [
@@ -30858,54 +30906,6 @@
               },
               "status": "Forbidden",
               "code": 403,
-              "_postman_previewlanguage": "text",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "cookie": [],
-              "responseTime": null,
-              "body": ""
-            }
-          ]
-        },
-        {
-          "name": "/swagger",
-          "_postman_id": "54ee8516-0ed6-4aa4-b333-88910c9e9bde",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "auth": {
-              "type": "oauth2",
-              "oauth2": {
-                "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSIsImtpZCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSJ9.eyJhdWQiOiJhcGk6Ly84MTE2N2QzZC04NTNmLTQyMDctODBmYS0zMjI1YTQ5MjdhY2EiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMvIiwiaWF0IjoxNTg2Mjc1Nzk0LCJuYmYiOjE1ODYyNzU3OTQsImV4cCI6MTU4NjI3OTY5NCwiYWlvIjoiNDJkZ1lFaGsvT2E1TWR4eGxweDJRS1RZdi9CUEFBPT0iLCJhcHBpZCI6IjIxYjhmYmVmLTcyNmItNDdhNC04MTM1LTFiY2ZlMmJhOWE5OCIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5My8iLCJvaWQiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJzdWIiOiI4ZWVmMzgyOS04MDNlLTQzN2UtYTQ5NC01NzQ1NzVkNTBlZTgiLCJ0aWQiOiIzNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMiLCJ1dGkiOiIwbEZqUHQ1ZnFrYXUzVXQ1aFZRYUFBIiwidmVyIjoiMS4wIn0.JYl7DKA7lGq3rsg_XXiv9Z14DbCnJDe7xG1Yjtk6vvZEIs72oFh4gxl9eK8gs0A-RHnMkMp8ZW60jFRqS7sZJfvkcWx7W5DGxbfmfYmHB6cJ2QM2BY1cYPvo9HU5mTL7fWf1-JqNHxPUyFAfpFKRoefF6vG-_cuF1A864etxhZiROvG-LVMpVNWVrfa3Zzge1dLgiKNI1cWZijFn2N2jroBoqd7kC98xob5O4eDaHlRH-Z_E3V8rnDhR4T7aScRjSr3Urw-kE9exVEowe6aMSklVBAyVSkW3SDc1gze0dlAkOCj1s6wVysSIp1NvarNAz1nFCRdYbgjwl7n3XcFRkA",
-                "tokenType": "Bearer",
-                "addTokenTo": "header"
-              }
-            },
-            "method": "GET",
-            "header": [
-              {
-                "key": "Ocp-Apim-Subscription-Key-South",
-                "value": ""
-              }
-            ],
-            "url": "{{BaseURL}}/udp/swagger"
-          },
-          "response": [
-            {
-              "id": "3acc986b-e2a6-4e0a-9a91-fb07de86dc75",
-              "name": "Success",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "url": "{{baseUrl}}/swagger"
-              },
-              "status": "OK",
-              "code": 200,
               "_postman_previewlanguage": "text",
               "header": [
                 {
