@@ -49296,7 +49296,7 @@
               "script": {
                 "id": "ce1f26ce-3544-459c-b315-6c863411a6bd",
                 "exec": [
-                  "var jsonData = JSON.parse(responseBody);",
+                  "try{",
                   "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));",
                   "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));",
                   "console.log(\"Average response time: \" + responseTime + \"ms\");",
@@ -49350,6 +49350,7 @@
                   "});",
                   "",
                   "///Negative Test",
+                  "} catch (e){",
                   "",
                   "pm.test(\"Incorrect Key Test\", function() {",
                   "    var employCode = schema.properties.employmentstatusCode;",
