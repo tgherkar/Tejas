@@ -44159,7 +44159,7 @@
                           "pm.test(\"TEST1G: description check\", function() {\r",
                           "        if(jsonData[0].description!=null){\r",
                           "            pm.expect(jsonData[0].savings.sfsDescriptionID).to.equal(JSON.stringify(data.sfs_description_id));\r",
-                          "            pm.expect(jsonData[0].savings.savingTypeCode).to.equal(JSON.stringify(data.saving_type));\r",
+                          "            pm.expect(jsonData[0].savings.value).to.equal(JSON.stringify(data.value));\r",
                           "        }\r",
                           "    });\r",
                           "\r",
