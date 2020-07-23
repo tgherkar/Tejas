@@ -44112,7 +44112,7 @@
                           "            pm.expect(jsonData[0].consumerDetail.householdContributorCode).to.equal(JSON.stringify(data.household_cont_code));\r",
                           "            pm.expect(jsonData[0].consumerDetail.residenceStatusCode).to.equal(JSON.stringify(data.residence_status_code));\r",
                           "            pm.expect(jsonData[0].consumerDetail.nameOfEmployer).to.equal(data.name_of_employer);\r",
-                          "            pm.expect(jsonData[0].consumerDetail.employmentStatusCode).to.equal(JSON.stringify(data.saving_notes));\r",
+                          "            pm.expect(jsonData[0].consumerDetail.employmentStatusCode).to.equal(JSON.stringify(data.employment_code));\r",
                           "        }\r",
                           "    });\r",
                           "\r",
