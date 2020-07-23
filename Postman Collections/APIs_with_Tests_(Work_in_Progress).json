@@ -41555,7 +41555,7 @@
                           "    pm.test(\"TEST1G: consumer address check\", function() {\r",
                           "        if(jsonData[0].savings!=null){\r",
                           "            pm.expect(jsonData[0].savings.sfsSavingID).to.equal(data.sfs_saving_id);\r",
-                          "            pm.expect(jsonData[0].savings.addressLine2).to.equal(data.AddressLine2);\r",
+                          "            pm.expect(jsonData[0].savings.savingTypeCode).to.equal(data.saving_type);\r",
                           "            pm.expect(jsonData[0].savings.addressLine3).to.equal(data.AddressLine3);\r",
                           "            pm.expect(jsonData[0].savings.city).to.equal(data.City);\r",
                           "            pm.expect(jsonData[0].savings.notes).to.equal(data.saving_notes);\r",
