@@ -60406,6 +60406,2543 @@
       "_postman_id": "f456ff3e-4fd2-4938-ac01-0437bd3e7292"
     },
     {
+      "name": "Consumer APIs Copy",
+      "item": [
+        {
+          "name": "GetByConsumerId",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "3571a3d6-4bf4-476d-9c43-9bb75a0aa73a",
+                "exec": [
+                  "try {",
+                  "pm.environment.set(\"response time\", (pm.response.responseTime) + Number(postman.getEnvironmentVariable(\"response time\")));",
+                  "pm.environment.set(\"responses\", 1 + Number(postman.getEnvironmentVariable(\"responses\")));",
+                  "console.log(\"Average response time: \" + responseTime + \"ms\");",
+                  "let expectedCode = pm.iterationData.get(\"expectedHttpCode\");",
+                  "var jsonData = JSON.parse(responseBody);",
+                  "var req = request.url;",
+                  "var query = request.url.split('/');",
+                  "//console.log(req);",
+                  "    pm.test(\"TEST1: Consumer ID Check\", function () {",
+                  "        if (data.cnsmr_id == null) {",
+                  "            console.log(query[5]);",
+                  "            pm.expect(JSON.stringify(jsonData.consumerID)).to.deep.equal(query[5]);",
+                  "            pm.expect(JSON.stringify(jsonData.consumerAddress.consumerID)).to.deep.equal(query[5]);",
+                  "            if (jsonData.consumerPhones != null) {",
+                  "                for (var i = 0; i < (jsonData.consumerPhones.length); i++) {",
+                  "                    pm.expect(JSON.stringify(jsonData.consumerPhones[i].consumerID)).to.deep.equal(query[5]);",
+                  "                };",
+                  "            }",
+                  "            if (jsonData.linkedConsumerCount > 0) {",
+                  "                console.log(\"linked account - can't verify consumer ID for linked account\")",
+                  "            } else {",
+                  "                if (jsonData.consumerAccount != null){",
+                  "                pm.expect(JSON.stringify(jsonData.consumerAccount.consumerID)).to.deep.equal(query[5]);}",
+                  "            }",
+                  "            if (jsonData.preDefault != null){",
+                  "            pm.expect(JSON.stringify(jsonData.preDefault.consumerID)).to.deep.equal(query[5]);}",
+                  "        } else {",
+                  "            pm.expect(jsonData.consumerID).to.deep.equal(data.cnsmr_id);",
+                  "        }",
+                  "    });",
+                  "",
+                  "    pm.test(\"TEST2: Status code Check\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"TEST3: Response Header Checks\", function () {",
+                  "        pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');",
+                  "    });",
+                  "",
+                  "    pm.test(\"TEST4: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {",
+                  "        pm.expect(pm.response.responseTime).to.be.below(5000);",
+                  "    });",
+                  "",
+                  "    var Ajv = require('ajv'),",
+                  "        ajv = new Ajv({ logger: console }),",
+                  "        schema = {",
+                  "    \"required\": [",
+                  "        \"consumerID\",",
+                  "        \"legacyID\",",
+                  "        \"agencyID\",",
+                  "        \"title\",",
+                  "        \"firstName\",",
+                  "        \"lastName\",",
+                  "        \"dateOfBirth\",",
+                  "        \"email\",",
+                  "        \"emailValidityCode\",",
+                  "        \"emailValidityValueText\",",
+                  "        \"emailConfirmedDate\",",
+                  "        \"consumerAddress\",",
+                  "        \"consumerPhones\",",
+                  "        \"consumerAccount\",",
+                  "        \"preDefault\",",
+                  "        \"linkedConsumerCount\",",
+                  "        \"consumerCallBack\"",
+                  "    ],",
+                  "    \"properties\": {",
+                  "        \"consumerID\": {",
+                  "            \"$id\": \"#/properties/consumerID\",",
+                  "            \"type\": \"integer\"",
+                  "        },",
+                  "        \"legacyID\": {",
+                  "            \"$id\": \"#/properties/legacyID\",",
+                  "            \"type\": \"string\"",
+                  "        },",
+                  "        \"agencyID\": {",
+                  "            \"$id\": \"#/properties/agencyID\",",
+                  "            \"type\": \"integer\"",
+                  "        },",
+                  "        \"title\": {",
+                  "            \"$id\": \"#/properties/title\",",
+                  "            \"type\": [\"string\", \"null\"]",
+                  "        },",
+                  "        \"firstName\": {",
+                  "            \"$id\": \"#/properties/firstName\",",
+                  "            \"type\": [\"string\", \"null\"]",
+                  "        },",
+                  "        \"lastName\": {",
+                  "            \"$id\": \"#/properties/lastName\",",
+                  "            \"type\": \"string\"",
+                  "        },",
+                  "        \"dateOfBirth\": {",
+                  "            \"$id\": \"#/properties/dateOfBirth\",",
+                  "            \"type\": \"string\"",
+                  "        },",
+                  "        \"email\": {",
+                  "            \"$id\": \"#/properties/email\",",
+                  "            \"type\": [\"string\", \"null\"]",
+                  "        },",
+                  "        \"emailValidityCode\": {",
+                  "            \"$id\": \"#/properties/emailValidityCode\",",
+                  "            \"type\": [\"integer\", \"null\"]",
+                  "        },",
+                  "        \"emailValidityValueText\": {",
+                  "            \"$id\": \"#/properties/emailValidityValueText\",",
+                  "            \"type\": [\"string\", \"null\"]",
+                  "        },",
+                  "        \"emailConfirmedDate\": {",
+                  "            \"$id\": \"#/properties/emailConfirmedDate\",",
+                  "            \"type\": [\"string\", \"null\"]",
+                  "        },",
+                  "        \"consumerAddress\": {",
+                  "            \"required\": [",
+                  "                \"consumerID\",",
+                  "                \"addressLine1\",",
+                  "                \"addressLine2\",",
+                  "                \"addressLine3\",",
+                  "                \"city\",",
+                  "                \"state\",",
+                  "                \"county\",",
+                  "                \"postCode\",",
+                  "                \"country\",",
+                  "                \"source\"",
+                  "            ],",
+                  "            \"properties\": {",
+                  "                \"consumerID\": {",
+                  "                    \"$id\": \"#/properties/consumerAddress/properties/consumerID\",",
+                  "                    \"type\": \"integer\"",
+                  "                },",
+                  "                \"addressLine1\": {",
+                  "                    \"$id\": \"#/properties/consumerAddress/properties/addressLine1\",",
+                  "                    \"type\": [\"string\", \"null\"]",
+                  "                },",
+                  "                \"addressLine2\": {",
+                  "                    \"$id\": \"#/properties/consumerAddress/properties/addressLine2\",",
+                  "                    \"type\": [\"string\", \"null\"]",
+                  "                },",
+                  "                \"addressLine3\": {",
+                  "                    \"$id\": \"#/properties/consumerAddress/properties/addressLine3\",",
+                  "                    \"type\": [\"string\", \"null\"]",
+                  "                },",
+                  "                \"city\": {",
+                  "                    \"$id\": \"#/properties/consumerAddress/properties/city\",",
+                  "                    \"type\": [\"string\", \"null\"]",
+                  "                },",
+                  "                \"state\": {",
+                  "                    \"$id\": \"#/properties/consumerAddress/properties/state\",",
+                  "                    \"type\": [\"string\", \"null\"]",
+                  "                },",
+                  "                \"county\": {",
+                  "                    \"$id\": \"#/properties/consumerAddress/properties/county\",",
+                  "                    \"type\": [\"string\", \"null\"]",
+                  "                },",
+                  "                \"postCode\": {",
+                  "                    \"$id\": \"#/properties/consumerAddress/properties/postCode\",",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"country\": {",
+                  "                    \"$id\": \"#/properties/consumerAddress/properties/country\",",
+                  "                    \"type\": [\"string\", \"null\"]",
+                  "                },",
+                  "                \"source\": {",
+                  "                    \"$id\": \"#/properties/consumerAddress/properties/source\",",
+                  "                    \"type\": [\"string\", \"null\"]",
+                  "                }",
+                  "            },",
+                  "            \"$id\": \"#/properties/consumerAddress\",",
+                  "            \"type\": \"object\"",
+                  "        },",
+                  "        \"consumerPhones\": {",
+                  "            \"items\": {",
+                  "                \"required\": [",
+                  "                    \"consumerPhoneID\",",
+                  "                    \"consumerID\",",
+                  "                    \"number\",",
+                  "                    \"sourceCode\",",
+                  "                    \"sourceValueText\",",
+                  "                    \"statusCode\",",
+                  "                    \"statusValueText\",",
+                  "                    \"typeCode\",",
+                  "                    \"typeValueText\",",
+                  "                    \"countryCode\",",
+                  "                    \"countryValueText\",",
+                  "                    \"softDeleteFlag\",",
+                  "                    \"qualityScoreNumber\",",
+                  "                    \"consentFlag\",",
+                  "                    \"consentDate\",",
+                  "                    \"technologyTypeCode\",",
+                  "                    \"technologyTypeValueText\",",
+                  "                    \"confirmedDate\"",
+                  "                ],",
+                  "                \"properties\": {",
+                  "                    \"consumerPhoneID\": {",
+                  "                        \"$id\": \"#/properties/consumerPhones/items/properties/consumerPhoneID\",",
+                  "                        \"type\": \"integer\"",
+                  "                    },",
+                  "                    \"consumerID\": {",
+                  "                        \"$id\": \"#/properties/consumerPhones/items/properties/consumerID\",",
+                  "                        \"type\": \"integer\"",
+                  "                    },",
+                  "                    \"number\": {",
+                  "                        \"$id\": \"#/properties/consumerPhones/items/properties/number\",",
+                  "                        \"type\": [\"string\", \"null\"]",
+                  "                    },",
+                  "                    \"sourceCode\": {",
+                  "                        \"$id\": \"#/properties/consumerPhones/items/properties/sourceCode\",",
+                  "                        \"type\": [\"integer\", \"null\"]",
+                  "                    },",
+                  "                    \"sourceValueText\": {",
+                  "                        \"$id\": \"#/properties/consumerPhones/items/properties/sourceValueText\",",
+                  "                        \"type\": [\"string\", \"null\"]",
+                  "                    },",
+                  "                    \"statusCode\": {",
+                  "                        \"$id\": \"#/properties/consumerPhones/items/properties/statusCode\",",
+                  "                        \"type\": [\"integer\", \"null\"]",
+                  "                    },",
+                  "                    \"statusValueText\": {",
+                  "                        \"$id\": \"#/properties/consumerPhones/items/properties/statusValueText\",",
+                  "                        \"type\": [\"string\", \"null\"]",
+                  "                    },",
+                  "                    \"typeCode\": {",
+                  "                        \"$id\": \"#/properties/consumerPhones/items/properties/typeCode\",",
+                  "                        \"type\": [\"integer\", \"null\"]",
+                  "                    },",
+                  "                    \"typeValueText\": {",
+                  "                        \"$id\": \"#/properties/consumerPhones/items/properties/typeValueText\",",
+                  "                        \"type\": [\"string\", \"null\"]",
+                  "                    },",
+                  "                    \"countryCode\": {",
+                  "                        \"$id\": \"#/properties/consumerPhones/items/properties/countryCode\",",
+                  "                        \"type\": [\"integer\", \"null\"]",
+                  "                    },",
+                  "                    \"countryValueText\": {",
+                  "                        \"$id\": \"#/properties/consumerPhones/items/properties/countryValueText\",",
+                  "                        \"type\": [\"string\", \"null\"]",
+                  "                    },",
+                  "                    \"softDeleteFlag\": {",
+                  "                        \"$id\": \"#/properties/consumerPhones/items/properties/softDeleteFlag\",",
+                  "                        \"type\": \"string\"",
+                  "                    },",
+                  "                    \"qualityScoreNumber\": {",
+                  "                        \"$id\": \"#/properties/consumerPhones/items/properties/qualityScoreNumber\",",
+                  "                        \"type\": [\"integer\", \"null\"]",
+                  "                    },",
+                  "                    \"consentFlag\": {",
+                  "                        \"$id\": \"#/properties/consumerPhones/items/properties/consentFlag\",",
+                  "                        \"type\": [\"string\", \"null\"]",
+                  "                    },",
+                  "                    \"consentDate\": {",
+                  "                        \"$id\": \"#/properties/consumerPhones/items/properties/consentDate\",",
+                  "                        \"type\": [\"string\", \"null\"]",
+                  "                    },",
+                  "                    \"technologyTypeCode\": {",
+                  "                        \"$id\": \"#/properties/consumerPhones/items/properties/technologyTypeCode\",",
+                  "                        \"type\": [\"integer\", \"null\"]",
+                  "                    },",
+                  "                    \"technologyTypeValueText\": {",
+                  "                        \"$id\": \"#/properties/consumerPhones/items/properties/technologyTypeValueText\",",
+                  "                        \"type\": [\"string\", \"null\"]",
+                  "                    },",
+                  "                    \"confirmedDate\": {",
+                  "                        \"$id\": \"#/properties/consumerPhones/items/properties/confirmedDate\",",
+                  "                        \"type\": [\"string\", \"null\"]",
+                  "                    }",
+                  "                },",
+                  "                \"$id\": \"#/properties/consumerPhones/items\",",
+                  "                \"type\": [\"object\", \"null\"]",
+                  "            },",
+                  "            \"$id\": \"#/properties/consumerPhones\",",
+                  "            \"type\": [\"array\", \"null\"]",
+                  "        },",
+                  "        \"consumerAccount\": {",
+                  "            \"required\": [",
+                  "                \"consumerAccountID\",",
+                  "                \"consumerID\",",
+                  "                \"currentBalance\",",
+                  "                \"originalBalance\",",
+                  "                \"owner\",",
+                  "                \"servicer\",",
+                  "                \"consumerAccountIdentifierAgencyId\"",
+                  "            ],",
+                  "            \"properties\": {",
+                  "                \"consumerAccountID\": {",
+                  "                    \"$id\": \"#/properties/consumerAccount/properties/consumerAccountID\",",
+                  "                    \"type\": \"integer\"",
+                  "                },",
+                  "                \"consumerID\": {",
+                  "                    \"$id\": \"#/properties/consumerAccount/properties/consumerID\",",
+                  "                    \"type\": \"integer\"",
+                  "                },",
+                  "                \"currentBalance\": {",
+                  "                    \"$id\": \"#/properties/consumerAccount/properties/currentBalance\",",
+                  "                    \"type\": \"number\"",
+                  "                },",
+                  "                \"originalBalance\": {",
+                  "                    \"$id\": \"#/properties/consumerAccount/properties/originalBalance\",",
+                  "                    \"type\": \"number\"",
+                  "                },",
+                  "                \"owner\": {",
+                  "                    \"$id\": \"#/properties/consumerAccount/properties/owner\",",
+                  "                    \"type\": [\"string\", \"null\"]",
+                  "                },",
+                  "                \"servicer\": {",
+                  "                    \"$id\": \"#/properties/consumerAccount/properties/servicer\",",
+                  "                    \"type\": [\"string\", \"null\"]",
+                  "                },",
+                  "                \"consumerAccountIdentifierAgencyId\": {",
+                  "                    \"$id\": \"#/properties/consumerAccount/properties/consumerAccountIdentifierAgencyId\",",
+                  "                    \"type\": [\"integer\", \"null\"]",
+                  "                }",
+                  "            },",
+                  "            \"$id\": \"#/properties/consumerAccount\",",
+                  "            \"type\": [\"object\", \"null\"]",
+                  "        },",
+                  "        \"preDefault\": {",
+                  "            \"required\": [",
+                  "                \"consumerID\",",
+                  "                \"startArrearsStatus\",",
+                  "                \"startArrearsAmount\",",
+                  "                \"currentArrearsStatus\",",
+                  "                \"currentArrearsAmount\",",
+                  "                \"currentDueAmount\",",
+                  "                \"isSpecialArrangementFlag\",",
+                  "                \"specialArrangementAmount\",",
+                  "                \"repaymentPercentage\",",
+                  "                \"creditType\",",
+                  "                \"isAnniversaryFlag\",",
+                  "                \"contractualInstalmentAmount\",",
+                  "                \"isActive\"",
+                  "            ],",
+                  "            \"properties\": {",
+                  "                \"consumerID\": {",
+                  "                    \"$id\": \"#/properties/preDefault/properties/consumerID\",",
+                  "                    \"type\": \"integer\"",
+                  "                },",
+                  "                \"startArrearsStatus\": {",
+                  "                    \"$id\": \"#/properties/preDefault/properties/startArrearsStatus\",",
+                  "                    \"type\": [\"integer\", \"null\"]",
+                  "                },",
+                  "                \"startArrearsAmount\": {",
+                  "                    \"$id\": \"#/properties/preDefault/properties/startArrearsAmount\",",
+                  "                    \"type\": [\"number\", \"null\"]",
+                  "                },",
+                  "                \"currentArrearsStatus\": {",
+                  "                    \"$id\": \"#/properties/preDefault/properties/currentArrearsStatus\",",
+                  "                    \"type\": [\"integer\", \"null\"]",
+                  "                },",
+                  "                \"currentArrearsAmount\": {",
+                  "                    \"$id\": \"#/properties/preDefault/properties/currentArrearsAmount\",",
+                  "                    \"type\": [\"number\", \"null\"]",
+                  "                },",
+                  "                \"currentDueAmount\": {",
+                  "                    \"$id\": \"#/properties/preDefault/properties/currentDueAmount\",",
+                  "                    \"type\": [\"number\", \"null\"]",
+                  "                },",
+                  "                \"isSpecialArrangementFlag\": {",
+                  "                    \"$id\": \"#/properties/preDefault/properties/isSpecialArrangementFlag\",",
+                  "                    \"type\": \"boolean\"",
+                  "                },",
+                  "                \"specialArrangementAmount\": {",
+                  "                    \"$id\": \"#/properties/preDefault/properties/specialArrangementAmount\",",
+                  "                    \"type\": [\"number\", \"null\"]",
+                  "                },",
+                  "                \"repaymentPercentage\": {",
+                  "                    \"$id\": \"#/properties/preDefault/properties/repaymentPercentage\",",
+                  "                    \"type\": [\"number\", \"null\"]",
+                  "                },",
+                  "                \"creditType\": {",
+                  "                    \"$id\": \"#/properties/preDefault/properties/creditType\",",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"isAnniversaryFlag\": {",
+                  "                    \"$id\": \"#/properties/preDefault/properties/isAnniversaryFlag\",",
+                  "                    \"type\": \"boolean\"",
+                  "                },",
+                  "                \"contractualInstalmentAmount\": {",
+                  "                    \"$id\": \"#/properties/preDefault/properties/contractualInstalmentAmount\",",
+                  "                    \"type\": [\"number\", \"null\"]",
+                  "                },",
+                  "                \"isActive\": {",
+                  "                    \"$id\": \"#/properties/preDefault/properties/isActive\",",
+                  "                    \"type\": \"null\"",
+                  "                }",
+                  "            },",
+                  "            \"$id\": \"#/properties/preDefault\",",
+                  "            \"type\": [\"object\", \"null\"]",
+                  "        },",
+                  "        \"linkedConsumerCount\": {",
+                  "            \"$id\": \"#/properties/linkedConsumerCount\",",
+                  "            \"type\": \"integer\"",
+                  "        },",
+                  "        \"consumerCallBack\": {",
+                  "            \"required\": [",
+                  "                \"isCallBackOutstanding\",",
+                  "                \"callbackRequestTime\",",
+                  "                \"phoneNumber\",",
+                  "                \"category\",",
+                  "                \"reasonForCall\",",
+                  "                \"requestDate\",",
+                  "                \"requestUserId\",",
+                  "                \"isCallBackAllowed\",",
+                  "                \"callBackDisallowedReason\",",
+                  "                \"actionCode\",",
+                  "                \"resultCode\"",
+                  "            ],",
+                  "            \"properties\": {",
+                  "                \"isCallBackOutstanding\": {",
+                  "                    \"$id\": \"#/properties/consumerCallBack/properties/isCallBackOutstanding\",",
+                  "                    \"type\": \"boolean\"",
+                  "                },",
+                  "                \"callbackRequestTime\": {",
+                  "                    \"$id\": \"#/properties/consumerCallBack/properties/callbackRequestTime\",",
+                  "                    \"type\": [\"string\", \"null\"]",
+                  "                },",
+                  "                \"phoneNumber\": {",
+                  "                    \"$id\": \"#/properties/consumerCallBack/properties/phoneNumber\",",
+                  "                    \"type\": [\"string\", \"null\"]",
+                  "                },",
+                  "                \"category\": {",
+                  "                    \"$id\": \"#/properties/consumerCallBack/properties/category\",",
+                  "                    \"type\": [\"string\", \"null\"]",
+                  "                },",
+                  "                \"reasonForCall\": {",
+                  "                    \"$id\": \"#/properties/consumerCallBack/properties/reasonForCall\",",
+                  "                    \"type\": [\"string\", \"null\"]",
+                  "                },",
+                  "                \"requestDate\": {",
+                  "                    \"$id\": \"#/properties/consumerCallBack/properties/requestDate\",",
+                  "                    \"type\": [\"string\", \"null\"]",
+                  "                },",
+                  "                \"requestUserId\": {",
+                  "                    \"$id\": \"#/properties/consumerCallBack/properties/requestUserId\",",
+                  "                    \"type\": [\"integer\", \"null\"]",
+                  "                },",
+                  "                \"isCallBackAllowed\": {",
+                  "                    \"$id\": \"#/properties/consumerCallBack/properties/isCallBackAllowed\",",
+                  "                    \"type\": \"boolean\"",
+                  "                },",
+                  "                \"callBackDisallowedReason\": {",
+                  "                    \"$id\": \"#/properties/consumerCallBack/properties/callBackDisallowedReason\",",
+                  "                    \"type\": [\"string\", \"null\"]",
+                  "                },",
+                  "                \"actionCode\": {",
+                  "                    \"$id\": \"#/properties/consumerCallBack/properties/actionCode\",",
+                  "                    \"type\": \"null\"",
+                  "                },",
+                  "                \"resultCode\": {",
+                  "                    \"$id\": \"#/properties/consumerCallBack/properties/resultCode\",",
+                  "                    \"type\": \"null\"",
+                  "                }",
+                  "            },",
+                  "            \"$id\": \"#/properties/consumerCallBack\",",
+                  "            \"type\": [\"object\", \"null\"]",
+                  "        }",
+                  "    },",
+                  "    \"$id\": \"http://example.org/root.json#\",",
+                  "    \"type\": \"object\",",
+                  "    \"definitions\": {},",
+                  "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"",
+                  "};",
+                  "    pm.test(\"TEST5: ajv test consumer address\", function () {",
+                  "        pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+                  "    });",
+                  "} catch (e){",
+                  "    //negative TESTS",
+                  "",
+                  "pm.test(\"Incorrect field examaple\", function () {",
+                  "    var consID = schema.properties.consumerID;",
+                  "    var consumerValue = Boolean;",
+                  "    pm.expect(consID).to.equal(consumerValue);",
+                  "    console.log(jsonData.toString());",
+                  "});",
+                  "pm.test(\"Check if schemaResponse is empty\", function () {",
+                  "    pm.expect(schemaResponse).to.be.empty;",
+                  "});",
+                  "pm.test(\"Check cnsmr_id variable isn't empty\", function () {",
+                  "    pm.expect('cnsmr_id').to.be.empty;",
+                  "});",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "ba5fafbe-d598-429f-9288-2407e8f5e1d9",
+                "exec": [
+                  "//pm.environment.set(\"OAuth_Timestamp\", null);\r",
+                  "//console.log(pm.environment.get(\"OAuth_Expiry\"));\r",
+                  "//console.log(pm.environment.get(\"OAuth_Timestamp\"));\r",
+                  "//console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "var noDate = 0;\r",
+                  "var tokenDate = new Date(2010, 1, 1);\r",
+                  "var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "if (tokenTimestamp) {\r",
+                  "    tokenDate = Date.parse(tokenTimestamp);\r",
+                  "} else { noDate = 1 };\r",
+                  "//console.log(\"timestamp is\"+tokenDate);\r",
+                  "var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "if (!expiresInTime) {\r",
+                  "    expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "}\r",
+                  "//console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime + \"and noDate value is :\"+noDate);\r",
+                  "if ((new Date() - tokenDate) >= expiresInTime || noDate == 1) {\r",
+                  "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
+                  "    let clientId = pm.environment.get(\"clientId\");\r",
+                  "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
+                  "    let scope = pm.environment.get(\"clientScope\");\r",
+                  "    let getTokenRequest = {\r",
+                  "        method: 'POST',\r",
+                  "        url: tokenUrl,\r",
+                  "        auth: {\r",
+                  "            type: \"basic\",\r",
+                  "            basic: [\r",
+                  "                { key: \"username\", value: clientId },\r",
+                  "                { key: \"password\", value: clientSecret }\r",
+                  "            ]\r",
+                  "        },\r",
+                  "        body: {\r",
+                  "            mode: 'formdata',\r",
+                  "            formdata: [\r",
+                  "                { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                { key: 'scope', value: scope }\r",
+                  "            ]\r",
+                  "        }\r",
+                  "    };\r",
+                  "    pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "        let jsonResponse = response.json(),\r",
+                  "            newAccessToken = jsonResponse.access_token;\r",
+                  "        //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "        pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "        pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in * 1000);\r",
+                  "        pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "    });\r",
+                  "    //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "}\r",
+                  "//console.log(\"End of Pre-req script\");"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "195710f2-7629-4dec-abff-4bd3aef5eb08",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
+              },
+              {
+                "key": "Correlation-Id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Origin",
+                "value": "Postman",
+                "type": "text"
+              },
+              {
+                "key": "Username",
+                "value": "{{$randomUserName}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/consumer/GetByConsumerId/:cnsmr_id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "consumer",
+                "GetByConsumerId",
+                ":cnsmr_id"
+              ],
+              "variable": [
+                {
+                  "id": "0cde6174-9112-4ab4-9205-ee216127b3c8",
+                  "key": "cnsmr_id",
+                  "value": "{{cnsmr_id}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "75ba3a31-13b5-4b4e-b357-1aebfe145604",
+              "name": "400 GetByConsumerId (Empty)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "kam-correlation",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  }
+                ],
+                "url": "{{base-consumer-url}}/GetByLegacyId/"
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 08:56:34 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "2727"
+                },
+                {
+                  "key": "Request-Context",
+                  "value": "appId=cid-v1:e6d3fb44-2f04-48dd-b4d6-37408e23d95c"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "8c132c3e-ecf6-4a07-9ede-3199bb0a49d7",
+              "name": "200 GetByConsumerId",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "kam-correlation",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  }
+                ],
+                "url": "{{base-consumer-url}}/GetByLegacyId/1013746"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 08:56:34 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "2727"
+                },
+                {
+                  "key": "Request-Context",
+                  "value": "appId=cid-v1:e6d3fb44-2f04-48dd-b4d6-37408e23d95c"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"consumerID\": 1593398,\n    \"legacyID\": \"1013746\",\n    \"agencyID\": 1013746,\n    \"title\": null,\n    \"firstName\": \"JBPHAHWF\",\n    \"lastName\": \"WPCRIYN\",\n    \"dateOfBirth\": \"1935-06-04T00:00:00\",\n    \"email\": \"z1593398@cdtest.com\",\n    \"emailValidityCode\": null,\n    \"emailValidityValueText\": \"\",\n    \"emailConfirmedDate\": null,\n    \"consumerAddress\": {\n        \"consumerID\": 1593398,\n        \"addressLine1\": \"my address 1\",\n        \"addressLine2\": \"my address 2\",\n        \"addressLine3\": \"my address 3\",\n        \"city\": \"my city\",\n        \"state\": \"my state\",\n        \"county\": \"my county\",\n        \"postCode\": \"W1A\",\n        \"country\": \"UK\",\n        \"source\": null\n    },\n    \"consumerPhoneNumbers\": [\n        {\n            \"consumerPhoneID\": 3583501,\n            \"consumerID\": 1593398,\n            \"number\": \"01141981542\",\n            \"sourceCode\": 8,\n            \"sourceValueText\": \"RELATEDASSET\",\n            \"statusCode\": 1,\n            \"statusValueText\": \"VALID\",\n            \"typeCode\": 1,\n            \"typeValueText\": \"HOME\",\n            \"countryCode\": 229,\n            \"countryValueText\": \"UK\",\n            \"softDeleteFlag\": \"N\",\n            \"qualityScoreNumber\": 1,\n            \"consentFlag\": null,\n            \"consentDate\": null,\n            \"technologyTypeCode\": null,\n            \"technologyTypeValueText\": \"\",\n            \"confirmedDate\": null\n        },\n        {\n            \"consumerPhoneID\": 3583503,\n            \"consumerID\": 1593398,\n            \"number\": \"01683595419\",\n            \"sourceCode\": 8,\n            \"sourceValueText\": \"RELATEDASSET\",\n            \"statusCode\": 1,\n            \"statusValueText\": \"VALID\",\n            \"typeCode\": 2,\n            \"typeValueText\": \"WORK\",\n            \"countryCode\": 229,\n            \"countryValueText\": \"UK\",\n            \"softDeleteFlag\": \"N\",\n            \"qualityScoreNumber\": 1,\n            \"consentFlag\": null,\n            \"consentDate\": null,\n            \"technologyTypeCode\": null,\n            \"technologyTypeValueText\": \"\",\n            \"confirmedDate\": null\n        },\n        {\n            \"consumerPhoneID\": 3583502,\n            \"consumerID\": 1593398,\n            \"number\": \"07762533405\",\n            \"sourceCode\": 8,\n            \"sourceValueText\": \"RELATEDASSET\",\n            \"statusCode\": 1,\n            \"statusValueText\": \"VALID\",\n            \"typeCode\": 3,\n            \"typeValueText\": \"CELL\",\n            \"countryCode\": 229,\n            \"countryValueText\": \"UK\",\n            \"softDeleteFlag\": \"N\",\n            \"qualityScoreNumber\": 1,\n            \"consentFlag\": null,\n            \"consentDate\": null,\n            \"technologyTypeCode\": null,\n            \"technologyTypeValueText\": \"\",\n            \"confirmedDate\": null\n        }\n    ],\n    \"consumerAccount\": {\n        \"consumerAccountID\": 1576083,\n        \"consumerID\": 1593398,\n        \"currentBalance\": 447.2,\n        \"originalBalance\": 447.2,\n        \"owner\": \"OwnMarln\",\n        \"servicer\": \"ServMarl\",\n        \"consumerAccountIdentifierAgencyId\": 500013549\n    },\n    \"preDefault\": {\n        \"consumerID\": 1593398,\n        \"startArrearsStatus\": null,\n        \"startArrearsAmount\": null,\n        \"currentArrearsStatus\": null,\n        \"currentArrearsAmount\": null,\n        \"currentDueAmount\": null,\n        \"isSpecialArrangementFlag\": false,\n        \"specialArrangementAmount\": null,\n        \"repaymentPercentage\": null,\n        \"creditType\": null,\n        \"isAnniversaryFlag\": false,\n        \"contractualInstalmentAmount\": null,\n        \"isActive\": null\n    },\n    \"linkedConsumerCount\": 1,\n    \"consumerCallBack\": {\n        \"isCallBackOutstanding\": false,\n        \"callbackRequestTime\": \"0001-01-01T00:00:00\",\n        \"phoneNumber\": null,\n        \"category\": null,\n        \"reasonForCall\": null,\n        \"requestDate\": \"0001-01-01T00:00:00\",\n        \"requestUserId\": 0,\n        \"isCallBackAllowed\": false,\n        \"callBackDisallowedReason\": \"Entity.Consumer's assigned Workgroup (Default workgroup) does not have one of the allowed tags (CustOps, PotLegal, Prelegal)\",\n        \"actionCode\": null,\n        \"resultCode\": null\n    }\n}"
+            },
+            {
+              "id": "9ea02f93-f072-4b8a-b4e4-962daa52c46c",
+              "name": "GetByConsumerId",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "kam-correlation",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  }
+                ],
+                "url": "{{base-consumer-url}}/GetByLegacyId/{{consumerId}"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 08:56:34 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "2727"
+                },
+                {
+                  "key": "Request-Context",
+                  "value": "appId=cid-v1:e6d3fb44-2f04-48dd-b4d6-37408e23d95c"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"consumerID\": 1593398,\n    \"legacyID\": \"1013746\",\n    \"agencyID\": 1013746,\n    \"title\": null,\n    \"firstName\": \"JBPHAHWF\",\n    \"lastName\": \"WPCRIYN\",\n    \"dateOfBirth\": \"1935-06-04T00:00:00\",\n    \"email\": \"z1593398@cdtest.com\",\n    \"emailValidityCode\": null,\n    \"emailValidityValueText\": \"\",\n    \"emailConfirmedDate\": null,\n    \"consumerAddress\": {\n        \"consumerID\": 1593398,\n        \"addressLine1\": \"my address 1\",\n        \"addressLine2\": \"my address 2\",\n        \"addressLine3\": \"my address 3\",\n        \"city\": \"my city\",\n        \"state\": \"my state\",\n        \"county\": \"my county\",\n        \"postCode\": \"W1A\",\n        \"country\": \"UK\",\n        \"source\": null\n    },\n    \"consumerPhoneNumbers\": [\n        {\n            \"consumerPhoneID\": 3583501,\n            \"consumerID\": 1593398,\n            \"number\": \"01141981542\",\n            \"sourceCode\": 8,\n            \"sourceValueText\": \"RELATEDASSET\",\n            \"statusCode\": 1,\n            \"statusValueText\": \"VALID\",\n            \"typeCode\": 1,\n            \"typeValueText\": \"HOME\",\n            \"countryCode\": 229,\n            \"countryValueText\": \"UK\",\n            \"softDeleteFlag\": \"N\",\n            \"qualityScoreNumber\": 1,\n            \"consentFlag\": null,\n            \"consentDate\": null,\n            \"technologyTypeCode\": null,\n            \"technologyTypeValueText\": \"\",\n            \"confirmedDate\": null\n        },\n        {\n            \"consumerPhoneID\": 3583503,\n            \"consumerID\": 1593398,\n            \"number\": \"01683595419\",\n            \"sourceCode\": 8,\n            \"sourceValueText\": \"RELATEDASSET\",\n            \"statusCode\": 1,\n            \"statusValueText\": \"VALID\",\n            \"typeCode\": 2,\n            \"typeValueText\": \"WORK\",\n            \"countryCode\": 229,\n            \"countryValueText\": \"UK\",\n            \"softDeleteFlag\": \"N\",\n            \"qualityScoreNumber\": 1,\n            \"consentFlag\": null,\n            \"consentDate\": null,\n            \"technologyTypeCode\": null,\n            \"technologyTypeValueText\": \"\",\n            \"confirmedDate\": null\n        },\n        {\n            \"consumerPhoneID\": 3583502,\n            \"consumerID\": 1593398,\n            \"number\": \"07762533405\",\n            \"sourceCode\": 8,\n            \"sourceValueText\": \"RELATEDASSET\",\n            \"statusCode\": 1,\n            \"statusValueText\": \"VALID\",\n            \"typeCode\": 3,\n            \"typeValueText\": \"CELL\",\n            \"countryCode\": 229,\n            \"countryValueText\": \"UK\",\n            \"softDeleteFlag\": \"N\",\n            \"qualityScoreNumber\": 1,\n            \"consentFlag\": null,\n            \"consentDate\": null,\n            \"technologyTypeCode\": null,\n            \"technologyTypeValueText\": \"\",\n            \"confirmedDate\": null\n        }\n    ],\n    \"consumerAccount\": {\n        \"consumerAccountID\": 1576083,\n        \"consumerID\": 1593398,\n        \"currentBalance\": 447.2,\n        \"originalBalance\": 447.2,\n        \"owner\": \"OwnMarln\",\n        \"servicer\": \"ServMarl\",\n        \"consumerAccountIdentifierAgencyId\": 500013549\n    },\n    \"preDefault\": {\n        \"consumerID\": 1593398,\n        \"startArrearsStatus\": null,\n        \"startArrearsAmount\": null,\n        \"currentArrearsStatus\": null,\n        \"currentArrearsAmount\": null,\n        \"currentDueAmount\": null,\n        \"isSpecialArrangementFlag\": false,\n        \"specialArrangementAmount\": null,\n        \"repaymentPercentage\": null,\n        \"creditType\": null,\n        \"isAnniversaryFlag\": false,\n        \"contractualInstalmentAmount\": null,\n        \"isActive\": null\n    },\n    \"linkedConsumerCount\": 1,\n    \"consumerCallBack\": {\n        \"isCallBackOutstanding\": false,\n        \"callbackRequestTime\": \"0001-01-01T00:00:00\",\n        \"phoneNumber\": null,\n        \"category\": null,\n        \"reasonForCall\": null,\n        \"requestDate\": \"0001-01-01T00:00:00\",\n        \"requestUserId\": 0,\n        \"isCallBackAllowed\": false,\n        \"callBackDisallowedReason\": \"Entity.Consumer's assigned Workgroup (Default workgroup) does not have one of the allowed tags (CustOps, PotLegal, Prelegal)\",\n        \"actionCode\": null,\n        \"resultCode\": null\n    }\n}"
+            },
+            {
+              "id": "b32dfdc3-cbf9-4047-aac4-f0602d90a9e2",
+              "name": "400 GetByConsumerId (string)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "kam-correlation",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  }
+                ],
+                "url": "{{base-consumer-url}}/GetByLegacyId/kam"
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 08:56:34 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "2727"
+                },
+                {
+                  "key": "Request-Context",
+                  "value": "appId=cid-v1:e6d3fb44-2f04-48dd-b4d6-37408e23d95c"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "GetActiveConsumerAccountOwner",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "74321855-64bd-4f7f-97ed-ef68bedc73a7",
+                "exec": [
+                  "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));",
+                  "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));",
+                  "console.log(\"Average response time: \" + responseTime + \"ms\");",
+                  "var schemaResponse = {",
+                  "                        \"description\": \"Success\",",
+                  "                        \"schema\": {",
+                  "                            \"uniqueItems\": false,",
+                  "                            \"type\": \"array\",",
+                  "                            \"items\": {",
+                  "                                \"$ref\": \"#/definitions/ConsumerAccountOwner\"",
+                  "                            }",
+                  "                        }",
+                  "};",
+                  "var schemaConsumerAO = {",
+                  "    \"schema\": {",
+                  "            \"type\": \"object\",",
+                  "            \"properties\": {",
+                  "                \"consumerAccountOwnerID\": {",
+                  "                    \"format\": \"int64\",",
+                  "                    \"type\": \"integer\"",
+                  "                },",
+                  "                \"consumerID\": {",
+                  "                    \"format\": \"int64\",",
+                  "                    \"type\": \"integer\"",
+                  "                },",
+                  "                \"legacyID\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"consumerName\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"consumerBirthDate\": {",
+                  "                    \"format\": \"date-time\",",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"ownership\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"type\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"attachDate\": {",
+                  "                    \"format\": \"date-time\",",
+                  "                    \"type\": \"string\"",
+                  "                }",
+                  "            }",
+                  "        }",
+                  "};",
+                  "if (data.test_polarity==null || data.test_polarity==1){",
+                  "pm.test(\"TEST1: Response Check \", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"TEST2: Status code Check\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"TEST3: Response Header Checks\", function() {",
+                  "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');",
+                  "});",
+                  "",
+                  "pm.test(\"TEST4: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+                  "});",
+                  "",
+                  "pm.test(\"TEST5: Response Schema is valid\", function() {",
+                  "  pm.expect(tv4.validate(pm.response.json, schemaResponse, true, false)).to.be.true;",
+                  "});",
+                  "",
+                  "pm.test(\"TEST7: Consumer Account Owner Schema is valid\", function() {",
+                  "    for(var i=0;  i<(pm.response.json.length); i++) {",
+                  "        pm.expect(tv4.validate(pm.response.json[i], schemaConsumerAO,true, false)).to.be.true;",
+                  "        }",
+                  "});",
+                  "} else {",
+                  "    //Negative TESTS",
+                  "}",
+                  "pm.test(\"Incorrect field examaple\", function() {",
+                  "    var consID = schema.properties.consumerID;",
+                  "    var consumerValue = Boolean;",
+                  "    pm.expect(consID).to.equal(consumerValue);",
+                  "    console.log(jsonData.toString());",
+                  "});",
+                  "pm.test(\"Check if schemaResponse is empty\", function () {",
+                  "     pm.expect(schemaResponse).to.be.empty;",
+                  "});",
+                  " pm.test(\"Check cnsmr_id variable isn't empty\", function () {",
+                  "     pm.expect('cnsmr_id').to.be.empty;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "8ecf602e-3516-4dc5-8b90-d235c4404109",
+                "exec": [
+                  "//pm.environment.set(\"OAuth_Timestamp\", null);\r",
+                  "//console.log(pm.environment.get(\"OAuth_Expiry\"));\r",
+                  "//console.log(pm.environment.get(\"OAuth_Timestamp\"));\r",
+                  "//console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "var noDate = 0;\r",
+                  "var tokenDate = new Date(2010, 1, 1);\r",
+                  "var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "if (tokenTimestamp) {\r",
+                  "    tokenDate = Date.parse(tokenTimestamp);\r",
+                  "} else { noDate = 1 };\r",
+                  "//console.log(\"timestamp is\"+tokenDate);\r",
+                  "var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "if (!expiresInTime) {\r",
+                  "    expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "}\r",
+                  "//console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime + \"and noDate value is :\"+noDate);\r",
+                  "if ((new Date() - tokenDate) >= expiresInTime || noDate == 1) {\r",
+                  "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
+                  "    let clientId = pm.environment.get(\"clientId\");\r",
+                  "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
+                  "    let scope = pm.environment.get(\"clientScope\");\r",
+                  "    let getTokenRequest = {\r",
+                  "        method: 'POST',\r",
+                  "        url: tokenUrl,\r",
+                  "        auth: {\r",
+                  "            type: \"basic\",\r",
+                  "            basic: [\r",
+                  "                { key: \"username\", value: clientId },\r",
+                  "                { key: \"password\", value: clientSecret }\r",
+                  "            ]\r",
+                  "        },\r",
+                  "        body: {\r",
+                  "            mode: 'formdata',\r",
+                  "            formdata: [\r",
+                  "                { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                { key: 'scope', value: scope }\r",
+                  "            ]\r",
+                  "        }\r",
+                  "    };\r",
+                  "    pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "        let jsonResponse = response.json(),\r",
+                  "            newAccessToken = jsonResponse.access_token;\r",
+                  "        //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "        pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "        pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in * 1000);\r",
+                  "        pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "    });\r",
+                  "    //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "}\r",
+                  "//console.log(\"End of Pre-req script\");"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "378ecf1f-b279-44cf-8706-4834d328c241",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "correlation-id",
+                "type": "text",
+                "value": "TEST-correlation"
+              },
+              {
+                "key": "ocp-apim-subscription-key-south",
+                "type": "text",
+                "value": "{{subkey-south}}"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "type": "text",
+                "value": "{{subkey-west}}"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "origin",
+                "value": "postman",
+                "type": "text"
+              },
+              {
+                "key": "username",
+                "value": "Test-User",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/GetActiveConsumerAccountOwner/:cnsmr_accnt_id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "GetActiveConsumerAccountOwner",
+                ":cnsmr_accnt_id"
+              ],
+              "variable": [
+                {
+                  "id": "4b28f755-57be-40a2-87c5-d49e47871034",
+                  "key": "cnsmr_accnt_id",
+                  "value": "4150023",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0e5efffa-fb49-4e57-be8a-a2e4e216bead",
+              "name": "400 GetActiveConsumerAccountOwner (Consumer Account Id < 1)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "kam-correlation",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  }
+                ],
+                "url": "{{base-consumer-url}}/GetActiveConsumerAccountOwner/-1"
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "plain",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 09:29:57 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain; charset=utf-8"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "36"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "Consumer Account Id must be positive"
+            },
+            {
+              "id": "56ab7b1f-663f-437f-b0f4-aa8a1c94c108",
+              "name": "404 GetActiveConsumerAccountOwner",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "kam-correlation",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  }
+                ],
+                "url": "{{base-consumer-url}}/GetActiveConsumerAccountOwner/"
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "plain",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 09:09:05 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "0"
+                },
+                {
+                  "key": "Request-Context",
+                  "value": "appId=cid-v1:e6d3fb44-2f04-48dd-b4d6-37408e23d95c"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "d86b5b3d-083e-49c4-adf3-ec89fe3320a2",
+              "name": "200 GetActiveConsumerAccountOwner",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "kam-correlation",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  }
+                ],
+                "url": "{{base-consumer-url}}/GetActiveConsumerAccountOwner/1663574"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 09:07:32 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "231"
+                },
+                {
+                  "key": "Request-Context",
+                  "value": "appId=cid-v1:e6d3fb44-2f04-48dd-b4d6-37408e23d95c"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n    {\n        \"consumerAccountOwnerID\": 1663559,\n        \"consumerID\": 1680782,\n        \"legacyID\": \"234567\",\n        \"consumerName\": \"IMRMPHC QLRKAVJ\",\n        \"consumerBirthDate\": \"1939-09-04T00:00:00\",\n        \"ownership\": \"Primary Owner\",\n        \"type\": null,\n        \"attachDate\": \"2013-04-12T19:26:09.133\"\n    }\n]"
+            }
+          ]
+        },
+        {
+          "name": "GetActiveConsumerAccountOwner Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "f11a95b2-83e3-48bb-b4b5-b7e64a6ef2ac",
+                "exec": [
+                  "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));",
+                  "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));",
+                  "console.log(\"Average response time: \" + responseTime + \"ms\");",
+                  "var schemaResponse = {",
+                  "                        \"description\": \"Success\",",
+                  "                        \"schema\": {",
+                  "                            \"uniqueItems\": false,",
+                  "                            \"type\": \"array\",",
+                  "                            \"items\": {",
+                  "                                \"$ref\": \"#/definitions/ConsumerAccountOwner\"",
+                  "                            }",
+                  "                        }",
+                  "};",
+                  "var schemaConsumerAO = {",
+                  "    \"schema\": {",
+                  "            \"type\": \"object\",",
+                  "            \"properties\": {",
+                  "                \"consumerAccountOwnerID\": {",
+                  "                    \"format\": \"int64\",",
+                  "                    \"type\": \"integer\"",
+                  "                },",
+                  "                \"consumerID\": {",
+                  "                    \"format\": \"int64\",",
+                  "                    \"type\": \"integer\"",
+                  "                },",
+                  "                \"legacyID\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"consumerName\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"consumerBirthDate\": {",
+                  "                    \"format\": \"date-time\",",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"ownership\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"type\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"attachDate\": {",
+                  "                    \"format\": \"date-time\",",
+                  "                    \"type\": \"string\"",
+                  "                }",
+                  "            }",
+                  "        }",
+                  "};",
+                  "if (data.test_polarity==null || data.test_polarity==1){",
+                  "pm.test(\"TEST1: Response Check \", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"TEST2: Status code Check\", function() {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"TEST3: Response Header Checks\", function() {",
+                  "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');",
+                  "});",
+                  "",
+                  "pm.test(\"TEST4: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+                  "});",
+                  "",
+                  "pm.test(\"TEST5: Response Schema is valid\", function() {",
+                  "  pm.expect(tv4.validate(pm.response.json, schemaResponse, true, false)).to.be.true;",
+                  "});",
+                  "",
+                  "pm.test(\"TEST7: Consumer Account Owner Schema is valid\", function() {",
+                  "    for(var i=0;  i<(pm.response.json.length); i++) {",
+                  "        pm.expect(tv4.validate(pm.response.json[i], schemaConsumerAO,true, false)).to.be.true;",
+                  "        }",
+                  "});",
+                  "} else {",
+                  "    //Negative TESTS",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "027f4583-658a-4c2e-a135-eeda267a3df3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "correlation-id",
+                "type": "text",
+                "value": "TEST-correlation"
+              },
+              {
+                "key": "ocp-apim-subscription-key-south",
+                "type": "text",
+                "value": "{{subkey-south}}"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "type": "text",
+                "value": "{{subkey-west}}"
+              }
+            ],
+            "url": "{{base-consumer-url}}/GetActiveConsumerAccountOwner/{{cnsmr_accnt_id}}"
+          },
+          "response": [
+            {
+              "id": "33a351a3-e330-4da9-801d-d44ebeceda3b",
+              "name": "400 GetActiveConsumerAccountOwner (Consumer Account Id < 1)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "kam-correlation",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  }
+                ],
+                "url": "{{base-consumer-url}}/GetActiveConsumerAccountOwner/-1"
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "plain",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 09:29:57 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain; charset=utf-8"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "36"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "Consumer Account Id must be positive"
+            },
+            {
+              "id": "41204b51-211c-4d28-9821-17fa6eda1e9b",
+              "name": "200 GetActiveConsumerAccountOwner",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "kam-correlation",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  }
+                ],
+                "url": "{{base-consumer-url}}/GetActiveConsumerAccountOwner/1663574"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 09:07:32 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "231"
+                },
+                {
+                  "key": "Request-Context",
+                  "value": "appId=cid-v1:e6d3fb44-2f04-48dd-b4d6-37408e23d95c"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n    {\n        \"consumerAccountOwnerID\": 1663559,\n        \"consumerID\": 1680782,\n        \"legacyID\": \"234567\",\n        \"consumerName\": \"IMRMPHC QLRKAVJ\",\n        \"consumerBirthDate\": \"1939-09-04T00:00:00\",\n        \"ownership\": \"Primary Owner\",\n        \"type\": null,\n        \"attachDate\": \"2013-04-12T19:26:09.133\"\n    }\n]"
+            },
+            {
+              "id": "5b838009-3eb1-4bcd-8e80-90c3ac3165a3",
+              "name": "404 GetActiveConsumerAccountOwner",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "kam-correlation",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  }
+                ],
+                "url": "{{base-consumer-url}}/GetActiveConsumerAccountOwner/"
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "plain",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 09:09:05 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "0"
+                },
+                {
+                  "key": "Request-Context",
+                  "value": "appId=cid-v1:e6d3fb44-2f04-48dd-b4d6-37408e23d95c"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "SaveConsumerAddressAsync",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "fefe1495-5d0f-4ca4-a991-cda485bb22d0",
+                "exec": [
+                  "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));",
+                  "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));",
+                  "console.log(\"Average response time: \" + responseTime + \"ms\");",
+                  "console.log(JSON.stringify(pm.response));",
+                  "if (data.test_polarity==null || data.test_polarity==1){",
+                  "pm.test(\"TEST1: Response Check \"+pm.response.status, function () {",
+                  "    pm.response.to.have.status(202);",
+                  "});",
+                  "",
+                  "pm.test(\"TEST2: Response Header Checks\", function() {",
+                  "    pm.response.to.have.header('Content-Length','0', 'Date', '', 'Request-Context', '');",
+                  "});",
+                  "",
+                  "pm.test(\"TEST3: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+                  "});",
+                  "} else {",
+                  "    //Negatvie TESTS",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "fe7a6a20-b594-4441-bb3c-c66285806a35",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "correlation-id",
+                "type": "text",
+                "value": "TEST-correlation"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "type": "text",
+                "value": "{{subkey-south}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "type": "text",
+                "value": "{{subkey-west}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"ConsumerAddress\": {\n        \"ConsumerID\": 1583183,\n        \"SecondaryConsumerId\": 0,\n        \"SecondaryConsumerEmail\": \"cabot_auto+user9@outlook.com\",\n        \"AddressLine1\": \"TEST AddLine1\",\n        \"AddressLine2\": \"TEST AddLine2\",\n        \"AddressLine3\": \"TEST AddLine3\",\n        \"City\": \"Test_CT\",\n        \"State\": \"TEST STT\",\n        \"County\": \"Test CNTY\",\n        \"PostCode\": \"TE573ER\",\n        \"Country\": \"VE\",\n        \"Source\": \"UNKNOWN\"\n    },\n    \"UserName\": \"TEST\",\n    \"CorrelationId\": \"TEST-correlation\",\n    \"Operation\": \"SaveConsumerAddressCommand\"\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "{{baseUrl}}/consumer/SaveConsumerAddressAsync"
+          },
+          "response": [
+            {
+              "id": "93c3c5f5-2308-43c9-afc7-c93a5aa80f57",
+              "name": "200 SaveConsumerAddressAsync",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "kam-correlation",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"ConsumerAddress\": {\n        \"ConsumerAddressID\": 1593398,\n        \"ConsumerID\": 1593398,\n        \"SecondaryConsumerId\": 0,\n        \"SecondaryConsumerEmail\": \"secondary@consumer.mail\",\n        \"AddressLine1\": \"my address 1\",\n        \"AddressLine2\": \"my address 2\",\n        \"AddressLine3\": \"my address 3\",\n        \"City\": \"my city\",\n        \"State\": \"my state\",\n        \"County\": \"my county\",\n        \"PostCode\": \"W1A\",\n        \"Country\": \"my country\",\n        \"Source\": \"my source\"\n    },\n    \"UserName\": \"kaml\",\n    \"CorrelationId\": \"my-correlation\",\n    \"Operation\": \"SaveConsumerAddressAsyncCommand\"\n}"
+                },
+                "url": "{{base-consumer-url}}/SaveConsumerAddressAsync"
+              },
+              "status": "Accepted",
+              "code": 202,
+              "_postman_previewlanguage": "plain",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 08:50:28 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "0"
+                },
+                {
+                  "key": "Request-Context",
+                  "value": "appId=cid-v1:e6d3fb44-2f04-48dd-b4d6-37408e23d95c"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "95b27705-5044-4cf2-a4cb-90968bd0a88e",
+              "name": "400 SaveConsumerAddressAsync (Empty)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "kam-correlation",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": "{{base-consumer-url}}/SaveConsumerAddressAsync"
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "plain",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 08:50:28 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "0"
+                },
+                {
+                  "key": "Request-Context",
+                  "value": "appId=cid-v1:e6d3fb44-2f04-48dd-b4d6-37408e23d95c"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "b6653989-dddc-4d6a-8276-2d23689050af",
+              "name": "400 SaveConsumerAddressAsync (Mal-formed)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "kam-correlation",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"BADConsumerAddress\": {\r\n        \"ConsumerAddressID\": 1593398,\r\n        \"ConsumerID\": 1593398,\r\n        \"SecondaryConsumerId\": 0,\r\n        \"SecondaryConsumerEmail\": \"secondary@consumer.mail\",\r\n        \"AddressLine1\": \"my address 1\",\r\n        \"AddressLine2\": \"my address 2\",\r\n        \"AddressLine3\": \"my address 3\",\r\n        \"City\": \"my city\",\r\n        \"State\": \"my state\",\r\n        \"County\": \"my county\",\r\n        \"PostCode\": \"W1A\",\r\n        \"Country\": \"my country\",\r\n        \"Source\": \"my source\"\r\n    },\r\n    \"UserName\": \"kaml\",\r\n    \"CorrelationId\": \"my-correlation\",\r\n    \"Operation\": \"SaveConsumerAddressAsyncCommand\"\r\n}"
+                },
+                "url": "{{base-consumer-url}}/SaveConsumerAddressAsync"
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "plain",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 08:50:28 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "0"
+                },
+                {
+                  "key": "Request-Context",
+                  "value": "appId=cid-v1:e6d3fb44-2f04-48dd-b4d6-37408e23d95c"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "ConsumerDPA",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "2ae990d3-aa99-4dd9-b328-959a175e12c5",
+                "exec": [
+                  "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));",
+                  "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));",
+                  "console.log(\"Average response time: \" + responseTime + \"ms\");",
+                  "console.log(JSON.stringify(pm.response));",
+                  "if (data.test_polarity==null || data.test_polarity==1){",
+                  "pm.test(\"TEST1: Response Check \"+pm.response.status, function () {",
+                  "    pm.response.to.have.status(202);",
+                  "});",
+                  "",
+                  "pm.test(\"TEST2: Response Header Checks\", function() {",
+                  "    pm.response.to.have.header('Content-Length','0', 'Date', '', 'Request-Context', '');",
+                  "});",
+                  "",
+                  "pm.test(\"TEST3: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+                  "});",
+                  "} else {",
+                  "    //Negatvie TESTS",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "5954eb8d-d271-4a71-9847-3e29640f01d0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "correlation-id",
+                "type": "text",
+                "value": "TEST-correlation"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}"
+              },
+              {
+                "key": "Origin",
+                "value": "Postman",
+                "type": "text"
+              },
+              {
+                "key": "Username",
+                "value": "tgherkar",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"reference\": 12345668476,\r\n  \"telephone\": 7886565684,\r\n  \"postcode\": \"ME19 4DZ\",\r\n  \"dateOfBirth\": \"1999-08-29T00:00:00.000Z\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "{{baseUrl}}/dpa/consumer"
+          },
+          "response": [
+            {
+              "id": "3e9bedd2-eaa0-4b13-82a4-97236a80d34e",
+              "name": "400 SaveConsumerAddressAsync (Mal-formed)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "kam-correlation",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"BADConsumerAddress\": {\r\n        \"ConsumerAddressID\": 1593398,\r\n        \"ConsumerID\": 1593398,\r\n        \"SecondaryConsumerId\": 0,\r\n        \"SecondaryConsumerEmail\": \"secondary@consumer.mail\",\r\n        \"AddressLine1\": \"my address 1\",\r\n        \"AddressLine2\": \"my address 2\",\r\n        \"AddressLine3\": \"my address 3\",\r\n        \"City\": \"my city\",\r\n        \"State\": \"my state\",\r\n        \"County\": \"my county\",\r\n        \"PostCode\": \"W1A\",\r\n        \"Country\": \"my country\",\r\n        \"Source\": \"my source\"\r\n    },\r\n    \"UserName\": \"kaml\",\r\n    \"CorrelationId\": \"my-correlation\",\r\n    \"Operation\": \"SaveConsumerAddressAsyncCommand\"\r\n}"
+                },
+                "url": "{{base-consumer-url}}/SaveConsumerAddressAsync"
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "plain",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 08:50:28 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "0"
+                },
+                {
+                  "key": "Request-Context",
+                  "value": "appId=cid-v1:e6d3fb44-2f04-48dd-b4d6-37408e23d95c"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "93683de2-c3a0-4234-a07a-73cbed858ec9",
+              "name": "200 SaveConsumerAddressAsync",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "kam-correlation",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"ConsumerAddress\": {\n        \"ConsumerAddressID\": 1593398,\n        \"ConsumerID\": 1593398,\n        \"SecondaryConsumerId\": 0,\n        \"SecondaryConsumerEmail\": \"secondary@consumer.mail\",\n        \"AddressLine1\": \"my address 1\",\n        \"AddressLine2\": \"my address 2\",\n        \"AddressLine3\": \"my address 3\",\n        \"City\": \"my city\",\n        \"State\": \"my state\",\n        \"County\": \"my county\",\n        \"PostCode\": \"W1A\",\n        \"Country\": \"my country\",\n        \"Source\": \"my source\"\n    },\n    \"UserName\": \"kaml\",\n    \"CorrelationId\": \"my-correlation\",\n    \"Operation\": \"SaveConsumerAddressAsyncCommand\"\n}"
+                },
+                "url": "{{base-consumer-url}}/SaveConsumerAddressAsync"
+              },
+              "status": "Accepted",
+              "code": 202,
+              "_postman_previewlanguage": "plain",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 08:50:28 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "0"
+                },
+                {
+                  "key": "Request-Context",
+                  "value": "appId=cid-v1:e6d3fb44-2f04-48dd-b4d6-37408e23d95c"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "a82323a9-f89a-4872-b971-3f277e17c65f",
+              "name": "400 SaveConsumerAddressAsync (Empty)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "kam-correlation",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": "{{base-consumer-url}}/SaveConsumerAddressAsync"
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "plain",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 08:50:28 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "0"
+                },
+                {
+                  "key": "Request-Context",
+                  "value": "appId=cid-v1:e6d3fb44-2f04-48dd-b4d6-37408e23d95c"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "SaveConsumerAddress",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "17cb06d1-610e-4d0c-bbc2-731b72266908",
+                "exec": [
+                  "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));",
+                  "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));",
+                  "console.log(\"Average response time: \" + responseTime + \"ms\");",
+                  "let expectedCode = 200;",
+                  "let RH = pm.response.headers.all();",
+                  "var jsonData = pm.response.json();",
+                  "var req = JSON.parse(request.data);",
+                  "var schemaResponse = {",
+                  "        \"description\": \"Success\",",
+                  "        \"schema\": {",
+                  "            \"type\": \"object\",",
+                  "            \"properties\": {",
+                  "                \"consumerID\": {",
+                  "                    \"format\": \"int64\",",
+                  "                    \"type\": \"integer\"",
+                  "                },",
+                  "                \"addressLine1\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"addressLine2\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"addressLine3\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"city\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"state\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"county\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"postCode\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"country\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"source\": {",
+                  "                    \"type\": \"string\"",
+                  "                }",
+                  "            }",
+                  "        }",
+                  "};",
+                  "if (data.test_polarity==null || data.test_polarity==1){",
+                  "pm.test(\"TEST1: Response Check \" + expectedCode, function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"TEST2: ConsumerID check\", function () {",
+                  "    pm.expect(jsonData.consumerID).to.equal(req.ConsumerAddress.ConsumerID);",
+                  "});",
+                  "",
+                  "pm.test(\"TEST3: Field checks against Request\", function () {",
+                  "    if (req.ConsumerAddress.postcode !== \"ME194UA\" && req.ConsumerAddress.postcode !== \"BN111QP\" && req.ConsumerAddress.postcode !== \"TF34NT\") {",
+                  "        pm.expect(jsonData).to.have.property('consumerID', req.ConsumerAddress.ConsumerID, 'addressLine1', req.ConsumerAddress.addressLine1, 'addressLine2', req.ConsumerAddress.addressLine2, 'addressLine3', req.ConsumerAddress.addressLine3,'city', req.ConsumerAddress.city, 'state', req.ConsumerAddress.state, 'county', req.ConsumerAddress.county,'postcode', req.ConsumerAddress.postcode, 'country', req.ConsumerAddress.coutry,'source', req.ConsumerAddress.ConsumerID);",
+                  "    }",
+                  "});",
+                  "",
+                  "pm.test(\"TEST4: Response Header Checks\", function() {",
+                  "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');",
+                  "});",
+                  "",
+                  "pm.test(\"TEST5: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+                  "});",
+                  "",
+                  "pm.test(\"TEST6: Response Schema is valid\", function() {",
+                  "  pm.expect(tv4.validate(pm.response.json, schemaResponse, true, false)).to.be.true;",
+                  "});",
+                  "} else {",
+                  "    //Negative Tests",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "594294f5-776f-4390-978d-380948a27bcb",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "46aec6d2-ca64-46c8-836f-3fa7ad2c0bf2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "correlation-id",
+                "type": "text",
+                "value": "Test-correlation"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "type": "text",
+                "value": "{{subkey-south}}"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "type": "text",
+                "value": "{{subkey-west}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"ConsumerAddress\": {\n        \"ConsumerID\": {{cnsmr_id}},\n        \"SecondaryConsumerId\": {{SecondaryConsumerId}},\n        \"SecondaryConsumerEmail\": \"{{SecondaryConsumerEmail}}\",\n        \"AddressLine1\": \"{{AddressLine1}}\",\n        \"AddressLine2\": \"{{AddressLine2}}\",\n        \"AddressLine3\": \"{{AddressLine3}}\",\n        \"City\": \"{{City}}\",\n        \"State\": \"{{State}}\",\n        \"County\": \"{{County}}\",\n        \"PostCode\": \"{{PostCode}}\",\n        \"Country\": \"{{Country}}\",\n        \"Source\": \"{{Source}}\"\n    },\n    \"UserName\": \"TEST\",\n    \"CorrelationId\": \"TEST-correlation\",\n    \"Operation\": \"SaveConsumerAddressCommand\",\n    \"Origin\": \"Postman\"\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "{{base-consumer-url}}/SaveConsumerAddress"
+          },
+          "response": [
+            {
+              "id": "15e53680-073f-4c5f-96a4-de9c9917defc",
+              "name": "400 SaveConsumerAddress",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "type": "text",
+                    "value": "kam-correlation"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{{\r\n  \"ConsumerAddress\": {\r\n    \"ConsumerAddressID\": 1593398,\r\n    \"ConsumerID\": 1680782,\r\n    \"SecondaryConsumerId\": 0,\r\n    \"SecondaryConsumerEmail\": \"secondary@consumer.mail\",\r\n    \"AddressLine1\": \"my address 1\",\r\n    \"AddressLine2\": \"my address 2\",\r\n    \"AddressLine3\": \"my address 3\",\r\n    \"City\": \"my city\",\r\n    \"State\": \"my state\",\r\n    \"County\": \"my county\",\r\n    \"PostCode\": \"W1A\",\r\n    \"Country\": \"my country\",\r\n    \"Source\": \"my source\"\r\n  },\r\n  \"UserName\": \"kaml\",\r\n  \"CorrelationId\": \"my-correlation\",\r\n  \"Operation\": \"SaveConsumerAddressAsyncCommand\"\r\n}"
+                },
+                "url": "{{base-consumer-url}}/SaveConsumerAddress"
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "plain",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 08:30:33 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "0"
+                },
+                {
+                  "key": "Request-Context",
+                  "value": "appId=cid-v1:e6d3fb44-2f04-48dd-b4d6-37408e23d95c"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "53f26dfd-c886-4c7d-9dde-b73eb9cd3c81",
+              "name": "200 SaveConsumerAddress",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "type": "text",
+                    "value": "kam-correlation"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"ConsumerAddress\": {\n        \"ConsumerAddressID\": 1593398,\n        \"ConsumerID\": 1680782,\n        \"SecondaryConsumerId\": 0,\n        \"SecondaryConsumerEmail\": \"secondary@consumer.mail\",\n        \"AddressLine1\": \"my address 1\",\n        \"AddressLine2\": \"my address 2\",\n        \"AddressLine3\": \"my address 3\",\n        \"City\": \"my city\",\n        \"State\": \"my state\",\n        \"County\": \"my county\",\n        \"PostCode\": \"W1A\",\n        \"Country\": \"my country\",\n        \"Source\": \"my source\"\n    },\n    \"UserName\": \"kaml\",\n    \"CorrelationId\": \"my-correlation\",\n    \"Operation\": \"SaveConsumerAddressAsyncCommand\"\n}"
+                },
+                "url": "{{base-consumer-url}}/SaveConsumerAddress"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 08:30:33 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "0"
+                },
+                {
+                  "key": "Request-Context",
+                  "value": "appId=cid-v1:e6d3fb44-2f04-48dd-b4d6-37408e23d95c"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"consumerID\": 1680782,\n    \"addressLine1\": \"my address 1\",\n    \"addressLine2\": \"my address 2\",\n    \"addressLine3\": \"my address 3\",\n    \"city\": \"my city\",\n    \"state\": \"my state\",\n    \"county\": \"my county\",\n    \"postCode\": \"W1A\",\n    \"country\": \"UK\",\n    \"source\": \"UNKNOWN\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Documentation",
+          "_postman_id": "0b3dabbc-0178-4a32-9f2f-f1f4ac677f2f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "text/plain"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "SELECT TOP 10 CAO.cnsmr_id, CAO.cnsmr_accnt_id, CD.cnsmr_addrss_ln_1_txt AS 'AddressLine1', CD.cnsmr_addrss_ln_2_txt AS 'AddressLine2', \r\nCD.cnsmr_addrss_ln_3_txt AS 'AddressLine3', CD.cnsmr_addrss_city_txt AS 'City', CD.cnsmr_addrss_st_txt, CD.cnsmr_addrss_cnty_txt AS 'County', \r\nCD.cnsmr_addrss_pstl_cd_txt AS 'PostCode', RCC.cntry_val_txt AS 'Country', RSC.addrss_src_val_txt AS 'Source', CAO.cnsmr_accnt_ownrs_id, \r\nC.cnsmr_idntfr_lgcy_txt AS 'legacyID'\r\nFROM [crs5_oltp].[dbo].[cnsmr] AS C\r\nLEFT JOIN [dbo].[cnsmr_accnt_ownrs] AS CAO ON CAO.cnsmr_id=C.cnsmr_id\r\nLEFT JOIN [dbo].[cnsmr_addrss] AS CD ON CD.cnsmr_id=C.cnsmr_id\r\nINNER JOIN [dbo].[Ref_cntry_cd] AS RCC ON RCC.cntry_cd=CD.cnsmr_addrss_cntry_cd\r\nINNER JOIN [dbo].[Ref_addrss_src_cd] AS RSC ON RSC.addrss_src_cd=CD.cnsmr_addrss_src_cd\r\n--WHERE C.cnsmr_idntfr_lgcy_txt=940\r\n--WHERE C.cnsmr_id=121321\r\n--WHERE CAO.cnsmr_accnt_id=1572329",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": ""
+          },
+          "response": []
+        },
+        {
+          "name": "SaveConsumerAddress_New",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "267c5f14-86c0-4b9d-bf6e-dec20219610b",
+                "exec": [
+                  "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));",
+                  "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));",
+                  "console.log(\"Average response time: \" + responseTime + \"ms\");",
+                  "let expectedCode = 202;",
+                  "let RH = pm.response.headers.all();",
+                  "var jsonData = pm.response.json();",
+                  "var req = JSON.parse(request.data);",
+                  "var schemaResponse = {",
+                  "        \"description\": \"Success\",",
+                  "        \"schema\": {",
+                  "            \"type\": \"object\",",
+                  "            \"properties\": {",
+                  "                \"consumerID\": {",
+                  "                    \"format\": \"int64\",",
+                  "                    \"type\": \"integer\"",
+                  "                },",
+                  "                \"addressLine1\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"addressLine2\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"addressLine3\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"city\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"state\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"county\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"postCode\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"country\": {",
+                  "                    \"type\": \"string\"",
+                  "                },",
+                  "                \"source\": {",
+                  "                    \"type\": \"string\"",
+                  "                }",
+                  "            }",
+                  "        }",
+                  "};",
+                  "if (data.test_polarity==null || data.test_polarity==1){",
+                  "pm.test(\"TEST1: Response Check \" + expectedCode, function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"TEST2: ConsumerID check\", function () {",
+                  "    pm.expect(jsonData.consumerID).to.equal(req.ConsumerAddress.ConsumerID);",
+                  "});",
+                  "",
+                  "pm.test(\"TEST3: Field checks against Request\", function () {",
+                  "    if (req.ConsumerAddress.postcode !== \"ME194UA\" && req.ConsumerAddress.postcode !== \"BN111QP\" && req.ConsumerAddress.postcode !== \"TF34NT\") {",
+                  "        pm.expect(jsonData).to.have.property('consumerID', req.ConsumerAddress.ConsumerID, 'addressLine1', req.ConsumerAddress.addressLine1, 'addressLine2', req.ConsumerAddress.addressLine2, 'addressLine3', req.ConsumerAddress.addressLine3,'city', req.ConsumerAddress.city, 'state', req.ConsumerAddress.state, 'county', req.ConsumerAddress.county,'postcode', req.ConsumerAddress.postcode, 'country', req.ConsumerAddress.coutry,'source', req.ConsumerAddress.ConsumerID);",
+                  "    }",
+                  "});",
+                  "",
+                  "pm.test(\"TEST4: Response Header Checks\", function() {",
+                  "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');",
+                  "});",
+                  "",
+                  "pm.test(\"TEST5: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+                  "});",
+                  "",
+                  "pm.test(\"TEST6: Response Schema is valid\", function() {",
+                  "  pm.expect(tv4.validate(pm.response.json, schemaResponse, true, false)).to.be.true;",
+                  "});",
+                  "} else {",
+                  "    //Negative Tests",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "cb90b8ef-9c1d-4427-b2b8-dac810f2d8bc",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "8e9812c5-d0b3-4aee-a775-da0316c59c7d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "correlation-id",
+                "type": "text",
+                "value": "Test-correlation"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "type": "text",
+                "value": "{{subkey-south}}"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "type": "text",
+                "value": "{{subkey-west}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Origin",
+                "type": "text",
+                "value": "Postman"
+              },
+              {
+                "key": "Username",
+                "type": "text",
+                "value": "postman"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"ConsumerAddress\": {\n        \"ConsumerID\": {{cnsmr_id}},\n        \"AddressLine1\": \"{{AddressLine1}}\",\n        \"AddressLine2\": \"{{AddressLine2}}\",\n        \"AddressLine3\": \"{{AddressLine3}}\",\n        \"City\": \"{{City}}\",\n        \"State\": \"{{State}}\",\n        \"County\": \"{{County}}\",\n        \"PostCode\": \"{{PostCode}}\",\n        \"Country\": \"{{Country}}\",\n        \"Source\": \"{{Source}}\"\n    },\n    \"UserName\": \"TEST\",\n    \"CorrelationId\": \"TEST-correlation\",\n    \"Operation\": \"SaveConsumerAddressCommand\",\n    \"Origin\": \"Postman\"\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "{{baseUrl}}/{{cnsmr_id}}/Address"
+          },
+          "response": [
+            {
+              "id": "0325a7da-e8ef-4cca-bdfe-55fd6c0d4503",
+              "name": "400 SaveConsumerAddress",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "type": "text",
+                    "value": "kam-correlation"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{{\r\n  \"ConsumerAddress\": {\r\n    \"ConsumerAddressID\": 1593398,\r\n    \"ConsumerID\": 1680782,\r\n    \"SecondaryConsumerId\": 0,\r\n    \"SecondaryConsumerEmail\": \"secondary@consumer.mail\",\r\n    \"AddressLine1\": \"my address 1\",\r\n    \"AddressLine2\": \"my address 2\",\r\n    \"AddressLine3\": \"my address 3\",\r\n    \"City\": \"my city\",\r\n    \"State\": \"my state\",\r\n    \"County\": \"my county\",\r\n    \"PostCode\": \"W1A\",\r\n    \"Country\": \"my country\",\r\n    \"Source\": \"my source\"\r\n  },\r\n  \"UserName\": \"kaml\",\r\n  \"CorrelationId\": \"my-correlation\",\r\n  \"Operation\": \"SaveConsumerAddressAsyncCommand\"\r\n}"
+                },
+                "url": "{{base-consumer-url}}/SaveConsumerAddress"
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "plain",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 08:30:33 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "0"
+                },
+                {
+                  "key": "Request-Context",
+                  "value": "appId=cid-v1:e6d3fb44-2f04-48dd-b4d6-37408e23d95c"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "57411cb4-0a7f-437e-9bc4-d57df03ffd58",
+              "name": "200 SaveConsumerAddress",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "type": "text",
+                    "value": "kam-correlation"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-south",
+                    "value": "{{subscription-key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"ConsumerAddress\": {\n        \"ConsumerAddressID\": 1593398,\n        \"ConsumerID\": 1680782,\n        \"SecondaryConsumerId\": 0,\n        \"SecondaryConsumerEmail\": \"secondary@consumer.mail\",\n        \"AddressLine1\": \"my address 1\",\n        \"AddressLine2\": \"my address 2\",\n        \"AddressLine3\": \"my address 3\",\n        \"City\": \"my city\",\n        \"State\": \"my state\",\n        \"County\": \"my county\",\n        \"PostCode\": \"W1A\",\n        \"Country\": \"my country\",\n        \"Source\": \"my source\"\n    },\n    \"UserName\": \"kaml\",\n    \"CorrelationId\": \"my-correlation\",\n    \"Operation\": \"SaveConsumerAddressAsyncCommand\"\n}"
+                },
+                "url": "{{base-consumer-url}}/SaveConsumerAddress"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 30 Aug 2019 08:30:33 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "Kestrel"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "0"
+                },
+                {
+                  "key": "Request-Context",
+                  "value": "appId=cid-v1:e6d3fb44-2f04-48dd-b4d6-37408e23d95c"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"consumerID\": 1680782,\n    \"addressLine1\": \"my address 1\",\n    \"addressLine2\": \"my address 2\",\n    \"addressLine3\": \"my address 3\",\n    \"city\": \"my city\",\n    \"state\": \"my state\",\n    \"county\": \"my county\",\n    \"postCode\": \"W1A\",\n    \"country\": \"UK\",\n    \"source\": \"UNKNOWN\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "{{baseUrl}}/sfs/fulldetails",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "644d2321-5c81-4b4e-a269-e9b1c18f8df3",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "4ef218f0-a986-4f86-b6e4-76a5c52908ce",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "e47d6df6-0b8d-4477-9b61-b21be59f93c3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
+              },
+              {
+                "key": "Correlation-Id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Origin",
+                "value": "Postman",
+                "type": "text"
+              },
+              {
+                "key": "Username",
+                "value": "LSimpson",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"consumerID\": \"1583206\",\r\n    \"statusCode\": \"Pending\",\r\n    \"copyNotes\": \"null\",\r\n    \"description\": {\r\n        \"value\": \"test add description\"\r\n    },\r\n    \"consumerDetail\": {\r\n        \"numberInHousehold\": \"{{numInHH}}\",\r\n        \"numberOfChildrenUnder16\": \"{{numOfChildU16}}\",\r\n        \"numberOfChildren16To18\": \"{{numOfChild16To18}}\",\r\n        \"numberOfVehicles\": \"{{numOfVehicles}}\",\r\n        \"householdTypeCode\": \"{{numOfVehicles}}\",\r\n        \"residenceStatusCode\": \"{{residenceStatusCode}}\",\r\n        \"employmentStatusCode\": \"{{employmentStatusCode}}\",\r\n        \"repayingDebtTypeCode\": \"{{repayingDebtTypeCode}}\",\r\n        \"outstandingDebt\": \"{{outstandingDebt}}\",\r\n        \"householdContributorCode\": \"{{householdContributorCode}}\",\r\n        \"nameOfEmployer\": \"TestLTD\",\r\n        \"partnersEmploymentStatusCode\": \"{{partEmploymentStatusCode}}\",\r\n        \"houseContributorEmploymentStatusCode\": \"1\",\r\n        \"isInPaidEmployment\": \"{{isPartnerInPaidEmployment}}\",\r\n        \"isPartnerInPaidEmployment\": \"false\",\r\n        \"isHouseContributorInPaidEmployment\": \"true\",\r\n        \"propertyValue\": \"{{propertyValue}}\",\r\n        \"mortgageAmount\": \"{{mortgageAmount}}\",\r\n        \"doYouHaveOutstandingDebt\": \"true\",\r\n        \"doYouReceivePension\": \"false\",\r\n        \"doYouReceiveChildSupport\": \"false\",\r\n        \"doYouReceiveBenefits\": \"false\",\r\n        \"otherDetails\": \"Test Consumer Details\",\r\n        \"doesAnyoneElseProvideIncome\": \"false\",\r\n        \"doHouseContributorsHaveBenefits\": \"false\",\r\n        \"areHouseContributorsInPaydEmployment\": \"false\"\r\n    },\r\n    \"expenditures\": [\r\n        {\r\n            \"frequencyCode\": \"{{expenFreqCode}}\",\r\n            \"notes\": \"Expen Test\",\r\n            \"expenditureGroupCode\": \"{{ExpenGroupCode}}\",\r\n            \"expenditureTypeCode\": \"{{randomExpenTypeCode}}\",\r\n            \"amount\": \"{{expenRandomAmount}}\"\r\n        }\r\n    ],\r\n    \"incomes\": [\r\n        {\r\n            \"amount\": \"220.00\",\r\n            \"frequencyCode\": \"4\",\r\n            \"incomeGroupCode\": \"1\",\r\n            \"incomeTypeCode\": \"1\",\r\n            \"notes\": \"Test Income\"\r\n        },\r\n        {\r\n            \"amount\": \"560.00\",\r\n            \"frequencyCode\": \"4\",\r\n            \"incomeGroupCode\": \"1\",\r\n            \"incomeTypeCode\": \"2\",\r\n            \"notes\": \"Test Income Two\"\r\n        }\r\n    ],\r\n    \"savings\": [\r\n        {\r\n            \"savingTypeCode\": \"1\",\r\n            \"amount\": \"{{savingsAmount}}\",\r\n            \"frequencyCode\": \"{{savingsFreqCode}}\",\r\n            \"notes\": \"Test Savings Amount\"\r\n        }\r\n    ]\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/sfs/fulldetails",
+            "description": "tsetst"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "12502a21-7253-4e60-b55e-1577d887c558"
+    },
+    {
       "name": "OAuth Renewal",
       "event": [
         {
