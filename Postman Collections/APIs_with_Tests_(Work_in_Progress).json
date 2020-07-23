@@ -44106,7 +44106,7 @@
                           "            pm.expect(jsonData[0].consumerDetail.outstandingDebt).to.equal(JSON.stringify(data.outstanding_debt));\r",
                           "            pm.expect(jsonData[0].consumerDetail.numberInHousehold).to.equal(JSON.stringify(data.number_in_hh));\r",
                           "            pm.expect(jsonData[0].consumerDetail.numberOfChildrenUnder16).to.equal(data.num_of_child_u16);\r",
-                          "            pm.expect(jsonData[0].consumerDetail.numberOfChildren16To18).to.equal(data.num_of_child_16to18);\r",
+                          "            pm.expect(jsonData[0].consumerDetail.numberOfChildren16To18).to.equal(JSON.stringify(data.num_of_child_16to18));\r",
                           "             pm.expect(jsonData[0].consumerDetail.numberOfVehicles).to.equal(JSON.stringify(data.num_of_vehicles));\r",
                           "            pm.expect(jsonData[0].consumerDetail.outstandingDebt).to.equal(JSON.stringify(data.outstanding_debt));\r",
                           "            pm.expect(jsonData[0].consumerDetail.amount).to.equal(JSON.stringify(data.saving_amount));\r",
