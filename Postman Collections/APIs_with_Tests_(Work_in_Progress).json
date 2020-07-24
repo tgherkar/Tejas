@@ -64836,7 +64836,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"consumerIds\": [\n        \"{{cnsmr_id}}\"\n    ],\n\t\"documentTemplateVersionId\": \"{{dcmnt_tmplt_vrsn_id}}\",\n    \"consumerAccountId\": \"{{cnsmr_accnt_id}}\",\n    \"documentGroupShortName\": \"{{dcmnt_grp}}\",\n    \"documentTemplateName\": \"T_Test Letter\",\n    \"documentTemplateShortName\": \"T_Test\",\n    \"Correlation-Id\": \"{{$guid}}\",\n    \"Cache-Control\": \"no-cache\"\n}\n\n{\n  \"consumerIds\": [\n    0\n  ],\n  \"documentTemplateVersionId\": 0,\n  \"consumerAccountId\": 0,\n  \"documentGroupShortName\": \"string\",\n  \"documentTemplateName\": \"string\",\n  \"documentTemplateShortName\": \"string\",\n  \"Correlation-Id\": \"string\",\n  \"Cache-Control\": \"string\"\n}",
+              "raw": "{\n    \"consumerIds\": [\n        \"{{cnsmr_id}}\"\n    ],\n\t\"documentTemplateVersionId\": \"{{dcmnt_tmplt_vrsn_id}}\",\n    \"consumerAccountId\": \"{{cnsmr_accnt_id}}\",\n    \"documentGroupShortName\": \"External\",\n    \"documentTemplateName\": \"T_ISE091\",\n    \"documentTemplateShortName\": \"T_ISE091\",\n    \"Correlation-Id\": \"{{$guid}}\",\n    \"Cache-Control\": \"no-cache\"\n}",
               "options": {
                 "raw": {}
               }
