@@ -62228,7 +62228,7 @@
                               "    var pID = schema.items.documentGroupId;\r",
                               "    var booleanV = Boolean;\r",
                               "    pm.expect(pID).to.not.equal(booleanV);\r",
-                              "    console.log(jsonData.toString());\r",
+                              "    //console.log(jsonData.toString());\r",
                               "});"
                             ],
                             "type": "text/javascript"
