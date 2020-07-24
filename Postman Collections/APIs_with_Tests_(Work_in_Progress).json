@@ -63254,7 +63254,7 @@
                           "variable": [
                             {
                               "key": "DocumentTemplateId",
-                              "value": "20",
+                              "value": "{{documentTemplateID}}",
                               "type": "string",
                               "description": "(Required) "
                             }
