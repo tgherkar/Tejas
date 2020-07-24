@@ -63435,7 +63435,7 @@
                       "        pm.expect(jsonData[0].documentTemplateFinalizedFlag).to.equal(data.documentTemplateFinalizedFlag);\r",
                       "    });\r",
                       "\r",
-                      "    pm.test(\"TEST1F: Document Template Source File Blog check\", function() {\r",
+                      "    pm.test(\"TEST1F: Document Template Source File Blob check\", function() {\r",
                       "        pm.expect(jsonData[0].documentTemplateSourceFileBlob).to.equal(data.documentTemplateSourceFileBlob);\r",
                       "    });\r",
                       "\r",
