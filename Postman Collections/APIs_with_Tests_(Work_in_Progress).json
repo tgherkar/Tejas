@@ -62211,7 +62211,7 @@
                               "    pm.expect(pm.response.responseTime).to.be.below(50000);\r",
                               "});\r",
                               "pm.test(\"TEST04: Response Schema is valid\", function () {\r",
-                              "    pm.expect(ajv.validate(schema, jsonData, true, false)).to.be.true;\r",
+                              "    pm.expect(ajv.validate(schema, jsonData, true, true)).to.be.true;\r",
                               "});\r",
                               "///NEGATIVE TESTS\r",
                               "\r",
