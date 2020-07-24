@@ -63146,7 +63146,7 @@
                               "    });\r",
                               "    ////////////////////////////////////\r",
                               "\r",
-                              "    pm.test(\"TEST1AD: Document Template Versions Check\", function() {\r",
+                              "    pm.test(\"TEST1D: Document Template Versions Check\", function() {\r",
                               "        pm.expect(jsonData.documentTemplateVersions[0].documentTemplateVersionId).to.equal(data.documentTemplateVersionID);\r",
                               "        pm.expect(jsonData.documentTemplateVersions[0].documentTemplateId).to.equal(data.documentTemplateID);\r",
                               "        pm.expect(jsonData.documentTemplateVersions[0].documentTemplateMappingSetId).to.equal(data.documentTemplateMappingSetID);\r",
