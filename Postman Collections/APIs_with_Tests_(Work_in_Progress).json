@@ -63109,7 +63109,7 @@
                               "        pm.expect(jsonData.documentTemplateActiveFlag).to.equal(data.dcmnt_tmplt_actv_flg);\r",
                               "    });\r",
                               "    pm.test(\"TEST1R: Document upsertDateTime check\", function() {\r",
-                              "        pm.expect(jsonData.documentTemplateActiveFlag.split('T')[0]).to.equal(data.DT_upsrt_dttm.split(' ')[0]);\r",
+                              "        pm.expect(jsonData.upsertDateTime.split('T')[0]).to.equal(data.DT_upsrt_dttm.split(' ')[0]);\r",
                               "    });\r",
                               "    pm.test(\"TEST1S: Document upsertSoftCompId check\", function() {\r",
                               "        pm.expect(jsonData.upsertSoftCompId).to.equal(data.DT_upsrt_soft_comp_id);\r",
