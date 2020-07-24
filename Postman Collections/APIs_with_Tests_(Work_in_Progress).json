@@ -62145,7 +62145,7 @@
                               "                        },\r",
                               "                        \"documentTemplateVersionNumber\": {\r",
                               "                            \"$id\": \"#/items/properties/documentTemplateVersions/items/properties/documentTemplateVersionNumber\",\r",
-                              "                            \"type\": \"integer\"\r",
+                              "                            \"type\": \"number\"\r",
                               "                        },\r",
                               "                        \"documentTemplateUploadedDateTime\": {\r",
                               "                            \"$id\": \"#/items/properties/documentTemplateVersions/items/properties/documentTemplateUploadedDateTime\",\r",
