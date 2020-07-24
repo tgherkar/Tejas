@@ -63043,8 +63043,8 @@
                               "});\r",
                               "\r",
                               "if (data.documentTemplateID!=null){\r",
-                              "    pm.test(\"TEST1A: Document Template Version ID check\", function() {\r",
-                              "        pm.expect(jsonData[0].documentTemplateVersionId).to.equal(data.documentTemplateVersionID);\r",
+                              "    pm.test(\"TEST1A: Document Template ID check\", function() {\r",
+                              "        pm.expect(jsonData.documentTemplateId).to.equal(data.documentTemplateID);\r",
                               "    });\r",
                               "    pm.test(\"TEST1B: Document Template name check\", function() {\r",
                               "        pm.expect(jsonData[0].documentTemplateName).to.equal(data.dcmnt_tmplt_nm);\r",
@@ -63255,7 +63255,7 @@
                           "variable": [
                             {
                               "key": "DocumentTemplateId",
-                              "value": "{{documentTemplateID}}",
+                              "value": "20",
                               "type": "string",
                               "description": "(Required) "
                             }
