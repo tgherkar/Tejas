@@ -63417,16 +63417,12 @@
                       "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
                       "};\r",
                       "\r",
-                      "\r",
-                      "\r",
-                      "\r",
-                      "\r",
                       "if (data.documentTemplateId!=null){\r",
                       "    pm.test(\"TEST1A: Document Template Version ID check\", function() {\r",
-                      "        pm.expect(jsonData[0].documentTemplateVersionId).to.equal(JSON.stringify(data.documentTemplateVersionId));\r",
+                      "        pm.expect(jsonData[0].documentTemplateVersionId).to.equal(data.documentTemplateVersionId);\r",
                       "    });\r",
                       "    pm.test(\"TEST1B: Document Template ID check\", function() {\r",
-                      "        pm.expect(jsonData[0].documentTemplateId).to.equal(JSON.stringify(data.documentTemplateId));\r",
+                      "        pm.expect(jsonData[0].documentTemplateId).to.equal(data.documentTemplateId);\r",
                       "    });\r",
                       "    pm.test(\"TEST1C: Document Template ID check\", function() {\r",
                       "        pm.expect(jsonData[0].documentTemplateMappingSetId).to.equal(JSON.stringify(data.documentTemplateMappingSetId));\r",
@@ -63585,7 +63581,7 @@
                   "variable": [
                     {
                       "key": "DocumentTemplateId",
-                      "value": "88",
+                      "value": "20",
                       "type": "string",
                       "description": " "
                     }
