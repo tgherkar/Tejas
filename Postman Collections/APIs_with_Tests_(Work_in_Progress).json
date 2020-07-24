@@ -63118,7 +63118,7 @@
                               "        pm.expect(jsonData.upsertTransactionNumber).to.equal(data.DT_upsrt_trnsctn_nmbr);\r",
                               "    });\r",
                               "    pm.test(\"TEST1U: Document upsertUserId check\", function() {\r",
-                              "        pm.expect(jsonData.upsertUserId).to.equal(data.DT_upsrt_usr_id);\r",
+                              "        pm.expect(jsonData.documentTemplateDescription).to.equal(data.DT_upsrt_usr_id);\r",
                               "    });\r",
                               "    pm.test(\"TEST1V: Document TemplateEmailableFlag check\", function() {\r",
                               "        pm.expect(jsonData.documentTemplateEmailableFlag).to.equal(data.dcmnt_tmplt_emailable_flg);\r",
