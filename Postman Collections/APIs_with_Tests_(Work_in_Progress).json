@@ -63059,7 +63059,7 @@
                               "        pm.expect(jsonData.documentGroup.documentGroupCreatedDateTime.split('T')[0]).to.be.oneOf([data.dcmnt_grp_crt_dttm.split(' ')[0], null]);\r",
                               "        pm.expect(jsonData.documentGroup.documentGroupIsPublicFlag).to.be.oneOf([data.dcmnt_grp_is_public_flg, null]);\r",
                               "        pm.expect(jsonData.documentGroup.documentGroupSoftDeleteFlag).to.be.oneOf([data.dcmnt_grp_sft_dlt_flg, null]);\r",
-                              "        pm.expect(jsonData.documentGroup.documentGroupPath).to.be.oneOf([data.dcmnt_grp_path_txt, null]);\r",
+                              "        pm.expect(jsonData.documentGroup.documentGroupPath).to.be.oneOf([JSON.stringify(data.dcmnt_grp_path_txt), null]);\r",
                               "        pm.expect(jsonData.documentGroup.upsertDateTime.split('T')[0]).to.be.oneOf([data.DG_upsrt_dttm.split(' ')[0], null]);\r",
                               "        pm.expect(jsonData.documentGroup.upsertSoftCompId).to.be.oneOf([data.DG_upsrt_soft_comp_id, null]);\r",
                               "        pm.expect(jsonData.documentGroup.upsertTransactionNumber).to.be.oneOf([data.DG_upsrt_trnsctn_nmbr, null]);\r",
