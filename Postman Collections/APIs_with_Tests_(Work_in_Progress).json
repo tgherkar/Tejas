@@ -64836,7 +64836,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"consumerIds\": [1966720],\n\t\"documentTemplateVersionId\": 15381,\n    \"consumerAccountId\": 1949512,\n    \"documentGroupShortName\": \"External\",\n    \"documentTemplateName\": \"T_ISE091\",\n    \"documentTemplateShortName\": \"T_ISE091\",\n    \"Correlation-Id\": \"{{$guid}}\",\n    \"Cache-Control\": \"no-cache\"\n}",
+              "raw": "{\n    \"consumerIds\": {{cnsmr_id}},\n\t\"documentTemplateVersionId\": {{documentTemplateVersionID}},\n    \"consumerAccountId\": {{cnsmr_accnt_id}},\n    \"documentGroupShortName\": \"{{dcmnt_grp_shrt_nm}}\",\n    \"documentTemplateName\": \"{{dcmnt_tmplt_nm}}\",\n    \"documentTemplateShortName\": \"{{dcmnt_tmplt_shrt_nm}}\",\n    \"Correlation-Id\": \"{{$guid}}\",\n    \"Cache-Control\": \"no-cache\"\n}",
               "options": {
                 "raw": {}
               }
