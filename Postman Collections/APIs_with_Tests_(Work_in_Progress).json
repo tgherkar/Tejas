@@ -61807,7 +61807,7 @@
       "_postman_id": "b82b1d7a-123c-4e17-a18a-f5b2b6d97d15"
     },
     {
-      "name": "Manual Letters",
+      "name": "Manual_Letters",
       "item": [
         {
           "name": "active",
@@ -63573,7 +63573,7 @@
                   "variable": [
                     {
                       "key": "DocumentTemplateId",
-                      "value": "20",
+                      "value": "{{documentTemplateID}}",
                       "type": "string",
                       "description": " "
                     }
