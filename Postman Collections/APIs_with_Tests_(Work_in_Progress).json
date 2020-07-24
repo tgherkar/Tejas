@@ -63488,24 +63488,14 @@
                       "});\r",
                       " pm.test(\"Incorrect Consumer ID should be not found\", function () {\r",
                       "     pm.expect(responseCode.code).to.equal(400);\r",
-                      "     pm.expect(responseBody).to.equal(\"Unable to find Document Template ID with versions: \"+query[5]);\r",
-                      "     pm.expect(cid[1]).to.equal(\" \"+query[5]);\r",
+                      "     pm.expect(responseBody).to.equal(\"Document template ID is not active\");\r",
                       "});\r",
                       "\r",
-                      "pm.test(\"Neg Test 01: Check if array is empty\", function () {\r",
-                      "     pm.expect(schema).to.not.be.empty;\r",
-                      "});\r",
                       " pm.test(\"Neg Test 02: Check if string is empty\", function () {\r",
                       "     pm.expect('description').to.not.be.empty;\r",
                       "});\r",
-                      " pm.test(\"Neg Test 03: Check keylinkID isn't empty\", function () {\r",
-                      "     pm.expect('documentTemplateSourceFileBlob').to.not.be.empty;\r",
-                      "});\r",
-                      "pm.test(\"Incorrect field examaple\", function() {\r",
-                      "    var pID = schema.items.preferenceTypeID;\r",
-                      "    var booleanV = Boolean;\r",
-                      "    pm.expect(pID).to.not.equal(booleanV);\r",
-                      "    console.log(jsonData.toString());\r",
+                      "pm.test(\"Response Code Check\", function() {\r",
+                      "    pm.expect(responseCode.code).to.be.oneOf([400,404]);\r",
                       "});\r",
                       "}\r",
                       ""
@@ -63573,7 +63563,7 @@
                   "variable": [
                     {
                       "key": "DocumentTemplateId",
-                      "value": "{{documentTemplateID}}",
+                      "value": "18",
                       "type": "string",
                       "description": " "
                     }
