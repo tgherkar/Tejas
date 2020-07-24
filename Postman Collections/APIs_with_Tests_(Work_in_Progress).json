@@ -63151,7 +63151,7 @@
                               "        pm.expect(jsonData.documentTemplateVersions[0].documentTemplateId).to.equal(data.documentTemplateID);\r",
                               "        pm.expect(jsonData.documentTemplateVersions[0].documentTemplateMappingSetId).to.equal(data.documentTemplateMappingSetID);\r",
                               "        pm.expect(jsonData.documentTemplateVersions[0].documentTemplateVersionNumber).to.equal(data.documentTemplateVersionNumber);\r",
-                              "        pm.expect(jsonData.documentTemplateVersions[0].documentTemplateUploadedDateTime.split('T')).to.equal(data.documentTemplateUploadDateTime.split(' '));\r",
+                              "        pm.expect(jsonData.documentTemplateVersions[0].documentTemplateUploadedDateTime.split('T')[0]).to.equal(data.documentTemplateUploadDateTime.split(' ')[0]);\r",
                               "        pm.expect(jsonData.documentTemplateVersions[0].documentTemplateFinalizedFlag).to.equal(data.documentTemplateFinalizedFlag);\r",
                               "        pm.expect(jsonData.documentTemplateVersions[0].documentTemplateVersionActiveFlag).to.equal(data.documentTemplateVersionActiveFlag);\r",
                               "        pm.expect(jsonData.documentTemplateVersions[0].upsertDateTime.split('T')[0]).to.equal(data.upsrt_dttm.split(' ')[0]);\r",
