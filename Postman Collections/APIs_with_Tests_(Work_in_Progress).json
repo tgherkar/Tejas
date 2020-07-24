@@ -63112,7 +63112,7 @@
                               "        pm.expect(jsonData.documentTemplateActiveFlag.split('T')[0]).to.equal(data.DT_upsrt_dttm.split(' ')[0]);\r",
                               "    });\r",
                               "    pm.test(\"TEST1S: Document upsertSoftCompId check\", function() {\r",
-                              "        pm.expect(jsonData.documentTemplateDescription).to.equal(data.DT_upsrt_soft_comp_id);\r",
+                              "        pm.expect(jsonData.upsertSoftCompId).to.equal(data.DT_upsrt_soft_comp_id);\r",
                               "    });\r",
                               "    pm.test(\"TEST1T: Document upsertTransactionNumber check\", function() {\r",
                               "        pm.expect(jsonData.upsertTransactionNumber).to.equal(data.DT_upsrt_trnsctn_nmbr);\r",
