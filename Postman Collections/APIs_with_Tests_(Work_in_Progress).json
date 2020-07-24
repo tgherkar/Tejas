@@ -63076,7 +63076,7 @@
                               "        pm.expect(jsonData.documentTemplateDescription).to.equal(data.dcmnt_tmplt_dscrptn_txt);\r",
                               "    });\r",
                               "    pm.test(\"TEST1G: Document TemplateCreatedDateTime check\", function() {\r",
-                              "        pm.expect(jsonData.documentTemplateCreatedDateTime.split('T')).to.equal(data.dcmnt_tmplt_crt_dttm.split(' '));\r",
+                              "        pm.expect(jsonData.documentTemplateCreatedDateTime.split('T')[0]).to.equal(data.dcmnt_tmplt_crt_dttm.split(' ')[0]);\r",
                               "    });\r",
                               "    pm.test(\"TEST1H: Document OutputDestinationId check\", function() {\r",
                               "        pm.expect(jsonData.documentOutputDestinationId).to.equal(data.dcmnt_output_dstntn_id);\r",
