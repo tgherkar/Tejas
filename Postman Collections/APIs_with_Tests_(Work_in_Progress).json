@@ -63563,7 +63563,7 @@
                   "variable": [
                     {
                       "key": "DocumentTemplateId",
-                      "value": "18",
+                      "value": "{{documentTemplateID}}",
                       "type": "string",
                       "description": " "
                     }
