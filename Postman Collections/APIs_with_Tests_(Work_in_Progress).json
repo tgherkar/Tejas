@@ -63215,28 +63215,28 @@
                           },
                           {
                             "key": "Ocp-Apim-Subscription-Key-West",
-                            "value": "{{Ocp-Apim-Subscription-Key-West}}",
-                            "type": "text"
+                            "type": "text",
+                            "value": "{{Ocp-Apim-Subscription-Key-West}}"
                           },
                           {
                             "key": "Origin",
-                            "value": "Postman",
-                            "type": "text"
+                            "type": "text",
+                            "value": "Postman"
                           },
                           {
                             "key": "Username",
-                            "value": "Test-User",
-                            "type": "text"
+                            "type": "text",
+                            "value": "Test-User"
                           },
                           {
                             "key": "Content-Type",
-                            "value": "application/json",
-                            "type": "text"
+                            "type": "text",
+                            "value": "application/json"
                           },
                           {
                             "key": "Correlation-Id",
-                            "value": "{{$guid}}",
-                            "type": "text"
+                            "type": "text",
+                            "value": "{{$guid}}"
                           }
                         ],
                         "url": {
