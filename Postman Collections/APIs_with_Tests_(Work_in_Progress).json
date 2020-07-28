@@ -59732,6 +59732,7 @@
                           "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
                           "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
                           "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                          "var jsonData = JSON.parse(responseBody);\r",
                           "var Ajv = require('ajv'),\r",
                           "ajv = new Ajv({logger: console});\r",
                           "var schema = \r",
