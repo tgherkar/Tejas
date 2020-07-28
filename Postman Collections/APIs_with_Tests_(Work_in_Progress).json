@@ -58407,11 +58407,12 @@
                       }
                     },
                     "url": {
-                      "raw": "{{baseUrl}}/category/:categoryId",
+                      "raw": "{{baseUrl}}/instance/category/:categoryId",
                       "host": [
                         "{{baseUrl}}"
                       ],
                       "path": [
+                        "instance",
                         "category",
                         ":categoryId"
                       ],
