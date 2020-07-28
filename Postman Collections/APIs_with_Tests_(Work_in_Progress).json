@@ -60467,6 +60467,14 @@
                 "disableBodyPruning": true
               },
               "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "accessToken": "{{OAuth_Token}}",
+                    "tokenType": "Bearer",
+                    "addTokenTo": "header"
+                  }
+                },
                 "method": "GET",
                 "header": [
                   {
@@ -60501,20 +60509,20 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/consumer/:consumerId/lastrpc",
+                  "raw": "{{baseUrl}}/interaction/consumer/:consumerId/lastrpc",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "interaction",
                     "consumer",
                     ":consumerId",
                     "lastrpc"
                   ],
                   "variable": [
                     {
-                      "id": "a14a2d15-6986-4790-94a7-3700978ea8a2",
                       "key": "consumerId",
-                      "value": "<string>",
+                      "value": "1223",
                       "type": "string",
                       "description": "(Required) "
                     }
