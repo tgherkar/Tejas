@@ -58877,6 +58877,11 @@
                         "key": "Ocp-Apim-Subscription-Key-West",
                         "value": "{{Ocp-Apim-Subscription-Key-West}}",
                         "type": "text"
+                      },
+                      {
+                        "key": "Origin",
+                        "value": "Postman",
+                        "type": "text"
                       }
                     ],
                     "body": {
