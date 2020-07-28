@@ -60509,20 +60509,20 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/interaction/consumer/:consumerId/lastrpc",
+                  "raw": "{{baseUrl}}/consumer/:consumerId/lastrpc",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
-                    "interaction",
                     "consumer",
                     ":consumerId",
                     "lastrpc"
                   ],
                   "variable": [
                     {
+                      "id": "a14a2d15-6986-4790-94a7-3700978ea8a2",
                       "key": "consumerId",
-                      "value": "1223",
+                      "value": "<string>",
                       "type": "string",
                       "description": "(Required) "
                     }
