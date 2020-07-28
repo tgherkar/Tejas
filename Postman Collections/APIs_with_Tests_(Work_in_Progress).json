@@ -60990,7 +60990,7 @@
                       "    pm.test(\"TEST1A: consumerID check\", function() {\r",
                       "        pm.expect(jsonData[0].consumerID).to.equal(JSON.stringify(data.cnsmr_id));\r",
                       "    });\r",
-                      "    pm.test(\"TEST1B: GroupID check\", function() {\r",
+                      "    pm.test(\"TEST1B: lastRpcDateTime check\", function() {\r",
                       "        pm.expect(jsonData[0].lastRpcDateTime).to.equal(JSON.stringify(data.lastRpcDateTime));\r",
                       "    });\r",
                       "\r",
