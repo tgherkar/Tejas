@@ -58670,7 +58670,7 @@
                     ],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\n    \"categoryID\": \"761d8e81-7154-4b4a-b889-350818179aa5\",\n    \"name\": \"Emails Inboubnd\",\n    \"description\": \"Emails Inbound\",\n    \"materialLogo\": \"email\",\n    \"sourceID\": \"51684748-c042-4985-9366-0c35dac25476\"\n}",
+                      "raw": "{\n    \"categoryID\": \"761d8e81-7154-4b4a-b889-350818179aa5\",\n    \"name\": \"Emails Inbound\",\n    \"description\": \"Emails Inbound\",\n    \"materialLogo\": \"email\",\n    \"sourceID\": \"51684748-c042-4985-9366-0c35dac25476\"\n}",
                       "options": {
                         "raw": {}
                       }
