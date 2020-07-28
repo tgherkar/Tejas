@@ -59270,11 +59270,12 @@
                       }
                     },
                     "url": {
-                      "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
+                      "raw": "{{baseUrl}}/interaction/category/:categoryId/rule/:categoryRuleId",
                       "host": [
                         "{{baseUrl}}"
                       ],
                       "path": [
+                        "interaction",
                         "category",
                         ":categoryId",
                         "rule",
@@ -60745,7 +60746,7 @@
                     "raw": {}
                   }
                 },
-                "url": "{{baseUrl}}/category",
+                "url": "{{baseUrl}}/interaction/category",
                 "description": "Create interaction category"
               },
               "response": [
