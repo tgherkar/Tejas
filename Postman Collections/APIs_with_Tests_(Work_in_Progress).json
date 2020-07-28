@@ -60637,6 +60637,31 @@
                   {
                     "key": "Content-Type",
                     "value": "application/json,v1.0.0"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Username",
+                    "value": "Test-User",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "Postman",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
                   }
                 ],
                 "body": {
