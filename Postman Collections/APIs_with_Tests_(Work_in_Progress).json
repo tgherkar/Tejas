@@ -60424,7 +60424,7 @@
                       "                        }\r",
                       "                    },\r",
                       "                    \"$id\": \"#/items/properties/categoryRules/items\",\r",
-                      "                    \"type\": \"object\"\r",
+                      "                    \"type\": [\"object\", \"null\"]\r",
                       "                },\r",
                       "                \"$id\": \"#/items/properties/categoryRules\",\r",
                       "                \"type\": \"array\"\r",
@@ -60738,6 +60738,9 @@
                       "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                       "    }\r",
                       "//console.log(\"End of Pre-req script\");\r",
+                      "\r",
+                      "\r",
+                      "\r",
                       ""
                     ],
                     "type": "text/javascript"
