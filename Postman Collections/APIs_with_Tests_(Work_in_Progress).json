@@ -59751,6 +59751,14 @@
                     "disableBodyPruning": true
                   },
                   "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": {
+                        "accessToken": "{{OAuth_Token}}",
+                        "tokenType": "Bearer",
+                        "addTokenTo": "header"
+                      }
+                    },
                     "method": "GET",
                     "header": [
                       {
@@ -59784,7 +59792,7 @@
                         "type": "text"
                       }
                     ],
-                    "url": "{{baseUrl}}/category/source",
+                    "url": "{{baseUrl}}/interaction/category/source",
                     "description": "Get all category sources"
                   },
                   "response": [
