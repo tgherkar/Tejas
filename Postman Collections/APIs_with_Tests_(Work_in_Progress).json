@@ -58596,25 +58596,25 @@
                     ],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\n    \"categoryID\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"sourceID\": \"<uuid>\"\n}",
+                      "raw": "{\n    \"categoryID\": \"761d8e81-7154-4b4a-b889-350818179aa5\",\n    \"name\": \"Emails Inboubnd\",\n    \"description\": \"Emails Inbound\",\n    \"materialLogo\": \"email\",\n    \"sourceID\": \"51684748-c042-4985-9366-0c35dac25476\"\n}",
                       "options": {
                         "raw": {}
                       }
                     },
                     "url": {
-                      "raw": "{{baseUrl}}/category/:categoryId",
+                      "raw": "{{baseUrl}}/interaction/category/:categoryId",
                       "host": [
                         "{{baseUrl}}"
                       ],
                       "path": [
+                        "interaction",
                         "category",
                         ":categoryId"
                       ],
                       "variable": [
                         {
-                          "id": "f4993da3-f23f-4322-a2ae-e1cd1aab025f",
                           "key": "categoryId",
-                          "value": "<string>",
+                          "value": "761d8e81-7154-4b4a-b889-350818179aa5",
                           "type": "string",
                           "description": "(Required) "
                         }
