@@ -59792,7 +59792,7 @@
                         "type": "text"
                       }
                     ],
-                    "url": "{{baseUrl}}/interaction/category/source",
+                    "url": "{{baseUrl}}/category/source",
                     "description": "Get all category sources"
                   },
                   "response": [
