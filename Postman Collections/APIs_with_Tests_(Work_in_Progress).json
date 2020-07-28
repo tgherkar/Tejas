@@ -58374,11 +58374,6 @@
                         "type": "text"
                       },
                       {
-                        "key": "Content-Type",
-                        "value": "application/json",
-                        "type": "text"
-                      },
-                      {
                         "key": "Username",
                         "value": "Test-User",
                         "type": "text"
