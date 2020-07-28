@@ -58402,12 +58402,12 @@
                       }
                     },
                     "url": {
-                      "raw": "{{baseUrl}}/instance/category/:categoryId",
+                      "raw": "{{baseUrl}}/interaction/category/:categoryId",
                       "host": [
                         "{{baseUrl}}"
                       ],
                       "path": [
-                        "instance",
+                        "interaction",
                         "category",
                         ":categoryId"
                       ],
@@ -60110,7 +60110,7 @@
                         "raw": {}
                       }
                     },
-                    "url": "{{baseUrl}}/category/source",
+                    "url": "{{baseUrl}}/interaction/category/source",
                     "description": "Create interaction category source"
                   },
                   "response": [
