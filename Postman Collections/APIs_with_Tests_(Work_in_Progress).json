@@ -60196,6 +60196,14 @@
                 "disableBodyPruning": true
               },
               "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "accessToken": "{{OAuth_Token}}",
+                    "tokenType": "Bearer",
+                    "addTokenTo": "header"
+                  }
+                },
                 "method": "GET",
                 "header": [
                   {
@@ -60229,7 +60237,7 @@
                     "type": "text"
                   }
                 ],
-                "url": "{{baseUrl}}/category",
+                "url": "{{baseUrl}}/interaction/category",
                 "description": "Get all categories"
               },
               "response": [
