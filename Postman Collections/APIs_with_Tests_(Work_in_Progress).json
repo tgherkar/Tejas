@@ -61072,19 +61072,125 @@
             },
             {
               "name": "/consumer/:consumerId/interactions/:categoryId/skip/:skip/take/:take",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "9e59df7a-f6cf-44df-b64e-65e1451dc43f",
+                    "exec": [
+                      "    var tokenDate = new Date(2010,1,1);\r",
+                      "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                      "    if(tokenTimestamp){\r",
+                      "        tokenDate = Date.parse(tokenTimestamp);\r",
+                      "    }else{\r",
+                      "        tokenDate = Date.parse(\"2018-03-29T13:34:00.000\");\r",
+                      "    }\r",
+                      "    console.log(\"timestamp is: \"+tokenDate +\" new time is: \"+Date.parse(new Date()));\r",
+                      "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                      "    if(!expiresInTime){\r",
+                      "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                      "    }\r",
+                      "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                      "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                      "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
+                      "    let clientId = pm.environment.get(\"clientId\");\r",
+                      "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
+                      "    let scope = pm.environment.get(\"clientScope\");\r",
+                      "\r",
+                      "        let getTokenRequest = {\r",
+                      "            method: 'POST',\r",
+                      "            url: tokenUrl,\r",
+                      "            auth: {\r",
+                      "                type: \"basic\",\r",
+                      "                basic: [\r",
+                      "                    { key: \"username\", value: clientId },\r",
+                      "                    { key: \"password\", value: clientSecret }\r",
+                      "                ]\r",
+                      "            },\r",
+                      "            body: {\r",
+                      "                mode: 'formdata',\r",
+                      "                formdata: [\r",
+                      "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                      "                    { key: 'scope', value: scope }\r",
+                      "                ]\r",
+                      "            }\r",
+                      "        };\r",
+                      "\r",
+                      "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                      "            let jsonResponse = response.json(),\r",
+                      "            newAccessToken = jsonResponse.access_token;\r",
+                      "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                      "\r",
+                      "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                      "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                      "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                      "        });\r",
+                      "\r",
+                      "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                      "    }\r",
+                      "//console.log(\"End of Pre-req script\");\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
               "_postman_id": "3f38b5ab-6f12-45d4-b90c-24f230fc319e",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
               "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "accessToken": "{{OAuth_Token}}",
+                    "tokenType": "Bearer",
+                    "addTokenTo": "header"
+                  }
+                },
                 "method": "GET",
-                "header": [],
+                "header": [
+                  {
+                    "key": "Origin",
+                    "value": "Postman",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Username",
+                    "value": "Test-User",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  }
+                ],
                 "url": {
-                  "raw": "{{baseUrl}}/consumer/:consumerId/interactions/:categoryId/skip/:skip/take/:take",
+                  "raw": "{{baseUrl}}/interaction/consumer/:consumerId/interactions/:categoryId/skip/:skip/take/:take",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "interaction",
                     "consumer",
                     ":consumerId",
                     "interactions",
@@ -61096,29 +61202,25 @@
                   ],
                   "variable": [
                     {
-                      "id": "948681da-3de9-42e5-a253-fb8c20dc02bb",
                       "key": "consumerId",
-                      "value": "<string>",
+                      "value": "1583175",
                       "type": "string",
                       "description": "(Required) "
                     },
                     {
-                      "id": "6ce34e18-5dab-4a59-854a-a7e1211fdf27",
+                      "key": "categoryId",
+                      "value": "03D96B03-CC47-4E77-8052-06AD96EBE730",
+                      "type": "string",
+                      "description": "(Required) "
+                    },
+                    {
                       "key": "skip",
                       "value": "<string>",
                       "type": "string",
                       "description": "(Required) "
                     },
                     {
-                      "id": "dff475da-ef45-4668-bb83-66334e7c0b74",
                       "key": "take",
-                      "value": "<string>",
-                      "type": "string",
-                      "description": "(Required) "
-                    },
-                    {
-                      "id": "b59749ea-1f96-49fc-a382-9972ce850bd9",
-                      "key": "categoryId",
                       "value": "<string>",
                       "type": "string",
                       "description": "(Required) "
