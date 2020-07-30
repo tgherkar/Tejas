@@ -55545,9 +55545,6 @@
                   "    pm.response.to.have.status(202);\r",
                   "});\r",
                   "\r",
-                  "pm.test(\"TEST02: Response Header Checks\", function () {\r",
-                  "    pm.response.to.have.header('Cache-Control', 'no Cache, no-store', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
-                  "});\r",
                   "\r",
                   "pm.test(\"TEST03: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {\r",
                   "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
@@ -55605,7 +55602,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"fromConsumerID\": \"2186018\",\r\n  \"toConsumerID\": \"2183868\"\r\n}",
+              "raw": "{\r\n  \"fromConsumerID\": \"{{cnsmr_id_from}}\",\r\n  \"toConsumerID\": \"{{cnsmr_id_to}}\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
