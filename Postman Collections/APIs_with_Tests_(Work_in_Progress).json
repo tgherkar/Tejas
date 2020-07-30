@@ -66727,9 +66727,8 @@
                   ],
                   "variable": [
                     {
-                      "id": "59cef769-f8b4-4a29-afcf-2e77676f5e75",
                       "key": "active",
-                      "value": "true",
+                      "value": "false",
                       "type": "string"
                     }
                   ]
@@ -67193,9 +67192,8 @@
                   ],
                   "variable": [
                     {
-                      "id": "1c390437-2927-41d7-a756-146d3b2b4cda",
                       "key": "consumerID",
-                      "value": "2227860",
+                      "value": "1587347",
                       "type": "string",
                       "description": "(Required) "
                     }
