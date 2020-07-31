@@ -52752,15 +52752,27 @@
                   "\r",
                   "\r",
                   "/*\r",
-                  "\r",
-                  "SELECT DISTINCT TOP 20 SLC.ConsumerID, SL.*\r",
+                  "(SELECT DISTINCT TOP 20 SLC.ConsumerID, SL.*\r",
                   "FROM dbo.SuggestedLinkConsumer SLC\r",
                   "JOIN dbo.SuggestedLink SL ON SL.SuggestedLinkID = SLC.SuggestedLinkID\r",
-                  "WHERE SL.DeletedDate IS NULL AND SL.MatchCount = '4'\r",
-                  "--AND SuggestedLinkID = 'FF83A71A-01F7-4DEF-A4C5-001676E1D1FD'\r",
-                  "\r",
+                  "WHERE SL.DeletedDate IS NULL AND SL.MatchCount = '4')\r",
+                  "UNION\r",
+                  "(SELECT DISTINCT TOP 20 SLC.ConsumerID, SL.*\r",
+                  "FROM dbo.SuggestedLinkConsumer SLC\r",
+                  "JOIN dbo.SuggestedLink SL ON SL.SuggestedLinkID = SLC.SuggestedLinkID\r",
+                  "WHERE SL.DeletedDate IS NULL AND SL.MatchCount = '3')\r",
+                  "UNION\r",
+                  "(SELECT DISTINCT TOP 20 SLC.ConsumerID, SL.*\r",
+                  "FROM dbo.SuggestedLinkConsumer SLC\r",
+                  "JOIN dbo.SuggestedLink SL ON SL.SuggestedLinkID = SLC.SuggestedLinkID\r",
+                  "WHERE SL.DeletedDate IS NULL AND SL.MatchCount = '2')\r",
+                  "UNION\r",
+                  "(SELECT DISTINCT TOP 20 SLC.ConsumerID, SL.*\r",
+                  "FROM dbo.SuggestedLinkConsumer SLC\r",
+                  "JOIN dbo.SuggestedLink SL ON SL.SuggestedLinkID = SLC.SuggestedLinkID\r",
+                  "WHERE SL.DeletedDate IS NULL AND SL.MatchCount = '1')\r",
+                  "ORDER BY SL.SuggestedLinkID\r",
                   "*/\r",
-                  "\r",
                   ""
                 ],
                 "type": "text/javascript"
@@ -67282,7 +67294,7 @@
                   "variable": [
                     {
                       "key": "consumerID",
-                      "value": "1696129",
+                      "value": "2093588",
                       "type": "string",
                       "description": "(Required) "
                     }
