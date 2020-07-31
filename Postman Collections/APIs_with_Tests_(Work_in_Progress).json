@@ -66533,7 +66533,14 @@
                       "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                       "    }\r",
                       "}\r",
-                      "//console.log(\"End of Pre-req script\");"
+                      "//console.log(\"End of Pre-req script\");\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      "var activeRandom = Math.random() >= 0.5;\r",
+                      "pm.globals.set(\"activeRandom\", activeRandom);\r",
+                      "console.log(\"Active True/False: \" + activeRandom.toString());"
                     ],
                     "type": "text/javascript"
                   }
