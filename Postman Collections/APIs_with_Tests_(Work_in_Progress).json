@@ -66773,7 +66773,7 @@
                   "variable": [
                     {
                       "key": "active",
-                      "value": "true",
+                      "value": "{{activeRandom}}",
                       "type": "string"
                     }
                   ]
