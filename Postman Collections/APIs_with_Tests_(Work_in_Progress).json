@@ -66445,7 +66445,7 @@
                   "pm.test(\"TEST05: LegacyID Check\", function() {\r",
                   "    pm.expect(jsonData.legacyID).to.deep.equal(query[5]);\r",
                   "});\r",
-                  "if(data.legacyID !=null){\r",
+                  "if(data.LegacyID !=null){\r",
                   "    pm.test(\"TEST05A: DB Validations\", function() {\r",
                   "        pm.expect(jsonData.lacRewardDiscount).to.deep.equal(data.LAC_Reward_Discount);\r",
                   "        pm.expect(jsonData.lacAmountToPay).to.deep.equal(data.LAC_Amount_To_Pay);\r",
