@@ -31911,7 +31911,7 @@
                   "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
                   "    }\r",
                   "    console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
-                  "    if(new Date() - tokenDate - expiresInTime > 0) {\r",
+                  "    if(new Date() - tokenDate - expiresInTime) {\r",
                   "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
                   "    let clientId = pm.environment.get(\"clientId\");\r",
                   "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
