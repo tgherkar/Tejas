@@ -66147,9 +66147,7 @@
                   "\r",
                   "let expectedCode = pm.iterationData.get(\"expectedHttpCode\");\r",
                   "var jsonData = JSON.parse(responseBody);\r",
-                  "var req = request.url;\r",
                   "var query = request.url.split('/');\r",
-                  "console.log(query);\r",
                   "var Ajv = require('ajv'),\r",
                   "ajv = new Ajv({logger: console}),\r",
                   "schema = \r",
@@ -66435,18 +66433,23 @@
                   "pm.test(\"TEST01: Status Code Check\", function() {\r",
                   "    pm.response.to.have.status(200);\r",
                   "});\r",
-                  "\r",
                   "pm.test(\"TEST02: Response Header Checks\", function() {\r",
                   "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
                   "});\r",
-                  "\r",
                   "pm.test(\"TEST03: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
                   "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
                   "});\r",
                   "pm.test(\"TEST04: Response Schema is valid\", function() {\r",
                   "  pm.expect(ajv.validate(jsonData, schema, true, false)).to.be.true;\r",
                   "});\r",
-                  "\r",
+                  "pm.test(\"TEST05: LegacyID Check\", function() {\r",
+                  "    pm.expect(jsonData.legacyID).to.deep.equal(query[5]);\r",
+                  "});\r",
+                  "if(data.legacyID !=null){\r",
+                  "    pm.test(\"TEST01: Status Code Check\", function() {\r",
+                  "        pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "}\r",
                   "\r",
                   "\r",
                   "} catch (e){\r",
@@ -66536,9 +66539,8 @@
               ],
               "variable": [
                 {
-                  "id": "a581d13a-98b7-473d-997f-e8322c820dd7",
                   "key": "legacyID",
-                  "value": "{{legacyID}}",
+                  "value": "1",
                   "type": "string"
                 }
               ]
@@ -66963,7 +66965,7 @@
                   "variable": [
                     {
                       "key": "active",
-                      "value": "{{activeRandom}}",
+                      "value": "true",
                       "type": "string"
                     }
                   ]
