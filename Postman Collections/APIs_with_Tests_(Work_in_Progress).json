@@ -67411,7 +67411,7 @@
                       "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
                       "});\r",
                       "pm.test(\"Response Header Checks\", function () {\r",
-                      "        pm.response.to.have.header('Vary', 'Accept-Encoding', 'X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '', 'Set-Cookie', '', 'Date','');\r",
+                      "        pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '','Cache-Control', 'no-cache, no-store','Content-Length','','Request-Context','');\r",
                       "});\r",
                       " pm.test(\"Incorrect legacyID ID should be not found\", function () {\r",
                       "     pm.expect(responseCode.code).to.equal(400);\r",
