@@ -66467,7 +66467,7 @@
                   "        pm.expect(jsonData.rewardPlan3.customerIncrease).to.deep.equal(data.RP3_Customer_Increase);\r",
                   "        pm.expect(jsonData.rewardPlan3.rewardDiscount).to.deep.equal(data.RP3_Reward_Discount);\r",
                   "        pm.expect(jsonData.rewardPlan3.repayPeriod).to.deep.equal(data.RP3_Repay_Period);\r",
-                  "        pm.expect(jsonData.rewardPlan3.expiryDate.split('T')[0]).to.deep.equal(data.RP3_Expiry_Date.split(' ')[0]);\r",
+                  "        pm.expect(jsonData.rewardPlan3.expiryDate.split('T')[0]).to.deep.equal(data.RP3_Expiry_Date.split(' ')[1]);\r",
                   "        //CIY1\r",
                   "        pm.expect(jsonData.clearInAYear1.cabotContribution).to.deep.equal(data.CIAY1_Cabot_Contribution);\r",
                   "        pm.expect(jsonData.clearInAYear1.customerIncrease).to.deep.equal(data.CIAY1_Customer_Increase);\r",
