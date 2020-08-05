@@ -31904,7 +31904,7 @@
                   "        tokenDate = Date.parse(\"2018-03-29T13:34:00.000\");\r",
                   "    }\r",
                   "    console.log(\"timestamp is: \"+tokenDate +\" new time is: \"+Date.parse(new Date()));\r",
-                  "    console.log(new Date() - tokenDate - expiresInTime);\r",
+                  "    console.log((new Date() - tokenDate) - expiresInTime);\r",
                   "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
                   "    if(!expiresInTime){\r",
                   "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
