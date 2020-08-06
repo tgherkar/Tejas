@@ -61682,7 +61682,7 @@
               ]
             },
             {
-              "name": "Gets the requested interactions",
+              "name": "/consumer/:consumerId/interactions/:categoryId/skip/:skip/take/:take",
               "event": [
                 {
                   "listen": "prerequest",
