@@ -61682,7 +61682,7 @@
               ]
             },
             {
-              "name": "/consumer/:consumerId/interactions/:categoryId/skip/:skip/take/:take",
+              "name": "Gets the requested interactions",
               "event": [
                 {
                   "listen": "prerequest",
@@ -61826,7 +61826,7 @@
                     },
                     {
                       "key": "skip",
-                      "value": "0",
+                      "value": "1",
                       "type": "string",
                       "description": "(Required) "
                     },
