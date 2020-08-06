@@ -59891,6 +59891,25 @@
                             ],
                             "type": "text/javascript"
                           }
+                        },
+                        {
+                          "listen": "test",
+                          "script": {
+                            "id": "5b19e23f-fa7b-476a-b9e3-1aec7ff33ec0",
+                            "exec": [
+                              "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                              "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
+                              "});\r",
+                              "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                              "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                              "});\r",
+                              "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                              "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                              "});\r",
+                              ""
+                            ],
+                            "type": "text/javascript"
+                          }
                         }
                       ],
                       "_postman_id": "5db923ba-2ee5-4135-b3d3-3ccf14fa67b5",
@@ -61839,13 +61858,13 @@
                     },
                     {
                       "key": "categoryId",
-                      "value": "18515A2D-A7C3-4A14-A95D-AB7EF92F0375",
+                      "value": "4B62C4B7-D947-4ECF-BFE7-E1B895DFA42F",
                       "type": "string",
                       "description": "(Required) "
                     },
                     {
                       "key": "skip",
-                      "value": "1",
+                      "value": "0",
                       "type": "string",
                       "description": "(Required) "
                     },
