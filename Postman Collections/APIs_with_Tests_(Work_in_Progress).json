@@ -60613,7 +60613,7 @@
                     ],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\n    \"name\": \"{{test_cat_name}}\",\n    \"description\": \"{{Test_Desc}}\",\n    \"materialLogo\": \"{{test_mat_logo}}\",\n    \"isInbound\": \"{{test_isinbound}}\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"{{Test_Desc}}\",\n            \"actionCode\": \"{{Test_AC}}\",\n            \"resultCode\": \"{{Test_RC}}\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"{{Test_Desc}}\",\n            \"actionCode\": \"{{Test_AC}}\",\n            \"resultCode\": \"{{Test_RC}}\"\n        }\n    ]\n}",
+                      "raw": "{\n    \"name\": \"-test_cat_name-\",\n    \"description\": \"-Test_Desc-\",\n    \"materialLogo\": \"-test_mat_logo-\",\n    \"isInbound\": \"-test_isinbound-\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"-Test_Desc-\",\n            \"actionCode\": \"-Test_AC-\",\n            \"resultCode\": \"-Test_RC-\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"-Test_Desc-\",\n            \"actionCode\": \"-Test_AC-\",\n            \"resultCode\": \"-Test_RC-\"\n        }\n    ]\n}",
                       "options": {
                         "raw": {}
                       }
