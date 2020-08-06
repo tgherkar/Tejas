@@ -60526,6 +60526,25 @@
                         ],
                         "type": "text/javascript"
                       }
+                    },
+                    {
+                      "listen": "test",
+                      "script": {
+                        "id": "61cd2025-a887-465f-81f6-d83833789902",
+                        "exec": [
+                          "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                          "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
+                          "});\r",
+                          "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                          "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                          "});\r",
+                          "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                          "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                          "});\r",
+                          ""
+                        ],
+                        "type": "text/javascript"
+                      }
                     }
                   ],
                   "_postman_id": "d2aedbe4-7b02-4358-9b03-a40976e7c151",
