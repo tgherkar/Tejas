@@ -61318,7 +61318,7 @@
                       "\r",
                       "if (data.cnsmr_id!=null){\r",
                       "    pm.test(\"TEST1A: consumerID check\", function() {\r",
-                      "        pm.expect(jsonData.consumerID).to.equal(JSON.stringify(data.cnsmr_id));\r",
+                      "        pm.expect(jsonData.consumerID).to.equal(data.cnsmr_id);\r",
                       "    });\r",
                       "    pm.test(\"TEST1B: lastRpcDateTime check\", function() {\r",
                       "        pm.expect(jsonData.lastRpcDateTime.split('T')[0]).to.equal(data.lastRpcDateTime.split(' ')[0]);\r",
