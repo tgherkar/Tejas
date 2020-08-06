@@ -58248,7 +58248,7 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"categoryID\": \"<uuid>\"\n}",
+                          "raw": "{\n    \"categoryID\": \"761d8e81-7154-4b4a-b889-350818179aa5\"\n}",
                           "options": {
                             "raw": {}
                           }
