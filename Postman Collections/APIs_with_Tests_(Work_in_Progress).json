@@ -60295,7 +60295,7 @@
                               "pm.test(\"TEST3: Response Header Checks\", function() {\r",
                               "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
                               "});\r",
-                              "console.log(req);"
+                              "console.log(request.data);"
                             ],
                             "type": "text/javascript"
                           }
