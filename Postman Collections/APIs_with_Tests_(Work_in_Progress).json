@@ -58195,7 +58195,13 @@
                               "pm.test(\"TEST3: Response Header Checks\", function() {\r",
                               "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
                               "});\r",
-                              ""
+                              "pm.test(\"TEST4: Response values check\", function () {\r",
+                              "    pm.expect(jsonData.name).to.deep.equal(req_body.name);\r",
+                              "    pm.expect(jsonData.categoryID).is.not.oneOf([null, undefined]);\r",
+                              "    pm.expect(jsonData.description).to.deep.equal(req_body.description);\r",
+                              "    pm.expect(jsonData.materialLogo).to.deep.equal(req_body.materialLogo);\r",
+                              "    pm.expect(jsonData.isInbound).to.deep.equal(req_body.isInbound);\r",
+                              "});"
                             ],
                             "type": "text/javascript"
                           }
