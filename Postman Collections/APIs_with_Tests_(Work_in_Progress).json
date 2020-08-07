@@ -60188,17 +60188,18 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"categorySourceID\": \"4728E443-9709-49C9-803A-63314BE5E50C\"\n}",
+                          "raw": "{\n    \"categorySourceID\": \"25718269-b364-4cd2-bdc6-758078ea328e\"\n}",
                           "options": {
                             "raw": {}
                           }
                         },
                         "url": {
-                          "raw": "{{baseUrl}}/category/source/:categorySourceId",
+                          "raw": "{{baseUrl}}/interaction/category/source/:categorySourceId",
                           "host": [
                             "{{baseUrl}}"
                           ],
                           "path": [
+                            "interaction",
                             "category",
                             "source",
                             ":categorySourceId"
@@ -60206,7 +60207,7 @@
                           "variable": [
                             {
                               "key": "categorySourceId",
-                              "value": "4728E443-9709-49C9-803A-63314BE5E50C",
+                              "value": "25718269-b364-4cd2-bdc6-758078ea328e",
                               "type": "string",
                               "description": "(Required) "
                             }
