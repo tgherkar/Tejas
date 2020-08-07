@@ -59506,7 +59506,7 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"categoryID\": \"761d8e81-7154-4b4a-b889-350818179aa5\"\n}",
+                          "raw": "{\n    \"categoryID\": \"A6F12E3C-CAD3-4427-F372-08D83AADD43E\"\n}",
                           "options": {
                             "raw": {}
                           }
@@ -59523,9 +59523,8 @@
                           ],
                           "variable": [
                             {
-                              "id": "75f9b0d4-d025-4047-ae71-b6d31626dcba",
                               "key": "categoryId",
-                              "value": "<string>",
+                              "value": "A6F12E3C-CAD3-4427-F372-08D83AADD43E",
                               "type": "string",
                               "description": "(Required) "
                             }
