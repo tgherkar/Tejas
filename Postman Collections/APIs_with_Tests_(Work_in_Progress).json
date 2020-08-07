@@ -60297,7 +60297,7 @@
                               "pm.test(\"TEST3: Response Header Checks\", function() {\r",
                               "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
                               "});\r",
-                              "console.log(req_body);\r",
+                              "//console.log(req_body);\r",
                               "pm.test(\"TEST4: Response values check\", function () {\r",
                               "    pm.expect(jsonData.name).to.deep.equal(req_body.name);\r",
                               "    pm.expect(jsonData.categorySourceID).is.not.oneOf([null, undefined]);\r",
