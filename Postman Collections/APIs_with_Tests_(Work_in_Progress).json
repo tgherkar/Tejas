@@ -61845,7 +61845,7 @@
                       "            },\r",
                       "            \"resultCodeText\": {\r",
                       "                \"$id\": \"#/items/properties/resultCodeText\",\r",
-                      "                \"type\": \"string\"\r",
+                      "                \"type\": [\"string\", \"null\"]\r",
                       "            },\r",
                       "            \"materialLogo\": {\r",
                       "                \"$id\": \"#/items/properties/materialLogo\",\r",
@@ -61982,7 +61982,7 @@
                     },
                     {
                       "key": "take",
-                      "value": "10",
+                      "value": "100",
                       "type": "string",
                       "description": "(Required) "
                     }
