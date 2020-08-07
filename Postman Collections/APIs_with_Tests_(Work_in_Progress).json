@@ -60188,7 +60188,7 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"categorySourceID\": \"<uuid>\"\n}",
+                          "raw": "{\n    \"categorySourceID\": \"4728E443-9709-49C9-803A-63314BE5E50C\"\n}",
                           "options": {
                             "raw": {}
                           }
@@ -60206,7 +60206,7 @@
                           "variable": [
                             {
                               "key": "categorySourceId",
-                              "value": "<string>",
+                              "value": "4728E443-9709-49C9-803A-63314BE5E50C",
                               "type": "string",
                               "description": "(Required) "
                             }
