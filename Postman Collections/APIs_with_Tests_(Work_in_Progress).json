@@ -61013,7 +61013,7 @@
                           "pm.test(\"TEST04: Response Schema is valid\", function() {\r",
                           "  pm.expect(ajv.validate(schema, jsonData[0])).to.be.true;\r",
                           "});\r",
-                          "console.log(JSON.stringify(ajv.errors[0]));    \r",
+                          "//console.log(JSON.stringify(ajv.errors[0]));    \r",
                           "\r",
                           "///Negative Test\r",
                           "} catch (e){\r",
