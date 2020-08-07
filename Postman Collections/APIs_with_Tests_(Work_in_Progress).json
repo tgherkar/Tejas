@@ -62012,6 +62012,325 @@
                   "body": ""
                 }
               ]
+            },
+            {
+              "name": "/consumer/:consumerId/interactions/linkedconsumers/:linkedConsumers/skip/:skip/take/:take Copy",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "2b1e6514-f1c9-4789-81b7-b97b401d4ab2",
+                    "exec": [
+                      "    var tokenDate = new Date(2010,1,1);\r",
+                      "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                      "    if(tokenTimestamp){\r",
+                      "        tokenDate = Date.parse(tokenTimestamp);\r",
+                      "    }else{\r",
+                      "        tokenDate = Date.parse(\"2018-03-29T13:34:00.000\");\r",
+                      "    }\r",
+                      "    console.log(\"timestamp is: \"+tokenDate +\" new time is: \"+Date.parse(new Date()));\r",
+                      "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                      "    if(!expiresInTime){\r",
+                      "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                      "    }\r",
+                      "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                      "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                      "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
+                      "    let clientId = pm.environment.get(\"clientId\");\r",
+                      "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
+                      "    let scope = pm.environment.get(\"clientScope\");\r",
+                      "\r",
+                      "        let getTokenRequest = {\r",
+                      "            method: 'POST',\r",
+                      "            url: tokenUrl,\r",
+                      "            auth: {\r",
+                      "                type: \"basic\",\r",
+                      "                basic: [\r",
+                      "                    { key: \"username\", value: clientId },\r",
+                      "                    { key: \"password\", value: clientSecret }\r",
+                      "                ]\r",
+                      "            },\r",
+                      "            body: {\r",
+                      "                mode: 'formdata',\r",
+                      "                formdata: [\r",
+                      "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                      "                    { key: 'scope', value: scope }\r",
+                      "                ]\r",
+                      "            }\r",
+                      "        };\r",
+                      "\r",
+                      "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                      "            let jsonResponse = response.json(),\r",
+                      "            newAccessToken = jsonResponse.access_token;\r",
+                      "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                      "\r",
+                      "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                      "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                      "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                      "        });\r",
+                      "\r",
+                      "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                      "    }\r",
+                      "//console.log(\"End of Pre-req script\");\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "_postman_id": "8c8274e2-074e-4edb-9aa5-9de9f678b0f4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "accessToken": "{{OAuth_Token}}",
+                    "tokenType": "Bearer",
+                    "addTokenTo": "header"
+                  }
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "Postman",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Username",
+                    "value": "{{$randomUserName}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerId/interactions/linkedconsumers/:linkedConsumers/skip/:skip/take/:take",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerId",
+                    "interactions",
+                    "linkedconsumers",
+                    ":linkedConsumers",
+                    "skip",
+                    ":skip",
+                    "take",
+                    ":take"
+                  ],
+                  "variable": [
+                    {
+                      "id": "40c79448-d145-4ddd-8d73-6e26f23cbb56",
+                      "key": "consumerId",
+                      "value": "1583175",
+                      "type": "string",
+                      "description": "(Required) "
+                    },
+                    {
+                      "id": "7bfc94f3-e729-4dcc-be44-d20100b22f29",
+                      "key": "linkedConsumers",
+                      "value": "0",
+                      "type": "string",
+                      "description": "(Required) "
+                    },
+                    {
+                      "id": "5a4cfafe-c6e1-45d1-9129-cbe5f13ce195",
+                      "key": "skip",
+                      "value": "0",
+                      "type": "string",
+                      "description": "(Required) "
+                    },
+                    {
+                      "id": "c57ffd70-cbd0-4dbb-be06-18e7f145caa7",
+                      "key": "take",
+                      "value": "10",
+                      "type": "string",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Gets the requested interactions by consumer Id"
+              },
+              "response": [
+                {
+                  "id": "0afb7c06-33c7-45ee-8fc4-78102cf96f09",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/:consumerId/interactions/linkedconsumers/:linkedConsumers/skip/:skip/take/:take",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        ":consumerId",
+                        "interactions",
+                        "linkedconsumers",
+                        ":linkedConsumers",
+                        "skip",
+                        ":skip",
+                        "take",
+                        ":take"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        },
+                        {
+                          "key": "linkedConsumers"
+                        },
+                        {
+                          "key": "skip"
+                        },
+                        {
+                          "key": "take"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "sunt exercitation labore"
+                },
+                {
+                  "id": "26af3226-7c80-40db-931f-68b168ade2fe",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/:consumerId/interactions/linkedconsumers/:linkedConsumers/skip/:skip/take/:take",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        ":consumerId",
+                        "interactions",
+                        "linkedconsumers",
+                        ":linkedConsumers",
+                        "skip",
+                        ":skip",
+                        "take",
+                        ":take"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        },
+                        {
+                          "key": "linkedConsumers"
+                        },
+                        {
+                          "key": "skip"
+                        },
+                        {
+                          "key": "take"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "sunt exercitation labore"
+                },
+                {
+                  "id": "8fb6e5b5-e0f4-459b-bb5c-53a9b16fa585",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/:consumerId/interactions/linkedconsumers/:linkedConsumers/skip/:skip/take/:take",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        ":consumerId",
+                        "interactions",
+                        "linkedconsumers",
+                        ":linkedConsumers",
+                        "skip",
+                        ":skip",
+                        "take",
+                        ":take"
+                      ],
+                      "variable": [
+                        {
+                          "key": "consumerId"
+                        },
+                        {
+                          "key": "linkedConsumers"
+                        },
+                        {
+                          "key": "skip"
+                        },
+                        {
+                          "key": "take"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                }
+              ]
             }
           ],
           "_postman_id": "00ca8250-d60d-4730-8adf-2ffcc140473a",
