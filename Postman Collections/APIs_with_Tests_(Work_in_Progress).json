@@ -62098,41 +62098,42 @@
                 "header": [
                   {
                     "key": "Ocp-Apim-Subscription-Key-South",
-                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
-                    "type": "text"
+                    "type": "text",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}"
                   },
                   {
                     "key": "Ocp-Apim-Subscription-Key-West",
-                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
-                    "type": "text"
+                    "type": "text",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}"
                   },
                   {
                     "key": "Correlation-Id",
-                    "value": "{{$guid}}",
-                    "type": "text"
+                    "type": "text",
+                    "value": "{{$guid}}"
                   },
                   {
                     "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
+                    "type": "text",
+                    "value": "application/json"
                   },
                   {
                     "key": "Origin",
-                    "value": "Postman",
-                    "type": "text"
+                    "type": "text",
+                    "value": "Postman"
                   },
                   {
                     "key": "Username",
-                    "value": "{{$randomUserName}}",
-                    "type": "text"
+                    "type": "text",
+                    "value": "{{$randomUserName}}"
                   }
                 ],
                 "url": {
-                  "raw": "{{baseUrl}}/consumer/:consumerId/interactions/linkedconsumers/:linkedConsumers/skip/:skip/take/:take",
+                  "raw": "{{baseUrl}}/interaction/consumer/:consumerId/interactions/linkedconsumers/:linkedConsumers/skip/:skip/take/:take",
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "path": [
+                    "interaction",
                     "consumer",
                     ":consumerId",
                     "interactions",
@@ -62145,28 +62146,24 @@
                   ],
                   "variable": [
                     {
-                      "id": "40c79448-d145-4ddd-8d73-6e26f23cbb56",
                       "key": "consumerId",
                       "value": "1583175",
                       "type": "string",
                       "description": "(Required) "
                     },
                     {
-                      "id": "7bfc94f3-e729-4dcc-be44-d20100b22f29",
                       "key": "linkedConsumers",
-                      "value": "0",
+                      "value": "false",
                       "type": "string",
                       "description": "(Required) "
                     },
                     {
-                      "id": "5a4cfafe-c6e1-45d1-9129-cbe5f13ce195",
                       "key": "skip",
                       "value": "0",
                       "type": "string",
                       "description": "(Required) "
                     },
                     {
-                      "id": "c57ffd70-cbd0-4dbb-be06-18e7f145caa7",
                       "key": "take",
                       "value": "10",
                       "type": "string",
