@@ -58248,7 +58248,7 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"name\": \"-test_cat_name-\",\n    \"description\": \"-Test_Desc-\",\n    \"materialLogo\": \"-test_mat_logo-\",\n    \"isInbound\": \"-test_isinbound-\",\n    \"sourceID\": \"4728E443-9709-49C9-803A-63314BE5E50C\",\n    \"rules\": [\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"-Test_Desc-\",\n            \"actionCode\": \"-Test_AC-\",\n            \"resultCode\": \"-Test_RC-\"\n        },\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"-Test_Desc-\",\n            \"actionCode\": \"-Test_AC-\",\n            \"resultCode\": \"-Test_RC-\"\n        }\n    ]\n}",
+                          "raw": "{\n    \"name\": \"-test_cat_name-\",\n    \"description\": \"-Test_Desc-\",\n    \"materialLogo\": \"-test_mat_logo-\",\n    \"isInbound\": true,\n    \"sourceID\": \"4728E443-9709-49C9-803A-63314BE5E50C\",\n    \"rules\": [\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"-Test_Desc-\",\n            \"actionCode\": \"-Test_AC-\",\n            \"resultCode\": \"-Test_RC-\"\n        },\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"-Test_Desc-\",\n            \"actionCode\": 0,\n            \"resultCode\": 0\n        }\n    ]\n}",
                           "options": {
                             "raw": {}
                           }
@@ -60326,7 +60326,7 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"name\": \"-test_cat_name?\",\n    \"description\": \"-Test_Desc?\",\n    \"materialLogo\": \"-test_mat_logo?\",\n    \"isInbound\": \"-test_isinbound?\",\n    \"sourceID\": \"4728E443-9709-49C9-803A-63314BE5E50C\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"-Test_Desc?\",\n            \"actionCode\": \"-Test_AC?\",\n            \"resultCode\": \"-Test_RC?\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"-Test_Desc?\",\n            \"actionCode\": \"-Test_AC?\",\n            \"resultCode\": \"-Test_RC?\"\n        }\n    ]\n}",
+                          "raw": "{\n    \"name\": \"-test_cat_name?\",\n    \"description\": \"-Test_Desc?\",\n    \"materialLogo\": \"-test_mat_logo?\",\n    \"isInbound\": true,\n    \"sourceID\": \"\",\n    \"rules\": [\n        {\n            \"categoryID\": \"\",\n            \"description\": \"-Test_Desc?\",\n            \"actionCode\": 0,\n            \"resultCode\": 0\n        },\n        {\n            \"categoryID\": \"\",\n            \"description\": \"-Test_Desc?\",\n            \"actionCode\": 0,\n            \"resultCode\": 0\n        }\n    ]\n}",
                           "options": {
                             "raw": {}
                           }
@@ -60904,6 +60904,25 @@
                             ],
                             "type": "text/javascript"
                           }
+                        },
+                        {
+                          "listen": "test",
+                          "script": {
+                            "id": "d4f11823-8a19-4d9f-80d9-9c3c898f1dad",
+                            "exec": [
+                              "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                              "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
+                              "});\r",
+                              "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                              "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                              "});\r",
+                              "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                              "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                              "});\r",
+                              ""
+                            ],
+                            "type": "text/javascript"
+                          }
                         }
                       ],
                       "_postman_id": "30cb5da5-d19c-4214-85c2-57d04f48f967",
@@ -60973,7 +60992,7 @@
                           "variable": [
                             {
                               "key": "categorySourceId",
-                              "value": "25718269-b364-4cd2-bdc6-758078ea328e",
+                              "value": "8C6CC475-9745-4418-84AC-B57437BEE53D",
                               "type": "string",
                               "description": "(Required) "
                             }
