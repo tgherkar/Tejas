@@ -61964,25 +61964,25 @@
                   "variable": [
                     {
                       "key": "consumerId",
-                      "value": "1583175",
+                      "value": "{{cnsmr_id}}",
                       "type": "string",
                       "description": "(Required) "
                     },
                     {
                       "key": "linkedConsumers",
-                      "value": "false",
+                      "value": "{{applyToLinkedConsumers}}",
                       "type": "string",
                       "description": "(Required) "
                     },
                     {
                       "key": "skip",
-                      "value": "0",
+                      "value": "{{skip}}",
                       "type": "string",
                       "description": "(Required) "
                     },
                     {
                       "key": "take",
-                      "value": "100",
+                      "value": "{{take}}",
                       "type": "string",
                       "description": "(Required) "
                     }
