@@ -58248,7 +58248,7 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"name\": \"-test_cat_name-\",\n    \"description\": \"-Test_Desc-\",\n    \"materialLogo\": \"-test_mat_logo-\",\n    \"isInbound\": \"-test_isinbound-\",\n    \"sourceID\": \"4728E443-9709-49C9-803A-63314BE5E50C\",\n    \"rules\": [\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"-Test_Desc-\",\n            \"actionCode\": \"-Test_AC-\",\n            \"resultCode\": \"-Test_RC-\"\n        },\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"-Test_Desc-\",\n            \"actionCode\": \"-Test_AC-\",\n            \"resultCode\": \"-Test_RC-\"\n        }\n    ]\n}",
+                          "raw": "{\n    \"name\": \"-test_cat_name-\",\n    \"description\": \"-Test_Desc-\",\n    \"materialLogo\": \"-test_mat_logo-\",\n    \"isInbound\": true,\n    \"sourceID\": \"4728E443-9709-49C9-803A-63314BE5E50C\",\n    \"rules\": [\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"-Test_Desc-\",\n            \"actionCode\": \"-Test_AC-\",\n            \"resultCode\": \"-Test_RC-\"\n        },\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"-Test_Desc-\",\n            \"actionCode\": 0,\n            \"resultCode\": 0\n        }\n    ]\n}",
                           "options": {
                             "raw": {}
                           }
@@ -59884,7 +59884,7 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}",
+                          "raw": "{\n    \"categoryRuleID\": \"BAFE0C6F-2D86-4978-6074-08D83AB0C57A\"\n}",
                           "options": {
                             "raw": {}
                           }
@@ -59903,16 +59903,14 @@
                           ],
                           "variable": [
                             {
-                              "id": "b14b392f-b140-403e-987d-e11ab94d8525",
                               "key": "categoryId",
-                              "value": "<string>",
+                              "value": "A2D1FF76-FD43-4864-DE5A-08D83AB0C56D",
                               "type": "string",
                               "description": "(Required) "
                             },
                             {
-                              "id": "6a7f8db3-6cfb-4eeb-a6b3-42754a85629a",
                               "key": "categoryRuleId",
-                              "value": "<string>",
+                              "value": "BAFE0C6F-2D86-4978-6074-08D83AB0C57A",
                               "type": "string",
                               "description": "(Required) "
                             }
@@ -60328,7 +60326,7 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"name\": \"-test_cat_name?\",\n    \"description\": \"-Test_Desc?\",\n    \"materialLogo\": \"-test_mat_logo?\",\n    \"isInbound\": \"-test_isinbound?\",\n    \"sourceID\": \"4728E443-9709-49C9-803A-63314BE5E50C\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"-Test_Desc?\",\n            \"actionCode\": \"-Test_AC?\",\n            \"resultCode\": \"-Test_RC?\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"-Test_Desc?\",\n            \"actionCode\": \"-Test_AC?\",\n            \"resultCode\": \"-Test_RC?\"\n        }\n    ]\n}",
+                          "raw": "{\n    \"name\": \"-test_cat_name?\",\n    \"description\": \"-Test_Desc?\",\n    \"materialLogo\": \"-test_mat_logo?\",\n    \"isInbound\": true,\n    \"sourceID\": \"\",\n    \"rules\": [\n        {\n            \"categoryID\": \"\",\n            \"description\": \"-Test_Desc?\",\n            \"actionCode\": 0,\n            \"resultCode\": 0\n        },\n        {\n            \"categoryID\": \"\",\n            \"description\": \"-Test_Desc?\",\n            \"actionCode\": 0,\n            \"resultCode\": 0\n        }\n    ]\n}",
                           "options": {
                             "raw": {}
                           }
