@@ -60299,7 +60299,8 @@
                               "});\r",
                               "console.log(req_body);\r",
                               "pm.test(\"TEST4: Response values check\", function () {\r",
-                              "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                              "    pm.expect(jsonData.name).to.deep.equal(req_body.name);\r",
+                              "    pm.expect(jsonData.categorySourceID).is.not.oneOf([null, undefined]);\r",
                               "});"
                             ],
                             "type": "text/javascript"
