@@ -60994,7 +60994,7 @@
                           "        \"type\": [\"object\", \"array\"]\r",
                           "    },\r",
                           "    \"$id\": \"http://example.org/root.json#\",\r",
-                          "    \"type\": [\"object\", \"array\"],\r",
+                          "    \"type\": \"array\",\r",
                           "    \"definitions\": {},\r",
                           "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
                           "};\r",
