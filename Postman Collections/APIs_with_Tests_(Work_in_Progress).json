@@ -59460,7 +59460,7 @@
                               "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
                               "});\r",
                               "pm.test(\"TEST3: Response Header Checks\", function() {\r",
-                              "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                              "    pm.response.to.have.header('Cache-Control', 'no-cache, no-store', 'X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '');\r",
                               "});\r",
                               ""
                             ],
