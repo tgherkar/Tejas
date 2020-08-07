@@ -58604,6 +58604,301 @@
                       ]
                     },
                     {
+                      "name": "/category",
+                      "event": [
+                        {
+                          "listen": "prerequest",
+                          "script": {
+                            "id": "54c4d01c-eb1c-4d50-ad1a-6805c7243eda",
+                            "exec": [
+                              "    var tokenDate = new Date(2010,1,1);\r",
+                              "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                              "    if(tokenTimestamp){\r",
+                              "        tokenDate = Date.parse(tokenTimestamp);\r",
+                              "    }else{\r",
+                              "        tokenDate = Date.parse(\"2018-03-29T13:34:00.000\");\r",
+                              "    }\r",
+                              "    console.log(\"timestamp is: \"+tokenDate +\" new time is: \"+Date.parse(new Date()));\r",
+                              "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                              "    if(!expiresInTime){\r",
+                              "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                              "    }\r",
+                              "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                              "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                              "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
+                              "    let clientId = pm.environment.get(\"clientId\");\r",
+                              "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
+                              "    let scope = pm.environment.get(\"clientScope\");\r",
+                              "\r",
+                              "        let getTokenRequest = {\r",
+                              "            method: 'POST',\r",
+                              "            url: tokenUrl,\r",
+                              "            auth: {\r",
+                              "                type: \"basic\",\r",
+                              "                basic: [\r",
+                              "                    { key: \"username\", value: clientId },\r",
+                              "                    { key: \"password\", value: clientSecret }\r",
+                              "                ]\r",
+                              "            },\r",
+                              "            body: {\r",
+                              "                mode: 'formdata',\r",
+                              "                formdata: [\r",
+                              "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                              "                    { key: 'scope', value: scope }\r",
+                              "                ]\r",
+                              "            }\r",
+                              "        };\r",
+                              "\r",
+                              "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                              "            let jsonResponse = response.json(),\r",
+                              "            newAccessToken = jsonResponse.access_token;\r",
+                              "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                              "\r",
+                              "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                              "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                              "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                              "        });\r",
+                              "\r",
+                              "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                              "    }\r",
+                              "//console.log(\"End of Pre-req script\");\r",
+                              "\r",
+                              "\r",
+                              "\r",
+                              ""
+                            ],
+                            "type": "text/javascript"
+                          }
+                        },
+                        {
+                          "listen": "test",
+                          "script": {
+                            "id": "61cd2025-a887-465f-81f6-d83833789902",
+                            "exec": [
+                              "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                              "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
+                              "});\r",
+                              "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                              "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                              "});\r",
+                              "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                              "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                              "});\r",
+                              ""
+                            ],
+                            "type": "text/javascript"
+                          }
+                        }
+                      ],
+                      "_postman_id": "d2aedbe4-7b02-4358-9b03-a40976e7c151",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": {
+                            "accessToken": "{{OAuth_Token}}",
+                            "tokenType": "Bearer",
+                            "addTokenTo": "header"
+                          }
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json,v1.0.0"
+                          },
+                          {
+                            "key": "Correlation-Id",
+                            "value": "{{$guid}}",
+                            "type": "text"
+                          },
+                          {
+                            "key": "Username",
+                            "value": "Test-User",
+                            "type": "text"
+                          },
+                          {
+                            "key": "Origin",
+                            "value": "Postman",
+                            "type": "text"
+                          },
+                          {
+                            "key": "Ocp-Apim-Subscription-Key-South",
+                            "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                            "type": "text"
+                          },
+                          {
+                            "key": "Ocp-Apim-Subscription-Key-West",
+                            "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                            "type": "text"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"name\": \"-test_cat_name-\",\n    \"description\": \"-Test_Desc-\",\n    \"materialLogo\": \"-test_mat_logo-\",\n    \"isInbound\": \"-test_isinbound-\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"-Test_Desc-\",\n            \"actionCode\": \"-Test_AC-\",\n            \"resultCode\": \"-Test_RC-\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"-Test_Desc-\",\n            \"actionCode\": \"-Test_AC-\",\n            \"resultCode\": \"-Test_RC-\"\n        }\n    ]\n}",
+                          "options": {
+                            "raw": {}
+                          }
+                        },
+                        "url": "{{baseUrl}}/interaction/category",
+                        "description": "Create interaction category"
+                      },
+                      "response": [
+                        {
+                          "id": "2d8ead2e-2672-46c3-a645-cd84aaeead99",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                            },
+                            "url": "{{baseUrl}}/category"
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": ""
+                        },
+                        {
+                          "id": "30cc1e75-c883-41c6-935f-2edefbf3b33c",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                            },
+                            "url": "{{baseUrl}}/category"
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<object>"
+                        },
+                        {
+                          "id": "687e42b4-e378-44ac-a0c2-cdc8433c5fdd",
+                          "name": "Server Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                            },
+                            "url": "{{baseUrl}}/category"
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<object>"
+                        },
+                        {
+                          "id": "6a5aad8f-672b-4a51-b1cf-d0df3d70cfe1",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                            },
+                            "url": "{{baseUrl}}/category"
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<object>"
+                        },
+                        {
+                          "id": "6adf2923-9454-4f1b-9ba9-d345016327fa",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                            },
+                            "url": "{{baseUrl}}/category"
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>"
+                        },
+                        {
+                          "id": "c6aeffcf-a1af-472f-b1c3-422d66aaae52",
+                          "name": "Server Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                            },
+                            "url": "{{baseUrl}}/category"
+                          },
+                          "status": "Service Unavailable",
+                          "code": 503,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<object>"
+                        }
+                      ]
+                    },
+                    {
                       "name": "/category/:categoryId",
                       "event": [
                         {
@@ -59425,7 +59720,7 @@
                         {
                           "listen": "prerequest",
                           "script": {
-                            "id": "54c4d01c-eb1c-4d50-ad1a-6805c7243eda",
+                            "id": "0c18e02d-670f-44d9-ac40-9d3e939e838d",
                             "exec": [
                               "    var tokenDate = new Date(2010,1,1);\r",
                               "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
@@ -59478,9 +59773,6 @@
                               "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                               "    }\r",
                               "//console.log(\"End of Pre-req script\");\r",
-                              "\r",
-                              "\r",
-                              "\r",
                               ""
                             ],
                             "type": "text/javascript"
@@ -59489,24 +59781,215 @@
                         {
                           "listen": "test",
                           "script": {
-                            "id": "61cd2025-a887-465f-81f6-d83833789902",
+                            "id": "3417b9e6-b5b4-4035-9a97-f22349e06430",
                             "exec": [
-                              "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
-                              "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
+                              "try{\r",
+                              "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                              "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                              "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                              "var jsonData = JSON.parse(responseBody);\r",
+                              "var Ajv = require('ajv'),\r",
+                              "ajv = new Ajv({logger: console, allErrors: true, verbose: true});\r",
+                              "schema={\r",
+                              "    \"items\": {\r",
+                              "        \"required\": [\r",
+                              "            \"categoryID\",\r",
+                              "            \"name\",\r",
+                              "            \"description\",\r",
+                              "            \"materialLogo\",\r",
+                              "            \"isInbound\",\r",
+                              "            \"createdAt\",\r",
+                              "            \"createdBy\",\r",
+                              "            \"updatedAt\",\r",
+                              "            \"updatedBy\",\r",
+                              "            \"source\",\r",
+                              "            \"categoryRules\"\r",
+                              "        ],\r",
+                              "        \"properties\": {\r",
+                              "            \"categoryID\": {\r",
+                              "                \"$id\": \"#/items/properties/categoryID\",\r",
+                              "                \"type\": \"string\"\r",
+                              "            },\r",
+                              "            \"name\": {\r",
+                              "                \"$id\": \"#/items/properties/name\",\r",
+                              "                \"type\": \"string\"\r",
+                              "            },\r",
+                              "            \"description\": {\r",
+                              "                \"$id\": \"#/items/properties/description\",\r",
+                              "                \"type\": \"string\"\r",
+                              "            },\r",
+                              "            \"materialLogo\": {\r",
+                              "                \"$id\": \"#/items/properties/materialLogo\",\r",
+                              "                \"type\": \"string\"\r",
+                              "            },\r",
+                              "            \"isInbound\": {\r",
+                              "                \"$id\": \"#/items/properties/isInbound\",\r",
+                              "                \"type\": \"boolean\"\r",
+                              "            },\r",
+                              "            \"createdAt\": {\r",
+                              "                \"$id\": \"#/items/properties/createdAt\",\r",
+                              "                \"type\": \"string\"\r",
+                              "            },\r",
+                              "            \"createdBy\": {\r",
+                              "                \"$id\": \"#/items/properties/createdBy\",\r",
+                              "                \"type\": \"string\"\r",
+                              "            },\r",
+                              "            \"updatedAt\": {\r",
+                              "                \"$id\": \"#/items/properties/updatedAt\",\r",
+                              "                \"type\": \"string\"\r",
+                              "            },\r",
+                              "            \"updatedBy\": {\r",
+                              "                \"$id\": \"#/items/properties/updatedBy\",\r",
+                              "                \"type\": \"string\"\r",
+                              "            },\r",
+                              "            \"source\": {\r",
+                              "                \"required\": [\r",
+                              "                    \"categorySourceID\",\r",
+                              "                    \"name\",\r",
+                              "                    \"createdAt\",\r",
+                              "                    \"createdBy\",\r",
+                              "                    \"updatedAt\",\r",
+                              "                    \"updatedBy\"\r",
+                              "                ],\r",
+                              "                \"properties\": {\r",
+                              "                    \"categorySourceID\": {\r",
+                              "                        \"$id\": \"#/items/properties/source/properties/categorySourceID\",\r",
+                              "                        \"type\": \"string\"\r",
+                              "                    },\r",
+                              "                    \"name\": {\r",
+                              "                        \"$id\": \"#/items/properties/source/properties/name\",\r",
+                              "                        \"type\": \"string\"\r",
+                              "                    },\r",
+                              "                    \"createdAt\": {\r",
+                              "                        \"$id\": \"#/items/properties/source/properties/createdAt\",\r",
+                              "                        \"type\": \"string\"\r",
+                              "                    },\r",
+                              "                    \"createdBy\": {\r",
+                              "                        \"$id\": \"#/items/properties/source/properties/createdBy\",\r",
+                              "                        \"type\": \"string\"\r",
+                              "                    },\r",
+                              "                    \"updatedAt\": {\r",
+                              "                        \"$id\": \"#/items/properties/source/properties/updatedAt\",\r",
+                              "                        \"type\": \"string\"\r",
+                              "                    },\r",
+                              "                    \"updatedBy\": {\r",
+                              "                        \"$id\": \"#/items/properties/source/properties/updatedBy\",\r",
+                              "                        \"type\": \"string\"\r",
+                              "                    }\r",
+                              "                },\r",
+                              "                \"$id\": \"#/items/properties/source\",\r",
+                              "                \"type\": \"object\"\r",
+                              "            },\r",
+                              "            \"categoryRules\": {\r",
+                              "                \"items\": {\r",
+                              "                    \"required\": [\r",
+                              "                        \"categoryRuleID\",\r",
+                              "                        \"categoryID\",\r",
+                              "                        \"description\",\r",
+                              "                        \"actionCode\",\r",
+                              "                        \"resultCode\",\r",
+                              "                        \"actionCodeShortValueText\",\r",
+                              "                        \"resultCodeShortValueText\",\r",
+                              "                        \"createdAt\",\r",
+                              "                        \"createdBy\",\r",
+                              "                        \"updatedAt\",\r",
+                              "                        \"updatedBy\"\r",
+                              "                    ],\r",
+                              "                    \"properties\": {\r",
+                              "                        \"categoryRuleID\": {\r",
+                              "                            \"$id\": \"#/items/properties/categoryRules/items/properties/categoryRuleID\",\r",
+                              "                            \"type\": \"string\"\r",
+                              "                        },\r",
+                              "                        \"categoryID\": {\r",
+                              "                            \"$id\": \"#/items/properties/categoryRules/items/properties/categoryID\",\r",
+                              "                            \"type\": \"string\"\r",
+                              "                        },\r",
+                              "                        \"description\": {\r",
+                              "                            \"$id\": \"#/items/properties/categoryRules/items/properties/description\",\r",
+                              "                            \"type\": \"string\"\r",
+                              "                        },\r",
+                              "                        \"actionCode\": {\r",
+                              "                            \"$id\": \"#/items/properties/categoryRules/items/properties/actionCode\",\r",
+                              "                            \"type\": \"integer\"\r",
+                              "                        },\r",
+                              "                        \"resultCode\": {\r",
+                              "                            \"$id\": \"#/items/properties/categoryRules/items/properties/resultCode\",\r",
+                              "                            \"type\": \"integer\"\r",
+                              "                        },\r",
+                              "                        \"actionCodeShortValueText\": {\r",
+                              "                            \"$id\": \"#/items/properties/categoryRules/items/properties/actionCodeShortValueText\",\r",
+                              "                            \"type\": \"string\"\r",
+                              "                        },\r",
+                              "                        \"resultCodeShortValueText\": {\r",
+                              "                            \"$id\": \"#/items/properties/categoryRules/items/properties/resultCodeShortValueText\",\r",
+                              "                            \"type\": \"string\"\r",
+                              "                        },\r",
+                              "                        \"createdAt\": {\r",
+                              "                            \"$id\": \"#/items/properties/categoryRules/items/properties/createdAt\",\r",
+                              "                            \"type\": \"string\"\r",
+                              "                        },\r",
+                              "                        \"createdBy\": {\r",
+                              "                            \"$id\": \"#/items/properties/categoryRules/items/properties/createdBy\",\r",
+                              "                            \"type\": \"string\"\r",
+                              "                        },\r",
+                              "                        \"updatedAt\": {\r",
+                              "                            \"$id\": \"#/items/properties/categoryRules/items/properties/updatedAt\",\r",
+                              "                            \"type\": \"string\"\r",
+                              "                        },\r",
+                              "                        \"updatedBy\": {\r",
+                              "                            \"$id\": \"#/items/properties/categoryRules/items/properties/updatedBy\",\r",
+                              "                            \"type\": \"string\"\r",
+                              "                        }\r",
+                              "                    },\r",
+                              "                    \"$id\": \"#/items/properties/categoryRules/items\",\r",
+                              "                    \"type\": [\"object\", \"array\"]\r",
+                              "                },\r",
+                              "                \"$id\": \"#/items/properties/categoryRules\",\r",
+                              "                \"type\": [\"object\", \"array\"]\r",
+                              "            }\r",
+                              "        },\r",
+                              "        \"$id\": \"#/items\",\r",
+                              "        \"type\": [\"object\", \"array\"]\r",
+                              "    },\r",
+                              "    \"$id\": \"http://example.org/root.json#\",\r",
+                              "    \"type\": [\"object\", \"array\"],\r",
+                              "    \"definitions\": {},\r",
+                              "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                              "};\r",
+                              "\r",
+                              "pm.test(\"TEST01: Status Code Check\", function() {\r",
+                              "    pm.response.to.have.status(200);\r",
                               "});\r",
-                              "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                              "\r",
+                              "pm.test(\"TEST02: Response Header Checks\", function() {\r",
+                              "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                              "});\r",
+                              "\r",
+                              "pm.test(\"TEST03: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
                               "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
                               "});\r",
-                              "pm.test(\"TEST3: Response Header Checks\", function() {\r",
-                              "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                              "pm.test(\"TEST04: Response Schema is valid\", function() {\r",
+                              "  pm.expect(ajv.validate(schema, jsonData[0])).to.be.true;\r",
                               "});\r",
+                              "//console.log(JSON.stringify(ajv.errors[0]));    \r",
+                              "\r",
+                              "///Negative Test\r",
+                              "} catch (e){\r",
+                              "pm.test(\"Check if Schema Response is empty\", function () {\r",
+                              "     pm.expect(schema).to.not.be.empty;\r",
+                              "});\r",
+                              " pm.test(\"Check name variable isn't empty\", function () {\r",
+                              "     pm.expect('name').to.not.be.empty;\r",
+                              "});\r",
+                              "}\r",
+                              "\r",
                               ""
                             ],
                             "type": "text/javascript"
                           }
                         }
                       ],
-                      "_postman_id": "d2aedbe4-7b02-4358-9b03-a40976e7c151",
+                      "_postman_id": "5343ca50-a53b-4a12-9ccc-3ac1cd249471",
                       "protocolProfileBehavior": {
                         "disableBodyPruning": true
                       },
@@ -59519,15 +60002,11 @@
                             "addTokenTo": "header"
                           }
                         },
-                        "method": "POST",
+                        "method": "GET",
                         "header": [
                           {
-                            "key": "Content-Type",
-                            "value": "application/json,v1.0.0"
-                          },
-                          {
-                            "key": "Correlation-Id",
-                            "value": "{{$guid}}",
+                            "key": "Origin",
+                            "value": "Postman",
                             "type": "text"
                           },
                           {
@@ -59536,8 +60015,13 @@
                             "type": "text"
                           },
                           {
-                            "key": "Origin",
-                            "value": "Postman",
+                            "key": "Content-Type",
+                            "value": "application/json",
+                            "type": "text"
+                          },
+                          {
+                            "key": "Correlation-Id",
+                            "value": "{{$guid}}",
                             "type": "text"
                           },
                           {
@@ -59551,27 +60035,37 @@
                             "type": "text"
                           }
                         ],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\n    \"name\": \"-test_cat_name-\",\n    \"description\": \"-Test_Desc-\",\n    \"materialLogo\": \"-test_mat_logo-\",\n    \"isInbound\": \"-test_isinbound-\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"-Test_Desc-\",\n            \"actionCode\": \"-Test_AC-\",\n            \"resultCode\": \"-Test_RC-\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"-Test_Desc-\",\n            \"actionCode\": \"-Test_AC-\",\n            \"resultCode\": \"-Test_RC-\"\n        }\n    ]\n}",
-                          "options": {
-                            "raw": {}
-                          }
-                        },
                         "url": "{{baseUrl}}/interaction/category",
-                        "description": "Create interaction category"
+                        "description": "Get all categories"
                       },
                       "response": [
                         {
-                          "id": "2d8ead2e-2672-46c3-a645-cd84aaeead99",
+                          "id": "082e98e0-7a74-4eb0-aa9a-92ecd8d366e9",
                           "name": "Success",
                           "originalRequest": {
-                            "method": "POST",
+                            "method": "GET",
                             "header": [],
-                            "body": {
-                              "mode": "raw",
-                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
-                            },
+                            "url": "{{baseUrl}}/category"
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<object>"
+                        },
+                        {
+                          "id": "0fa59bc0-e1a9-4038-b326-e26ddf65e40c",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [],
                             "url": "{{baseUrl}}/category"
                           },
                           "status": "OK",
@@ -59588,65 +60082,11 @@
                           "body": ""
                         },
                         {
-                          "id": "30cc1e75-c883-41c6-935f-2edefbf3b33c",
-                          "name": "Unauthorized",
-                          "originalRequest": {
-                            "method": "POST",
-                            "header": [],
-                            "body": {
-                              "mode": "raw",
-                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
-                            },
-                            "url": "{{baseUrl}}/category"
-                          },
-                          "status": "Unauthorized",
-                          "code": 401,
-                          "_postman_previewlanguage": "text",
-                          "header": [
-                            {
-                              "key": "Content-Type",
-                              "value": "application/json,v1.0.0"
-                            }
-                          ],
-                          "cookie": [],
-                          "responseTime": null,
-                          "body": "<object>"
-                        },
-                        {
-                          "id": "687e42b4-e378-44ac-a0c2-cdc8433c5fdd",
-                          "name": "Server Error",
-                          "originalRequest": {
-                            "method": "POST",
-                            "header": [],
-                            "body": {
-                              "mode": "raw",
-                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
-                            },
-                            "url": "{{baseUrl}}/category"
-                          },
-                          "status": "Internal Server Error",
-                          "code": 500,
-                          "_postman_previewlanguage": "text",
-                          "header": [
-                            {
-                              "key": "Content-Type",
-                              "value": "application/json,v1.0.0"
-                            }
-                          ],
-                          "cookie": [],
-                          "responseTime": null,
-                          "body": "<object>"
-                        },
-                        {
-                          "id": "6a5aad8f-672b-4a51-b1cf-d0df3d70cfe1",
+                          "id": "68a774b9-9baf-495d-9903-cdc8a2487220",
                           "name": "Forbidden",
                           "originalRequest": {
-                            "method": "POST",
+                            "method": "GET",
                             "header": [],
-                            "body": {
-                              "mode": "raw",
-                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
-                            },
                             "url": "{{baseUrl}}/category"
                           },
                           "status": "Forbidden",
@@ -59663,19 +60103,15 @@
                           "body": "<object>"
                         },
                         {
-                          "id": "6adf2923-9454-4f1b-9ba9-d345016327fa",
-                          "name": "Bad Request",
+                          "id": "7d1fbc10-4387-44bd-801b-3d84ca3ebe1d",
+                          "name": "Server Error",
                           "originalRequest": {
-                            "method": "POST",
+                            "method": "GET",
                             "header": [],
-                            "body": {
-                              "mode": "raw",
-                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
-                            },
                             "url": "{{baseUrl}}/category"
                           },
-                          "status": "Bad Request",
-                          "code": 400,
+                          "status": "Internal Server Error",
+                          "code": 500,
                           "_postman_previewlanguage": "text",
                           "header": [
                             {
@@ -59685,18 +60121,14 @@
                           ],
                           "cookie": [],
                           "responseTime": null,
-                          "body": "<string>"
+                          "body": "<object>"
                         },
                         {
-                          "id": "c6aeffcf-a1af-472f-b1c3-422d66aaae52",
+                          "id": "c5750166-13b6-49ff-ab1e-1b3bd936b9b4",
                           "name": "Server Error",
                           "originalRequest": {
-                            "method": "POST",
+                            "method": "GET",
                             "header": [],
-                            "body": {
-                              "mode": "raw",
-                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
-                            },
                             "url": "{{baseUrl}}/category"
                           },
                           "status": "Service Unavailable",
@@ -59711,6 +60143,48 @@
                           "cookie": [],
                           "responseTime": null,
                           "body": "<object>"
+                        },
+                        {
+                          "id": "d736260e-1ed5-473a-a54a-96aecd097a7a",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [],
+                            "url": "{{baseUrl}}/category"
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<object>"
+                        },
+                        {
+                          "id": "f7fd7d33-fd87-4a78-997f-fcc3b2f62187",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [],
+                            "url": "{{baseUrl}}/category"
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>"
                         }
                       ]
                     }
@@ -60756,480 +61230,6 @@
                   ],
                   "_postman_id": "3eaa6e65-acd9-41ff-b85d-5bdf47c801dd",
                   "_postman_isSubFolder": true
-                },
-                {
-                  "name": "/category",
-                  "event": [
-                    {
-                      "listen": "prerequest",
-                      "script": {
-                        "id": "0c18e02d-670f-44d9-ac40-9d3e939e838d",
-                        "exec": [
-                          "    var tokenDate = new Date(2010,1,1);\r",
-                          "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
-                          "    if(tokenTimestamp){\r",
-                          "        tokenDate = Date.parse(tokenTimestamp);\r",
-                          "    }else{\r",
-                          "        tokenDate = Date.parse(\"2018-03-29T13:34:00.000\");\r",
-                          "    }\r",
-                          "    console.log(\"timestamp is: \"+tokenDate +\" new time is: \"+Date.parse(new Date()));\r",
-                          "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
-                          "    if(!expiresInTime){\r",
-                          "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
-                          "    }\r",
-                          "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
-                          "    if((new Date() - tokenDate) >= expiresInTime) {\r",
-                          "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
-                          "    let clientId = pm.environment.get(\"clientId\");\r",
-                          "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
-                          "    let scope = pm.environment.get(\"clientScope\");\r",
-                          "\r",
-                          "        let getTokenRequest = {\r",
-                          "            method: 'POST',\r",
-                          "            url: tokenUrl,\r",
-                          "            auth: {\r",
-                          "                type: \"basic\",\r",
-                          "                basic: [\r",
-                          "                    { key: \"username\", value: clientId },\r",
-                          "                    { key: \"password\", value: clientSecret }\r",
-                          "                ]\r",
-                          "            },\r",
-                          "            body: {\r",
-                          "                mode: 'formdata',\r",
-                          "                formdata: [\r",
-                          "                    { key: 'grant_type', value: 'client_credentials' },\r",
-                          "                    { key: 'scope', value: scope }\r",
-                          "                ]\r",
-                          "            }\r",
-                          "        };\r",
-                          "\r",
-                          "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
-                          "            let jsonResponse = response.json(),\r",
-                          "            newAccessToken = jsonResponse.access_token;\r",
-                          "            //console.log({ err, jsonResponse, newAccessToken });\r",
-                          "\r",
-                          "            pm.environment.set('OAuth_Token', newAccessToken);\r",
-                          "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
-                          "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
-                          "        });\r",
-                          "\r",
-                          "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
-                          "    }\r",
-                          "//console.log(\"End of Pre-req script\");\r",
-                          ""
-                        ],
-                        "type": "text/javascript"
-                      }
-                    },
-                    {
-                      "listen": "test",
-                      "script": {
-                        "id": "3417b9e6-b5b4-4035-9a97-f22349e06430",
-                        "exec": [
-                          "try{\r",
-                          "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
-                          "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
-                          "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
-                          "var jsonData = JSON.parse(responseBody);\r",
-                          "var Ajv = require('ajv'),\r",
-                          "ajv = new Ajv({logger: console, allErrors: true, verbose: true});\r",
-                          "schema={\r",
-                          "    \"items\": {\r",
-                          "        \"required\": [\r",
-                          "            \"categoryID\",\r",
-                          "            \"name\",\r",
-                          "            \"description\",\r",
-                          "            \"materialLogo\",\r",
-                          "            \"isInbound\",\r",
-                          "            \"createdAt\",\r",
-                          "            \"createdBy\",\r",
-                          "            \"updatedAt\",\r",
-                          "            \"updatedBy\",\r",
-                          "            \"source\",\r",
-                          "            \"categoryRules\"\r",
-                          "        ],\r",
-                          "        \"properties\": {\r",
-                          "            \"categoryID\": {\r",
-                          "                \"$id\": \"#/items/properties/categoryID\",\r",
-                          "                \"type\": \"string\"\r",
-                          "            },\r",
-                          "            \"name\": {\r",
-                          "                \"$id\": \"#/items/properties/name\",\r",
-                          "                \"type\": \"string\"\r",
-                          "            },\r",
-                          "            \"description\": {\r",
-                          "                \"$id\": \"#/items/properties/description\",\r",
-                          "                \"type\": \"string\"\r",
-                          "            },\r",
-                          "            \"materialLogo\": {\r",
-                          "                \"$id\": \"#/items/properties/materialLogo\",\r",
-                          "                \"type\": \"string\"\r",
-                          "            },\r",
-                          "            \"isInbound\": {\r",
-                          "                \"$id\": \"#/items/properties/isInbound\",\r",
-                          "                \"type\": \"boolean\"\r",
-                          "            },\r",
-                          "            \"createdAt\": {\r",
-                          "                \"$id\": \"#/items/properties/createdAt\",\r",
-                          "                \"type\": \"string\"\r",
-                          "            },\r",
-                          "            \"createdBy\": {\r",
-                          "                \"$id\": \"#/items/properties/createdBy\",\r",
-                          "                \"type\": \"string\"\r",
-                          "            },\r",
-                          "            \"updatedAt\": {\r",
-                          "                \"$id\": \"#/items/properties/updatedAt\",\r",
-                          "                \"type\": \"string\"\r",
-                          "            },\r",
-                          "            \"updatedBy\": {\r",
-                          "                \"$id\": \"#/items/properties/updatedBy\",\r",
-                          "                \"type\": \"string\"\r",
-                          "            },\r",
-                          "            \"source\": {\r",
-                          "                \"required\": [\r",
-                          "                    \"categorySourceID\",\r",
-                          "                    \"name\",\r",
-                          "                    \"createdAt\",\r",
-                          "                    \"createdBy\",\r",
-                          "                    \"updatedAt\",\r",
-                          "                    \"updatedBy\"\r",
-                          "                ],\r",
-                          "                \"properties\": {\r",
-                          "                    \"categorySourceID\": {\r",
-                          "                        \"$id\": \"#/items/properties/source/properties/categorySourceID\",\r",
-                          "                        \"type\": \"string\"\r",
-                          "                    },\r",
-                          "                    \"name\": {\r",
-                          "                        \"$id\": \"#/items/properties/source/properties/name\",\r",
-                          "                        \"type\": \"string\"\r",
-                          "                    },\r",
-                          "                    \"createdAt\": {\r",
-                          "                        \"$id\": \"#/items/properties/source/properties/createdAt\",\r",
-                          "                        \"type\": \"string\"\r",
-                          "                    },\r",
-                          "                    \"createdBy\": {\r",
-                          "                        \"$id\": \"#/items/properties/source/properties/createdBy\",\r",
-                          "                        \"type\": \"string\"\r",
-                          "                    },\r",
-                          "                    \"updatedAt\": {\r",
-                          "                        \"$id\": \"#/items/properties/source/properties/updatedAt\",\r",
-                          "                        \"type\": \"string\"\r",
-                          "                    },\r",
-                          "                    \"updatedBy\": {\r",
-                          "                        \"$id\": \"#/items/properties/source/properties/updatedBy\",\r",
-                          "                        \"type\": \"string\"\r",
-                          "                    }\r",
-                          "                },\r",
-                          "                \"$id\": \"#/items/properties/source\",\r",
-                          "                \"type\": \"object\"\r",
-                          "            },\r",
-                          "            \"categoryRules\": {\r",
-                          "                \"items\": {\r",
-                          "                    \"required\": [\r",
-                          "                        \"categoryRuleID\",\r",
-                          "                        \"categoryID\",\r",
-                          "                        \"description\",\r",
-                          "                        \"actionCode\",\r",
-                          "                        \"resultCode\",\r",
-                          "                        \"actionCodeShortValueText\",\r",
-                          "                        \"resultCodeShortValueText\",\r",
-                          "                        \"createdAt\",\r",
-                          "                        \"createdBy\",\r",
-                          "                        \"updatedAt\",\r",
-                          "                        \"updatedBy\"\r",
-                          "                    ],\r",
-                          "                    \"properties\": {\r",
-                          "                        \"categoryRuleID\": {\r",
-                          "                            \"$id\": \"#/items/properties/categoryRules/items/properties/categoryRuleID\",\r",
-                          "                            \"type\": \"string\"\r",
-                          "                        },\r",
-                          "                        \"categoryID\": {\r",
-                          "                            \"$id\": \"#/items/properties/categoryRules/items/properties/categoryID\",\r",
-                          "                            \"type\": \"string\"\r",
-                          "                        },\r",
-                          "                        \"description\": {\r",
-                          "                            \"$id\": \"#/items/properties/categoryRules/items/properties/description\",\r",
-                          "                            \"type\": \"string\"\r",
-                          "                        },\r",
-                          "                        \"actionCode\": {\r",
-                          "                            \"$id\": \"#/items/properties/categoryRules/items/properties/actionCode\",\r",
-                          "                            \"type\": \"integer\"\r",
-                          "                        },\r",
-                          "                        \"resultCode\": {\r",
-                          "                            \"$id\": \"#/items/properties/categoryRules/items/properties/resultCode\",\r",
-                          "                            \"type\": \"integer\"\r",
-                          "                        },\r",
-                          "                        \"actionCodeShortValueText\": {\r",
-                          "                            \"$id\": \"#/items/properties/categoryRules/items/properties/actionCodeShortValueText\",\r",
-                          "                            \"type\": \"string\"\r",
-                          "                        },\r",
-                          "                        \"resultCodeShortValueText\": {\r",
-                          "                            \"$id\": \"#/items/properties/categoryRules/items/properties/resultCodeShortValueText\",\r",
-                          "                            \"type\": \"string\"\r",
-                          "                        },\r",
-                          "                        \"createdAt\": {\r",
-                          "                            \"$id\": \"#/items/properties/categoryRules/items/properties/createdAt\",\r",
-                          "                            \"type\": \"string\"\r",
-                          "                        },\r",
-                          "                        \"createdBy\": {\r",
-                          "                            \"$id\": \"#/items/properties/categoryRules/items/properties/createdBy\",\r",
-                          "                            \"type\": \"string\"\r",
-                          "                        },\r",
-                          "                        \"updatedAt\": {\r",
-                          "                            \"$id\": \"#/items/properties/categoryRules/items/properties/updatedAt\",\r",
-                          "                            \"type\": \"string\"\r",
-                          "                        },\r",
-                          "                        \"updatedBy\": {\r",
-                          "                            \"$id\": \"#/items/properties/categoryRules/items/properties/updatedBy\",\r",
-                          "                            \"type\": \"string\"\r",
-                          "                        }\r",
-                          "                    },\r",
-                          "                    \"$id\": \"#/items/properties/categoryRules/items\",\r",
-                          "                    \"type\": [\"object\", \"array\"]\r",
-                          "                },\r",
-                          "                \"$id\": \"#/items/properties/categoryRules\",\r",
-                          "                \"type\": [\"object\", \"array\"]\r",
-                          "            }\r",
-                          "        },\r",
-                          "        \"$id\": \"#/items\",\r",
-                          "        \"type\": [\"object\", \"array\"]\r",
-                          "    },\r",
-                          "    \"$id\": \"http://example.org/root.json#\",\r",
-                          "    \"type\": [\"object\", \"array\"],\r",
-                          "    \"definitions\": {},\r",
-                          "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
-                          "};\r",
-                          "\r",
-                          "pm.test(\"TEST01: Status Code Check\", function() {\r",
-                          "    pm.response.to.have.status(200);\r",
-                          "});\r",
-                          "\r",
-                          "pm.test(\"TEST02: Response Header Checks\", function() {\r",
-                          "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
-                          "});\r",
-                          "\r",
-                          "pm.test(\"TEST03: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
-                          "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
-                          "});\r",
-                          "pm.test(\"TEST04: Response Schema is valid\", function() {\r",
-                          "  pm.expect(ajv.validate(schema, jsonData[0])).to.be.true;\r",
-                          "});\r",
-                          "//console.log(JSON.stringify(ajv.errors[0]));    \r",
-                          "\r",
-                          "///Negative Test\r",
-                          "} catch (e){\r",
-                          "pm.test(\"Check if Schema Response is empty\", function () {\r",
-                          "     pm.expect(schema).to.not.be.empty;\r",
-                          "});\r",
-                          " pm.test(\"Check name variable isn't empty\", function () {\r",
-                          "     pm.expect('name').to.not.be.empty;\r",
-                          "});\r",
-                          "}\r",
-                          "\r",
-                          ""
-                        ],
-                        "type": "text/javascript"
-                      }
-                    }
-                  ],
-                  "_postman_id": "5343ca50-a53b-4a12-9ccc-3ac1cd249471",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "auth": {
-                      "type": "oauth2",
-                      "oauth2": {
-                        "accessToken": "{{OAuth_Token}}",
-                        "tokenType": "Bearer",
-                        "addTokenTo": "header"
-                      }
-                    },
-                    "method": "GET",
-                    "header": [
-                      {
-                        "key": "Origin",
-                        "value": "Postman",
-                        "type": "text"
-                      },
-                      {
-                        "key": "Username",
-                        "value": "Test-User",
-                        "type": "text"
-                      },
-                      {
-                        "key": "Content-Type",
-                        "value": "application/json",
-                        "type": "text"
-                      },
-                      {
-                        "key": "Correlation-Id",
-                        "value": "{{$guid}}",
-                        "type": "text"
-                      },
-                      {
-                        "key": "Ocp-Apim-Subscription-Key-South",
-                        "value": "{{Ocp-Apim-Subscription-Key-South}}",
-                        "type": "text"
-                      },
-                      {
-                        "key": "Ocp-Apim-Subscription-Key-West",
-                        "value": "{{Ocp-Apim-Subscription-Key-West}}",
-                        "type": "text"
-                      }
-                    ],
-                    "url": "{{baseUrl}}/interaction/category",
-                    "description": "Get all categories"
-                  },
-                  "response": [
-                    {
-                      "id": "082e98e0-7a74-4eb0-aa9a-92ecd8d366e9",
-                      "name": "Success",
-                      "originalRequest": {
-                        "method": "GET",
-                        "header": [],
-                        "url": "{{baseUrl}}/category"
-                      },
-                      "status": "No Content",
-                      "code": 204,
-                      "_postman_previewlanguage": "text",
-                      "header": [
-                        {
-                          "key": "Content-Type",
-                          "value": "application/json,v1.0.0"
-                        }
-                      ],
-                      "cookie": [],
-                      "responseTime": null,
-                      "body": "<object>"
-                    },
-                    {
-                      "id": "0fa59bc0-e1a9-4038-b326-e26ddf65e40c",
-                      "name": "Success",
-                      "originalRequest": {
-                        "method": "GET",
-                        "header": [],
-                        "url": "{{baseUrl}}/category"
-                      },
-                      "status": "OK",
-                      "code": 200,
-                      "_postman_previewlanguage": "text",
-                      "header": [
-                        {
-                          "key": "Content-Type",
-                          "value": "application/json,v1.0.0"
-                        }
-                      ],
-                      "cookie": [],
-                      "responseTime": null,
-                      "body": ""
-                    },
-                    {
-                      "id": "68a774b9-9baf-495d-9903-cdc8a2487220",
-                      "name": "Forbidden",
-                      "originalRequest": {
-                        "method": "GET",
-                        "header": [],
-                        "url": "{{baseUrl}}/category"
-                      },
-                      "status": "Forbidden",
-                      "code": 403,
-                      "_postman_previewlanguage": "text",
-                      "header": [
-                        {
-                          "key": "Content-Type",
-                          "value": "application/json,v1.0.0"
-                        }
-                      ],
-                      "cookie": [],
-                      "responseTime": null,
-                      "body": "<object>"
-                    },
-                    {
-                      "id": "7d1fbc10-4387-44bd-801b-3d84ca3ebe1d",
-                      "name": "Server Error",
-                      "originalRequest": {
-                        "method": "GET",
-                        "header": [],
-                        "url": "{{baseUrl}}/category"
-                      },
-                      "status": "Internal Server Error",
-                      "code": 500,
-                      "_postman_previewlanguage": "text",
-                      "header": [
-                        {
-                          "key": "Content-Type",
-                          "value": "application/json,v1.0.0"
-                        }
-                      ],
-                      "cookie": [],
-                      "responseTime": null,
-                      "body": "<object>"
-                    },
-                    {
-                      "id": "c5750166-13b6-49ff-ab1e-1b3bd936b9b4",
-                      "name": "Server Error",
-                      "originalRequest": {
-                        "method": "GET",
-                        "header": [],
-                        "url": "{{baseUrl}}/category"
-                      },
-                      "status": "Service Unavailable",
-                      "code": 503,
-                      "_postman_previewlanguage": "text",
-                      "header": [
-                        {
-                          "key": "Content-Type",
-                          "value": "application/json,v1.0.0"
-                        }
-                      ],
-                      "cookie": [],
-                      "responseTime": null,
-                      "body": "<object>"
-                    },
-                    {
-                      "id": "d736260e-1ed5-473a-a54a-96aecd097a7a",
-                      "name": "Unauthorized",
-                      "originalRequest": {
-                        "method": "GET",
-                        "header": [],
-                        "url": "{{baseUrl}}/category"
-                      },
-                      "status": "Unauthorized",
-                      "code": 401,
-                      "_postman_previewlanguage": "text",
-                      "header": [
-                        {
-                          "key": "Content-Type",
-                          "value": "application/json,v1.0.0"
-                        }
-                      ],
-                      "cookie": [],
-                      "responseTime": null,
-                      "body": "<object>"
-                    },
-                    {
-                      "id": "f7fd7d33-fd87-4a78-997f-fcc3b2f62187",
-                      "name": "Bad Request",
-                      "originalRequest": {
-                        "method": "GET",
-                        "header": [],
-                        "url": "{{baseUrl}}/category"
-                      },
-                      "status": "Bad Request",
-                      "code": 400,
-                      "_postman_previewlanguage": "text",
-                      "header": [
-                        {
-                          "key": "Content-Type",
-                          "value": "application/json,v1.0.0"
-                        }
-                      ],
-                      "cookie": [],
-                      "responseTime": null,
-                      "body": "<string>"
-                    }
-                  ]
                 }
               ],
               "_postman_id": "8e008999-62f7-4ce7-afed-8adea10d1dd2",
