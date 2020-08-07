@@ -62014,7 +62014,7 @@
               ]
             },
             {
-              "name": "/consumer/:consumerId/interactions/linkedconsumers/:linkedConsumers/skip/:skip/take/:take Copy",
+              "name": "/consumer/:consumerId/interactions/linkedconsumers/:linkedConsumers/skip/:skip/take/:take",
               "event": [
                 {
                   "listen": "prerequest",
