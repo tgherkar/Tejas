@@ -60951,7 +60951,7 @@
                               "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
                               "});\r",
                               "pm.test(\"TEST3: Response Header Checks\", function() {\r",
-                              "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                              "    pm.response.to.have.header('Cache-Control', 'no-cache, no-store', 'X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '');\r",
                               "});\r",
                               ""
                             ],
@@ -61026,7 +61026,7 @@
                           "variable": [
                             {
                               "key": "categorySourceId",
-                              "value": "8C6CC475-9745-4418-84AC-B57437BEE53D",
+                              "value": "C28DAA2E-55D5-40FB-9B7D-DFC236A9EB93",
                               "type": "string",
                               "description": "(Required) "
                             }
