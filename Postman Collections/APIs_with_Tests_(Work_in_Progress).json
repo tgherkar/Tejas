@@ -60287,6 +60287,7 @@
                             "id": "5b19e23f-fa7b-476a-b9e3-1aec7ff33ec0",
                             "exec": [
                               "var req_body=request.data;\r",
+                              "var jsonData = JSON.parse(responseBody);\r",
                               "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
                               "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
                               "});\r",
