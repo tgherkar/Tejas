@@ -60286,6 +60286,7 @@
                           "script": {
                             "id": "5b19e23f-fa7b-476a-b9e3-1aec7ff33ec0",
                             "exec": [
+                              "var req_body=request.data;\r",
                               "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
                               "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
                               "});\r",
@@ -60295,7 +60296,10 @@
                               "pm.test(\"TEST3: Response Header Checks\", function() {\r",
                               "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
                               "});\r",
-                              "console.log(request.data);"
+                              "console.log(req_body);\r",
+                              "pm.test(\"TEST4: Response values check\", function () {\r",
+                              "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                              "});"
                             ],
                             "type": "text/javascript"
                           }
