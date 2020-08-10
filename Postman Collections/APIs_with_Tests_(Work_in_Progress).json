@@ -76536,7 +76536,7 @@
                       "        pm.expect(jsonData.lastRpcDateTime.split('T')[0]).to.equal(data.lastRpcDateTime.split(' ')[0]);\r",
                       "        pm.expect(jsonData.lastRpcDateTime.split('T')[1].split(':')[0]).to.equal(data.lastRpcDateTime.split(' ')[1].split(':')[0]);\r",
                       "        pm.expect(jsonData.lastRpcDateTime.split('T')[1].split(':')[1]).to.equal(data.lastRpcDateTime.split(' ')[1].split(':')[1]);\r",
-                      "        pm.expect(jsonData.lastRpcDateTime.split('T')[1].split(':')[2]).to.equal(data.lastRpcDateTime.split(' ')[1].split(':')[2]);\r",
+                      "        pm.expect(jsonData.lastRpcDateTime.split('T')[1].split(':')[2].split('.')[0]).to.equal(data.lastRpcDateTime.split(' ')[1].split(':')[2].split('.')[0]);\r",
                       "    });\r",
                       "};\r",
                       "\r",
