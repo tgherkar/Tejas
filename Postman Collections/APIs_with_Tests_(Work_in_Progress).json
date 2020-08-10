@@ -76529,7 +76529,7 @@
                       "        } else {\r",
                       "            pm.expect(jsonData.consumerID).to.deep.equal(data.cnsmr_id);\r",
                       "        }\r",
-                      "    });  \r",
+                      "});  \r",
                       "\r",
                       "if (data.cnsmr_id!=null){\r",
                       "    pm.test(\"TEST1B: lastRpcDateTime check\", function() {\r",
@@ -76630,7 +76630,7 @@
                   "variable": [
                     {
                       "key": "consumerId",
-                      "value": "1727167",
+                      "value": "{{cnsmr_id}}",
                       "type": "string",
                       "description": "(Required) "
                     }
@@ -77155,28 +77155,24 @@
                   ],
                   "variable": [
                     {
-                      "id": "d7ee3c53-0073-4e3e-b316-73463635cce6",
                       "key": "consumerId",
                       "value": "{{cnsmr_id}}",
                       "type": "string",
                       "description": "(Required) "
                     },
                     {
-                      "id": "743b1c5c-729e-4eae-b926-3962172218b7",
                       "key": "linkedConsumers",
                       "value": "{{applyToLinkedConsumers}}",
                       "type": "string",
                       "description": "(Required) "
                     },
                     {
-                      "id": "36d93d87-7362-4f2e-a43b-8271eba27bfb",
                       "key": "skip",
                       "value": "{{skip}}",
                       "type": "string",
                       "description": "(Required) "
                     },
                     {
-                      "id": "14903724-b742-47dd-a305-33e88628cc7c",
                       "key": "take",
                       "value": "{{take}}",
                       "type": "string",
