@@ -76529,7 +76529,7 @@
                       "        } else {\r",
                       "            pm.expect(jsonData.consumerID).to.deep.equal(data.cnsmr_id);\r",
                       "        }\r",
-                      "});  \r",
+                      "    });  \r",
                       "\r",
                       "if (data.cnsmr_id!=null){\r",
                       "    pm.test(\"TEST1B: lastRpcDateTime check\", function() {\r",
@@ -76630,7 +76630,7 @@
                   "variable": [
                     {
                       "key": "consumerId",
-                      "value": "{{cnsmr_id}}",
+                      "value": "1727167",
                       "type": "string",
                       "description": "(Required) "
                     }
