@@ -61400,7 +61400,7 @@
                   "            },\r",
                   "            \"actionCodeText\": {\r",
                   "                \"$id\": \"#/items/properties/actionCodeText\",\r",
-                  "                \"type\": \"null\"\r",
+                  "                \"type\": [\"string\", \"null\"]\r",
                   "            },\r",
                   "            \"resultCodeText\": {\r",
                   "                \"$id\": \"#/items/properties/resultCodeText\",\r",
