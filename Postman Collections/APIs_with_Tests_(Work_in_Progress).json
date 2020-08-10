@@ -77073,7 +77073,7 @@
                       "        pm.response.to.have.header('Cache-Control', 'no-cache, no-store', 'X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '');\r",
                       "    });\r",
                       "    pm.test(\"Incorrect Consumer ID should be not found\", function () {\r",
-                      "        pm.expect(responseCode.code).to.equal(204);\r",
+                      "        pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
                       "    });\r",
                       "}\r",
                       ""
