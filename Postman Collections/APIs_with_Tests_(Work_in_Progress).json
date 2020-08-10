@@ -76983,16 +76983,6 @@
                       "        }\r",
                       "    });\r",
                       "\r",
-                      "    if (data.cnsmr_id != null) {\r",
-                      "        pm.test(\"TEST1A: isRegisteredOnWebSite check\", function () {\r",
-                      "            if(data.Reg_status==1 && data.Act_status==1){\r",
-                      "                pm.expect(jsonData.isRegisteredOnWebSite).to.deep.equal(false);\r",
-                      "            }else{\r",
-                      "                pm.expect(jsonData.isRegisteredOnWebSite).to.deep.equal(true);\r",
-                      "            }\r",
-                      "        });\r",
-                      "    }\r",
-                      "\r",
                       "    pm.test(\"TEST2: Status code Check\", function () {\r",
                       "        pm.response.to.have.status(200);\r",
                       "    });\r",
@@ -77158,7 +77148,7 @@
                   "variable": [
                     {
                       "key": "consumerId",
-                      "value": "2107578",
+                      "value": "{{cnsmr_id}}",
                       "type": "string",
                       "description": "(Required) "
                     },
