@@ -76422,7 +76422,7 @@
       "_postman_id": "d0ea4201-748a-4fee-b738-ed4f01c56cc8"
     },
     {
-      "name": "Interaction1",
+      "name": "Interaction",
       "item": [
         {
           "name": "consumer/{consumer Id}",
