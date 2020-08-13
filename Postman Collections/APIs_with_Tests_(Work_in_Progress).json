@@ -53585,7 +53585,7 @@
                             "id": "61cd2025-a887-465f-81f6-d83833789902",
                             "exec": [
                               "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
-                              "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
+                              "    pm.expect(pm.response.code).to.be.oneOf([200,204,202,400]);\r",
                               "});\r",
                               "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
                               "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
@@ -53593,13 +53593,17 @@
                               "pm.test(\"TEST3: Response Header Checks\", function() {\r",
                               "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
                               "});\r",
+                              "var jsonData = JSON.parse(responseBody);\r",
                               "pm.test(\"TEST4: Response values check\", function () {\r",
                               "    pm.expect(jsonData.name).to.deep.equal(req_body.name);\r",
                               "    pm.expect(jsonData.categoryID).is.not.oneOf([null, undefined]);\r",
                               "    pm.expect(jsonData.description).to.deep.equal(req_body.description);\r",
                               "    pm.expect(jsonData.materialLogo).to.deep.equal(req_body.materialLogo);\r",
                               "    pm.expect(jsonData.isInbound).to.deep.equal(req_body.isInbound);\r",
-                              "});"
+                              "});\r",
+                              "pm.globals.set(\"CatID\", jsonData.categoryID);\r",
+                              "pm.globals.set(\"variable_key\", \"variable_value\");\r",
+                              "pm.globals.set(\"variable_key\", \"variable_value\");"
                             ],
                             "type": "text/javascript"
                           }
