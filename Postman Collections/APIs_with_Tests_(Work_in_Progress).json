@@ -49445,7 +49445,7 @@
               "variable": [
                 {
                   "key": "cnsmr_id",
-                  "value": "{{cnsmr_id_from}}",
+                  "value": "{{cnsmr_id}}",
                   "type": "string"
                 }
               ]
@@ -49608,7 +49608,7 @@
                 "value": "Test-User"
               }
             ],
-            "url": "{{BaseURL}}/linkedconsumer/suggestion/{{sugg_link_id}}"
+            "url": "{{BaseURL}}/linkedconsumer/suggestion/{{SuggestedLinkID}}"
           },
           "response": []
         },
