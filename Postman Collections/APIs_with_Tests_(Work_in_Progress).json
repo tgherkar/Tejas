@@ -53657,7 +53657,7 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"name\": \"{{Cat_Nm}}\",\n    \"description\": \"{{Cat_Desc}}\",\n    \"materialLogo\": \"{{CAT_Mat_logo}}\",\n    \"isInbound\": {{IsInbound}},\n    \"sourceID\": \"{{SourceID}}\",\n    \"rules\": [\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"{{Rule_Desc}}\",\n            \"actionCode\": \"{{Rule_AC}}\",\n            \"resultCode\": \"{{Rule_RC}}\"\n        },\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"{{Rule_Desc1}}\",\n            \"actionCode\": \"{{Rule_AC1}}\",\n            \"resultCode\": \"{{Rule_RC1}}\"\n        }\n    ],\n    \"paymentRules\": [\n    {\n      \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n      \"description\": \"{{PaymentRuleStatusCode}}\",\n      \"statusValueText\": \"{{PaymentRuleStatusCode}}\"\n    }\n  ]\n}",
+                          "raw": "{\n    \"name\": \"{{Cat_Nm}}\",\n    \"description\": \"{{Cat_Desc}}\",\n    \"materialLogo\": \"{{CAT_Mat_logo}}\",\n    \"isInbound\": {{IsInbound}},\n    \"sourceID\": \"{{SourceID}}\",\n    \"rules\": [\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"{{Rule_Desc}}\",\n            \"actionCode\": \"{{Rule_AC}}\",\n            \"resultCode\": \"{{Rule_RC}}\"\n        },\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"{{Rule_Desc1}}\",\n            \"actionCode\": \"{{Rule_AC1}}\",\n            \"resultCode\": \"{{Rule_RC1}}\"\n        }\n    ]\n}",
                           "options": {
                             "raw": {}
                           }
@@ -55224,7 +55224,7 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"categoryID\": \"{{Cat_Nm}}\"\n}",
+                          "raw": "{\n    \"categoryID\": \"{{CatID}}\"\n}",
                           "options": {
                             "raw": {}
                           }
@@ -55242,7 +55242,7 @@
                           "variable": [
                             {
                               "key": "categoryId",
-                              "value": "{{Cat_Nm}}",
+                              "value": "{{CatID}}",
                               "type": "string",
                               "description": "(Required) "
                             }
