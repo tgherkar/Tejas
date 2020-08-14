@@ -57422,7 +57422,7 @@
                               "    pm.expect(jsonData.name).to.deep.equal(req_body.name);\r",
                               "    pm.expect(jsonData.categorySourceID).is.not.oneOf([null, undefined]);\r",
                               "});\r",
-                              "pm.globals.set(\"SourceID\", jsonData.categorySourceID);\r",
+                              "pm.globals.set(\"SourceID1\", jsonData.categorySourceID);\r",
                               "//pm.globals.set(\"variable_key\", \"variable_value\");\r",
                               "}catch(e){\r",
                               "    pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
@@ -58153,7 +58153,7 @@
                           "variable": [
                             {
                               "key": "categorySourceId",
-                              "value": "{{SourceID}}",
+                              "value": "{{SourceID1}}",
                               "type": "string",
                               "description": "(Required) "
                             }
