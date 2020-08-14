@@ -53903,12 +53903,12 @@
                           "script": {
                             "id": "614e985a-4735-4108-8560-e4f573787295",
                             "exec": [
+                              "var req_body = JSON.parse(request.data);\r",
                               "try{\r",
                               "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
                               "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
                               "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
                               "var jsonData = JSON.parse(responseBody);\r",
-                              "var req_body = JSON.parse(request.data);\r",
                               "var Ajv = require('ajv'),\r",
                               "ajv = new Ajv({logger: console});\r",
                               "schema = \r",
@@ -54004,9 +54004,9 @@
                               "\r",
                               "///Negative Test\r",
                               "} catch (e){\r",
-                              "pm.test(\"Check if Schema Response is empty\", function () {\r",
-                              "     pm.expect(schema).to.not.be.empty;\r",
-                              "});\r",
+                              "pm.test(\"TEST3: ResponseBody Check\", function () {\r",
+                              "        pm.expect(responseBody).to.deep.equal(\"Unable to find Category with CategoryID: \"+req_body.categoryID);\r",
+                              "    });\r",
                               " pm.test(\"Check categoryID isn't empty\", function () {\r",
                               "     pm.expect('categoryID').to.not.be.empty;\r",
                               "});\r",
@@ -54065,7 +54065,7 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"categoryID\": \"761d8e81-7154-4b4a-b889-350818179aa5\",\n    \"name\": \"{{Cat_Nm1}}\",\n    \"description\": \"{{Cat_Desc1}}\",\n    \"materialLogo\": \"{{CAT_Mat_logo1}}\",\n    \"sourceID\": \"{{SourceID}}\"\n}",
+                          "raw": "{\n    \"categoryID\": \"{{CatID}}\",\n    \"name\": \"{{Cat_Nm1}}\",\n    \"description\": \"{{Cat_Desc1}}\",\n    \"materialLogo\": \"{{CAT_Mat_logo1}}\",\n    \"sourceID\": \"{{SourceID}}\"\n}",
                           "options": {
                             "raw": {}
                           }
@@ -54083,7 +54083,7 @@
                           "variable": [
                             {
                               "key": "categoryId",
-                              "value": "761d8e81-7154-4b4a-b889-350818179aa5",
+                              "value": "{{CatID}}",
                               "type": "string",
                               "description": "(Required) "
                             }
