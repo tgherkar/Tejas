@@ -53584,6 +53584,7 @@
                           "script": {
                             "id": "61cd2025-a887-465f-81f6-d83833789902",
                             "exec": [
+                              "try{\r",
                               "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
                               "    pm.expect(pm.response.code).to.be.oneOf([200,204,202,400]);\r",
                               "});\r",
@@ -53604,7 +53605,10 @@
                               "pm.globals.set(\"CatID\", jsonData.categoryID);\r",
                               "pm.globals.set(\"CatRuleID1\", jsonData.categoryRules[0].categoryRuleID);\r",
                               "pm.globals.set(\"CatRuleID2\", jsonData.categoryRules[1].categoryRuleID);\r",
-                              "//pm.globals.set(\"variable_key\", \"variable_value\");"
+                              "//pm.globals.set(\"variable_key\", \"variable_value\");\r",
+                              "}catch(e){\r",
+                              "\r",
+                              "}"
                             ],
                             "type": "text/javascript"
                           }
@@ -53921,7 +53925,6 @@
                               "    pm.test(\"TEST3: ResponseBody Check\", function () {\r",
                               "        pm.expect(responseBody).to.deep.equal(\"Category with name '\"+req_body.name+\"' already exists\");\r",
                               "    });\r",
-                              "\r",
                               "}"
                             ],
                             "type": "text/javascript"
