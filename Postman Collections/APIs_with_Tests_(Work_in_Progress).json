@@ -63113,7 +63113,7 @@
                   "});\r",
                   " pm.test(\"Incorrect legacyID ID should be not found\", function () {\r",
                   "     pm.expect(responseCode.code).to.equal(400);\r",
-                  "     pm.expect(responseBody).to.equal(\"Document template ID is not active\");\r",
+                  "     pm.expect(responseBody).to.equal(\"Unable to find Next Best Action for LegacyID: \"+query[5]);\r",
                   "});\r",
                   "\r",
                   " pm.test(\"Neg Test 02: Check if string is empty\", function () {\r",
