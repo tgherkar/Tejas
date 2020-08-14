@@ -54335,6 +54335,441 @@
                       ]
                     },
                     {
+                      "name": "/category/:categoryId/rule/:categoryRuleId",
+                      "event": [
+                        {
+                          "listen": "prerequest",
+                          "script": {
+                            "id": "87517cf7-958e-4fab-843d-ac73d0eebbcb",
+                            "exec": [
+                              "    var tokenDate = new Date(2010,1,1);\r",
+                              "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                              "    if(tokenTimestamp){\r",
+                              "        tokenDate = Date.parse(tokenTimestamp);\r",
+                              "    }else{\r",
+                              "        tokenDate = Date.parse(\"2018-03-29T13:34:00.000\");\r",
+                              "    }\r",
+                              "    console.log(\"timestamp is: \"+tokenDate +\" new time is: \"+Date.parse(new Date()));\r",
+                              "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                              "    if(!expiresInTime){\r",
+                              "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                              "    }\r",
+                              "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                              "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                              "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
+                              "    let clientId = pm.environment.get(\"clientId\");\r",
+                              "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
+                              "    let scope = pm.environment.get(\"clientScope\");\r",
+                              "\r",
+                              "        let getTokenRequest = {\r",
+                              "            method: 'POST',\r",
+                              "            url: tokenUrl,\r",
+                              "            auth: {\r",
+                              "                type: \"basic\",\r",
+                              "                basic: [\r",
+                              "                    { key: \"username\", value: clientId },\r",
+                              "                    { key: \"password\", value: clientSecret }\r",
+                              "                ]\r",
+                              "            },\r",
+                              "            body: {\r",
+                              "                mode: 'formdata',\r",
+                              "                formdata: [\r",
+                              "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                              "                    { key: 'scope', value: scope }\r",
+                              "                ]\r",
+                              "            }\r",
+                              "        };\r",
+                              "\r",
+                              "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                              "            let jsonResponse = response.json(),\r",
+                              "            newAccessToken = jsonResponse.access_token;\r",
+                              "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                              "\r",
+                              "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                              "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                              "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                              "        });\r",
+                              "\r",
+                              "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                              "    }\r",
+                              "//console.log(\"End of Pre-req script\");\r",
+                              "\r",
+                              "\r",
+                              "\r",
+                              ""
+                            ],
+                            "type": "text/javascript"
+                          }
+                        },
+                        {
+                          "listen": "test",
+                          "script": {
+                            "id": "5bca92b0-4512-4d36-ae32-b0fc69d115db",
+                            "exec": [
+                              "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                              "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
+                              "});\r",
+                              "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                              "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                              "});\r",
+                              "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                              "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                              "});\r",
+                              ""
+                            ],
+                            "type": "text/javascript"
+                          }
+                        }
+                      ],
+                      "_postman_id": "f22b8514-a3c5-4405-b460-db70fa5c57bf",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": {
+                            "accessToken": "{{OAuth_Token}}",
+                            "tokenType": "Bearer",
+                            "addTokenTo": "header"
+                          }
+                        },
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json,v1.0.0"
+                          },
+                          {
+                            "key": "Correlation-Id",
+                            "value": "{{$guid}}",
+                            "type": "text"
+                          },
+                          {
+                            "key": "Origin",
+                            "value": "Postman",
+                            "type": "text"
+                          },
+                          {
+                            "key": "Username",
+                            "value": "Test-User",
+                            "type": "text"
+                          },
+                          {
+                            "key": "Ocp-Apim-Subscription-Key-South",
+                            "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                            "type": "text"
+                          },
+                          {
+                            "key": "Ocp-Apim-Subscription-Key-West",
+                            "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                            "type": "text"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"categoryRuleID\": \"{{CatRuleID1}}\"\n}",
+                          "options": {
+                            "raw": {}
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/interaction/category/:categoryId/rule/:categoryRuleId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "interaction",
+                            "category",
+                            ":categoryId",
+                            "rule",
+                            ":categoryRuleId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "categoryId",
+                              "value": "6c017bbd-751c-4bac-8a7a-08d83f922288",
+                              "type": "string",
+                              "description": "(Required) "
+                            },
+                            {
+                              "key": "categoryRuleId",
+                              "value": "{{CatRuleID1}}",
+                              "type": "string",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Delete interaction category rule"
+                      },
+                      "response": [
+                        {
+                          "id": "55660cc6-cae9-482f-854a-2c7771bec3a7",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}"
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "category",
+                                ":categoryId",
+                                "rule",
+                                ":categoryRuleId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "categoryId"
+                                },
+                                {
+                                  "key": "categoryRuleId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<object>"
+                        },
+                        {
+                          "id": "6ae4d9c0-f076-4d43-8372-a678107753f0",
+                          "name": "Server Error",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}"
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "category",
+                                ":categoryId",
+                                "rule",
+                                ":categoryRuleId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "categoryId"
+                                },
+                                {
+                                  "key": "categoryRuleId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<object>"
+                        },
+                        {
+                          "id": "7dcc9703-a3a0-4162-87c7-96647799dda3",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}"
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "category",
+                                ":categoryId",
+                                "rule",
+                                ":categoryRuleId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "categoryId"
+                                },
+                                {
+                                  "key": "categoryRuleId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<object>"
+                        },
+                        {
+                          "id": "c1f7b357-a1f6-4fba-972f-f4f23932b8cc",
+                          "name": "Server Error",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}"
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "category",
+                                ":categoryId",
+                                "rule",
+                                ":categoryRuleId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "categoryId"
+                                },
+                                {
+                                  "key": "categoryRuleId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Service Unavailable",
+                          "code": 503,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<object>"
+                        },
+                        {
+                          "id": "cf77c564-dcf0-4def-bc18-3fb5f83c564d",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}"
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "category",
+                                ":categoryId",
+                                "rule",
+                                ":categoryRuleId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "categoryId"
+                                },
+                                {
+                                  "key": "categoryRuleId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<object>"
+                        },
+                        {
+                          "id": "e96e1dbb-788a-4392-94c7-254603c1dcea",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}"
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "category",
+                                ":categoryId",
+                                "rule",
+                                ":categoryRuleId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "categoryId"
+                                },
+                                {
+                                  "key": "categoryRuleId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>"
+                        }
+                      ]
+                    },
+                    {
                       "name": "/category",
                       "event": [
                         {
@@ -56872,441 +57307,6 @@
                               "variable": [
                                 {
                                   "key": "categoryId"
-                                }
-                              ]
-                            }
-                          },
-                          "status": "Bad Request",
-                          "code": 400,
-                          "_postman_previewlanguage": "text",
-                          "header": [
-                            {
-                              "key": "Content-Type",
-                              "value": "application/json,v1.0.0"
-                            }
-                          ],
-                          "cookie": [],
-                          "responseTime": null,
-                          "body": "<string>"
-                        }
-                      ]
-                    },
-                    {
-                      "name": "/category/:categoryId/rule/:categoryRuleId",
-                      "event": [
-                        {
-                          "listen": "prerequest",
-                          "script": {
-                            "id": "87517cf7-958e-4fab-843d-ac73d0eebbcb",
-                            "exec": [
-                              "    var tokenDate = new Date(2010,1,1);\r",
-                              "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
-                              "    if(tokenTimestamp){\r",
-                              "        tokenDate = Date.parse(tokenTimestamp);\r",
-                              "    }else{\r",
-                              "        tokenDate = Date.parse(\"2018-03-29T13:34:00.000\");\r",
-                              "    }\r",
-                              "    console.log(\"timestamp is: \"+tokenDate +\" new time is: \"+Date.parse(new Date()));\r",
-                              "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
-                              "    if(!expiresInTime){\r",
-                              "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
-                              "    }\r",
-                              "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
-                              "    if((new Date() - tokenDate) >= expiresInTime) {\r",
-                              "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
-                              "    let clientId = pm.environment.get(\"clientId\");\r",
-                              "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
-                              "    let scope = pm.environment.get(\"clientScope\");\r",
-                              "\r",
-                              "        let getTokenRequest = {\r",
-                              "            method: 'POST',\r",
-                              "            url: tokenUrl,\r",
-                              "            auth: {\r",
-                              "                type: \"basic\",\r",
-                              "                basic: [\r",
-                              "                    { key: \"username\", value: clientId },\r",
-                              "                    { key: \"password\", value: clientSecret }\r",
-                              "                ]\r",
-                              "            },\r",
-                              "            body: {\r",
-                              "                mode: 'formdata',\r",
-                              "                formdata: [\r",
-                              "                    { key: 'grant_type', value: 'client_credentials' },\r",
-                              "                    { key: 'scope', value: scope }\r",
-                              "                ]\r",
-                              "            }\r",
-                              "        };\r",
-                              "\r",
-                              "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
-                              "            let jsonResponse = response.json(),\r",
-                              "            newAccessToken = jsonResponse.access_token;\r",
-                              "            //console.log({ err, jsonResponse, newAccessToken });\r",
-                              "\r",
-                              "            pm.environment.set('OAuth_Token', newAccessToken);\r",
-                              "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
-                              "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
-                              "        });\r",
-                              "\r",
-                              "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
-                              "    }\r",
-                              "//console.log(\"End of Pre-req script\");\r",
-                              "\r",
-                              "\r",
-                              "\r",
-                              ""
-                            ],
-                            "type": "text/javascript"
-                          }
-                        },
-                        {
-                          "listen": "test",
-                          "script": {
-                            "id": "5bca92b0-4512-4d36-ae32-b0fc69d115db",
-                            "exec": [
-                              "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
-                              "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
-                              "});\r",
-                              "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
-                              "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
-                              "});\r",
-                              "pm.test(\"TEST3: Response Header Checks\", function() {\r",
-                              "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
-                              "});\r",
-                              ""
-                            ],
-                            "type": "text/javascript"
-                          }
-                        }
-                      ],
-                      "_postman_id": "f22b8514-a3c5-4405-b460-db70fa5c57bf",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "auth": {
-                          "type": "oauth2",
-                          "oauth2": {
-                            "accessToken": "{{OAuth_Token}}",
-                            "tokenType": "Bearer",
-                            "addTokenTo": "header"
-                          }
-                        },
-                        "method": "DELETE",
-                        "header": [
-                          {
-                            "key": "Content-Type",
-                            "value": "application/json,v1.0.0"
-                          },
-                          {
-                            "key": "Correlation-Id",
-                            "value": "{{$guid}}",
-                            "type": "text"
-                          },
-                          {
-                            "key": "Origin",
-                            "value": "Postman",
-                            "type": "text"
-                          },
-                          {
-                            "key": "Username",
-                            "value": "Test-User",
-                            "type": "text"
-                          },
-                          {
-                            "key": "Ocp-Apim-Subscription-Key-South",
-                            "value": "{{Ocp-Apim-Subscription-Key-South}}",
-                            "type": "text"
-                          },
-                          {
-                            "key": "Ocp-Apim-Subscription-Key-West",
-                            "value": "{{Ocp-Apim-Subscription-Key-West}}",
-                            "type": "text"
-                          }
-                        ],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\n    \"categoryRuleID\": \"57a642a9-1010-4586-e67e-08d83f92229c\"\n}",
-                          "options": {
-                            "raw": {}
-                          }
-                        },
-                        "url": {
-                          "raw": "{{baseUrl}}/interaction/category/:categoryId/rule/:categoryRuleId",
-                          "host": [
-                            "{{baseUrl}}"
-                          ],
-                          "path": [
-                            "interaction",
-                            "category",
-                            ":categoryId",
-                            "rule",
-                            ":categoryRuleId"
-                          ],
-                          "variable": [
-                            {
-                              "key": "categoryId",
-                              "value": "6c017bbd-751c-4bac-8a7a-08d83f922288",
-                              "type": "string",
-                              "description": "(Required) "
-                            },
-                            {
-                              "key": "categoryRuleId",
-                              "value": "57a642a9-1010-4586-e67e-08d83f92229c",
-                              "type": "string",
-                              "description": "(Required) "
-                            }
-                          ]
-                        },
-                        "description": "Delete interaction category rule"
-                      },
-                      "response": [
-                        {
-                          "id": "55660cc6-cae9-482f-854a-2c7771bec3a7",
-                          "name": "Success",
-                          "originalRequest": {
-                            "method": "DELETE",
-                            "header": [],
-                            "body": {
-                              "mode": "raw",
-                              "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}"
-                            },
-                            "url": {
-                              "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
-                              "host": [
-                                "{{baseUrl}}"
-                              ],
-                              "path": [
-                                "category",
-                                ":categoryId",
-                                "rule",
-                                ":categoryRuleId"
-                              ],
-                              "variable": [
-                                {
-                                  "key": "categoryId"
-                                },
-                                {
-                                  "key": "categoryRuleId"
-                                }
-                              ]
-                            }
-                          },
-                          "status": "No Content",
-                          "code": 204,
-                          "_postman_previewlanguage": "text",
-                          "header": [
-                            {
-                              "key": "Content-Type",
-                              "value": "application/json,v1.0.0"
-                            }
-                          ],
-                          "cookie": [],
-                          "responseTime": null,
-                          "body": "<object>"
-                        },
-                        {
-                          "id": "6ae4d9c0-f076-4d43-8372-a678107753f0",
-                          "name": "Server Error",
-                          "originalRequest": {
-                            "method": "DELETE",
-                            "header": [],
-                            "body": {
-                              "mode": "raw",
-                              "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}"
-                            },
-                            "url": {
-                              "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
-                              "host": [
-                                "{{baseUrl}}"
-                              ],
-                              "path": [
-                                "category",
-                                ":categoryId",
-                                "rule",
-                                ":categoryRuleId"
-                              ],
-                              "variable": [
-                                {
-                                  "key": "categoryId"
-                                },
-                                {
-                                  "key": "categoryRuleId"
-                                }
-                              ]
-                            }
-                          },
-                          "status": "Internal Server Error",
-                          "code": 500,
-                          "_postman_previewlanguage": "text",
-                          "header": [
-                            {
-                              "key": "Content-Type",
-                              "value": "application/json,v1.0.0"
-                            }
-                          ],
-                          "cookie": [],
-                          "responseTime": null,
-                          "body": "<object>"
-                        },
-                        {
-                          "id": "7dcc9703-a3a0-4162-87c7-96647799dda3",
-                          "name": "Forbidden",
-                          "originalRequest": {
-                            "method": "DELETE",
-                            "header": [],
-                            "body": {
-                              "mode": "raw",
-                              "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}"
-                            },
-                            "url": {
-                              "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
-                              "host": [
-                                "{{baseUrl}}"
-                              ],
-                              "path": [
-                                "category",
-                                ":categoryId",
-                                "rule",
-                                ":categoryRuleId"
-                              ],
-                              "variable": [
-                                {
-                                  "key": "categoryId"
-                                },
-                                {
-                                  "key": "categoryRuleId"
-                                }
-                              ]
-                            }
-                          },
-                          "status": "Forbidden",
-                          "code": 403,
-                          "_postman_previewlanguage": "text",
-                          "header": [
-                            {
-                              "key": "Content-Type",
-                              "value": "application/json,v1.0.0"
-                            }
-                          ],
-                          "cookie": [],
-                          "responseTime": null,
-                          "body": "<object>"
-                        },
-                        {
-                          "id": "c1f7b357-a1f6-4fba-972f-f4f23932b8cc",
-                          "name": "Server Error",
-                          "originalRequest": {
-                            "method": "DELETE",
-                            "header": [],
-                            "body": {
-                              "mode": "raw",
-                              "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}"
-                            },
-                            "url": {
-                              "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
-                              "host": [
-                                "{{baseUrl}}"
-                              ],
-                              "path": [
-                                "category",
-                                ":categoryId",
-                                "rule",
-                                ":categoryRuleId"
-                              ],
-                              "variable": [
-                                {
-                                  "key": "categoryId"
-                                },
-                                {
-                                  "key": "categoryRuleId"
-                                }
-                              ]
-                            }
-                          },
-                          "status": "Service Unavailable",
-                          "code": 503,
-                          "_postman_previewlanguage": "text",
-                          "header": [
-                            {
-                              "key": "Content-Type",
-                              "value": "application/json,v1.0.0"
-                            }
-                          ],
-                          "cookie": [],
-                          "responseTime": null,
-                          "body": "<object>"
-                        },
-                        {
-                          "id": "cf77c564-dcf0-4def-bc18-3fb5f83c564d",
-                          "name": "Unauthorized",
-                          "originalRequest": {
-                            "method": "DELETE",
-                            "header": [],
-                            "body": {
-                              "mode": "raw",
-                              "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}"
-                            },
-                            "url": {
-                              "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
-                              "host": [
-                                "{{baseUrl}}"
-                              ],
-                              "path": [
-                                "category",
-                                ":categoryId",
-                                "rule",
-                                ":categoryRuleId"
-                              ],
-                              "variable": [
-                                {
-                                  "key": "categoryId"
-                                },
-                                {
-                                  "key": "categoryRuleId"
-                                }
-                              ]
-                            }
-                          },
-                          "status": "Unauthorized",
-                          "code": 401,
-                          "_postman_previewlanguage": "text",
-                          "header": [
-                            {
-                              "key": "Content-Type",
-                              "value": "application/json,v1.0.0"
-                            }
-                          ],
-                          "cookie": [],
-                          "responseTime": null,
-                          "body": "<object>"
-                        },
-                        {
-                          "id": "e96e1dbb-788a-4392-94c7-254603c1dcea",
-                          "name": "Bad Request",
-                          "originalRequest": {
-                            "method": "DELETE",
-                            "header": [],
-                            "body": {
-                              "mode": "raw",
-                              "raw": "{\n    \"categoryRuleID\": \"<uuid>\"\n}"
-                            },
-                            "url": {
-                              "raw": "{{baseUrl}}/category/:categoryId/rule/:categoryRuleId",
-                              "host": [
-                                "{{baseUrl}}"
-                              ],
-                              "path": [
-                                "category",
-                                ":categoryId",
-                                "rule",
-                                ":categoryRuleId"
-                              ],
-                              "variable": [
-                                {
-                                  "key": "categoryId"
-                                },
-                                {
-                                  "key": "categoryRuleId"
                                 }
                               ]
                             }
