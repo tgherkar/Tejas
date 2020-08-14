@@ -49770,7 +49770,7 @@
                 "type": "text"
               }
             ],
-            "url": "{{BaseURL}}/linkedconsumer/suggestion/{{sugg_link_id}}/undelete"
+            "url": "{{BaseURL}}/linkedconsumer/suggestion/{{SuggestedLinkID}}/undelete"
           },
           "response": []
         },
