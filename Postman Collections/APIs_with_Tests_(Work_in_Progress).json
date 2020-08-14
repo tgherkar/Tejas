@@ -53604,7 +53604,7 @@
                               "pm.globals.set(\"CatID\", jsonData.categoryID);\r",
                               "pm.globals.set(\"CatRuleID1\", jsonData.categoryRules[0].categoryRuleID);\r",
                               "pm.globals.set(\"CatRuleID2\", jsonData.categoryRules[1].categoryRuleID);\r",
-                              "pm.globals.set(\"variable_key\", \"variable_value\");"
+                              "//pm.globals.set(\"variable_key\", \"variable_value\");"
                             ],
                             "type": "text/javascript"
                           }
@@ -55621,7 +55621,7 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"categoryRuleID\": \"BAFE0C6F-2D86-4978-6074-08D83AB0C57A\"\n}",
+                          "raw": "{\n    \"categoryRuleID\": \"57a642a9-1010-4586-e67e-08d83f92229c\"\n}",
                           "options": {
                             "raw": {}
                           }
@@ -55641,13 +55641,13 @@
                           "variable": [
                             {
                               "key": "categoryId",
-                              "value": "A2D1FF76-FD43-4864-DE5A-08D83AB0C56D",
+                              "value": "6c017bbd-751c-4bac-8a7a-08d83f922288",
                               "type": "string",
                               "description": "(Required) "
                             },
                             {
                               "key": "categoryRuleId",
-                              "value": "BAFE0C6F-2D86-4978-6074-08D83AB0C57A",
+                              "value": "57a642a9-1010-4586-e67e-08d83f92229c",
                               "type": "string",
                               "description": "(Required) "
                             }
