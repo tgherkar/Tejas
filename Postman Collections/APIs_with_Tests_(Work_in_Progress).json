@@ -64388,7 +64388,23 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": ""
+        "url": {
+          "raw": "{{BaseURL}}/:API/swagger",
+          "host": [
+            "{{BaseURL}}"
+          ],
+          "path": [
+            ":API",
+            "swagger"
+          ],
+          "variable": [
+            {
+              "key": "API",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        }
       },
       "response": []
     }
