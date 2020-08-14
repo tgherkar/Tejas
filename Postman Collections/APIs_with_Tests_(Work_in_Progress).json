@@ -55224,7 +55224,7 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"categoryID\": \"3D5C83AD-5FD5-407D-DE5B-08D83AB0C56D\"\n}",
+                          "raw": "{\n    \"categoryID\": \"{{Cat_Nm}}\"\n}",
                           "options": {
                             "raw": {}
                           }
@@ -55242,7 +55242,7 @@
                           "variable": [
                             {
                               "key": "categoryId",
-                              "value": "3D5C83AD-5FD5-407D-DE5B-08D83AB0C56D",
+                              "value": "{{Cat_Nm}}",
                               "type": "string",
                               "description": "(Required) "
                             }
