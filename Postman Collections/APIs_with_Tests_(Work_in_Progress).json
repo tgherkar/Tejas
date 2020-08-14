@@ -57405,11 +57405,11 @@
                           "script": {
                             "id": "5b19e23f-fa7b-476a-b9e3-1aec7ff33ec0",
                             "exec": [
-                              "var req_body=request.data;\r",
+                              "var req_body = JSON.parse(request.data);\r",
                               "try{\r",
                               "var jsonData = JSON.parse(responseBody);\r",
                               "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
-                              "    pm.expect(pm.response.code).to.be.oneOf([204,202]);\r",
+                              "    pm.expect(pm.response.code).to.be.oneOf([200,202]);\r",
                               "});\r",
                               "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
                               "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
@@ -57422,6 +57422,8 @@
                               "    pm.expect(jsonData.name).to.deep.equal(req_body.name);\r",
                               "    pm.expect(jsonData.categorySourceID).is.not.oneOf([null, undefined]);\r",
                               "});\r",
+                              "pm.globals.set(\"SourceID\", jsonData.categorySourceID);\r",
+                              "//pm.globals.set(\"variable_key\", \"variable_value\");\r",
                               "}catch(e){\r",
                               "    pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
                               "        pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
@@ -57429,7 +57431,6 @@
                               "    pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
                               "        pm.expect(pm.response.responseTime).to.be.below(5000);\r",
                               "    });\r",
-                              "    console.log(req_body);\r",
                               "    pm.test(\"TEST3: ResponseBody Check\", function () {\r",
                               "        pm.expect(responseBody).to.deep.equal(\"Category Source with name '\"+req_body.name+\"' already exists\");\r",
                               "    });\r",
@@ -57486,7 +57487,7 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"name\": \"-test_cat_name?\",\n    \"description\": \"-Test_Desc?\",\n    \"materialLogo\": \"-test_mat_logo?\",\n    \"isInbound\": true,\n    \"sourceID\": \"\",\n    \"rules\": [\n        {\n            \"categoryID\": \"\",\n            \"description\": \"-Test_Desc?\",\n            \"actionCode\": 0,\n            \"resultCode\": 0\n        },\n        {\n            \"categoryID\": \"\",\n            \"description\": \"-Test_Desc?\",\n            \"actionCode\": 0,\n            \"resultCode\": 0\n        }\n    ]\n}",
+                          "raw": "{\n    \"name\": \"{{Src_Nm}}\",\n    \"description\": \"{{Src_Desc}}\",\n    \"materialLogo\": \"{{Src_Mat_logo}}\",\n    \"isInbound\": {{IsInbound}},\n    \"sourceID\": \"\",\n    \"rules\": [\n        {\n            \"categoryID\": \"\",\n            \"description\": \"-Test_Desc?\",\n            \"actionCode\": 0,\n            \"resultCode\": 0\n        },\n        {\n            \"categoryID\": \"\",\n            \"description\": \"-Test_Desc?\",\n            \"actionCode\": 0,\n            \"resultCode\": 0\n        }\n    ]\n}",
                           "options": {
                             "raw": {}
                           }
