@@ -55588,6 +55588,7 @@
                               "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
                               "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
                               "var jsonData = JSON.parse(responseBody);\r",
+                              "var req_body = JSON.parse(request.data);\r",
                               "var Ajv = require('ajv'),\r",
                               "ajv = new Ajv({logger: console});\r",
                               "schema = \r",
@@ -55674,7 +55675,12 @@
                               "  pm.expect(ajv.validate(schema, jsonData, true, false)).to.be.true;\r",
                               "});\r",
                               "pm.test(\"TEST05: Response Check\", function() {\r",
-                              "  \r",
+                              "    pm.expect(jsonData.name).to.deep.equal(req_body.name);\r",
+                              "    pm.expect(jsonData.categoryID).to.deep.equal(req_body.categoryID);\r",
+                              "    pm.expect(jsonData.description).to.deep.equal(req_body.description);\r",
+                              "    pm.expect(jsonData.materialLogo).to.deep.equal(req_body.materialLogo);\r",
+                              "    pm.expect(jsonData.isInbound).to.deep.equal(req_body.isInbound);\r",
+                              "    pm.expect(jsonData.source.categorySourceID.toUpperCase()).to.deep.equal(req_body.sourceID.toUpperCase());\r",
                               "});\r",
                               "\r",
                               "///Negative Test\r",
@@ -55740,7 +55746,7 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"categoryID\": \"{{CatID_Pm}}}}\",\n    \"name\": \"{{Cat_Nm1}}\",\n    \"description\": \"{{Cat_Desc1}}\",\n    \"materialLogo\": \"{{CAT_Mat_logo1}}\",\n    \"sourceID\": \"{{SourceID}}\"\n}",
+                          "raw": "{\n    \"categoryID\": \"{{CatID_Pm}}\",\n    \"name\": \"{{Cat_Nm1}}\",\n    \"description\": \"{{Cat_Desc1}}\",\n    \"materialLogo\": \"{{CAT_Mat_logo1}}\",\n    \"sourceID\": \"{{SourceID}}\"\n}",
                           "options": {
                             "raw": {}
                           }
