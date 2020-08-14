@@ -53900,6 +53900,7 @@
                               "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
                               "});\r",
                               "var jsonData = JSON.parse(responseBody);\r",
+                              "var req_body = JSON.parse(request.data);\r",
                               "pm.test(\"TEST4: Response values check\", function () {\r",
                               "    pm.expect(jsonData.name).to.deep.equal(req_body.name);\r",
                               "    pm.expect(jsonData.categoryID).is.not.oneOf([null, undefined]);\r",
