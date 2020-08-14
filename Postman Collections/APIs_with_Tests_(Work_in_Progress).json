@@ -53819,6 +53819,312 @@
                       ]
                     },
                     {
+                      "name": "/category(Payment_Rules)",
+                      "event": [
+                        {
+                          "listen": "prerequest",
+                          "script": {
+                            "id": "81d27641-8b3a-4228-8b46-cd56b2887f99",
+                            "exec": [
+                              "    var tokenDate = new Date(2010,1,1);\r",
+                              "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                              "    if(tokenTimestamp){\r",
+                              "        tokenDate = Date.parse(tokenTimestamp);\r",
+                              "    }else{\r",
+                              "        tokenDate = Date.parse(\"2018-03-29T13:34:00.000\");\r",
+                              "    }\r",
+                              "    console.log(\"timestamp is: \"+tokenDate +\" new time is: \"+Date.parse(new Date()));\r",
+                              "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                              "    if(!expiresInTime){\r",
+                              "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                              "    }\r",
+                              "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                              "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                              "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
+                              "    let clientId = pm.environment.get(\"clientId\");\r",
+                              "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
+                              "    let scope = pm.environment.get(\"clientScope\");\r",
+                              "\r",
+                              "        let getTokenRequest = {\r",
+                              "            method: 'POST',\r",
+                              "            url: tokenUrl,\r",
+                              "            auth: {\r",
+                              "                type: \"basic\",\r",
+                              "                basic: [\r",
+                              "                    { key: \"username\", value: clientId },\r",
+                              "                    { key: \"password\", value: clientSecret }\r",
+                              "                ]\r",
+                              "            },\r",
+                              "            body: {\r",
+                              "                mode: 'formdata',\r",
+                              "                formdata: [\r",
+                              "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                              "                    { key: 'scope', value: scope }\r",
+                              "                ]\r",
+                              "            }\r",
+                              "        };\r",
+                              "\r",
+                              "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                              "            let jsonResponse = response.json(),\r",
+                              "            newAccessToken = jsonResponse.access_token;\r",
+                              "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                              "\r",
+                              "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                              "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                              "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                              "        });\r",
+                              "\r",
+                              "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                              "    }\r",
+                              "//console.log(\"End of Pre-req script\");\r",
+                              "\r",
+                              "\r",
+                              "\r",
+                              ""
+                            ],
+                            "type": "text/javascript"
+                          }
+                        },
+                        {
+                          "listen": "test",
+                          "script": {
+                            "id": "408afb59-8063-4575-b2b4-a155eb3de347",
+                            "exec": [
+                              "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                              "    pm.expect(pm.response.code).to.be.oneOf([200,204,202,400]);\r",
+                              "});\r",
+                              "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                              "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                              "});\r",
+                              "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                              "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                              "});\r",
+                              "var jsonData = JSON.parse(responseBody);\r",
+                              "pm.test(\"TEST4: Response values check\", function () {\r",
+                              "    pm.expect(jsonData.name).to.deep.equal(req_body.name);\r",
+                              "    pm.expect(jsonData.categoryID).is.not.oneOf([null, undefined]);\r",
+                              "    pm.expect(jsonData.description).to.deep.equal(req_body.description);\r",
+                              "    pm.expect(jsonData.materialLogo).to.deep.equal(req_body.materialLogo);\r",
+                              "    pm.expect(jsonData.isInbound).to.deep.equal(req_body.isInbound);\r",
+                              "});\r",
+                              "pm.globals.set(\"CatID\", jsonData.categoryID);\r",
+                              "pm.globals.set(\"CatRuleID1\", jsonData.categoryRules[0].categoryRuleID);\r",
+                              "pm.globals.set(\"CatRuleID2\", jsonData.categoryRules[1].categoryRuleID);\r",
+                              "pm.globals.set(\"variable_key\", \"variable_value\");"
+                            ],
+                            "type": "text/javascript"
+                          }
+                        }
+                      ],
+                      "_postman_id": "fd49aa0c-cfb8-47cf-a9bd-614785c9bcf6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": {
+                            "accessToken": "{{OAuth_Token}}",
+                            "tokenType": "Bearer",
+                            "addTokenTo": "header"
+                          }
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json,v1.0.0"
+                          },
+                          {
+                            "key": "Correlation-Id",
+                            "type": "text",
+                            "value": "{{$guid}}"
+                          },
+                          {
+                            "key": "Username",
+                            "type": "text",
+                            "value": "Test-User"
+                          },
+                          {
+                            "key": "Origin",
+                            "type": "text",
+                            "value": "Postman"
+                          },
+                          {
+                            "key": "Ocp-Apim-Subscription-Key-South",
+                            "type": "text",
+                            "value": "{{Ocp-Apim-Subscription-Key-South}}"
+                          },
+                          {
+                            "key": "Ocp-Apim-Subscription-Key-West",
+                            "type": "text",
+                            "value": "{{Ocp-Apim-Subscription-Key-West}}"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n    \"name\": \"{{Cat_Nm}}\",\n    \"description\": \"{{Cat_Desc}}\",\n    \"materialLogo\": \"{{CAT_Mat_logo}}\",\n    \"isInbound\": {{IsInbound}},\n    \"sourceID\": \"{{SourceID}}\",\n    \"rules\": [\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"{{Rule_Desc}}\",\n            \"actionCode\": \"{{Rule_AC}}\",\n            \"resultCode\": \"{{Rule_RC}}\"\n        },\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"{{Rule_Desc1}}\",\n            \"actionCode\": \"{{Rule_AC1}}\",\n            \"resultCode\": \"{{Rule_RC1}}\"\n        }\n    ],\n    \"paymentRules\": [\n    {\n      \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n      \"description\": \"{{PaymentRuleStatusCode}}\",\n      \"statusValueText\": \"{{PaymentRuleStatusCode}}\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {}
+                          }
+                        },
+                        "url": "{{baseUrl}}/interaction/category",
+                        "description": "Create interaction category"
+                      },
+                      "response": [
+                        {
+                          "id": "0c6d9695-af1f-41b4-b4dd-52759070ffc7",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                            },
+                            "url": "{{baseUrl}}/category"
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<object>"
+                        },
+                        {
+                          "id": "141e9911-1ffe-4036-9309-5e3cda416b5b",
+                          "name": "Server Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                            },
+                            "url": "{{baseUrl}}/category"
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<object>"
+                        },
+                        {
+                          "id": "175581e8-4635-4817-b83b-56de721babca",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                            },
+                            "url": "{{baseUrl}}/category"
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": ""
+                        },
+                        {
+                          "id": "34eefd3f-1748-4e8d-9855-bd27257db93b",
+                          "name": "Server Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                            },
+                            "url": "{{baseUrl}}/category"
+                          },
+                          "status": "Service Unavailable",
+                          "code": 503,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<object>"
+                        },
+                        {
+                          "id": "74c97e63-61db-41ce-b60a-1e2728115a37",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                            },
+                            "url": "{{baseUrl}}/category"
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>"
+                        },
+                        {
+                          "id": "b2ba67c1-01a1-4e91-9e3a-c57b90731b6e",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
+                            },
+                            "url": "{{baseUrl}}/category"
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json,v1.0.0"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<object>"
+                        }
+                      ]
+                    },
+                    {
                       "name": "/category/:categoryId",
                       "event": [
                         {
@@ -55613,312 +55919,6 @@
                           "cookie": [],
                           "responseTime": null,
                           "body": "<string>"
-                        }
-                      ]
-                    },
-                    {
-                      "name": "/category Copy",
-                      "event": [
-                        {
-                          "listen": "prerequest",
-                          "script": {
-                            "id": "81d27641-8b3a-4228-8b46-cd56b2887f99",
-                            "exec": [
-                              "    var tokenDate = new Date(2010,1,1);\r",
-                              "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
-                              "    if(tokenTimestamp){\r",
-                              "        tokenDate = Date.parse(tokenTimestamp);\r",
-                              "    }else{\r",
-                              "        tokenDate = Date.parse(\"2018-03-29T13:34:00.000\");\r",
-                              "    }\r",
-                              "    console.log(\"timestamp is: \"+tokenDate +\" new time is: \"+Date.parse(new Date()));\r",
-                              "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
-                              "    if(!expiresInTime){\r",
-                              "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
-                              "    }\r",
-                              "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
-                              "    if((new Date() - tokenDate) >= expiresInTime) {\r",
-                              "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
-                              "    let clientId = pm.environment.get(\"clientId\");\r",
-                              "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
-                              "    let scope = pm.environment.get(\"clientScope\");\r",
-                              "\r",
-                              "        let getTokenRequest = {\r",
-                              "            method: 'POST',\r",
-                              "            url: tokenUrl,\r",
-                              "            auth: {\r",
-                              "                type: \"basic\",\r",
-                              "                basic: [\r",
-                              "                    { key: \"username\", value: clientId },\r",
-                              "                    { key: \"password\", value: clientSecret }\r",
-                              "                ]\r",
-                              "            },\r",
-                              "            body: {\r",
-                              "                mode: 'formdata',\r",
-                              "                formdata: [\r",
-                              "                    { key: 'grant_type', value: 'client_credentials' },\r",
-                              "                    { key: 'scope', value: scope }\r",
-                              "                ]\r",
-                              "            }\r",
-                              "        };\r",
-                              "\r",
-                              "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
-                              "            let jsonResponse = response.json(),\r",
-                              "            newAccessToken = jsonResponse.access_token;\r",
-                              "            //console.log({ err, jsonResponse, newAccessToken });\r",
-                              "\r",
-                              "            pm.environment.set('OAuth_Token', newAccessToken);\r",
-                              "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
-                              "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
-                              "        });\r",
-                              "\r",
-                              "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
-                              "    }\r",
-                              "//console.log(\"End of Pre-req script\");\r",
-                              "\r",
-                              "\r",
-                              "\r",
-                              ""
-                            ],
-                            "type": "text/javascript"
-                          }
-                        },
-                        {
-                          "listen": "test",
-                          "script": {
-                            "id": "408afb59-8063-4575-b2b4-a155eb3de347",
-                            "exec": [
-                              "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
-                              "    pm.expect(pm.response.code).to.be.oneOf([200,204,202,400]);\r",
-                              "});\r",
-                              "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
-                              "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
-                              "});\r",
-                              "pm.test(\"TEST3: Response Header Checks\", function() {\r",
-                              "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
-                              "});\r",
-                              "var jsonData = JSON.parse(responseBody);\r",
-                              "pm.test(\"TEST4: Response values check\", function () {\r",
-                              "    pm.expect(jsonData.name).to.deep.equal(req_body.name);\r",
-                              "    pm.expect(jsonData.categoryID).is.not.oneOf([null, undefined]);\r",
-                              "    pm.expect(jsonData.description).to.deep.equal(req_body.description);\r",
-                              "    pm.expect(jsonData.materialLogo).to.deep.equal(req_body.materialLogo);\r",
-                              "    pm.expect(jsonData.isInbound).to.deep.equal(req_body.isInbound);\r",
-                              "});\r",
-                              "pm.globals.set(\"CatID\", jsonData.categoryID);\r",
-                              "pm.globals.set(\"CatRuleID1\", jsonData.categoryRules[0].categoryRuleID);\r",
-                              "pm.globals.set(\"CatRuleID2\", jsonData.categoryRules[1].categoryRuleID);\r",
-                              "pm.globals.set(\"variable_key\", \"variable_value\");"
-                            ],
-                            "type": "text/javascript"
-                          }
-                        }
-                      ],
-                      "_postman_id": "fd49aa0c-cfb8-47cf-a9bd-614785c9bcf6",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "auth": {
-                          "type": "oauth2",
-                          "oauth2": {
-                            "accessToken": "{{OAuth_Token}}",
-                            "tokenType": "Bearer",
-                            "addTokenTo": "header"
-                          }
-                        },
-                        "method": "POST",
-                        "header": [
-                          {
-                            "key": "Content-Type",
-                            "value": "application/json,v1.0.0"
-                          },
-                          {
-                            "key": "Correlation-Id",
-                            "type": "text",
-                            "value": "{{$guid}}"
-                          },
-                          {
-                            "key": "Username",
-                            "type": "text",
-                            "value": "Test-User"
-                          },
-                          {
-                            "key": "Origin",
-                            "type": "text",
-                            "value": "Postman"
-                          },
-                          {
-                            "key": "Ocp-Apim-Subscription-Key-South",
-                            "type": "text",
-                            "value": "{{Ocp-Apim-Subscription-Key-South}}"
-                          },
-                          {
-                            "key": "Ocp-Apim-Subscription-Key-West",
-                            "type": "text",
-                            "value": "{{Ocp-Apim-Subscription-Key-West}}"
-                          }
-                        ],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\n    \"name\": \"{{Cat_Nm}}\",\n    \"description\": \"{{Cat_Desc}}\",\n    \"materialLogo\": \"{{CAT_Mat_logo}}\",\n    \"isInbound\": {{IsInbound}},\n    \"sourceID\": \"{{SourceID}}\",\n    \"rules\": [\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"{{Rule_Desc}}\",\n            \"actionCode\": \"{{Rule_AC}}\",\n            \"resultCode\": \"{{Rule_RC}}\"\n        },\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"{{Rule_Desc1}}\",\n            \"actionCode\": \"{{Rule_AC1}}\",\n            \"resultCode\": \"{{Rule_RC1}}\"\n        }\n    ],\n    \"paymentRules\": [\n    {\n      \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n      \"description\": \"{{PaymentRuleStatusCode}}\",\n      \"statusValueText\": \"{{PaymentRuleStatusCode}}\"\n    }\n  ]\n}",
-                          "options": {
-                            "raw": {}
-                          }
-                        },
-                        "url": "{{baseUrl}}/interaction/category",
-                        "description": "Create interaction category"
-                      },
-                      "response": [
-                        {
-                          "id": "0c6d9695-af1f-41b4-b4dd-52759070ffc7",
-                          "name": "Unauthorized",
-                          "originalRequest": {
-                            "method": "POST",
-                            "header": [],
-                            "body": {
-                              "mode": "raw",
-                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
-                            },
-                            "url": "{{baseUrl}}/category"
-                          },
-                          "status": "Unauthorized",
-                          "code": 401,
-                          "_postman_previewlanguage": "text",
-                          "header": [
-                            {
-                              "key": "Content-Type",
-                              "value": "application/json,v1.0.0"
-                            }
-                          ],
-                          "cookie": [],
-                          "responseTime": null,
-                          "body": "<object>"
-                        },
-                        {
-                          "id": "141e9911-1ffe-4036-9309-5e3cda416b5b",
-                          "name": "Server Error",
-                          "originalRequest": {
-                            "method": "POST",
-                            "header": [],
-                            "body": {
-                              "mode": "raw",
-                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
-                            },
-                            "url": "{{baseUrl}}/category"
-                          },
-                          "status": "Internal Server Error",
-                          "code": 500,
-                          "_postman_previewlanguage": "text",
-                          "header": [
-                            {
-                              "key": "Content-Type",
-                              "value": "application/json,v1.0.0"
-                            }
-                          ],
-                          "cookie": [],
-                          "responseTime": null,
-                          "body": "<object>"
-                        },
-                        {
-                          "id": "175581e8-4635-4817-b83b-56de721babca",
-                          "name": "Success",
-                          "originalRequest": {
-                            "method": "POST",
-                            "header": [],
-                            "body": {
-                              "mode": "raw",
-                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
-                            },
-                            "url": "{{baseUrl}}/category"
-                          },
-                          "status": "OK",
-                          "code": 200,
-                          "_postman_previewlanguage": "text",
-                          "header": [
-                            {
-                              "key": "Content-Type",
-                              "value": "application/json,v1.0.0"
-                            }
-                          ],
-                          "cookie": [],
-                          "responseTime": null,
-                          "body": ""
-                        },
-                        {
-                          "id": "34eefd3f-1748-4e8d-9855-bd27257db93b",
-                          "name": "Server Error",
-                          "originalRequest": {
-                            "method": "POST",
-                            "header": [],
-                            "body": {
-                              "mode": "raw",
-                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
-                            },
-                            "url": "{{baseUrl}}/category"
-                          },
-                          "status": "Service Unavailable",
-                          "code": 503,
-                          "_postman_previewlanguage": "text",
-                          "header": [
-                            {
-                              "key": "Content-Type",
-                              "value": "application/json,v1.0.0"
-                            }
-                          ],
-                          "cookie": [],
-                          "responseTime": null,
-                          "body": "<object>"
-                        },
-                        {
-                          "id": "74c97e63-61db-41ce-b60a-1e2728115a37",
-                          "name": "Bad Request",
-                          "originalRequest": {
-                            "method": "POST",
-                            "header": [],
-                            "body": {
-                              "mode": "raw",
-                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
-                            },
-                            "url": "{{baseUrl}}/category"
-                          },
-                          "status": "Bad Request",
-                          "code": 400,
-                          "_postman_previewlanguage": "text",
-                          "header": [
-                            {
-                              "key": "Content-Type",
-                              "value": "application/json,v1.0.0"
-                            }
-                          ],
-                          "cookie": [],
-                          "responseTime": null,
-                          "body": "<string>"
-                        },
-                        {
-                          "id": "b2ba67c1-01a1-4e91-9e3a-c57b90731b6e",
-                          "name": "Forbidden",
-                          "originalRequest": {
-                            "method": "POST",
-                            "header": [],
-                            "body": {
-                              "mode": "raw",
-                              "raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"materialLogo\": \"<string>\",\n    \"isInbound\": \"<boolean>\",\n    \"sourceID\": \"<uuid>\",\n    \"rules\": [\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        },\n        {\n            \"categoryID\": \"<uuid>\",\n            \"description\": \"<string>\",\n            \"actionCode\": \"<integer>\",\n            \"resultCode\": \"<integer>\"\n        }\n    ]\n}"
-                            },
-                            "url": "{{baseUrl}}/category"
-                          },
-                          "status": "Forbidden",
-                          "code": 403,
-                          "_postman_previewlanguage": "text",
-                          "header": [
-                            {
-                              "key": "Content-Type",
-                              "value": "application/json,v1.0.0"
-                            }
-                          ],
-                          "cookie": [],
-                          "responseTime": null,
-                          "body": "<object>"
                         }
                       ]
                     }
