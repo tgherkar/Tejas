@@ -58134,7 +58134,7 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"categorySourceID\": \"25718269-b364-4cd2-bdc6-758078ea328e\"\n}",
+                          "raw": "{\n    \"categorySourceID\": \"{{SourceID}}\"\n}",
                           "options": {
                             "raw": {}
                           }
@@ -58153,7 +58153,7 @@
                           "variable": [
                             {
                               "key": "categorySourceId",
-                              "value": "C28DAA2E-55D5-40FB-9B7D-DFC236A9EB93",
+                              "value": "ED97FFBD-2127-4088-A1DC-3EB29F3C590F",
                               "type": "string",
                               "description": "(Required) "
                             }
