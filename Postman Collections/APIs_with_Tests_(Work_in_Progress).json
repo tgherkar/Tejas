@@ -54488,7 +54488,7 @@
                           "variable": [
                             {
                               "key": "categoryId",
-                              "value": "6c017bbd-751c-4bac-8a7a-08d83f922288",
+                              "value": "{{CatID}}",
                               "type": "string",
                               "description": "(Required) "
                             },
