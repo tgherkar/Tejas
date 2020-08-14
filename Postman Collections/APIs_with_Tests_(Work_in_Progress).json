@@ -57405,10 +57405,11 @@
                           "script": {
                             "id": "5b19e23f-fa7b-476a-b9e3-1aec7ff33ec0",
                             "exec": [
+                              "try{\r",
                               "var req_body=request.data;\r",
                               "var jsonData = JSON.parse(responseBody);\r",
                               "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
-                              "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
+                              "    pm.expect(pm.response.code).to.be.oneOf([204,202]);\r",
                               "});\r",
                               "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
                               "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
@@ -57420,7 +57421,18 @@
                               "pm.test(\"TEST4: Response values check\", function () {\r",
                               "    pm.expect(jsonData.name).to.deep.equal(req_body.name);\r",
                               "    pm.expect(jsonData.categorySourceID).is.not.oneOf([null, undefined]);\r",
-                              "});"
+                              "});\r",
+                              "}catch(e){\r",
+                              "    pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                              "        pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+                              "    });\r",
+                              "    pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                              "        pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                              "    });\r",
+                              "    pm.test(\"TEST3: ResponseBody Check\", function () {\r",
+                              "        pm.expect(responseBody).to.deep.equal(\"Category with name '\"+req_body.name+\"' already exists\");\r",
+                              "    });\r",
+                              "}"
                             ],
                             "type": "text/javascript"
                           }
