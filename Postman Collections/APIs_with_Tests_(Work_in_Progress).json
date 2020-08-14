@@ -56004,7 +56004,7 @@
                       ]
                     },
                     {
-                      "name": "/category Copy",
+                      "name": "/category(Payment_Rules)",
                       "event": [
                         {
                           "listen": "prerequest",
