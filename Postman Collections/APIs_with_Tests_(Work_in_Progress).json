@@ -49327,12 +49327,12 @@
                   "            if (jsonData[0].suggestedConsumers != null) {\r",
                   "                pm.expect(JSON.stringify(jsonData[0].suggestedConsumers.suggestedLinkID).toUpperCase()).to.equal(data.suggestedLinkID.toUpperCase());\r",
                   "                pm.expect(JSON.stringify(jsonData[0].suggestedConsumers.consumerID).toUpperCase()).to.equal(data.consumerID.toUpperCase());\r",
-                  "                pm.expect(JSON.stringify(jsonData[0].consumerAddress.addressLine3).toUpperCase()).to.equal(data.AddressLine3.toUpperCase());\r",
-                  "                pm.expect(JSON.stringify(jsonData[0].consumerAddress.city).toUpperCase()).to.equal(data.City.toUpperCase());\r",
-                  "                pm.expect(JSON.stringify(jsonData[0].consumerAddress.state).toUpperCase()).to.equal(data.State.toUpperCase());\r",
-                  "                pm.expect(JSON.stringify(jsonData[0].consumerAddress.county).toUpperCase()).to.equal(data.County.toUpperCase());\r",
-                  "                pm.expect(JSON.stringify(jsonData[0].consumerAddress.postCode).toUpperCase()).to.equal(data.PostCode.toUpperCase());\r",
-                  "                pm.expect(JSON.stringify(jsonData[0].consumerAddress.country).toUpperCase()).to.equal(data.Country.toUpperCase());\r",
+                  "                pm.expect(JSON.stringify(jsonData[0].suggestedConsumers.legacyID).toUpperCase()).to.equal(data.legacyID.toUpperCase());\r",
+                  "                pm.expect(JSON.stringify(jsonData[0].suggestedConsumers.title).toUpperCase()).to.equal(data.title.toUpperCase());\r",
+                  "                pm.expect(JSON.stringify(jsonData[0].suggestedConsumers.firstName).toUpperCase()).to.equal(data.firstName.toUpperCase());\r",
+                  "                pm.expect(JSON.stringify(jsonData[0].suggestedConsumers.lastName).toUpperCase()).to.equal(data.lastName.toUpperCase());\r",
+                  "                pm.expect(JSON.stringify(jsonData[0].suggestedConsumers.postCode).toUpperCase()).to.equal(data.PostCode.toUpperCase());\r",
+                  "                pm.expect(JSON.stringify(jsonData[0].suggestedConsumers.email).toUpperCase()).to.equal(data.email.toUpperCase());\r",
                   "            }\r",
                   "        });\r",
                   "}\r",
@@ -53657,7 +53657,7 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"name\": \"{{Cat_Nm}}\",\n    \"description\": \"{{Cat_Desc}}\",\n    \"materialLogo\": \"{{CAT_Mat_logo}}\",\n    \"isInbound\": {{IsInbound}},\n    \"sourceID\": \"{{SourceID}}\",\n    \"rules\": [\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"-Test_Desc-\",\n            \"actionCode\": \"-Test_AC-\",\n            \"resultCode\": \"-Test_RC-\"\n        },\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"-Test_Desc-\",\n            \"actionCode\": \"-Test_AC-\",\n            \"resultCode\": \"-Test_RC-\"\n        }\n    ]\n}",
+                          "raw": "{\n    \"name\": \"{{Cat_Nm}}\",\n    \"description\": \"{{Cat_Desc}}\",\n    \"materialLogo\": \"{{CAT_Mat_logo}}\",\n    \"isInbound\": {{IsInbound}},\n    \"sourceID\": \"{{SourceID}}\",\n    \"rules\": [\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"{{Rule_Desc}}\",\n            \"actionCode\": \"{{Rule_AC}}\",\n            \"resultCode\": \"{{Rule_RC}}\"\n        },\n        {\n            \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n            \"description\": \"{{Rule_Desc1}}\",\n            \"actionCode\": \"{{Rule_AC1}}\",\n            \"resultCode\": \"{{Rule_RC1}}\"\n        }\n    ],\n    \"paymentRules\": [\n    {\n      \"categoryID\": \"03D96B03-CC47-4E77-8052-06AD96EBE733\",\n      \"description\": \"{{PayRule_Desc}}\",\n      \"statusValueText\": \"string\"\n    }\n  ]\n}",
                           "options": {
                             "raw": {}
                           }
