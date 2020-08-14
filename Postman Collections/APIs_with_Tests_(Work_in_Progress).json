@@ -58486,7 +58486,16 @@
                       "    }\r",
                       "}\r",
                       "//console.log(\"End of Pre-req script\");\r",
-                      ""
+                      "pm.globals.set(\"keyLinkID\", \"8791292A-DA4D-4F33-9FE6-3967C439EFFE\");\r",
+                      "//pm.globals.set(\"keyLinkDsplnm\", \"API_TEST_KL_Nm\");\r",
+                      "pm.globals.set(\"keyLinklnk\", \"www.google.com\");\r",
+                      "/*pm.globals.set(\"keyLinkDscrptn\", \"API_TEST_KL_Desc\");\r",
+                      "pm.globals.set(\"keyLinkLogo\", \"API_TEST_KL_Logo\");\r",
+                      "pm.globals.set(\"keyLinkDsplyOrdr\", 102);\r",
+                      "pm.globals.set(\"keyLinkADAccssNm\", \"API_TEST_KL_ADANm\");\r",
+                      "pm.globals.set(\"keyLinkIsActive\", 1);\r",
+                      "pm.globals.set(\"keyLinkParentID\", \"665AED12-3A59-4D62-AC5C-9195C9ECB0C8\");\r",
+                      "pm.globals.set(\"keyLinkChildkeyLink\", \"NULL\");*/"
                     ],
                     "type": "text/javascript"
                   }
