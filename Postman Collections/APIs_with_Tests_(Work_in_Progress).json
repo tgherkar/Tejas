@@ -53602,7 +53602,8 @@
                               "    pm.expect(jsonData.isInbound).to.deep.equal(req_body.isInbound);\r",
                               "});\r",
                               "pm.globals.set(\"CatID\", jsonData.categoryID);\r",
-                              "pm.globals.set(\"variable_key\", \"variable_value\");\r",
+                              "pm.globals.set(\"CatRuleID1\", jsonData.categoryRules[0].categoryRuleID);\r",
+                              "pm.globals.set(\"CatRuleID2\", jsonData.categoryRules[1].categoryRuleID);\r",
                               "pm.globals.set(\"variable_key\", \"variable_value\");"
                             ],
                             "type": "text/javascript"
