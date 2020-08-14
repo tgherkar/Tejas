@@ -55740,7 +55740,7 @@
                         ],
                         "body": {
                           "mode": "raw",
-                          "raw": "{\n    \"categoryID\": \"761d8e81-7154-4b4a-b889-350818179aa5\",\n    \"name\": \"{{Cat_Nm1}}\",\n    \"description\": \"{{Cat_Desc1}}\",\n    \"materialLogo\": \"{{CAT_Mat_logo1}}\",\n    \"sourceID\": \"{{SourceID}}\"\n}",
+                          "raw": "{\n    \"categoryID\": \"{{CatID_Pm}}}}\",\n    \"name\": \"{{Cat_Nm1}}\",\n    \"description\": \"{{Cat_Desc1}}\",\n    \"materialLogo\": \"{{CAT_Mat_logo1}}\",\n    \"sourceID\": \"{{SourceID}}\"\n}",
                           "options": {
                             "raw": {}
                           }
@@ -55757,9 +55757,8 @@
                           ],
                           "variable": [
                             {
-                              "id": "031e6142-6bb1-4910-9323-374d4073d49d",
                               "key": "categoryId",
-                              "value": "761d8e81-7154-4b4a-b889-350818179aa5",
+                              "value": "{{CatID_Pm}}",
                               "type": "string",
                               "description": "(Required) "
                             }
