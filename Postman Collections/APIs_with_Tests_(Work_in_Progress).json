@@ -58485,17 +58485,7 @@
                       "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                       "    }\r",
                       "}\r",
-                      "//console.log(\"End of Pre-req script\");\r",
-                      "pm.globals.set(\"keyLinkID\", \"8791292A-DA4D-4F33-9FE6-3967C439EFFE\");\r",
-                      "//pm.globals.set(\"keyLinkDsplnm\", \"API_TEST_KL_Nm\");\r",
-                      "pm.globals.set(\"keyLinklnk\", \"www.google.com\");\r",
-                      "/*pm.globals.set(\"keyLinkDscrptn\", \"API_TEST_KL_Desc\");\r",
-                      "pm.globals.set(\"keyLinkLogo\", \"API_TEST_KL_Logo\");\r",
-                      "pm.globals.set(\"keyLinkDsplyOrdr\", 102);\r",
-                      "pm.globals.set(\"keyLinkADAccssNm\", \"API_TEST_KL_ADANm\");\r",
-                      "pm.globals.set(\"keyLinkIsActive\", 1);\r",
-                      "pm.globals.set(\"keyLinkParentID\", \"665AED12-3A59-4D62-AC5C-9195C9ECB0C8\");\r",
-                      "pm.globals.set(\"keyLinkChildkeyLink\", \"NULL\");*/"
+                      "//console.log(\"End of Pre-req script\");"
                     ],
                     "type": "text/javascript"
                   }
@@ -58547,7 +58537,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"keyLinkID\": \"{{keyLinkID}}\",\r\n    \"displayName\": \"{{keyLinkDsplnm}}\",\r\n    \"link\": \"{{keyLinklnk}}\",\r\n    \"description\": \"{{keyLinkDscrptn}}\",\r\n    \"materialLogo\": \"{{keyLinkLogo}}\",\r\n    \"displayOrder\": {{keyLinkDsplyOrdr}},\r\n    \"activeDirectoryAccessName\": \"{{keyLinkADAccssNm}}\",\r\n    \"isActive\": {{keyLinkIsActive}},\r\n    \"parentKeyLinkID\": \"{{keyLinkParentID}}\",\r\n    \"childKeyLinks\": \"{{keyLinkChildkeyLink}}\"\r\n}",
+                  "raw": "{\r\n    \"keyLinkID\": \"8791292A-DA4D-4F33-9FE6-3967C439EFFE\",\r\n    \"displayName\": \"{{keyLinkDsplnm}}\",\r\n    \"link\": \"{{keyLinklnk}}\",\r\n    \"description\": \"{{keyLinkDscrptn}}\",\r\n    \"materialLogo\": \"{{keyLinkLogo}}\",\r\n    \"displayOrder\": {{keyLinkDsplyOrdr}},\r\n    \"activeDirectoryAccessName\": null,\r\n    \"isActive\": true,\r\n    \"parentKeyLinkID\": null,\r\n    \"childKeyLinks\": [{{keyLinkChildkeyLink}}],\r\n    \"Correlation-Id\": \"{{$guid}}\",\r\n    \"Cache-Control\": \"no-cache\"\r\n}",
                   "options": {
                     "raw": {}
                   }
