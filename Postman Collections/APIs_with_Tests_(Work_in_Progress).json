@@ -58153,7 +58153,7 @@
                           "variable": [
                             {
                               "key": "categorySourceId",
-                              "value": "{{SourceID}}",
+                              "value": "4377636C-5B59-4B35-B675-B305B8C9C2D6",
                               "type": "string",
                               "description": "(Required) "
                             }
