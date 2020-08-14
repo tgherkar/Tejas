@@ -49933,7 +49933,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"fromConsumerID\": \"1583195\",\r\n  \"toConsumerID\": \"1583204\"\r\n}",
+              "raw": "{\r\n  \"fromConsumerID\": \"{{cnsmr_id_from}}\",\r\n  \"toConsumerID\": \"{{cnsmr_id_to}}\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
