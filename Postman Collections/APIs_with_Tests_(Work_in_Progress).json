@@ -55283,6 +55283,7 @@
                               "    pm.expect(jsonData.description).to.deep.equal(req_body.description);\r",
                               "    pm.expect(jsonData.materialLogo).to.deep.equal(req_body.materialLogo);\r",
                               "    pm.expect(jsonData.isInbound).to.deep.equal(req_body.isInbound);\r",
+                              "    pm.expect(jsonData.source.categorySourceID).to.deep.equal(req_body.sourceID);\r",
                               "});\r",
                               "pm.globals.set(\"CatID_Pm\", jsonData.categoryID);\r",
                               "//pm.globals.set(\"variable_key\", \"variable_value\");\r",
