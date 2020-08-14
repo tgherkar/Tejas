@@ -53890,6 +53890,8 @@
                           "script": {
                             "id": "408afb59-8063-4575-b2b4-a155eb3de347",
                             "exec": [
+                              "var req_body = JSON.parse(request.data);\r",
+                              "try{\r",
                               "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
                               "    pm.expect(pm.response.code).to.be.oneOf([200,204,202,400]);\r",
                               "});\r",
@@ -53900,7 +53902,6 @@
                               "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
                               "});\r",
                               "var jsonData = JSON.parse(responseBody);\r",
-                              "var req_body = JSON.parse(request.data);\r",
                               "pm.test(\"TEST4: Response values check\", function () {\r",
                               "    pm.expect(jsonData.name).to.deep.equal(req_body.name);\r",
                               "    pm.expect(jsonData.categoryID).is.not.oneOf([null, undefined]);\r",
@@ -53909,7 +53910,19 @@
                               "    pm.expect(jsonData.isInbound).to.deep.equal(req_body.isInbound);\r",
                               "});\r",
                               "pm.globals.set(\"CatID_Pm\", jsonData.categoryID);\r",
-                              "//pm.globals.set(\"variable_key\", \"variable_value\");"
+                              "//pm.globals.set(\"variable_key\", \"variable_value\");\r",
+                              "}catch(e){\r",
+                              "    pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                              "        pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+                              "    });\r",
+                              "    pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                              "        pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                              "    });\r",
+                              "    pm.test(\"TEST3: ResponseBody Check\", function () {\r",
+                              "        pm.expect(responseBody).to.deep.equal(\"Category with name '\"+req_body.name+\"' already exists\");\r",
+                              "    });\r",
+                              "\r",
+                              "}"
                             ],
                             "type": "text/javascript"
                           }
