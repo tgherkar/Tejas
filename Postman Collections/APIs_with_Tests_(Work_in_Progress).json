@@ -53584,6 +53584,7 @@
                           "script": {
                             "id": "61cd2025-a887-465f-81f6-d83833789902",
                             "exec": [
+                              "var req_body = JSON.parse(request.data);\r",
                               "try{\r",
                               "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
                               "    pm.expect(pm.response.code).to.be.oneOf([200,204,202,400]);\r",
