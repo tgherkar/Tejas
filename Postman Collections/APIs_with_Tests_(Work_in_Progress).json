@@ -49871,8 +49871,8 @@
               "script": {
                 "id": "25546619-7276-4931-926e-b410b8a1c663",
                 "exec": [
-                  "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
-                  "    pm.expect(pm.response.code).to.be[202];\r",
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(202);\r",
                   "});\r",
                   "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
                   "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
