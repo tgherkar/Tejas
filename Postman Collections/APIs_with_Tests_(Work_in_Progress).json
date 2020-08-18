@@ -46640,12 +46640,9 @@
               }
             ],
             "url": {
-              "raw": "https://cabotapi-test.cabotcm.com/sfs/consumer/:id/residentialstatus",
-              "protocol": "https",
+              "raw": "{{BaseURL}}/sfs/consumer/:id/residentialstatus",
               "host": [
-                "cabotapi-test",
-                "cabotcm",
-                "com"
+                "{{BaseURL}}"
               ],
               "path": [
                 "sfs",
@@ -46656,7 +46653,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "{{cnsmrlc_id}}",
+                  "value": "{{cnsmr_id}}",
                   "type": "string"
                 }
               ]
