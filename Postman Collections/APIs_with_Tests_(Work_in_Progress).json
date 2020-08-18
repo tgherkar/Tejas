@@ -41689,8 +41689,7 @@
                       "    pm.test(\"Neg Test 03: Check consumerID isn't empty\", function () {",
                       "        pm.expect('consumerID').to.not.be.empty;",
                       "    });",
-                      "}",
-                      "   }"
+                      "}};"
                     ],
                     "type": "text/javascript"
                   }
