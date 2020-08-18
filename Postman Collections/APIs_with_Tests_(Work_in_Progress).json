@@ -49308,7 +49308,7 @@
                   "}\r",
                   "\r",
                   "if (data.cnsmr_id_from!=null){\r",
-                  "    pm.test(\"TEST1A: Document Template Version ID check\", function() {\r",
+                  "    pm.test(\"TEST1A: ConsumerID check\", function() {\r",
                   "        pm.expect(jsonData[0].sourceConsumerID).to.equal(data.cnsmr_id_from);\r",
                   "    });\r",
                   "   pm.test(\"TEST1B: Suggestion Details check\", function () {\r",
