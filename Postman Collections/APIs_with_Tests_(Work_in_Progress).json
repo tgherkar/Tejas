@@ -49413,14 +49413,14 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/linkedconsumer/consumer/{{cnsmr_id_from}}/suggestions",
+              "raw": "{{baseUrl}}/linkedconsumer/consumer/:cnsmr_id/suggestions",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "linkedconsumer",
                 "consumer",
-                "{{cnsmr_id_from}}",
+                ":cnsmr_id",
                 "suggestions"
               ],
               "query": [
@@ -49428,6 +49428,13 @@
                   "key": "",
                   "value": null,
                   "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "cnsmr_id",
+                  "value": "{{cnsmr_id_from}}",
+                  "type": "string"
                 }
               ]
             }
