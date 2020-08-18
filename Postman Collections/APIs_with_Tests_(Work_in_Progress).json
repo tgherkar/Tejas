@@ -49309,7 +49309,7 @@
                   "\r",
                   "if (data.cnsmr_id_from!=null){\r",
                   "    pm.test(\"TEST1A: Document Template Version ID check\", function() {\r",
-                  "        pm.expect(jsonData[0].sourceConsumerID).to.equal(data.cnsmr_id);\r",
+                  "        pm.expect(jsonData[0].sourceConsumerID).to.equal(data.cnsmr_id_from);\r",
                   "    });\r",
                   "   pm.test(\"TEST1B: consumer address check\", function () {\r",
                   "            if (jsonData[0].suggestedConsumers != null) {\r",
