@@ -46832,7 +46832,7 @@
                   "\r",
                   "/*\r",
                   "\r",
-                  "\r",
+                  "SET NOCOUNT ON\r",
                   "SELECT DISTINCT TOP (10) OriginalConsumerID AS 'cnsmr_id'\r",
                   ",Cd.ResidenceStatusCode AS 'residence_status_code'\r",
                   ",Cd.EmploymentStatusCode AS 'employment_status_code'\r",
@@ -46912,18 +46912,10 @@
                 ":id",
                 "employmentstatus"
               ],
-              "query": [
-                {
-                  "key": "cnsmrlc_id",
-                  "value": "{{cnsmrlc_id}}",
-                  "type": "text",
-                  "disabled": true
-                }
-              ],
               "variable": [
                 {
                   "key": "id",
-                  "value": "{{cnsmrlc_id}}",
+                  "value": "{{cnsmr_id}}",
                   "type": "string"
                 }
               ]
