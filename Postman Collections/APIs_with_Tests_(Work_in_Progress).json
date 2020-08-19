@@ -47013,7 +47013,24 @@
                   "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                   "    }\r",
                   "}\r",
-                  "//console.log(\"End of Pre-req script\");"
+                  "//console.log(\"End of Pre-req script\");\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "/*\r",
+                  "SET NOCOUNT ON\r",
+                  "SELECT DISTINCT TOP (10) SFS.SFSID AS 'sfs_id'\r",
+                  ", OriginalConsumerID AS 'cnsmr_id'\r",
+                  ", SFSStatusCode AS 'status_code'\r",
+                  ", E.LastModifiedDateTime AS 'last_modified_date_time'\r",
+                  ", E.LastModifiedByUser AS 'last_modified_by_user'\r",
+                  "  FROM [dbo].[SFS]\r",
+                  "  FULL JOIN dbo.SFSExpenditure E ON E.SFSID = SFS.SFSID\r",
+                  "  FULL JOIN dbo.SFSIncome I ON I.SFSID = SFS.SFSID\r",
+                  "  WHERE SFSStatusCode = '2' ORDER BY E.LastModifiedDateTime DESC\r",
+                  "\r",
+                  "  */"
                 ],
                 "type": "text/javascript"
               }
@@ -47203,7 +47220,7 @@
                 "type": "text"
               }
             ],
-            "url": "{{BaseURL}}/SFS/Consumer/4058738/LatestCompleted/Summary"
+            "url": "{{BaseURL}}/SFS/Consumer/{{cnsmr_id}}/LatestCompleted/Summary"
           },
           "response": []
         }
