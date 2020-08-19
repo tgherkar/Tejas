@@ -30697,7 +30697,24 @@
                 "value": "Mike"
               }
             ],
-            "url": "{{BaseURL}}/udp/fullreferencevalues/70",
+            "url": {
+              "raw": "{{BaseURL}}/udp/fullreferencevalues/:fullrefvalue",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "udp",
+                "fullreferencevalues",
+                ":fullrefvalue"
+              ],
+              "variable": [
+                {
+                  "key": "fullrefvalue",
+                  "value": "{{fullrefvalue}}",
+                  "type": "string"
+                }
+              ]
+            },
             "description": "Get list of UDP Reference Values"
           },
           "response": [
