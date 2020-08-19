@@ -29778,21 +29778,20 @@
               }
             ],
             "url": {
-              "raw": "{{BaseURL}}/udp/values/21",
+              "raw": "{{BaseURL}}/udp/values/:UdpValue",
               "host": [
                 "{{BaseURL}}"
               ],
               "path": [
                 "udp",
                 "values",
-                "21"
+                ":UdpValue"
               ],
-              "query": [
+              "variable": [
                 {
-                  "key": "",
-                  "value": "",
-                  "type": "text",
-                  "disabled": true
+                  "key": "UdpValue",
+                  "value": "{{udp_value}}",
+                  "type": "string"
                 }
               ]
             },
