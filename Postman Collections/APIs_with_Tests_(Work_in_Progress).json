@@ -47170,7 +47170,7 @@
                 "type": "text"
               }
             ],
-            "url": "https://cabotapi-dev.cabotcm.com/SFS/Consumer/4058738/LatestCompleted/Summary"
+            "url": "{{BaseURL}}/SFS/Consumer/4058738/LatestCompleted/Summary"
           },
           "response": []
         }
