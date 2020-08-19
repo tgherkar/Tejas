@@ -30216,7 +30216,24 @@
                 "type": "text"
               }
             ],
-            "url": "{{BaseURL}}/udp/referencevalues/70",
+            "url": {
+              "raw": "{{BaseURL}}/udp/referencevalues/:referencevalue",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "udp",
+                "referencevalues",
+                ":referencevalue"
+              ],
+              "variable": [
+                {
+                  "key": "referencevalue",
+                  "value": "{{referencevalue}}",
+                  "type": "string"
+                }
+              ]
+            },
             "description": "Get list of UDP Reference Values"
           },
           "response": [
