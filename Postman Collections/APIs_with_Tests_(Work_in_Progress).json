@@ -66207,7 +66207,7 @@
                 "type": "text"
               }
             ],
-            "url": "{{BaseURL}}/DirectDebit/Validate/BankAccount/{sortcode}/{accountnumber}"
+            "url": "{{BaseURL}}/Test/DirectDebit/Validate/BankAccount/{sortcode}/{accountnumber}"
           },
           "response": []
         }
