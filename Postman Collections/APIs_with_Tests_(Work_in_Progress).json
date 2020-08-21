@@ -47138,7 +47138,7 @@
                   "        pm.expect(jsonData[0].disposableIncome).to.equal(JSON.stringify(data.disposableIncome));\r",
                   "    });\r",
                   "    pm.test(\"TEST1A: SFSID check\", function() {\r",
-                  "        pm.expect(jsonData[0].statusCode).to.equal(JSON.stringify(data.statusCode));\r",
+                  "        pm.expect(jsonData[0].statusCode).to.equal(JSON.stringify(data.status_code));\r",
                   "    });\r",
                   "    pm.test(\"TEST1B: GroupID check\", function() {\r",
                   "        pm.expect(jsonData[0].status).to.equal(JSON.stringify(data.status));\r",
