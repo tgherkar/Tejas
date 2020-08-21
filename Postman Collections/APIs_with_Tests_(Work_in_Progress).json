@@ -47141,7 +47141,7 @@
                   "        pm.expect(jsonData[0].statusCode).to.equal(JSON.stringify(data.status_code));\r",
                   "    });\r",
                   "    pm.test(\"TEST1B: GroupID check\", function() {\r",
-                  "        pm.expect(jsonData[0].status).to.equal(JSON.stringify(data.status));\r",
+                  "        pm.expect(jsonData[0].status).to.equal(JSON.stringify(data.status_code));\r",
                   "    });\r",
                   "    pm.test(\"TEST1C: Date Received check\", function() {\r",
                   "        pm.expect(jsonData[0].lastModifiedByUser).to.equal(JSON.stringify(data.last_modified_by_user));\r",
