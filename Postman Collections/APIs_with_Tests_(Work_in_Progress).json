@@ -47129,11 +47129,12 @@
                   "    });\r",
                   "    \r",
                   "    \r",
-                  "    pm.test(\"TEST1B: Original Consumer ID Check\", function() {\r",
-                  "        pm.expect(jsonData[0].consumerID).to.equal(JSON.stringify(data.cnsmr_id));\r",
+                  "   /*\r",
+                  "   pm.test(\"TEST1B: Original Consumer ID Check\", function() {\r",
+                  "        pm.expect(jsonData[0].ConsumerID).to.equal(JSON.stringify(data.cnsmr_id));\r",
                   "    });\r",
                   "\r",
-                  "    /*\r",
+                  "    \r",
                   "    pm.test(\"TEST1C: Date Received check\", function() {\r",
                   "        pm.expect(jsonData[0].totalIncome).to.equal(JSON.stringify(data.totalIncome));\r",
                   "    });\r",
@@ -47226,7 +47227,7 @@
                 "type": "text"
               }
             ],
-            "url": "{{BaseURL}}/SFS/Consumer/{{cnsmr_id}}/LatestCompleted/Summary"
+            "url": "{{BaseURL}}/SFS/Consumer/2055373/LatestCompleted/Summary"
           },
           "response": []
         }
