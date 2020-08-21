@@ -47168,10 +47168,10 @@
                   "     pm.expect(schema).to.not.be.empty;\r",
                   "});\r",
                   " pm.test(\"Neg Test 02: Check if string is empty\", function () {\r",
-                  "     pm.expect('sourceConsumerID').to.not.be.empty;\r",
+                  "     pm.expect('sfsid').to.not.be.empty;\r",
                   "});\r",
                   " pm.test(\"Neg Test 03: Check suggestedConsumers isn't empty\", function () {\r",
-                  "     pm.expect('suggestedConsumers').to.not.be.empty;\r",
+                  "     pm.expect('statusCode').to.not.be[2];\r",
                   "});\r",
                   "\r",
                   "}\r",
@@ -47227,7 +47227,7 @@
                 "type": "text"
               }
             ],
-            "url": "{{BaseURL}}/SFS/Consumer/2055373/LatestCompleted/Summary"
+            "url": "{{BaseURL}}/SFS/Consumer/{{cnsmr_id}}/LatestCompleted/Summary"
           },
           "response": []
         }
