@@ -66225,29 +66225,7 @@
           "response": []
         }
       ],
-      "_postman_id": "83205810-e848-4507-95a1-3d20f2e02edd",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "id": "d2075cb5-2524-4437-909f-e39f3cee0a01",
-            "type": "text/javascript",
-            "exec": [
-              ""
-            ]
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "id": "13be8cfb-a533-44fb-9bae-a2f66cd1a777",
-            "type": "text/javascript",
-            "exec": [
-              ""
-            ]
-          }
-        }
-      ]
+      "_postman_id": "83205810-e848-4507-95a1-3d20f2e02edd"
     },
     {
       "name": "Get Swagger",
