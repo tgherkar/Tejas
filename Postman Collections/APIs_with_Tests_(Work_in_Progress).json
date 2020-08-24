@@ -66220,7 +66220,7 @@
                 "type": "text"
               }
             ],
-            "url": "{{BaseURL}}/SFS/Consumer/{{cnsmr_id}}/LatestCompleted/Summary"
+            "url": "{{BaseURL}}/SFS/Consumer/2055368/LatestCompleted/Summary"
           },
           "response": []
         }
