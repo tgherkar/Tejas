@@ -65844,7 +65844,7 @@
       "name": "DirectDebit(PlanHub)",
       "item": [
         {
-          "name": "{{BaseURL}}/DirectDebit/Validate/BankAccount/{sortcode}/{accountnumber}",
+          "name": "Validate_Bank",
           "event": [
             {
               "listen": "prerequest",
