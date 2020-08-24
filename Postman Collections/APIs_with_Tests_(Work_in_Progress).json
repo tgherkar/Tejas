@@ -65956,7 +65956,31 @@
                 "type": "text"
               }
             ],
-            "url": "{{BaseURL}}/DirectDebit/Validate/BankAccount/{sortcode}/{accountnumber}"
+            "url": {
+              "raw": "{{BaseURL}}/DirectDebit/Validate/BankAccount/:sortcode/:accountnumber",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "DirectDebit",
+                "Validate",
+                "BankAccount",
+                ":sortcode",
+                ":accountnumber"
+              ],
+              "variable": [
+                {
+                  "key": "sortcode",
+                  "value": "161633",
+                  "type": "string"
+                },
+                {
+                  "key": "accountnumber",
+                  "value": "88888888",
+                  "type": "string"
+                }
+              ]
+            }
           },
           "response": []
         }
