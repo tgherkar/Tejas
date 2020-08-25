@@ -66657,7 +66657,26 @@
                 "type": "text"
               }
             ],
-            "url": "{{BaseURL}}/SFS/Consumer/{{cnsmr_id}}/LatestCompleted/Summary"
+            "url": {
+              "raw": "{{BaseURL}}/SFS/Consumer/:ConsumerID/LatestCompleted/Summary",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "SFS",
+                "Consumer",
+                ":ConsumerID",
+                "LatestCompleted",
+                "Summary"
+              ],
+              "variable": [
+                {
+                  "key": "ConsumerID",
+                  "value": "4399291",
+                  "type": "string"
+                }
+              ]
+            }
           },
           "response": []
         }
