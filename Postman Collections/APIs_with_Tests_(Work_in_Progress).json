@@ -66244,7 +66244,7 @@
               "variable": [
                 {
                   "key": "PaymentPlanID",
-                  "value": "714996",
+                  "value": "84090",
                   "type": "string"
                 }
               ]
@@ -66366,7 +66366,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"ConsumerID\": 12345678,\r\n  \"AmountToClear\": 10,\r\n  \"PlanFrequency\": \"4Weekly|Monthly\",\r\n  \"RegularPaymentMethod\": \"CreditCard|DirecDebit|RepeatCard|Promise\",\r\n  \"RegularInstalmentDate\": \"2016-08-29T01:00:00.000Z\",\r\n  \"CardNumber\": 1234567898765432,\r\n  \"CardExpiryDate\": \"2016-08-29T01:00:00.000Z\",\r\n  \"CardHolderName\": \"Mr J Bloggs\",\r\n  \"CardSecurityCode\": 123,\r\n  \"AccountName\": \"Mr J Bloggs\",\r\n  \"AccountOwner\": \"true|false\",\r\n  \"OnlyAccountSignatureRequired\": \"true|false\",\r\n  \"SourceOfFunds\": \"Savings\",\r\n  \"SortCode\": 111027,\r\n  \"AccountNumber\": 342391,\r\n  \"BankName\": \"Halifax\",\r\n  \"InitalPaymentMethod\": \"DirectDebit\",\r\n  \"InitialPaymentAmount\": 10,\r\n  \"InitalPaymentDate\": \"2016-08-29T01:00:00.000Z\",\r\n  \"RegularInstalmentAmount\": 500\r\n}",
+              "raw": "{\r\n\"consumerID\":123,\r\n\"scheduledPaymentSummaryId\":123,\r\n\"agencyID\":123,\r\n\"legacyID\":\"123\",\r\n\"planType\":\"string\",\r\n\"customerBankAccountID\":16864,\r\n\"ignoreFirstPayment\":true,\r\n\"isThirdPartyBank\":true,\r\n\"source\":\"test\"\r\n}\r\n\r\n",
               "options": {
                 "raw": {
                   "language": "json"
