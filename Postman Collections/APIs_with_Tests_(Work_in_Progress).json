@@ -66555,7 +66555,7 @@
                   "\r",
                   "if (data.cnsmr_id!=null){\r",
                   "    pm.test(\"TEST1A: SFSID check\", function() {\r",
-                  "        pm.expect(jsonData.sfsid).to.equal(JSON.stringify(data.sfsid));\r",
+                  "        pm.expect(jsonData.sfsid).to.equal(data.sfsid);\r",
                   "    });\r",
                   "    \r",
                   "    \r",
