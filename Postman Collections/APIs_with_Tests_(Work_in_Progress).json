@@ -66657,7 +66657,7 @@
                 "type": "text"
               }
             ],
-            "url": "{{BaseURL}}/SFS/Consumer/4427945/LatestCompleted/Summary"
+            "url": "{{BaseURL}}/SFS/Consumer/{{cnsmr_id}}/LatestCompleted/Summary"
           },
           "response": []
         }
