@@ -66708,7 +66708,1514 @@
     },
     {
       "name": "WhiteData",
-      "item": [],
+      "item": [
+        {
+          "name": "consumer",
+          "item": [
+            {
+              "name": "/consumer/legacy/:legacyId",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "2d88ed74-6db0-48d9-aff6-0ee9b2ff50d2",
+                    "exec": [
+                      "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                      "{\r",
+                      "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                      "} else {\r",
+                      "    var tokenDate = new Date(2010,1,1);\r",
+                      "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                      "    if(tokenTimestamp){\r",
+                      "        tokenDate = Date.parse(tokenTimestamp);\r",
+                      "    }\r",
+                      "    //console.log(\"timestamp is\"+tokenDate);\r",
+                      "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                      "    if(!expiresInTime){\r",
+                      "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                      "    }\r",
+                      "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                      "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                      "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                      "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                      "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                      "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                      "\r",
+                      "        let getTokenRequest = {\r",
+                      "            method: 'POST',\r",
+                      "            url: tokenUrl,\r",
+                      "            auth: {\r",
+                      "                type: \"basic\",\r",
+                      "                basic: [\r",
+                      "                    { key: \"username\", value: clientId },\r",
+                      "                    { key: \"password\", value: clientSecret }\r",
+                      "                ]\r",
+                      "            },\r",
+                      "            body: {\r",
+                      "                mode: 'formdata',\r",
+                      "                formdata: [\r",
+                      "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                      "                    { key: 'scope', value: scope }\r",
+                      "                ]\r",
+                      "            }\r",
+                      "        };\r",
+                      "\r",
+                      "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                      "            let jsonResponse = response.json(),\r",
+                      "            newAccessToken = jsonResponse.access_token;\r",
+                      "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                      "\r",
+                      "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                      "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                      "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                      "        });\r",
+                      "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                      "    }\r",
+                      "}\r",
+                      "//console.log(\"End of Pre-req script\");\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "943d09ce-ee41-4261-b8e2-edf2fb8bd396",
+                    "exec": [
+                      "try{\r",
+                      "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                      "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                      "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                      "var Ajv = require('ajv'),\r",
+                      "ajv = new Ajv({logger: console});\r",
+                      "\r",
+                      "var jsonData = JSON.parse(responseBody);\r",
+                      "var schema =\r",
+                      "{\r",
+                      "    \"required\": [\r",
+                      "        \"debtorNo\",\r",
+                      "        \"missedMortgagePaymentsNumberLast12Months\",\r",
+                      "        \"customerPaydayLoanAccountsTotalNumber\",\r",
+                      "        \"lastPaydayLoanOpenedMonthsNumber\",\r",
+                      "        \"paydayLoansOpenedAverageNumberLast12Months\",\r",
+                      "        \"monthsSinceMostRecentPublicInformationRecord\",\r",
+                      "        \"ccjBankruptcyIVASatisfiedDischargedNumber\",\r",
+                      "        \"ccjBankruptcyIVASatisfiedDischargedUnsatisfied\",\r",
+                      "        \"customerPriorityAccountsInArrearsNumber\",\r",
+                      "        \"customerPriorityMortgageAccountIntoArrearsAge\",\r",
+                      "        \"customerPriorityAccountInArrearsMonthsNumberLast12Months\",\r",
+                      "        \"estimatedYearsAtAddress\",\r",
+                      "        \"minPropertyBandValue\",\r",
+                      "        \"maxPropertyBandValue\",\r",
+                      "        \"mostRecentMortgageOpenDate\",\r",
+                      "        \"mostRecentActiveMortgageAccountOpenedNumber\",\r",
+                      "        \"mortgageValue\",\r",
+                      "        \"searchRecordsNumberLast3Months\",\r",
+                      "        \"creditCardSearchRecordsNumberLast3Months\",\r",
+                      "        \"retailCardSearchRecordsNumberLast3Months\",\r",
+                      "        \"bankSearchRecordsNumberLast3Months\",\r",
+                      "        \"activeMortgageRecordsNumber\",\r",
+                      "        \"liveCreditStoreCardsNumber\",\r",
+                      "        \"defaultedAccountsReceivingPaymentNumberLast12Months\",\r",
+                      "        \"timeSinceLastDefaultedAccountReceivedPayment\",\r",
+                      "        \"timeSinceLastDefaultedAccountCleared\",\r",
+                      "        \"defaultAccountsTotalNumber\",\r",
+                      "        \"mortgageApplicationsNumberLast12Months\",\r",
+                      "        \"creditCardApplicationsNumberLast12Months\",\r",
+                      "        \"paydayLoanApplicationsNumberLast12Months\",\r",
+                      "        \"telcosMediaApplicationsNumberLast90Days\",\r",
+                      "        \"utilitiesApplicationsNumberLast90Days\",\r",
+                      "        \"nocToPublicInfoOnBureauFile\",\r",
+                      "        \"satisifedDischargedPublicInfoRecord\",\r",
+                      "        \"dpAccountPayingNumberLast12Months\",\r",
+                      "        \"crbReportingFlag\",\r",
+                      "        \"lastVariablesRunDate\"\r",
+                      "    ],\r",
+                      "    \"properties\": {\r",
+                      "        \"debtorNo\": {\r",
+                      "            \"$id\": \"#/properties/debtorNo\",\r",
+                      "            \"type\": [\"string\", \"null\"]\r",
+                      "        },\r",
+                      "        \"missedMortgagePaymentsNumberLast12Months\": {\r",
+                      "            \"$id\": \"#/properties/missedMortgagePaymentsNumberLast12Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"customerPaydayLoanAccountsTotalNumber\": {\r",
+                      "            \"$id\": \"#/properties/customerPaydayLoanAccountsTotalNumber\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"lastPaydayLoanOpenedMonthsNumber\": {\r",
+                      "            \"$id\": \"#/properties/lastPaydayLoanOpenedMonthsNumber\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"paydayLoansOpenedAverageNumberLast12Months\": {\r",
+                      "            \"$id\": \"#/properties/paydayLoansOpenedAverageNumberLast12Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"monthsSinceMostRecentPublicInformationRecord\": {\r",
+                      "            \"$id\": \"#/properties/monthsSinceMostRecentPublicInformationRecord\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"ccjBankruptcyIVASatisfiedDischargedNumber\": {\r",
+                      "            \"$id\": \"#/properties/ccjBankruptcyIVASatisfiedDischargedNumber\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"ccjBankruptcyIVASatisfiedDischargedUnsatisfied\": {\r",
+                      "            \"$id\": \"#/properties/ccjBankruptcyIVASatisfiedDischargedUnsatisfied\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"customerPriorityAccountsInArrearsNumber\": {\r",
+                      "            \"$id\": \"#/properties/customerPriorityAccountsInArrearsNumber\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"customerPriorityMortgageAccountIntoArrearsAge\": {\r",
+                      "            \"$id\": \"#/properties/customerPriorityMortgageAccountIntoArrearsAge\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"customerPriorityAccountInArrearsMonthsNumberLast12Months\": {\r",
+                      "            \"$id\": \"#/properties/customerPriorityAccountInArrearsMonthsNumberLast12Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"estimatedYearsAtAddress\": {\r",
+                      "            \"$id\": \"#/properties/estimatedYearsAtAddress\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"minPropertyBandValue\": {\r",
+                      "            \"$id\": \"#/properties/minPropertyBandValue\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"maxPropertyBandValue\": {\r",
+                      "            \"$id\": \"#/properties/maxPropertyBandValue\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"mostRecentMortgageOpenDate\": {\r",
+                      "            \"$id\": \"#/properties/mostRecentMortgageOpenDate\",\r",
+                      "            \"type\": [\"string\", \"null\"]\r",
+                      "        },\r",
+                      "        \"mostRecentActiveMortgageAccountOpenedNumber\": {\r",
+                      "            \"$id\": \"#/properties/mostRecentActiveMortgageAccountOpenedNumber\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"mortgageValue\": {\r",
+                      "            \"$id\": \"#/properties/mortgageValue\",\r",
+                      "            \"type\": [\"string\", \"null\"]\r",
+                      "        },\r",
+                      "        \"searchRecordsNumberLast3Months\": {\r",
+                      "            \"$id\": \"#/properties/searchRecordsNumberLast3Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"creditCardSearchRecordsNumberLast3Months\": {\r",
+                      "            \"$id\": \"#/properties/creditCardSearchRecordsNumberLast3Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"retailCardSearchRecordsNumberLast3Months\": {\r",
+                      "            \"$id\": \"#/properties/retailCardSearchRecordsNumberLast3Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"bankSearchRecordsNumberLast3Months\": {\r",
+                      "            \"$id\": \"#/properties/bankSearchRecordsNumberLast3Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"activeMortgageRecordsNumber\": {\r",
+                      "            \"$id\": \"#/properties/activeMortgageRecordsNumber\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"liveCreditStoreCardsNumber\": {\r",
+                      "            \"$id\": \"#/properties/liveCreditStoreCardsNumber\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"defaultedAccountsReceivingPaymentNumberLast12Months\": {\r",
+                      "            \"$id\": \"#/properties/defaultedAccountsReceivingPaymentNumberLast12Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"timeSinceLastDefaultedAccountReceivedPayment\": {\r",
+                      "            \"$id\": \"#/properties/timeSinceLastDefaultedAccountReceivedPayment\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"timeSinceLastDefaultedAccountCleared\": {\r",
+                      "            \"$id\": \"#/properties/timeSinceLastDefaultedAccountCleared\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"defaultAccountsTotalNumber\": {\r",
+                      "            \"$id\": \"#/properties/defaultAccountsTotalNumber\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"mortgageApplicationsNumberLast12Months\": {\r",
+                      "            \"$id\": \"#/properties/mortgageApplicationsNumberLast12Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"creditCardApplicationsNumberLast12Months\": {\r",
+                      "            \"$id\": \"#/properties/creditCardApplicationsNumberLast12Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"paydayLoanApplicationsNumberLast12Months\": {\r",
+                      "            \"$id\": \"#/properties/paydayLoanApplicationsNumberLast12Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"telcosMediaApplicationsNumberLast90Days\": {\r",
+                      "            \"$id\": \"#/properties/telcosMediaApplicationsNumberLast90Days\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"utilitiesApplicationsNumberLast90Days\": {\r",
+                      "            \"$id\": \"#/properties/utilitiesApplicationsNumberLast90Days\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"nocToPublicInfoOnBureauFile\": {\r",
+                      "            \"$id\": \"#/properties/nocToPublicInfoOnBureauFile\",\r",
+                      "            \"type\": [\"boolean\", \"null\"]\r",
+                      "        },\r",
+                      "        \"satisifedDischargedPublicInfoRecord\": {\r",
+                      "            \"$id\": \"#/properties/satisifedDischargedPublicInfoRecord\",\r",
+                      "            \"type\": [\"boolean\", \"null\"]\r",
+                      "        },\r",
+                      "        \"dpAccountPayingNumberLast12Months\": {\r",
+                      "            \"$id\": \"#/properties/dpAccountPayingNumberLast12Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"crbReportingFlag\": {\r",
+                      "            \"$id\": \"#/properties/crbReportingFlag\",\r",
+                      "            \"type\": [\"boolean\", \"null\"]\r",
+                      "        },\r",
+                      "        \"lastVariablesRunDate\": {\r",
+                      "            \"$id\": \"#/properties/lastVariablesRunDate\",\r",
+                      "            \"type\": [\"string\", \"null\"]\r",
+                      "        }\r",
+                      "    },\r",
+                      "    \"$id\": \"http://example.org/root.json#\",\r",
+                      "    \"type\": \"object\",\r",
+                      "    \"definitions\": {},\r",
+                      "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                      "}\r",
+                      "\r",
+                      "\r",
+                      "if (data.legacyID!=null){\r",
+                      "    pm.test(\"TEST1A: legacyID check\", function() {\r",
+                      "        pm.expect(jsonData.debtorNo).to.equal(JSON.stringify(data.legacyID));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1B: missedMortgagePaymentsNumberLast12Months check\", function() {\r",
+                      "        pm.expect(jsonData.missedMortgagePaymentsNumberLast12Months).to.equal(JSON.stringify(data.NoAcctsMissedPaymentL12M));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1C: customerPaydayLoanAccountsTotalNumber check\", function() {\r",
+                      "        pm.expect(jsonData.customerPaydayLoanAccountsTotalNumber).to.equal(JSON.stringify(data.NoPayDayLoanAcctsEverHad));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1D: lastPaydayLoanOpenedMonthsNumber check\", function() {\r",
+                      "        pm.expect(jsonData.lastPaydayLoanOpenedMonthsNumber).to.equal(JSON.stringify(data.MonthsWithPayDayLoanL12M));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1E: paydayLoansOpenedAverageNumberLast12Months check\", function() {\r",
+                      "        pm.expect(jsonData[0].paydayLoansOpenedAverageNumberLast12Months).to.equal(JSON.stringify(data.AvgNoPayDayLoanOpenedPML12M));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1G: monthsSinceMostRecentPublicInformationRecord check\", function() {\r",
+                      "        pm.expect(jsonData.monthsSinceMostRecentPublicInformationRecord).to.equal(JSON.stringify(data.MnthsSinceMostRecentPublicInfoRec));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1H: ccjBankruptcyIVASatisfiedDischargedNumber check\", function() {\r",
+                      "        pm.expect(jsonData.ccjBankruptcyIVASatisfiedDischargedNumber).to.equal(JSON.stringify(data.NoPublicInfoRecords));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1I: ccjBankruptcyIVASatisfiedDischargedUnsatisfied check\", function() {\r",
+                      "        pm.expect(jsonData.ccjBankruptcyIVASatisfiedDischargedUnsatisfied).to.equal(JSON.stringify(data.NoOutstandingPublicInfoRecs));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1J: customerPriorityAccountsInArrearsNumber check\", function() {\r",
+                      "        pm.expect(jsonData.customerPriorityAccountsInArrearsNumber).to.equal(JSON.stringify(data.NoPriorityMortgageAcctsInArrears));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1K: customerPriorityMortgageAccountIntoArrearsAge check\", function() {\r",
+                      "        pm.expect(jsonData.customerPriorityMortgageAccountIntoArrearsAge).to.equal(JSON.stringify(data.PriorityArrearsMortgageAge));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1L: customerPriorityAccountInArrearsMonthsNumberLast12Months check\", function() {\r",
+                      "        pm.expect(jsonData.customerPriorityAccountInArrearsMonthsNumberLast12Months).to.equal(JSON.stringify(data.NoMnthsPriorityArrearsL12M));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1M: paydayLoansOpenedAverageNumberLast12Months check\", function() {\r",
+                      "        pm.expect(jsonData.paydayLoansOpenedAverageNumberLast12Months).to.equal(JSON.stringify(data.AvgNoPayDayLoanOpenedPML12M));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1N: estimatedYearsAtAddress check\", function() {\r",
+                      "        pm.expect(jsonData.estimatedYearsAtAddress).to.equal(JSON.stringify(data.YearsAtAddress_MA_CA));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1O: minPropertyBandValue check\", function() {\r",
+                      "        pm.expect(jsonData.minPropertyBandValue).to.equal(JSON.stringify(data.MinPropertyBandValue));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1P: maxPropertyBandValue check\", function() {\r",
+                      "        pm.expect(jsonData.maxPropertyBandValue).to.equal(JSON.stringify(data.MaxPropertyBandValue));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Q: mostRecentMortgageOpenDate check\", function() {\r",
+                      "        pm.expect(jsonData.mostRecentMortgageOpenDate).to.equal(JSON.stringify(data.OpenDateOfLatestOpenedMortgage));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Q: estimatedPropertyValueModel check\", function() {\r",
+                      "        pm.expect(jsonData.estimatedPropertyValueModel).to.equal(JSON.stringify(data.EstimatePropertyValueModel));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1R: mostRecentActiveMortgageAccountOpenedNumber check\", function() {\r",
+                      "        pm.expect(jsonData.mostRecentActiveMortgageAccountOpenedNumber).to.equal(JSON.stringify(data.NoMnthsSinceLastActiveMrtgOpened));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1S: mortgageValue check\", function() {\r",
+                      "        pm.expect(jsonData.mortgageValue).to.equal(JSON.stringify(data.TotalValActiveMortgBand));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1T: searchRecordsNumberLast3Months check\", function() {\r",
+                      "        pm.expect(jsonData.searchRecordsNumberLast3Months).to.equal(JSON.stringify(data.NoSearchRecordsLast3Months));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1U: creditCardSearchRecordsNumberLast3Months check\", function() {\r",
+                      "        pm.expect(jsonData.creditCardSearchRecordsNumberLast3Months).to.equal(JSON.stringify(data.NoSearchRecordsLast3MonthsCC));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1V: retailCardSearchRecordsNumberLast3Months check\", function() {\r",
+                      "        pm.expect(jsonData.retailCardSearchRecordsNumberLast3Months).to.equal(JSON.stringify(data.NoSearchRecordLst3MnthsLoanPOS));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1W: bankSearchRecordsNumberLast3Months check\", function() {\r",
+                      "        pm.expect(jsonData.bankSearchRecordsNumberLast3Months).to.equal(JSON.stringify(data.NoSearchRecordLst3MnthBankBSoc));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1X: activeMortgageRecordsNumber check\", function() {\r",
+                      "        pm.expect(jsonData.activeMortgageRecordsNumber).to.equal(JSON.stringify(data.NoActiveMortgageRecords));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Y: liveCreditStoreCardsNumber check\", function() {\r",
+                      "        pm.expect(jsonData.liveCreditStoreCardsNumber).to.equal(JSON.stringify(data.NoLiveCreditOrStoreCards));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Z: defaultedAccountsReceivingPaymentNumberLast12Months check\", function() {\r",
+                      "        pm.expect(jsonData.defaultedAccountsReceivingPaymentNumberLast12Months).to.equal(JSON.stringify(data.NoDefaultedAcctsPaidL12M));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Ai: timeSinceLastDefaultedAccountReceivedPayment check\", function() {\r",
+                      "        pm.expect(jsonData.timeSinceLastDefaultedAccountReceivedPayment).to.equal(JSON.stringify(data.TimeSinceRecentPaymentDefault));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Bi: timeSinceLastDefaultedAccountCleared check\", function() {\r",
+                      "        pm.expect(jsonData.timeSinceLastDefaultedAccountCleared).to.equal(JSON.stringify(data.TimeSinceLastBalCleared_Default));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Ci: defaultAccountsTotalNumber check\", function() {\r",
+                      "        pm.expect(jsonData.defaultAccountsTotalNumber).to.equal(JSON.stringify(data.NoAcctsSatisfied_Default));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1Di: mortgageApplicationsNumberLast12Months check\", function() {\r",
+                      "        pm.expect(jsonData.mortgageApplicationsNumberLast12Months).to.equal(JSON.stringify(data.NoMortgageAppsLast12Months));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1Ei: creditCardApplicationsNumberLast12Months check\", function() {\r",
+                      "        pm.expect(jsonData.creditCardApplicationsNumberLast12Months).to.equal(JSON.stringify(data.NoCreditCardAppsLast12Months));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Fi: paydayLoanApplicationsNumberLast12Months check\", function() {\r",
+                      "        pm.expect(jsonData.paydayLoanApplicationsNumberLast12Months).to.equal(JSON.stringify(data.NoPayDayLoanAppsLast12Months));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Gi: telcosMediaApplicationsNumberLast90Days check\", function() {\r",
+                      "        pm.expect(jsonData.telcosMediaApplicationsNumberLast90Days).to.equal(JSON.stringify(data.NoTelcosMediaAppsLast90Days));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1Hi: utilitiesApplicationsNumberLast90Days check\", function() {\r",
+                      "        pm.expect(jsonData.utilitiesApplicationsNumberLast90Days).to.equal(JSON.stringify(data.NoUtilitiesAppsLast90Days));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1Ii: nocToPublicInfoOnBureauFile check\", function() {\r",
+                      "        pm.expect(jsonData.nocToPublicInfoOnBureauFile).to.equal(JSON.stringify(data.PublicInfoWithNOC));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Ji: satisifedDischargedPublicInfoRecord check\", function() {\r",
+                      "        pm.expect(jsonData.satisifedDischargedPublicInfoRecord).to.equal(JSON.stringify(data.SatisfiedDischargedPublicInfoRec));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Ki: dpAccountPayingNumberLast12Months check\", function() {\r",
+                      "        pm.expect(jsonData.dpAccountPayingNumberLast12Months).to.equal(JSON.stringify(data.NoOfDPAcctsPayingL12M));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1Li: crbReportingFlag check\", function() {\r",
+                      "        pm.expect(jsonData.crbReportingFlag).to.equal(JSON.stringify(data.CRBReportingFlag));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Mi: lastVariablesRunDate check\", function() {\r",
+                      "        pm.expect(jsonData.lastVariablesRunDate).to.equal(JSON.stringify(data.LastVariablesRunDate));\r",
+                      "    });\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      "};\r",
+                      "\r",
+                      "\r",
+                      "pm.test(\"TEST01: Status Code Check\", function() {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST02: Response Header Checks\", function() {\r",
+                      "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST03: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST04: Response Schema is valid\", function() {\r",
+                      "  pm.expect(ajv.validate(schema, jsonData, true, false)).to.be.true;\r",
+                      "});\r",
+                      "\r",
+                      "///Negative Test\r",
+                      "} catch (e){\r",
+                      "\r",
+                      "pm.test(\"Check if Schema Response isn't empty\", function () {\r",
+                      "     pm.expect(schema).to.not.be.empty;\r",
+                      "});\r",
+                      " pm.test(\"Check consumerID variable isn't empty\", function () {\r",
+                      "     pm.expect('consumerID').to.not.be.empty;\r",
+                      "});\r",
+                      "}\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "_postman_id": "fafe92ed-0f3c-4424-b9eb-6f4119ef3d6b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "accessToken": "{{OAuth_Token}}",
+                    "tokenType": "Bearer",
+                    "addTokenTo": "header"
+                  }
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Origin",
+                    "value": "Postman",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Username",
+                    "value": "Test-User",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/whitedata/consumer/legacy/:legacyId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "whitedata",
+                    "consumer",
+                    "legacy",
+                    ":legacyId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "bccf54a7-8b1e-46d1-88ea-eac3ceefd40d",
+                      "key": "legacyId",
+                      "value": "{{legacyID}}",
+                      "type": "string",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Get White Data for a given legacyId. Using anonymous auth, maybe should be UserAuth, if not handled by consumer"
+              },
+              "response": [
+                {
+                  "id": "115e7c7e-f160-4136-a160-e3d9b3f187c8",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/legacy/:legacyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        "legacy",
+                        ":legacyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "legacyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "officia pariatur nisi labore"
+                },
+                {
+                  "id": "38892418-1722-4e04-ab82-bc2560dd656a",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/legacy/:legacyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        "legacy",
+                        ":legacyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "legacyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "officia pariatur nisi labore"
+                },
+                {
+                  "id": "7e9dc6db-28a9-4b33-8bd0-acbab33f7bc7",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/legacy/:legacyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        "legacy",
+                        ":legacyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "legacyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "officia pariatur nisi labore"
+                },
+                {
+                  "id": "9248b445-8490-4911-92cc-cda25d3b4ad7",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/legacy/:legacyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        "legacy",
+                        ":legacyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "legacyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "officia pariatur nisi labore"
+                },
+                {
+                  "id": "b0347701-1c33-4ee8-bb85-52005a621ff2",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/legacy/:legacyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        "legacy",
+                        ":legacyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "legacyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "officia pariatur nisi labore"
+                },
+                {
+                  "id": "cc3fa749-7c4f-467c-8e1f-060712ae3eee",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/legacy/:legacyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        "legacy",
+                        ":legacyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "legacyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "officia pariatur nisi labore"
+                }
+              ]
+            },
+            {
+              "name": "/consumer/WithoutPermissions/legacy/:legacyId",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "8338a627-5800-4657-92e5-f307e35d7c00",
+                    "exec": [
+                      "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                      "{\r",
+                      "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                      "} else {\r",
+                      "    var tokenDate = new Date(2010,1,1);\r",
+                      "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                      "    if(tokenTimestamp){\r",
+                      "        tokenDate = Date.parse(tokenTimestamp);\r",
+                      "    }\r",
+                      "    //console.log(\"timestamp is\"+tokenDate);\r",
+                      "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                      "    if(!expiresInTime){\r",
+                      "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                      "    }\r",
+                      "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                      "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                      "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                      "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                      "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                      "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                      "\r",
+                      "        let getTokenRequest = {\r",
+                      "            method: 'POST',\r",
+                      "            url: tokenUrl,\r",
+                      "            auth: {\r",
+                      "                type: \"basic\",\r",
+                      "                basic: [\r",
+                      "                    { key: \"username\", value: clientId },\r",
+                      "                    { key: \"password\", value: clientSecret }\r",
+                      "                ]\r",
+                      "            },\r",
+                      "            body: {\r",
+                      "                mode: 'formdata',\r",
+                      "                formdata: [\r",
+                      "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                      "                    { key: 'scope', value: scope }\r",
+                      "                ]\r",
+                      "            }\r",
+                      "        };\r",
+                      "\r",
+                      "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                      "            let jsonResponse = response.json(),\r",
+                      "            newAccessToken = jsonResponse.access_token;\r",
+                      "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                      "\r",
+                      "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                      "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                      "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                      "        });\r",
+                      "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                      "    }\r",
+                      "}\r",
+                      "//console.log(\"End of Pre-req script\");\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "c23fb559-6e26-4bb4-9cd3-aebae9d4a611",
+                    "exec": [
+                      "try{\r",
+                      "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                      "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                      "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                      "var Ajv = require('ajv'),\r",
+                      "ajv = new Ajv({logger: console});\r",
+                      "\r",
+                      "var jsonData = JSON.parse(responseBody);\r",
+                      "var schema =\r",
+                      "{\r",
+                      "    \"required\": [\r",
+                      "        \"debtorNo\",\r",
+                      "        \"missedMortgagePaymentsNumberLast12Months\",\r",
+                      "        \"customerPaydayLoanAccountsTotalNumber\",\r",
+                      "        \"lastPaydayLoanOpenedMonthsNumber\",\r",
+                      "        \"paydayLoansOpenedAverageNumberLast12Months\",\r",
+                      "        \"monthsSinceMostRecentPublicInformationRecord\",\r",
+                      "        \"ccjBankruptcyIVASatisfiedDischargedNumber\",\r",
+                      "        \"ccjBankruptcyIVASatisfiedDischargedUnsatisfied\",\r",
+                      "        \"customerPriorityAccountsInArrearsNumber\",\r",
+                      "        \"customerPriorityMortgageAccountIntoArrearsAge\",\r",
+                      "        \"customerPriorityAccountInArrearsMonthsNumberLast12Months\",\r",
+                      "        \"estimatedYearsAtAddress\",\r",
+                      "        \"minPropertyBandValue\",\r",
+                      "        \"maxPropertyBandValue\",\r",
+                      "        \"mostRecentMortgageOpenDate\",\r",
+                      "        \"mostRecentActiveMortgageAccountOpenedNumber\",\r",
+                      "        \"mortgageValue\",\r",
+                      "        \"searchRecordsNumberLast3Months\",\r",
+                      "        \"creditCardSearchRecordsNumberLast3Months\",\r",
+                      "        \"retailCardSearchRecordsNumberLast3Months\",\r",
+                      "        \"bankSearchRecordsNumberLast3Months\",\r",
+                      "        \"activeMortgageRecordsNumber\",\r",
+                      "        \"liveCreditStoreCardsNumber\",\r",
+                      "        \"defaultedAccountsReceivingPaymentNumberLast12Months\",\r",
+                      "        \"timeSinceLastDefaultedAccountReceivedPayment\",\r",
+                      "        \"timeSinceLastDefaultedAccountCleared\",\r",
+                      "        \"defaultAccountsTotalNumber\",\r",
+                      "        \"mortgageApplicationsNumberLast12Months\",\r",
+                      "        \"creditCardApplicationsNumberLast12Months\",\r",
+                      "        \"paydayLoanApplicationsNumberLast12Months\",\r",
+                      "        \"telcosMediaApplicationsNumberLast90Days\",\r",
+                      "        \"utilitiesApplicationsNumberLast90Days\",\r",
+                      "        \"nocToPublicInfoOnBureauFile\",\r",
+                      "        \"satisifedDischargedPublicInfoRecord\",\r",
+                      "        \"dpAccountPayingNumberLast12Months\",\r",
+                      "        \"crbReportingFlag\",\r",
+                      "        \"lastVariablesRunDate\"\r",
+                      "    ],\r",
+                      "    \"properties\": {\r",
+                      "        \"debtorNo\": {\r",
+                      "            \"$id\": \"#/properties/debtorNo\",\r",
+                      "            \"type\": [\"string\", \"null\"]\r",
+                      "        },\r",
+                      "        \"missedMortgagePaymentsNumberLast12Months\": {\r",
+                      "            \"$id\": \"#/properties/missedMortgagePaymentsNumberLast12Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"customerPaydayLoanAccountsTotalNumber\": {\r",
+                      "            \"$id\": \"#/properties/customerPaydayLoanAccountsTotalNumber\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"lastPaydayLoanOpenedMonthsNumber\": {\r",
+                      "            \"$id\": \"#/properties/lastPaydayLoanOpenedMonthsNumber\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"paydayLoansOpenedAverageNumberLast12Months\": {\r",
+                      "            \"$id\": \"#/properties/paydayLoansOpenedAverageNumberLast12Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"monthsSinceMostRecentPublicInformationRecord\": {\r",
+                      "            \"$id\": \"#/properties/monthsSinceMostRecentPublicInformationRecord\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"ccjBankruptcyIVASatisfiedDischargedNumber\": {\r",
+                      "            \"$id\": \"#/properties/ccjBankruptcyIVASatisfiedDischargedNumber\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"ccjBankruptcyIVASatisfiedDischargedUnsatisfied\": {\r",
+                      "            \"$id\": \"#/properties/ccjBankruptcyIVASatisfiedDischargedUnsatisfied\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"customerPriorityAccountsInArrearsNumber\": {\r",
+                      "            \"$id\": \"#/properties/customerPriorityAccountsInArrearsNumber\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"customerPriorityMortgageAccountIntoArrearsAge\": {\r",
+                      "            \"$id\": \"#/properties/customerPriorityMortgageAccountIntoArrearsAge\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"customerPriorityAccountInArrearsMonthsNumberLast12Months\": {\r",
+                      "            \"$id\": \"#/properties/customerPriorityAccountInArrearsMonthsNumberLast12Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"estimatedYearsAtAddress\": {\r",
+                      "            \"$id\": \"#/properties/estimatedYearsAtAddress\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"minPropertyBandValue\": {\r",
+                      "            \"$id\": \"#/properties/minPropertyBandValue\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"maxPropertyBandValue\": {\r",
+                      "            \"$id\": \"#/properties/maxPropertyBandValue\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"mostRecentMortgageOpenDate\": {\r",
+                      "            \"$id\": \"#/properties/mostRecentMortgageOpenDate\",\r",
+                      "            \"type\": [\"string\", \"null\"]\r",
+                      "        },\r",
+                      "        \"mostRecentActiveMortgageAccountOpenedNumber\": {\r",
+                      "            \"$id\": \"#/properties/mostRecentActiveMortgageAccountOpenedNumber\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"mortgageValue\": {\r",
+                      "            \"$id\": \"#/properties/mortgageValue\",\r",
+                      "            \"type\": [\"string\", \"null\"]\r",
+                      "        },\r",
+                      "        \"searchRecordsNumberLast3Months\": {\r",
+                      "            \"$id\": \"#/properties/searchRecordsNumberLast3Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"creditCardSearchRecordsNumberLast3Months\": {\r",
+                      "            \"$id\": \"#/properties/creditCardSearchRecordsNumberLast3Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"retailCardSearchRecordsNumberLast3Months\": {\r",
+                      "            \"$id\": \"#/properties/retailCardSearchRecordsNumberLast3Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"bankSearchRecordsNumberLast3Months\": {\r",
+                      "            \"$id\": \"#/properties/bankSearchRecordsNumberLast3Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"activeMortgageRecordsNumber\": {\r",
+                      "            \"$id\": \"#/properties/activeMortgageRecordsNumber\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"liveCreditStoreCardsNumber\": {\r",
+                      "            \"$id\": \"#/properties/liveCreditStoreCardsNumber\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"defaultedAccountsReceivingPaymentNumberLast12Months\": {\r",
+                      "            \"$id\": \"#/properties/defaultedAccountsReceivingPaymentNumberLast12Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"timeSinceLastDefaultedAccountReceivedPayment\": {\r",
+                      "            \"$id\": \"#/properties/timeSinceLastDefaultedAccountReceivedPayment\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"timeSinceLastDefaultedAccountCleared\": {\r",
+                      "            \"$id\": \"#/properties/timeSinceLastDefaultedAccountCleared\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"defaultAccountsTotalNumber\": {\r",
+                      "            \"$id\": \"#/properties/defaultAccountsTotalNumber\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"mortgageApplicationsNumberLast12Months\": {\r",
+                      "            \"$id\": \"#/properties/mortgageApplicationsNumberLast12Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"creditCardApplicationsNumberLast12Months\": {\r",
+                      "            \"$id\": \"#/properties/creditCardApplicationsNumberLast12Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"paydayLoanApplicationsNumberLast12Months\": {\r",
+                      "            \"$id\": \"#/properties/paydayLoanApplicationsNumberLast12Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"telcosMediaApplicationsNumberLast90Days\": {\r",
+                      "            \"$id\": \"#/properties/telcosMediaApplicationsNumberLast90Days\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"utilitiesApplicationsNumberLast90Days\": {\r",
+                      "            \"$id\": \"#/properties/utilitiesApplicationsNumberLast90Days\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"nocToPublicInfoOnBureauFile\": {\r",
+                      "            \"$id\": \"#/properties/nocToPublicInfoOnBureauFile\",\r",
+                      "            \"type\": [\"boolean\", \"null\"]\r",
+                      "        },\r",
+                      "        \"satisifedDischargedPublicInfoRecord\": {\r",
+                      "            \"$id\": \"#/properties/satisifedDischargedPublicInfoRecord\",\r",
+                      "            \"type\": [\"boolean\", \"null\"]\r",
+                      "        },\r",
+                      "        \"dpAccountPayingNumberLast12Months\": {\r",
+                      "            \"$id\": \"#/properties/dpAccountPayingNumberLast12Months\",\r",
+                      "            \"type\": [\"integer\", \"null\"]\r",
+                      "        },\r",
+                      "        \"crbReportingFlag\": {\r",
+                      "            \"$id\": \"#/properties/crbReportingFlag\",\r",
+                      "            \"type\": [\"boolean\", \"null\"]\r",
+                      "        },\r",
+                      "        \"lastVariablesRunDate\": {\r",
+                      "            \"$id\": \"#/properties/lastVariablesRunDate\",\r",
+                      "            \"type\": [\"string\", \"null\"]\r",
+                      "        }\r",
+                      "    },\r",
+                      "    \"$id\": \"http://example.org/root.json#\",\r",
+                      "    \"type\": \"object\",\r",
+                      "    \"definitions\": {},\r",
+                      "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                      "}\r",
+                      "\r",
+                      "\r",
+                      "if (data.legacyID!=null){\r",
+                      "    pm.test(\"TEST1A: legacyID check\", function() {\r",
+                      "        pm.expect(jsonData.debtorNo).to.equal(JSON.stringify(data.legacyID));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1B: missedMortgagePaymentsNumberLast12Months check\", function() {\r",
+                      "        pm.expect(jsonData.missedMortgagePaymentsNumberLast12Months).to.equal(JSON.stringify(data.NoAcctsMissedPaymentL12M));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1C: customerPaydayLoanAccountsTotalNumber check\", function() {\r",
+                      "        pm.expect(jsonData.customerPaydayLoanAccountsTotalNumber).to.equal(JSON.stringify(data.NoPayDayLoanAcctsEverHad));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1D: lastPaydayLoanOpenedMonthsNumber check\", function() {\r",
+                      "        pm.expect(jsonData.lastPaydayLoanOpenedMonthsNumber).to.equal(JSON.stringify(data.MonthsWithPayDayLoanL12M));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1E: paydayLoansOpenedAverageNumberLast12Months check\", function() {\r",
+                      "        pm.expect(jsonData[0].paydayLoansOpenedAverageNumberLast12Months).to.equal(JSON.stringify(data.AvgNoPayDayLoanOpenedPML12M));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1G: monthsSinceMostRecentPublicInformationRecord check\", function() {\r",
+                      "        pm.expect(jsonData.monthsSinceMostRecentPublicInformationRecord).to.equal(JSON.stringify(data.MnthsSinceMostRecentPublicInfoRec));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1H: ccjBankruptcyIVASatisfiedDischargedNumber check\", function() {\r",
+                      "        pm.expect(jsonData.ccjBankruptcyIVASatisfiedDischargedNumber).to.equal(JSON.stringify(data.NoPublicInfoRecords));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1I: ccjBankruptcyIVASatisfiedDischargedUnsatisfied check\", function() {\r",
+                      "        pm.expect(jsonData.ccjBankruptcyIVASatisfiedDischargedUnsatisfied).to.equal(JSON.stringify(data.NoOutstandingPublicInfoRecs));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1J: customerPriorityAccountsInArrearsNumber check\", function() {\r",
+                      "        pm.expect(jsonData.customerPriorityAccountsInArrearsNumber).to.equal(JSON.stringify(data.NoPriorityMortgageAcctsInArrears));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1K: customerPriorityMortgageAccountIntoArrearsAge check\", function() {\r",
+                      "        pm.expect(jsonData.customerPriorityMortgageAccountIntoArrearsAge).to.equal(JSON.stringify(data.PriorityArrearsMortgageAge));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1L: customerPriorityAccountInArrearsMonthsNumberLast12Months check\", function() {\r",
+                      "        pm.expect(jsonData.customerPriorityAccountInArrearsMonthsNumberLast12Months).to.equal(JSON.stringify(data.NoMnthsPriorityArrearsL12M));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1M: paydayLoansOpenedAverageNumberLast12Months check\", function() {\r",
+                      "        pm.expect(jsonData.paydayLoansOpenedAverageNumberLast12Months).to.equal(JSON.stringify(data.AvgNoPayDayLoanOpenedPML12M));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1N: estimatedYearsAtAddress check\", function() {\r",
+                      "        pm.expect(jsonData.estimatedYearsAtAddress).to.equal(JSON.stringify(data.YearsAtAddress_MA_CA));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1O: minPropertyBandValue check\", function() {\r",
+                      "        pm.expect(jsonData.minPropertyBandValue).to.equal(JSON.stringify(data.MinPropertyBandValue));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1P: maxPropertyBandValue check\", function() {\r",
+                      "        pm.expect(jsonData.maxPropertyBandValue).to.equal(JSON.stringify(data.MaxPropertyBandValue));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Q: mostRecentMortgageOpenDate check\", function() {\r",
+                      "        pm.expect(jsonData.mostRecentMortgageOpenDate).to.equal(JSON.stringify(data.OpenDateOfLatestOpenedMortgage));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Q: estimatedPropertyValueModel check\", function() {\r",
+                      "        pm.expect(jsonData.estimatedPropertyValueModel).to.equal(JSON.stringify(data.EstimatePropertyValueModel));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1R: mostRecentActiveMortgageAccountOpenedNumber check\", function() {\r",
+                      "        pm.expect(jsonData.mostRecentActiveMortgageAccountOpenedNumber).to.equal(JSON.stringify(data.NoMnthsSinceLastActiveMrtgOpened));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1S: mortgageValue check\", function() {\r",
+                      "        pm.expect(jsonData.mortgageValue).to.equal(JSON.stringify(data.TotalValActiveMortgBand));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1T: searchRecordsNumberLast3Months check\", function() {\r",
+                      "        pm.expect(jsonData.searchRecordsNumberLast3Months).to.equal(JSON.stringify(data.NoSearchRecordsLast3Months));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1U: creditCardSearchRecordsNumberLast3Months check\", function() {\r",
+                      "        pm.expect(jsonData.creditCardSearchRecordsNumberLast3Months).to.equal(JSON.stringify(data.NoSearchRecordsLast3MonthsCC));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1V: retailCardSearchRecordsNumberLast3Months check\", function() {\r",
+                      "        pm.expect(jsonData.retailCardSearchRecordsNumberLast3Months).to.equal(JSON.stringify(data.NoSearchRecordLst3MnthsLoanPOS));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1W: bankSearchRecordsNumberLast3Months check\", function() {\r",
+                      "        pm.expect(jsonData.bankSearchRecordsNumberLast3Months).to.equal(JSON.stringify(data.NoSearchRecordLst3MnthBankBSoc));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1X: activeMortgageRecordsNumber check\", function() {\r",
+                      "        pm.expect(jsonData.activeMortgageRecordsNumber).to.equal(JSON.stringify(data.NoActiveMortgageRecords));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Y: liveCreditStoreCardsNumber check\", function() {\r",
+                      "        pm.expect(jsonData.liveCreditStoreCardsNumber).to.equal(JSON.stringify(data.NoLiveCreditOrStoreCards));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Z: defaultedAccountsReceivingPaymentNumberLast12Months check\", function() {\r",
+                      "        pm.expect(jsonData.defaultedAccountsReceivingPaymentNumberLast12Months).to.equal(JSON.stringify(data.NoDefaultedAcctsPaidL12M));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Ai: timeSinceLastDefaultedAccountReceivedPayment check\", function() {\r",
+                      "        pm.expect(jsonData.timeSinceLastDefaultedAccountReceivedPayment).to.equal(JSON.stringify(data.TimeSinceRecentPaymentDefault));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Bi: timeSinceLastDefaultedAccountCleared check\", function() {\r",
+                      "        pm.expect(jsonData.timeSinceLastDefaultedAccountCleared).to.equal(JSON.stringify(data.TimeSinceLastBalCleared_Default));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Ci: defaultAccountsTotalNumber check\", function() {\r",
+                      "        pm.expect(jsonData.defaultAccountsTotalNumber).to.equal(JSON.stringify(data.NoAcctsSatisfied_Default));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1Di: mortgageApplicationsNumberLast12Months check\", function() {\r",
+                      "        pm.expect(jsonData.mortgageApplicationsNumberLast12Months).to.equal(JSON.stringify(data.NoMortgageAppsLast12Months));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1Ei: creditCardApplicationsNumberLast12Months check\", function() {\r",
+                      "        pm.expect(jsonData.creditCardApplicationsNumberLast12Months).to.equal(JSON.stringify(data.NoCreditCardAppsLast12Months));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Fi: paydayLoanApplicationsNumberLast12Months check\", function() {\r",
+                      "        pm.expect(jsonData.paydayLoanApplicationsNumberLast12Months).to.equal(JSON.stringify(data.NoPayDayLoanAppsLast12Months));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Gi: telcosMediaApplicationsNumberLast90Days check\", function() {\r",
+                      "        pm.expect(jsonData.telcosMediaApplicationsNumberLast90Days).to.equal(JSON.stringify(data.NoTelcosMediaAppsLast90Days));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1Hi: utilitiesApplicationsNumberLast90Days check\", function() {\r",
+                      "        pm.expect(jsonData.utilitiesApplicationsNumberLast90Days).to.equal(JSON.stringify(data.NoUtilitiesAppsLast90Days));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1Ii: nocToPublicInfoOnBureauFile check\", function() {\r",
+                      "        pm.expect(jsonData.nocToPublicInfoOnBureauFile).to.equal(JSON.stringify(data.PublicInfoWithNOC));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Ji: satisifedDischargedPublicInfoRecord check\", function() {\r",
+                      "        pm.expect(jsonData.satisifedDischargedPublicInfoRecord).to.equal(JSON.stringify(data.SatisfiedDischargedPublicInfoRec));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Ki: dpAccountPayingNumberLast12Months check\", function() {\r",
+                      "        pm.expect(jsonData.dpAccountPayingNumberLast12Months).to.equal(JSON.stringify(data.NoOfDPAcctsPayingL12M));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1Li: crbReportingFlag check\", function() {\r",
+                      "        pm.expect(jsonData.crbReportingFlag).to.equal(JSON.stringify(data.CRBReportingFlag));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1Mi: lastVariablesRunDate check\", function() {\r",
+                      "        pm.expect(jsonData.lastVariablesRunDate).to.equal(JSON.stringify(data.LastVariablesRunDate));\r",
+                      "    });\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      "};\r",
+                      "\r",
+                      "\r",
+                      "pm.test(\"TEST01: Status Code Check\", function() {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST02: Response Header Checks\", function() {\r",
+                      "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST03: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST04: Response Schema is valid\", function() {\r",
+                      "  pm.expect(ajv.validate(schema, jsonData, true, false)).to.be.true;\r",
+                      "});\r",
+                      "\r",
+                      "///Negative Test\r",
+                      "} catch (e){\r",
+                      "\r",
+                      "pm.test(\"Check if Schema Response isn't empty\", function () {\r",
+                      "     pm.expect(schema).to.not.be.empty;\r",
+                      "});\r",
+                      " pm.test(\"Check consumerID variable isn't empty\", function () {\r",
+                      "     pm.expect('legacyID').to.not.be.empty;\r",
+                      "});\r",
+                      "}\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "_postman_id": "0c92314f-01aa-41d7-be4e-de99800cc780",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "accessToken": "{{OAuth_Token}}",
+                    "tokenType": "Bearer",
+                    "addTokenTo": "header"
+                  }
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Origin",
+                    "value": "Postman",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Username",
+                    "value": "Test-User",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/whitedata/consumer/WithoutPermissions/legacy/:legacyId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "whitedata",
+                    "consumer",
+                    "WithoutPermissions",
+                    "legacy",
+                    ":legacyId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "a93501aa-7f54-4a9e-917d-a03a05bd2fed",
+                      "key": "legacyId",
+                      "value": "{{legacyID}}",
+                      "type": "string",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Get White Data without permissions for a given legacyId. Using anonymous auth, maybe should be UserAuth, if not handled by consumer"
+              },
+              "response": [
+                {
+                  "id": "23545990-5272-4755-b41a-d332bb43f993",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/WithoutPermissions/legacy/:legacyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        "WithoutPermissions",
+                        "legacy",
+                        ":legacyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "legacyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "officia pariatur nisi labore"
+                },
+                {
+                  "id": "4d66bd3e-a813-4709-b5ed-eb03d80ca497",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/WithoutPermissions/legacy/:legacyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        "WithoutPermissions",
+                        "legacy",
+                        ":legacyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "legacyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "officia pariatur nisi labore"
+                },
+                {
+                  "id": "651dc692-6ab3-4190-89ac-c829c88bccc4",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/WithoutPermissions/legacy/:legacyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        "WithoutPermissions",
+                        "legacy",
+                        ":legacyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "legacyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "officia pariatur nisi labore"
+                },
+                {
+                  "id": "95e8929b-f546-4fe3-bf62-796e65194e90",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/WithoutPermissions/legacy/:legacyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        "WithoutPermissions",
+                        "legacy",
+                        ":legacyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "legacyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "officia pariatur nisi labore"
+                },
+                {
+                  "id": "ae85591d-222f-409c-a096-410a70beeadd",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/WithoutPermissions/legacy/:legacyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        "WithoutPermissions",
+                        "legacy",
+                        ":legacyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "legacyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "officia pariatur nisi labore"
+                },
+                {
+                  "id": "fddc6105-322b-4fcf-98a7-bc29a73f3cfc",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer/WithoutPermissions/legacy/:legacyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer",
+                        "WithoutPermissions",
+                        "legacy",
+                        ":legacyId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "legacyId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "officia pariatur nisi labore"
+                }
+              ]
+            }
+          ],
+          "_postman_id": "520555d8-06e4-4c1e-985b-fc9d9cef2cfc",
+          "_postman_isSubFolder": true
+        }
+      ],
       "_postman_id": "28b2d346-9689-4610-b1da-fb27a245116f"
     },
     {
