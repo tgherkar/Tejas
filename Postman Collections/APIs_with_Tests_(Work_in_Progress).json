@@ -66586,6 +66586,7 @@
                   "\r",
                   "    pm.test(\"TEST1D: Date Modified check\", function() {\r",
                   "     pm.expect(jsonData.lastModifiedDateTime.split('T')[0]).to.equal(data.last_modified_date_time.split(' ')[0]);\r",
+                  "     pm.expect(jsonData.lastModifiedDateTime.split('T')[1]).to.equal(data.last_modified_date_time.split(' ')[1]);\r",
                   "     });\r",
                   "\r",
                   "\r",
@@ -66704,6 +66705,11 @@
           }
         }
       ]
+    },
+    {
+      "name": "WhiteData",
+      "item": [],
+      "_postman_id": "28b2d346-9689-4610-b1da-fb27a245116f"
     },
     {
       "name": "Get Swagger",
