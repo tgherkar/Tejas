@@ -65064,7 +65064,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n\"consumerID\":123,\r\n\"scheduledPaymentSummaryId\":123,\r\n\"agencyID\":123,\r\n\"legacyID\":\"123\",\r\n\"planType\":\"string\",\r\n\"customerBankAccountID\":16864,\r\n\"ignoreFirstPayment\":true,\r\n\"isThirdPartyBank\":true,\r\n\"source\":\"test\"\r\n}\r\n\r\n",
+              "raw": "{\r\n\"consumerID\":2345985,\r\n\"scheduledPaymentSummaryId\":\"123\",\r\n\"agencyID\":123,\r\n\"legacyID\":14955872,\r\n\"planType\":\"string\",\r\n\"customerBankAccountID\":801512,\r\n\"ignoreFirstPayment\":true,\r\n\"isThirdPartyBank\":\"false\",\r\n\"source\":\"test\"\r\n}\r\n\r\n",
               "options": {
                 "raw": {
                   "language": "json"
