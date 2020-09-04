@@ -68467,14 +68467,7 @@
                   "\r",
                   "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                   "    }\r",
-                  "//console.log(\"End of Pre-req script\");\r",
-                  "\r",
-                  "\r",
-                  "\r",
-                  "/*\r",
-                  "SELECT TOP (100) [LegacyID] AS legacy_id\r",
-                  "  FROM [dbo].[NBA_DATA]\r",
-                  "*/"
+                  "//console.log(\"End of Pre-req script\");"
                 ],
                 "type": "text/javascript"
               }
