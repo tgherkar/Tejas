@@ -68521,14 +68521,14 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"consumerID\": 0,\r\n  \"amount\": 0,\r\n  \"paymentComments\": \"string\",\r\n  \"paymentLocationCode\": \"string\",\r\n  \"paymentMemoCode\": \"string\",\r\n  \"paymentMethod\": \"string\",\r\n  \"paymentType\": \"string\",\r\n  \"tenderedDate\": \"2020-09-04T08:35:21.895Z\"\r\n}",
+              "raw": "{\r\n  \"consumerID\": {{cnsmr_id}},\r\n  \"amount\": 1.50,\r\n  \"paymentComments\": \"Test Payment\",\r\n  \"paymentLocationCode\": \"string\",\r\n  \"paymentMemoCode\": \"string\",\r\n  \"paymentMethod\": \"string\",\r\n  \"paymentType\": \"string\",\r\n  \"tenderedDate\": \"2020-09-04T08:35:21.895Z\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
             },
-            "url": ""
+            "url": "{{baseUrl}}/payment//createPayment"
           },
           "response": []
         },
