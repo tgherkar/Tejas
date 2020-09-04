@@ -68964,7 +68964,7 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": ""
+            "url": "{{baseUrl}}/payment/"
           },
           "response": []
         }
