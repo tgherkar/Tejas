@@ -68646,7 +68646,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"autoPostBatch\": true,\r\n  \"batchName\": \"string\",\r\n  \"payments\": [\r\n    {\r\n      \"consumerID\": 0,\r\n      \"amount\": 0,\r\n      \"paymentComments\": \"string\",\r\n      \"paymentLocationCode\": \"string\",\r\n      \"paymentMemoCode\": \"string\",\r\n      \"paymentMethod\": \"string\",\r\n      \"paymentType\": \"string\",\r\n      \"tenderedDate\": \"2020-09-04T09:04:26.296Z\"\r\n    }\r\n  ]\r\n}",
+              "raw": "{\r\n  \"autoPostBatch\": true,\r\n  \"batchName\": \"string\",\r\n  \"payments\": [\r\n    {\r\n      \"consumerID\": {{cnsmr_id}},\r\n      \"amount\": 0,\r\n      \"paymentComments\": \"string\",\r\n      \"paymentLocationCode\": \"string\",\r\n      \"paymentMemoCode\": \"string\",\r\n      \"paymentMethod\": \"string\",\r\n      \"paymentType\": \"string\",\r\n      \"tenderedDate\": \"2020-09-04T09:04:26.296Z\"\r\n    }\r\n  ]\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
