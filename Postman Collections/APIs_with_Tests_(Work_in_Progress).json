@@ -69172,7 +69172,7 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/payment//consumer/:consumerId/datefrom/:dateFrom:/dateto/:dateTo/skip/:skip/take/:take",
+              "raw": "{{baseUrl}}/payment//consumer/:consumerId/datefrom/:dateFrom/dateto/:dateTo/skip/:skip/take/:take",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -69182,7 +69182,7 @@
                 "consumer",
                 ":consumerId",
                 "datefrom",
-                ":dateFrom:",
+                ":dateFrom",
                 "dateto",
                 ":dateTo",
                 "skip",
@@ -69193,11 +69193,11 @@
               "variable": [
                 {
                   "key": "consumerId",
-                  "value": "",
+                  "value": "{{cnsmr_id}}",
                   "type": "string"
                 },
                 {
-                  "key": "dateFrom:",
+                  "key": "dateFrom",
                   "value": "",
                   "type": "string"
                 },
@@ -69208,12 +69208,12 @@
                 },
                 {
                   "key": "skip",
-                  "value": "",
+                  "value": "{{skip}}",
                   "type": "string"
                 },
                 {
                   "key": "take",
-                  "value": "",
+                  "value": "{{take}}",
                   "type": "string"
                 }
               ]
@@ -69331,7 +69331,60 @@
                 "type": "text"
               }
             ],
-            "url": "{{baseUrl}}/payment/"
+            "url": {
+              "raw": "{{baseUrl}}/payment//consumer/:consumerId/linkedconsumers/:linkedConsumers/datefrom/:dateFrom/dateto/:dateTo/skip/:skip/take/:take",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payment",
+                "",
+                "consumer",
+                ":consumerId",
+                "linkedconsumers",
+                ":linkedConsumers",
+                "datefrom",
+                ":dateFrom",
+                "dateto",
+                ":dateTo",
+                "skip",
+                ":skip",
+                "take",
+                ":take"
+              ],
+              "variable": [
+                {
+                  "key": "consumerId",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "linkedConsumers",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "dateFrom",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "dateTo",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "skip",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "take",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            }
           },
           "response": []
         },
@@ -69445,7 +69498,45 @@
                 "type": "text"
               }
             ],
-            "url": "{{baseUrl}}/payment/"
+            "url": {
+              "raw": "{{baseUrl}}/payment/consumer/:consumerId/linkedconsumers/:linkedConsumers/skip/:skip/take/:take",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payment",
+                "consumer",
+                ":consumerId",
+                "linkedconsumers",
+                ":linkedConsumers",
+                "skip",
+                ":skip",
+                "take",
+                ":take"
+              ],
+              "variable": [
+                {
+                  "key": "consumerId",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "linkedConsumers",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "skip",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "take",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            }
           },
           "response": []
         }
