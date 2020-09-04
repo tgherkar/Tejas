@@ -68771,7 +68771,7 @@
                   "    });\r",
                   "\r",
                   "    pm.test(\"TEST4: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {\r",
-                  "        pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "        pm.expect(pm.response.responseTime).to.be.below(3000);\r",
                   "    });\r",
                   "\r",
                   "    var Ajv = require('ajv'),\r",
