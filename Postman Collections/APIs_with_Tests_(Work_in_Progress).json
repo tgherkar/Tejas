@@ -68794,7 +68794,24 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": ""
+            "url": {
+              "raw": "{{baseUrl}}/payment/:paymentId/detail",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payment",
+                ":paymentId",
+                "detail"
+              ],
+              "variable": [
+                {
+                  "key": "paymentId",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            }
           },
           "response": []
         },
