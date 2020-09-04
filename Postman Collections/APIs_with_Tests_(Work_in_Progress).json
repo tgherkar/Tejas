@@ -45492,7 +45492,9 @@
                   "OUTER APPLY (SELECT TOP 1 * FROM dbo.SFSSaving WHERE SFSID = S.SFSID ORDER BY SFSID DESC) SS\r",
                   "OUTER APPLY (SELECT TOP 1 * FROM dbo.SFSDescription WHERE SFSID = S.SFSID ORDER BY SFSID DESC) D\r",
                   "OUTER APPLY (SELECT TOP 1 * FROM dbo.SFSConsumerDetail WHERE SFSID = S.SFSID ORDER BY SFSID DESC) CD\r",
-                  "OUTER APPLY (SELECT TOP 1 * FROM dbo.SFS WHERE SFSID = S.SFSID ORDER BY SFSID DESC) DE"
+                  "OUTER APPLY (SELECT TOP 1 * FROM dbo.SFS WHERE SFSID = S.SFSID ORDER BY SFSID DESC) DE\r",
+                  "\r",
+                  "*/"
                 ],
                 "type": "text/javascript"
               }
