@@ -68486,6 +68486,32 @@
             "url": ""
           },
           "response": []
+        },
+        {
+          "name": "GetPaymentsByConsumerIDByLinkedByDate",
+          "_postman_id": "20e7d45e-4bd0-4704-8d81-1e6ae6990ca3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": ""
+          },
+          "response": []
+        },
+        {
+          "name": "GetPaymentsByConsumerIDWithLinkedConsumers",
+          "_postman_id": "1cf43eff-cc07-4cc0-ba21-1a5450c2f52e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": ""
+          },
+          "response": []
         }
       ],
       "_postman_id": "c1718198-a762-43b4-8c2a-dec5d25836a9"
