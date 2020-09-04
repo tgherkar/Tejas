@@ -53231,7 +53231,7 @@
                       "    let expectedCode = pm.iterationData.get(\"expectedHttpCode\");\r",
                       "    var jsonData = JSON.parse(responseBody);\r",
                       "    var query = request.url.split('/');\r",
-                      "    console.log(query);\r",
+                      "    //console.log(query);\r",
                       "    //if((1==1 || 2==4) && 3==3){console.log(\"yay\");} else{console.log(\"nay\");}\r",
                       "    pm.test(\"TEST1: Consumer ID Check\", function () {\r",
                       "        for(var i=0; i<jsonData.length; i++){\r",
