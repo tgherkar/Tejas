@@ -68473,6 +68473,19 @@
             "url": ""
           },
           "response": []
+        },
+        {
+          "name": "GetPaymentsByConsumerIDByDate",
+          "_postman_id": "78f40b73-c4d6-457d-88fb-ffa4d13f419b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": ""
+          },
+          "response": []
         }
       ],
       "_postman_id": "c1718198-a762-43b4-8c2a-dec5d25836a9"
