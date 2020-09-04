@@ -68434,6 +68434,19 @@
             "url": ""
           },
           "response": []
+        },
+        {
+          "name": "GetPaymentByPaymentID",
+          "_postman_id": "7a5634c9-bead-4392-abaa-8f14da6f6107",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": ""
+          },
+          "response": []
         }
       ],
       "_postman_id": "c1718198-a762-43b4-8c2a-dec5d25836a9"
