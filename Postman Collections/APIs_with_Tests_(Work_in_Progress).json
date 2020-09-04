@@ -69043,17 +69043,17 @@
               "variable": [
                 {
                   "key": "consumerId",
-                  "value": "",
+                  "value": "{{cnsmr_id}}",
                   "type": "string"
                 },
                 {
                   "key": "skip",
-                  "value": "",
+                  "value": "{{skip}}",
                   "type": "string"
                 },
                 {
                   "key": "take",
-                  "value": "",
+                  "value": "{{take}}",
                   "type": "string"
                 }
               ]
