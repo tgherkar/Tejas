@@ -68760,13 +68760,6 @@
                   "        pm.test(\"TEST1G: paymentType check\", function () {\r",
                   "            pm.expect(jsonData.paymentType).to.deep.equal(data.paymentType);\r",
                   "        });\r",
-                  "        pm.test(\"TEST1D: twoFA Preference check\", function () {\r",
-                  "            if(jsonData.twoFAPreference==\"None\"){\r",
-                  "                pm.expect(data.TFA_Method.toUpperCase()).to.deep.equal(\"NULL\");\r",
-                  "            }else{\r",
-                  "                pm.expect(data.TFA_Method).to.deep.equal(jsonData.twoFAPreference);\r",
-                  "            }\r",
-                  "        });\r",
                   "    }\r",
                   "\r",
                   "    pm.test(\"TEST2: Status code Check\", function () {\r",
@@ -68778,7 +68771,7 @@
                   "    });\r",
                   "\r",
                   "    pm.test(\"TEST4: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function () {\r",
-                  "        pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "        pm.expect(pm.response.responseTime).to.be.below(3000);\r",
                   "    });\r",
                   "\r",
                   "    var Ajv = require('ajv'),\r",
@@ -68847,12 +68840,10 @@
                   "        pm.expect(pm.response.responseTime).to.be.below(5000);\r",
                   "    });\r",
                   "    pm.test(\"Response Header Checks\", function () {\r",
-                  "        pm.response.to.have.header('Content-Type', 'text/plain; charset=utf-8', 'Vary', 'Accept-Encoding', 'X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                  "        pm.response.to.have.header('Cache-Control', 'no-cache, no-store', 'X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Content-Length', '0', 'Date', '', 'Request-Context', '');\r",
                   "    });\r",
-                  "    pm.test(\"Incorrect Consumer ID should be not found\", function () {\r",
-                  "        pm.expect(responseCode.code).to.equal(400);\r",
-                  "        pm.expect(responseBody).to.equal(\"Unable to find consumer with consumerId: \" + query[4]);\r",
-                  "        pm.expect(cid[1]).to.deep.equal(\" \" + query[6]);\r",
+                  "    pm.test(\"Response check\", function () {\r",
+                  "        pm.expect(responseCode.code).to.equal(204);\r",
                   "    });\r",
                   "}\r",
                   ""
@@ -68919,7 +68910,7 @@
               "variable": [
                 {
                   "key": "paymentId",
-                  "value": "{{PaymentID}}",
+                  "value": "123231",
                   "type": "string"
                 }
               ]
