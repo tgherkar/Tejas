@@ -69362,7 +69362,7 @@
                 },
                 {
                   "key": "linkedConsumers",
-                  "value": "",
+                  "value": "true",
                   "type": "string"
                 },
                 {
