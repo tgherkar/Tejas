@@ -68539,9 +68539,57 @@
             "disableBodyPruning": true
           },
           "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
             "method": "GET",
-            "header": [],
-            "url": ""
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
+              },
+              {
+                "key": "Correlation-Id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Origin",
+                "value": "Postman",
+                "type": "text"
+              },
+              {
+                "key": "Username",
+                "value": "{{$randomUserName}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"autoPostBatch\": true,\r\n  \"batchName\": \"string\",\r\n  \"payments\": [\r\n    {\r\n      \"consumerID\": 0,\r\n      \"amount\": 0,\r\n      \"paymentComments\": \"string\",\r\n      \"paymentLocationCode\": \"string\",\r\n      \"paymentMemoCode\": \"string\",\r\n      \"paymentMethod\": \"string\",\r\n      \"paymentType\": \"string\",\r\n      \"tenderedDate\": \"2020-09-04T09:04:26.296Z\"\r\n    }\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/payment/batch"
           },
           "response": []
         },
