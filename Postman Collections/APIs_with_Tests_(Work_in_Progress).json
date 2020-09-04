@@ -68733,7 +68733,7 @@
                   "    let expectedCode = pm.iterationData.get(\"expectedHttpCode\");\r",
                   "    var jsonData = JSON.parse(responseBody);\r",
                   "    var query = request.url.split('/');\r",
-                  "    //console.log(JSON.stringify(jsonData.paymentID).slice(0,-4));\r",
+                  "    //console.log(JSON.stringify(jsonData.balanceAfter).slice(0,-1));\r",
                   "    pm.test(\"TEST1: Payment ID Check\", function () {\r",
                   "        pm.expect(JSON.stringify(jsonData.paymentID)).to.deep.equal(query[4]);\r",
                   "    });\r",
