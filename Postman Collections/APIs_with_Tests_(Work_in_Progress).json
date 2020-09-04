@@ -69198,12 +69198,12 @@
                 },
                 {
                   "key": "dateFrom",
-                  "value": "",
+                  "value": "2010-12-31 ",
                   "type": "string"
                 },
                 {
                   "key": "dateTo",
-                  "value": "",
+                  "value": "2020-08-30",
                   "type": "string"
                 },
                 {
