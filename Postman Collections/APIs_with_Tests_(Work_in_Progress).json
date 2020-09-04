@@ -68925,7 +68925,7 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": ""
+            "url": "{{baseUrl}}/payment/consumer/{consumerId}/skip/{skip}/take/{take}"
           },
           "response": []
         },
