@@ -68421,6 +68421,19 @@
             "url": ""
           },
           "response": []
+        },
+        {
+          "name": "createPaymentBatch",
+          "_postman_id": "feb76561-e976-4110-88b2-b83b2c2a71c5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": ""
+          },
+          "response": []
         }
       ],
       "_postman_id": "c1718198-a762-43b4-8c2a-dec5d25836a9"
