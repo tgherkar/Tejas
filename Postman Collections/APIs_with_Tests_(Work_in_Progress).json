@@ -68918,14 +68918,115 @@
         },
         {
           "name": "GetPaymentsByConsumerID",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "5b50dc2f-13a6-4812-9e78-436d1038a4da",
+                "exec": [
+                  "    var tokenDate = new Date(2010,1,1);\r",
+                  "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "    if(tokenTimestamp){\r",
+                  "        tokenDate = Date.parse(tokenTimestamp);\r",
+                  "    }else{\r",
+                  "        tokenDate = Date.parse(\"2018-03-29T13:34:00.000\");\r",
+                  "    }\r",
+                  "    console.log(\"timestamp is: \"+tokenDate +\" new time is: \"+Date.parse(new Date()));\r",
+                  "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "    if(!expiresInTime){\r",
+                  "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "    }\r",
+                  "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                  "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                  "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
+                  "    let clientId = pm.environment.get(\"clientId\");\r",
+                  "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
+                  "    let scope = pm.environment.get(\"clientScope\");\r",
+                  "\r",
+                  "        let getTokenRequest = {\r",
+                  "            method: 'POST',\r",
+                  "            url: tokenUrl,\r",
+                  "            auth: {\r",
+                  "                type: \"basic\",\r",
+                  "                basic: [\r",
+                  "                    { key: \"username\", value: clientId },\r",
+                  "                    { key: \"password\", value: clientSecret }\r",
+                  "                ]\r",
+                  "            },\r",
+                  "            body: {\r",
+                  "                mode: 'formdata',\r",
+                  "                formdata: [\r",
+                  "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                    { key: 'scope', value: scope }\r",
+                  "                ]\r",
+                  "            }\r",
+                  "        };\r",
+                  "\r",
+                  "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "            let jsonResponse = response.json(),\r",
+                  "            newAccessToken = jsonResponse.access_token;\r",
+                  "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "\r",
+                  "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "        });\r",
+                  "\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "    }\r",
+                  "//console.log(\"End of Pre-req script\");"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
           "_postman_id": "b01756ea-e2fc-4dd9-91de-4b8eaa31ec9d",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
           "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
             "method": "GET",
-            "header": [],
-            "url": ""
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
+              },
+              {
+                "key": "Correlation-Id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Origin",
+                "value": "Postman",
+                "type": "text"
+              },
+              {
+                "key": "Username",
+                "value": "{{$randomUserName}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{baseUrl}}/payment/consumer/{consumerId}/skip/{skip}/take/{take}"
           },
           "response": []
         },
@@ -68964,7 +69065,7 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": ""
+            "url": "{{baseUrl}}/payment/"
           },
           "response": []
         }
