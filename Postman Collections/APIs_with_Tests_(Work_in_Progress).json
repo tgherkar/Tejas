@@ -68408,7 +68408,21 @@
     },
     {
       "name": "Payment",
-      "item": [],
+      "item": [
+        {
+          "name": "Create Payment",
+          "_postman_id": "498083d0-8920-4383-9d68-b0f22a81a35a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": ""
+          },
+          "response": []
+        }
+      ],
       "_postman_id": "c1718198-a762-43b4-8c2a-dec5d25836a9"
     },
     {
