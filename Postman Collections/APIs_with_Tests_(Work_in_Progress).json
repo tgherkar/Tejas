@@ -68528,7 +68528,7 @@
                 }
               }
             },
-            "url": "{{baseUrl}}/payment//createPayment"
+            "url": "{{baseUrl}}/payment/createPayment"
           },
           "response": []
         },
