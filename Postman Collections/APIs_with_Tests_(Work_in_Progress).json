@@ -69028,7 +69028,7 @@
                   "            pm.expect(jsonData.postedDate.split('T')[0]).to.deep.equal(data.postedDate.split(' ')[0]);\r",
                   "        });\r",
                   "        pm.test(\"TEST1G: paymentType check\", function () {\r",
-                  "            pm.expect(jsonData.comment).to.deep.equal(data.pymnt_comment);\r",
+                  "            pm.expect(jsonData.paymentType).to.deep.equal(data.paymentType);\r",
                   "        });\r",
                   "    }\r",
                   "\r",
