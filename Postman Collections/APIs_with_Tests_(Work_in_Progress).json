@@ -69983,7 +69983,25 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": ""
+            "url": {
+              "raw": "{{BaseURL}}/dialler/task/callData/:callDataRecordID",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "dialler",
+                "task",
+                "callData",
+                ":callDataRecordID"
+              ],
+              "variable": [
+                {
+                  "key": "callDataRecordID",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            }
           },
           "response": []
         }
