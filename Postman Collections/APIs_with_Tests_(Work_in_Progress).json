@@ -75826,7 +75826,21 @@
     },
     {
       "name": "AW_SMS_Templates2",
-      "item": [],
+      "item": [
+        {
+          "name": "adminTemplateGet",
+          "_postman_id": "324c47b9-f9b6-4378-a19f-1222c6258b34",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/sms/template/{activeStatus}/admin"
+          },
+          "response": []
+        }
+      ],
       "_postman_id": "ef6d584f-90eb-4f03-8e2c-05abfca745b7"
     },
     {
