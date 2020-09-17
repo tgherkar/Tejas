@@ -70511,7 +70511,21 @@
     },
     {
       "name": "Account_Ownership",
-      "item": [],
+      "item": [
+        {
+          "name": "Post AccountOwner",
+          "_postman_id": "2ad32996-d288-41c8-884c-2f7187a57615",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": ""
+          },
+          "response": []
+        }
+      ],
       "_postman_id": "5394e21b-91ba-4f12-ac83-939c6f558251"
     },
     {
