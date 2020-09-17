@@ -76488,7 +76488,7 @@
           "response": []
         },
         {
-          "name": "templateGet",
+          "name": "SendSMS Copy 4",
           "event": [
             {
               "listen": "prerequest",
