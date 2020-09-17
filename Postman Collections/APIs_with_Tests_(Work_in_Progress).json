@@ -76565,15 +76565,14 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/sms/template/:activeStatus/admin",
+              "raw": "{{baseUrl}}/sms/template/:activeStatus",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "sms",
                 "template",
-                ":activeStatus",
-                "admin"
+                ":activeStatus"
               ],
               "variable": [
                 {
