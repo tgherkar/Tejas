@@ -70519,9 +70519,17 @@
             "disableBodyPruning": true
           },
           "request": {
-            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "POST",
             "header": [],
-            "url": ""
+            "url": "{{baseUrl}}/accountowner"
           },
           "response": []
         }
