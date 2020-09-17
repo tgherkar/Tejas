@@ -70514,6 +70514,68 @@
       "item": [
         {
           "name": "Post AccountOwner",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "767d34c5-153b-4be5-b24e-67d81e16184f",
+                "exec": [
+                  "    var tokenDate = new Date(2010,1,1);\r",
+                  "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "    if(tokenTimestamp){\r",
+                  "        tokenDate = Date.parse(tokenTimestamp);\r",
+                  "    }else{\r",
+                  "        tokenDate = Date.parse(\"2018-03-29T13:34:00.000\");\r",
+                  "    }\r",
+                  "    console.log(\"timestamp is: \"+tokenDate +\" new time is: \"+Date.parse(new Date()));\r",
+                  "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "    if(!expiresInTime){\r",
+                  "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "    }\r",
+                  "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                  "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                  "    let tokenUrl = pm.environment.get(\"tokenUrl\");\r",
+                  "    let clientId = pm.environment.get(\"clientId\");\r",
+                  "    let clientSecret = pm.environment.get(\"clientSecret\");\r",
+                  "    let scope = pm.environment.get(\"clientScope\");\r",
+                  "\r",
+                  "        let getTokenRequest = {\r",
+                  "            method: 'POST',\r",
+                  "            url: tokenUrl,\r",
+                  "            auth: {\r",
+                  "                type: \"basic\",\r",
+                  "                basic: [\r",
+                  "                    { key: \"username\", value: clientId },\r",
+                  "                    { key: \"password\", value: clientSecret }\r",
+                  "                ]\r",
+                  "            },\r",
+                  "            body: {\r",
+                  "                mode: 'formdata',\r",
+                  "                formdata: [\r",
+                  "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                    { key: 'scope', value: scope }\r",
+                  "                ]\r",
+                  "            }\r",
+                  "        };\r",
+                  "\r",
+                  "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "            let jsonResponse = response.json(),\r",
+                  "            newAccessToken = jsonResponse.access_token;\r",
+                  "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "\r",
+                  "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "        });\r",
+                  "\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "    }\r",
+                  "//console.log(\"End of Pre-req script\");"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
           "_postman_id": "2ad32996-d288-41c8-884c-2f7187a57615",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
@@ -70528,7 +70590,45 @@
               }
             },
             "method": "POST",
-            "header": [],
+            "header": [
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
+              },
+              {
+                "key": "Correlation-Id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Origin",
+                "value": "Postman",
+                "type": "text"
+              },
+              {
+                "key": "Username",
+                "value": "{{$randomUserName}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"consumerID\": 11213\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
             "url": "{{baseUrl}}/accountowner"
           },
           "response": []
@@ -74949,7 +75049,7 @@
                 },
                 {
                   "key": "emailAddress",
-                  "value": "tgherkar@cabotfinancial.com",
+                  "value": "lusimpson@cabotcm.com",
                   "type": "text"
                 },
                 {
@@ -74959,7 +75059,7 @@
                 },
                 {
                   "key": "messageBody",
-                  "value": "Hello",
+                  "value": "<table><thead><tr><th>Cheque or Bacs?</th><th> </th></tr></thead><tbody><tr><td>Date of Refund Request:</td><td>{DateToday}</td></tr><tr><td>Amount:</td><td> </td></tr><tr><td>Legacy Id:</td><td>{Consumer.LegacyID}</td></tr><tr><td>Customer Name:</td><td>{Consumer.ConsumerFirstName} {Consumer.ConsumerLastName}</td></tr><tr><td>Payable To:</td><td>{Consumer.ConsumerFirstName} {Consumer.ConsumerLastName}</td></tr><tr><td>Payment Method (Bacs or Cheque):</td><td> </td></tr><tr><td>Account No:</td><td> </td></tr><tr><td>Sort Code:</td><td> </td></tr><tr><td>Third Party Authority Requited:</td><td> </td></tr><tr><td>Refund Reason:</td><td> </td></tr></tbody></table>",
                   "type": "text"
                 },
                 {
