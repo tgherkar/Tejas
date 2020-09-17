@@ -74490,7 +74490,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"description\": \"Test Form\",\n    \"toEmail\": \"cabottestemail@test.com\",\n    \"templateBody\": \"<table><thead><tr><th>Account Reference &amp; Customer Name:</th><th>{Consumer.LegacyID} {Consumer.ConsumerFirstName} {Consumer.ConsumerLastName}</th></tr></thead><tbody><tr><td>Vulnerability:</td><td> </td></tr><tr><td>Telephone or Postcode:</td><td>{ConsumerAddress.Postcode}</td></tr><tr><td>Call Back Date:</td><td> </td></tr><tr><td>Call Back AM or PM:</td><td> </td></tr><tr><td>DCON taken to call customer?</td><td> </td></tr><tr><td>Reason for call back request:</td><td> </td></tr></tbody></table>\",\n    \"actionCode\": \"CO\",\n    \"resultCode\": \"CO\",\n    \"isActive\": \"true\"\n}",
+                  "raw": "{\n    \"description\": \"Test Formr\",\n    \"toEmail\": \"cabottestemail@test.com\",\n    \"templateBody\": \"<table><thead><tr><th>Account Reference &amp; Customer Name:</th><th>{Consumer.LegacyID} {Consumer.ConsumerFirstName} {Consumer.ConsumerLastName}</th></tr></thead><tbody><tr><td>Vulnerability:</td><td> </td></tr><tr><td>Telephone or Postcode:</td><td>{ConsumerAddress.Postcode}</td></tr><tr><td>Call Back Date:</td><td> </td></tr><tr><td>Call Back AM or PM:</td><td> </td></tr><tr><td>DCON taken to call customer?</td><td> </td></tr><tr><td>Reason for call back request:</td><td> </td></tr></tbody></table>\",\n    \"actionCode\": \"CO\",\n    \"resultCode\": \"CO\",\n    \"isActive\": \"true\"\n}",
                   "options": {
                     "raw": {}
                   }
@@ -76311,25 +76311,14 @@
                 "value": "{{$randomUserName}}"
               }
             ],
-            "url": {
-              "raw": "{{baseUrl}}/sms/template/:activeStatus/admin",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "sms",
-                "template",
-                ":activeStatus",
-                "admin"
-              ],
-              "variable": [
-                {
-                  "key": "activeStatus",
-                  "value": "0",
-                  "type": "string"
-                }
-              ]
-            }
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"templateCode\": 0,\r\n  \"displayName\": \"string\",\r\n  \"templateBody\": \"string\",\r\n  \"campaign\": \"string\",\r\n  \"type\": \"string\",\r\n  \"isActive\": true,\r\n  \"isAgentPortalOption\": true\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "{{baseUrl}}/sms/template/admin"
           },
           "response": []
         },
@@ -76444,20 +76433,20 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/sms/template/:activeStatus/admin",
+              "raw": "{{baseUrl}}/sms/template/:templateCode/admin",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "sms",
                 "template",
-                ":activeStatus",
+                ":templateCode",
                 "admin"
               ],
               "variable": [
                 {
-                  "key": "activeStatus",
-                  "value": "0",
+                  "key": "templateCode",
+                  "value": "",
                   "type": "string"
                 }
               ]
