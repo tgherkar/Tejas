@@ -70748,37 +70748,37 @@
                 "addTokenTo": "header"
               }
             },
-            "method": "DELETE",
+            "method": "POST",
             "header": [
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
-                "type": "text",
-                "value": "{{Ocp-Apim-Subscription-Key-South}}"
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
               },
               {
                 "key": "Ocp-Apim-Subscription-Key-West",
-                "type": "text",
-                "value": "{{Ocp-Apim-Subscription-Key-West}}"
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
               },
               {
                 "key": "Correlation-Id",
-                "type": "text",
-                "value": "{{$guid}}"
+                "value": "{{$guid}}",
+                "type": "text"
               },
               {
                 "key": "Content-Type",
-                "type": "text",
-                "value": "application/json"
+                "value": "application/json",
+                "type": "text"
               },
               {
                 "key": "Origin",
-                "type": "text",
-                "value": "Postman"
+                "value": "Postman",
+                "type": "text"
               },
               {
                 "key": "Username",
-                "type": "text",
-                "value": "{{$randomUserName}}"
+                "value": "{{$randomUserName}}",
+                "type": "text"
               }
             ],
             "body": {
