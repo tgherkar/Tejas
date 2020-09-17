@@ -76224,7 +76224,7 @@
           "response": []
         },
         {
-          "name": "Template Update",
+          "name": "SendSMS Copy 2",
           "event": [
             {
               "listen": "prerequest",
@@ -76300,37 +76300,37 @@
                 "addTokenTo": "header"
               }
             },
-            "method": "PUT",
+            "method": "POST",
             "header": [
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
-                "type": "text",
-                "value": "{{Ocp-Apim-Subscription-Key-South}}"
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
               },
               {
                 "key": "Ocp-Apim-Subscription-Key-West",
-                "type": "text",
-                "value": "{{Ocp-Apim-Subscription-Key-West}}"
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
               },
               {
                 "key": "Correlation-Id",
-                "type": "text",
-                "value": "{{$guid}}"
+                "value": "{{$guid}}",
+                "type": "text"
               },
               {
                 "key": "Content-Type",
-                "type": "text",
-                "value": "application/json"
+                "value": "application/json",
+                "type": "text"
               },
               {
                 "key": "Origin",
-                "type": "text",
-                "value": "Postman"
+                "value": "Postman",
+                "type": "text"
               },
               {
                 "key": "Username",
-                "type": "text",
-                "value": "{{$randomUserName}}"
+                "value": "{{$randomUserName}}",
+                "type": "text"
               }
             ],
             "url": {
@@ -76346,6 +76346,7 @@
               ],
               "variable": [
                 {
+                  "id": "f4ddf967-4e0d-4068-bb4e-7a43a9cf6dda",
                   "key": "activeStatus",
                   "value": "0",
                   "type": "string"
