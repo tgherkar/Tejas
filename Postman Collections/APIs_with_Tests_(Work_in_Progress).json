@@ -76076,7 +76076,25 @@
                 "raw": {}
               }
             },
-            "url": "{{baseUrl}}/sms/template/"
+            "url": {
+              "raw": "{{baseUrl}}/sms/template/:activeStatus/admin",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sms",
+                "template",
+                ":activeStatus",
+                "admin"
+              ],
+              "variable": [
+                {
+                  "key": "activeStatus",
+                  "value": "0",
+                  "type": "string"
+                }
+              ]
+            }
           },
           "response": []
         },
