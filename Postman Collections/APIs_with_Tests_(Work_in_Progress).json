@@ -76069,6 +76069,13 @@
                 "type": "text"
               }
             ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"smsRequestID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"consumerID\": 0,\r\n  \"consumerPhoneID\": 0,\r\n  \"number\": \"string\",\r\n  \"templateCode\": 0,\r\n  \"messageBody\": \"string\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
             "url": {
               "raw": "{{baseUrl}}/sms/template/:activeStatus/admin",
               "host": [
@@ -76488,7 +76495,7 @@
           "response": []
         },
         {
-          "name": "SendSMS Copy 4",
+          "name": "templateGet",
           "event": [
             {
               "listen": "prerequest",
@@ -76564,37 +76571,37 @@
                 "addTokenTo": "header"
               }
             },
-            "method": "POST",
+            "method": "GET",
             "header": [
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
-                "value": "{{Ocp-Apim-Subscription-Key-South}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}"
               },
               {
                 "key": "Ocp-Apim-Subscription-Key-West",
-                "value": "{{Ocp-Apim-Subscription-Key-West}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}"
               },
               {
                 "key": "Correlation-Id",
-                "value": "{{$guid}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{$guid}}"
               },
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
+                "type": "text",
+                "value": "application/json"
               },
               {
                 "key": "Origin",
-                "value": "Postman",
-                "type": "text"
+                "type": "text",
+                "value": "Postman"
               },
               {
                 "key": "Username",
-                "value": "{{$randomUserName}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{$randomUserName}}"
               }
             ],
             "url": {
@@ -76610,7 +76617,6 @@
               ],
               "variable": [
                 {
-                  "id": "5d499733-684c-434e-a719-91bb464a438f",
                   "key": "activeStatus",
                   "value": "0",
                   "type": "string"
