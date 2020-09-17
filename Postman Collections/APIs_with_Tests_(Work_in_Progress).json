@@ -70873,7 +70873,7 @@
       "_postman_id": "5394e21b-91ba-4f12-ac83-939c6f558251"
     },
     {
-      "name": "Autowrap_QuickNotes",
+      "name": "AW_QuickNotes",
       "item": [
         {
           "name": "actionresult",
@@ -73968,7 +73968,7 @@
       "_postman_id": "8012988e-7e11-4f28-852d-0ec29fb87f33"
     },
     {
-      "name": "Autowrap_Email",
+      "name": "AW_Email",
       "item": [
         {
           "name": "template",
@@ -74084,7 +74084,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"templateCode\": 10,\n    \"description\": \"Test Form\",\n    \"toEmail\": \"cabottestemail@test.com\",\n    \"templateBody\": \"<table><thead><tr><th>Account Reference &amp; Customer Name:</th><th>{Consumer.LegacyID} {Consumer.ConsumerFirstName} {Consumer.ConsumerLastName}</th></tr></thead><tbody><tr><td>Vulnerability:</td><td> </td></tr><tr><td>Telephone or Postcode:</td><td>{ConsumerAddress.Postcode}</td></tr><tr><td>Call Back Date:</td><td> </td></tr><tr><td>Call Back AM or PM:</td><td> </td></tr><tr><td>DCON taken to call customer?</td><td> </td></tr><tr><td>Reason for call back request:</td><td> </td></tr></tbody></table>\",\n    \"actionCode\": \"CO\",\n    \"resultCode\": \"CO\",\n    \"isActive\": true\n}",
+                  "raw": "{\n    \"templateCode\": 10,\n    \"description\": \"Test Formr\",\n    \"toEmail\": \"cabottestemail@test.com\",\n    \"templateBody\": \"<table><thead><tr><th>Account Reference &amp; Customer Name:</th><th>{Consumer.LegacyID} {Consumer.ConsumerFirstName} {Consumer.ConsumerLastName}</th></tr></thead><tbody><tr><td>Vulnerability:</td><td> </td></tr><tr><td>Telephone or Postcode:</td><td>{ConsumerAddress.Postcode}</td></tr><tr><td>Call Back Date:</td><td> </td></tr><tr><td>Call Back AM or PM:</td><td> </td></tr><tr><td>DCON taken to call customer?</td><td> </td></tr><tr><td>Reason for call back request:</td><td> </td></tr></tbody></table>\",\n    \"actionCode\": \"CO\",\n    \"resultCode\": \"CO\",\n    \"isActive\": true\n}",
                   "options": {
                     "raw": {}
                   }
@@ -75822,7 +75822,29 @@
           ]
         }
       ],
-      "_postman_id": "cc6f8e1e-d94a-4785-a739-cbc726ef02da"
+      "_postman_id": "cc6f8e1e-d94a-4785-a739-cbc726ef02da",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "4b46703e-c91e-4a21-aa83-a754aca3f4e7",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "ab8bcaa4-2fbf-4c05-a4c3-5c61bf3c8a30",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
     },
     {
       "name": "AW_SMS_Templates2",
