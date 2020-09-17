@@ -75960,7 +75960,7 @@
           "response": []
         },
         {
-          "name": "adminTemplateGet Copy",
+          "name": "SendSMS",
           "event": [
             {
               "listen": "prerequest",
