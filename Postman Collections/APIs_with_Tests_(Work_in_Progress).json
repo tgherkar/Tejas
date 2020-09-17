@@ -6554,23 +6554,33 @@
             "header": [
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
-                "type": "text",
-                "value": "{{Ocp-Apim-Subscription-Key-South}}"
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
               },
               {
                 "key": "Ocp-Apim-Subscription-Key-West",
-                "type": "text",
-                "value": "{{Ocp-Apim-Subscription-Key-West}}"
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
               },
               {
                 "key": "Correlation-Id",
-                "type": "text",
-                "value": "{{$guid}}"
+                "value": "{{$guid}}",
+                "type": "text"
               },
               {
                 "key": "Content-Type",
-                "type": "text",
-                "value": "application/json"
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Origin",
+                "value": "Postman",
+                "type": "text"
+              },
+              {
+                "key": "Username",
+                "value": "{{$randomUserName}}",
+                "type": "text"
               }
             ],
             "url": {
@@ -6590,7 +6600,7 @@
               "variable": [
                 {
                   "key": "consumerId",
-                  "value": "3402183",
+                  "value": "{{cnsmr_id}}",
                   "type": "string"
                 },
                 {
@@ -6605,12 +6615,12 @@
                 },
                 {
                   "key": "messagePart",
-                  "value": "hello",
+                  "value": "h",
                   "type": "string"
                 },
                 {
                   "key": "num",
-                  "value": "3",
+                  "value": "0",
                   "type": "string"
                 }
               ]
