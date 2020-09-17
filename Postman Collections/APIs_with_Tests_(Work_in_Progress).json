@@ -74839,14 +74839,12 @@
                   ],
                   "variable": [
                     {
-                      "id": "b257e77b-7f0b-45ed-b03f-04315eb2985c",
                       "key": "templateCode",
-                      "value": "1",
+                      "value": "3",
                       "type": "string",
                       "description": "(Required) "
                     },
                     {
-                      "id": "0ec599a9-4cb1-4278-92ad-72001cb4bfce",
                       "key": "consumerID",
                       "value": "2361220",
                       "type": "string",
