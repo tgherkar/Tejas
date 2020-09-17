@@ -70653,7 +70653,7 @@
           "response": []
         },
         {
-          "name": "Post AccountOwner Copy",
+          "name": "Delete AccountOwner",
           "event": [
             {
               "listen": "prerequest",
@@ -70748,37 +70748,37 @@
                 "addTokenTo": "header"
               }
             },
-            "method": "POST",
+            "method": "DELETE",
             "header": [
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
-                "value": "{{Ocp-Apim-Subscription-Key-South}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}"
               },
               {
                 "key": "Ocp-Apim-Subscription-Key-West",
-                "value": "{{Ocp-Apim-Subscription-Key-West}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}"
               },
               {
                 "key": "Correlation-Id",
-                "value": "{{$guid}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{$guid}}"
               },
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
+                "type": "text",
+                "value": "application/json"
               },
               {
                 "key": "Origin",
-                "value": "Postman",
-                "type": "text"
+                "type": "text",
+                "value": "Postman"
               },
               {
                 "key": "Username",
-                "value": "{{$randomUserName}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{$randomUserName}}"
               }
             ],
             "body": {
