@@ -70574,6 +70574,25 @@
                 ],
                 "type": "text/javascript"
               }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "5002a934-1404-432b-816e-5c3913d017c4",
+                "exec": [
+                  "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([204,202,400]);\r",
+                  "});\r",
+                  "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                  "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
             }
           ],
           "_postman_id": "2ad32996-d288-41c8-884c-2f7187a57615",
@@ -70624,12 +70643,12 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"consumerID\": 1583175\r\n}",
+              "raw": "{\r\n  \"consumerID\": 11221232432\r\n}",
               "options": {
                 "raw": {}
               }
             },
-            "url": "{{baseUrl}}/accountowner"
+            "url": "{{baseUrl}}/agent/accountowner"
           },
           "response": []
         }
