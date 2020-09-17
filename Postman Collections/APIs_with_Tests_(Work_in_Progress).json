@@ -6600,7 +6600,7 @@
               "variable": [
                 {
                   "key": "consumerId",
-                  "value": "{{cnsmr_id}}",
+                  "value": "3402183",
                   "type": "string"
                 },
                 {
@@ -6615,12 +6615,12 @@
                 },
                 {
                   "key": "messagePart",
-                  "value": "h",
+                  "value": "world",
                   "type": "string"
                 },
                 {
                   "key": "num",
-                  "value": "0",
+                  "value": "100",
                   "type": "string"
                 }
               ]
@@ -70587,7 +70587,7 @@
       "_postman_id": "9174c8c0-96ec-4cee-aae5-88862ccb204e"
     },
     {
-      "name": "Account_Ownership",
+      "name": "AW_Account_Ownership",
       "item": [
         {
           "name": "Post AccountOwner",
