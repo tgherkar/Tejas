@@ -73611,7 +73611,1557 @@
     },
     {
       "name": "Autowrap_Email",
-      "item": [],
+      "item": [
+        {
+          "name": "template",
+          "item": [
+            {
+              "name": "/template",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "b6704a95-328a-471e-b2c3-e3949ffdeb55",
+                    "exec": [
+                      "if (pm.environment.get(\"OAuth_Timestamp\") == null) {\r",
+                      "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                      "} else {\r",
+                      "    var tokenDate = new Date(2010, 1, 1);\r",
+                      "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                      "    if (tokenTimestamp) {\r",
+                      "        tokenDate = Date.parse(tokenTimestamp);\r",
+                      "    }\r",
+                      "    //console.log(\"timestamp is\"+tokenDate);\r",
+                      "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                      "    if (!expiresInTime) {\r",
+                      "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                      "    }\r",
+                      "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                      "    if ((new Date() - tokenDate) >= expiresInTime) {\r",
+                      "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                      "        let clientId = 'cc92e9b3-5045-4369-9105-5b085a45e247';\r",
+                      "        let clientSecret = 'f3r6G:bq.2b:n:APJhUui18D=WVG_hHz';\r",
+                      "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                      "\r",
+                      "        let getTokenRequest = {\r",
+                      "            method: 'POST',\r",
+                      "            url: tokenUrl,\r",
+                      "            auth: {\r",
+                      "                type: \"basic\",\r",
+                      "                basic: [\r",
+                      "                    { key: \"username\", value: clientId },\r",
+                      "                    { key: \"password\", value: clientSecret }\r",
+                      "                ]\r",
+                      "            },\r",
+                      "            body: {\r",
+                      "                mode: 'formdata',\r",
+                      "                formdata: [\r",
+                      "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                      "                    { key: 'scope', value: scope }\r",
+                      "                ]\r",
+                      "            }\r",
+                      "        };\r",
+                      "\r",
+                      "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                      "            let jsonResponse = response.json(),\r",
+                      "                newAccessToken = jsonResponse.access_token;\r",
+                      "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                      "\r",
+                      "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                      "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in * 1000);\r",
+                      "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                      "        });\r",
+                      "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                      "    }\r",
+                      "}"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "_postman_id": "c1ee36f6-d110-4323-87be-1b48f44de890",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "accessToken": "{{OAuth_Token}}",
+                    "tokenType": "Bearer",
+                    "addTokenTo": "header"
+                  }
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json,application/json,v1.0.0"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "Postman",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Username",
+                    "value": "Test-User",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"templateCode\": \"9\",\n    \"description\": \"Test Form\",\n    \"toEmail\": \"cabottestemail@test.com\",\n    \"templateBody\": \"<table><thead><tr><th>Account Reference &amp; Customer Name:</th><th>{Consumer.LegacyID} {Consumer.ConsumerFirstName} {Consumer.ConsumerLastName}</th></tr></thead><tbody><tr><td>Vulnerability:</td><td> </td></tr><tr><td>Telephone or Postcode:</td><td>{ConsumerAddress.Postcode}</td></tr><tr><td>Call Back Date:</td><td> </td></tr><tr><td>Call Back AM or PM:</td><td> </td></tr><tr><td>DCON taken to call customer?</td><td> </td></tr><tr><td>Reason for call back request:</td><td> </td></tr></tbody></table>\",\n    \"actionCode\": \"CO\",\n    \"resultCode\": \"CO\",\n    \"isActive\": \"false\"\n}",
+                  "options": {
+                    "raw": {}
+                  }
+                },
+                "url": "{{baseUrl}}/email/template"
+              },
+              "response": [
+                {
+                  "id": "385394c8-833b-4d3d-8c4e-5dd7bf72bcc8",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"templateCode\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template"
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "5ed05f54-b9c9-4e28-907a-76f0abaaa11d",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"templateCode\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template"
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "915a67c0-9857-49c9-b072-f554fa12d6cf",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"templateCode\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template"
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "a29fbf6a-a75d-4525-bd35-96a9bedbeb72",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"templateCode\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template"
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "af98f943-2f02-41d1-bd12-5b7529a5ef03",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"templateCode\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template"
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "ddd90d49-2df9-4a9d-afeb-e3228bdc17f6",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"templateCode\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template"
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "name": "/template",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "a77a75ff-7c72-44a3-b735-5a4e68657c05",
+                    "exec": [
+                      "if (pm.environment.get(\"OAuth_Timestamp\") == null) {\r",
+                      "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                      "} else {\r",
+                      "    var tokenDate = new Date(2010, 1, 1);\r",
+                      "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                      "    if (tokenTimestamp) {\r",
+                      "        tokenDate = Date.parse(tokenTimestamp);\r",
+                      "    }\r",
+                      "    //console.log(\"timestamp is\"+tokenDate);\r",
+                      "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                      "    if (!expiresInTime) {\r",
+                      "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                      "    }\r",
+                      "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                      "    if ((new Date() - tokenDate) >= expiresInTime) {\r",
+                      "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                      "        let clientId = 'cc92e9b3-5045-4369-9105-5b085a45e247';\r",
+                      "        let clientSecret = 'f3r6G:bq.2b:n:APJhUui18D=WVG_hHz';\r",
+                      "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                      "\r",
+                      "        let getTokenRequest = {\r",
+                      "            method: 'POST',\r",
+                      "            url: tokenUrl,\r",
+                      "            auth: {\r",
+                      "                type: \"basic\",\r",
+                      "                basic: [\r",
+                      "                    { key: \"username\", value: clientId },\r",
+                      "                    { key: \"password\", value: clientSecret }\r",
+                      "                ]\r",
+                      "            },\r",
+                      "            body: {\r",
+                      "                mode: 'formdata',\r",
+                      "                formdata: [\r",
+                      "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                      "                    { key: 'scope', value: scope }\r",
+                      "                ]\r",
+                      "            }\r",
+                      "        };\r",
+                      "\r",
+                      "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                      "            let jsonResponse = response.json(),\r",
+                      "                newAccessToken = jsonResponse.access_token;\r",
+                      "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                      "\r",
+                      "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                      "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in * 1000);\r",
+                      "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                      "        });\r",
+                      "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                      "    }\r",
+                      "}\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      "/*\r",
+                      "\r",
+                      "SELECT TOP (1000) [TemplateCode]\r",
+                      "      ,[Description]\r",
+                      "      ,[ToEmail]\r",
+                      "      ,[TemplateBody]\r",
+                      "      ,[ActionCode]\r",
+                      "      ,[ResultCode]\r",
+                      "      ,[IsActive]\r",
+                      "      ,[RowVersion]\r",
+                      "  FROM [dbo].[Template]\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      "  */"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "91501ab2-e45b-4fe0-8207-e3aa54216673",
+                    "exec": [
+                      "try{\r",
+                      "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                      "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                      "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                      "var Ajv = require('ajv'),\r",
+                      "ajv = new Ajv({logger: console});\r",
+                      "\r",
+                      "var jsonData = JSON.parse(responseBody);\r",
+                      "var schema =\r",
+                      "{\r",
+                      "    \"required\": [\r",
+                      "        \"templateCode\",\r",
+                      "        \"description\",\r",
+                      "        \"toEmail\",\r",
+                      "        \"templateBody\",\r",
+                      "        \"actionCode\",\r",
+                      "        \"resultCode\",\r",
+                      "        \"isActive\"\r",
+                      "    ],\r",
+                      "    \"properties\": {\r",
+                      "        \"templateCode\": {\r",
+                      "            \"$id\": \"#/properties/templateCode\",\r",
+                      "            \"type\": \"integer\"\r",
+                      "        },\r",
+                      "        \"description\": {\r",
+                      "            \"$id\": \"#/properties/description\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"toEmail\": {\r",
+                      "            \"$id\": \"#/properties/toEmail\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"templateBody\": {\r",
+                      "            \"$id\": \"#/properties/templateBody\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"actionCode\": {\r",
+                      "            \"$id\": \"#/properties/actionCode\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"resultCode\": {\r",
+                      "            \"$id\": \"#/properties/resultCode\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"isActive\": {\r",
+                      "            \"$id\": \"#/properties/isActive\",\r",
+                      "            \"type\": \"boolean\"\r",
+                      "        }\r",
+                      "    },\r",
+                      "    \"$id\": \"http://example.org/root.json#\",\r",
+                      "    \"type\": \"object\",\r",
+                      "    \"definitions\": {},\r",
+                      "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                      "}\r",
+                      "\r",
+                      "if (data.templateCode!=null){\r",
+                      "    pm.test(\"TEST1A: Template Code check\", function() {\r",
+                      "        pm.expect(jsonData.templateCode).to.equal(JSON.stringify(data.TemplateCode));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1B: description check\", function() {\r",
+                      "        pm.expect(jsonData.description).to.equal(JSON.stringify(data.Description));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1C: to Email check\", function() {\r",
+                      "        pm.expect(jsonData.toEmail).to.equal(JSON.stringify(data.ToEmail));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1D: templateBody check\", function() {\r",
+                      "        pm.expect(jsonData.templateBody).to.equal(JSON.stringify(data.TemplateBody));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1E: actionCode check\", function() {\r",
+                      "        pm.expect(jsonData[0].actionCode).to.equal(JSON.stringify(data.ActionCode));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1G: resultCode check\", function() {\r",
+                      "        pm.expect(jsonData.resultCode).to.equal(JSON.stringify(data.ResultCode));\r",
+                      "    });\r",
+                      "\r",
+                      "};\r",
+                      "\r",
+                      "\r",
+                      "pm.test(\"TEST01: Status Code Check\", function() {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST02: Response Header Checks\", function() {\r",
+                      "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST03: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST04: Response Schema is valid\", function() {\r",
+                      "  pm.expect(ajv.validate(schema, jsonData, true, false)).to.be.true;\r",
+                      "});\r",
+                      "\r",
+                      "///Negative Test\r",
+                      "} catch (e){\r",
+                      "\r",
+                      "pm.test(\"Check if Schema Response isn't empty\", function () {\r",
+                      "     pm.expect(schema).to.not.be.empty;\r",
+                      "});\r",
+                      " pm.test(\"Check templateCode variable isn't empty\", function () {\r",
+                      "     pm.expect('templateCode').to.not.be.empty;\r",
+                      "});\r",
+                      "}"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "_postman_id": "23253381-61ec-458b-8221-39170a2e6974",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "accessToken": "{{OAuth_Token}}",
+                    "tokenType": "Bearer",
+                    "addTokenTo": "header"
+                  }
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json,application/json,v1.0.0"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Username",
+                    "value": "Test-User",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "Postman",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"description\": \"Test Form\",\n    \"toEmail\": \"cabottestemail@test.com\",\n    \"templateBody\": \"<table><thead><tr><th>Account Reference &amp; Customer Name:</th><th>{Consumer.LegacyID} {Consumer.ConsumerFirstName} {Consumer.ConsumerLastName}</th></tr></thead><tbody><tr><td>Vulnerability:</td><td> </td></tr><tr><td>Telephone or Postcode:</td><td>{ConsumerAddress.Postcode}</td></tr><tr><td>Call Back Date:</td><td> </td></tr><tr><td>Call Back AM or PM:</td><td> </td></tr><tr><td>DCON taken to call customer?</td><td> </td></tr><tr><td>Reason for call back request:</td><td> </td></tr></tbody></table>\",\n    \"actionCode\": \"CO\",\n    \"resultCode\": \"CO\",\n    \"isActive\": \"true\"\n}",
+                  "options": {
+                    "raw": {}
+                  }
+                },
+                "url": "{{baseUrl}}/email/template"
+              },
+              "response": [
+                {
+                  "id": "166d5c2f-9100-4915-abf7-2ee6acfd66c4",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template"
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "35cac9d2-0272-4fd2-a360-ee423ce226ea",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template"
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "4f3be4bd-92ad-4dc7-87e5-7a11726dae8b",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template"
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "559251b7-3053-4cd9-8c3d-1c99451b6fae",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template"
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "cebc9049-730b-4c02-ac3d-430a7e0447c3",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template"
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "d82f98f1-0453-4f48-941d-0953bb9eb5dc",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template"
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "name": "/template/email",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "c95fa857-4550-412d-a0f1-4f8ca4b930b0",
+                    "exec": [
+                      "if (pm.environment.get(\"OAuth_Timestamp\") == null) {\r",
+                      "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                      "} else {\r",
+                      "    var tokenDate = new Date(2010, 1, 1);\r",
+                      "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                      "    if (tokenTimestamp) {\r",
+                      "        tokenDate = Date.parse(tokenTimestamp);\r",
+                      "    }\r",
+                      "    //console.log(\"timestamp is\"+tokenDate);\r",
+                      "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                      "    if (!expiresInTime) {\r",
+                      "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                      "    }\r",
+                      "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                      "    if ((new Date() - tokenDate) >= expiresInTime) {\r",
+                      "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                      "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                      "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                      "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                      "\r",
+                      "        let getTokenRequest = {\r",
+                      "            method: 'POST',\r",
+                      "            url: tokenUrl,\r",
+                      "            auth: {\r",
+                      "                type: \"basic\",\r",
+                      "                basic: [\r",
+                      "                    { key: \"username\", value: clientId },\r",
+                      "                    { key: \"password\", value: clientSecret }\r",
+                      "                ]\r",
+                      "            },\r",
+                      "            body: {\r",
+                      "                mode: 'formdata',\r",
+                      "                formdata: [\r",
+                      "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                      "                    { key: 'scope', value: scope }\r",
+                      "                ]\r",
+                      "            }\r",
+                      "        };\r",
+                      "\r",
+                      "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                      "            let jsonResponse = response.json(),\r",
+                      "                newAccessToken = jsonResponse.access_token;\r",
+                      "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                      "\r",
+                      "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                      "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in * 1000);\r",
+                      "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                      "        });\r",
+                      "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                      "    }\r",
+                      "}"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "_postman_id": "e2d34acd-88ae-4d0a-85ad-685cadc52160",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "accessToken": "{{OAuth_Token}}",
+                    "tokenType": "Bearer",
+                    "addTokenTo": "header"
+                  }
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json,multipart/form-data,v1.0.0"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "Postman",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Username",
+                    "value": "Test-User",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "consumerID",
+                      "type": "text",
+                      "value": "2361220"
+                    },
+                    {
+                      "key": "emailAddress",
+                      "type": "text",
+                      "value": "testuser@test.com"
+                    },
+                    {
+                      "key": "subject",
+                      "type": "text",
+                      "value": "Test"
+                    },
+                    {
+                      "key": "messageBody",
+                      "type": "text",
+                      "value": "<table><thead><tr><th>Legacy ID:</th><th>{Consumer.LegacyID} </th></tr></thead><tbody><tr><td>Customers / Authorised Third Party Name:</td><td>{Consumer.ConsumerFirstName} {Consumer.ConsumerLastName}</td></tr><tr><td>Date of Request:</td><td>{DateToday}</td></tr><tr><td>Consultants Name:</td><td>{UserName}</td></tr><tr><td>What documentation has been requested?:</td><td> </td></tr><tr><td>Why is the documentation being requested?:</td><td> </td></tr></tbody></table>"
+                    },
+                    {
+                      "key": "templateCode",
+                      "type": "text",
+                      "value": "3"
+                    },
+                    {
+                      "key": "",
+                      "type": "file",
+                      "value": null
+                    }
+                  ],
+                  "options": {
+                    "formdata": {}
+                  }
+                },
+                "url": "{{baseUrl}}/email/template/email"
+              },
+              "response": [
+                {
+                  "id": "20c061d9-f10a-4f74-bf65-9423357d2f82",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"templateCode\": \"<integer>\",\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template/email"
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "526a27ab-a772-4300-99ae-e1add98f78fb",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"templateCode\": \"<integer>\",\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template/email"
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "55241f1e-0ee1-4e86-a3d7-7cf927014440",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"templateCode\": \"<integer>\",\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template/email"
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "6180e3f1-6fc2-47ca-bc74-5d2f58ce3f4f",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"templateCode\": \"<integer>\",\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template/email"
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "9487cf73-5f7f-4173-a6ed-30c6fb040a57",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"templateCode\": \"<integer>\",\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template/email"
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "d6508b69-65aa-4784-905c-412ff6767959",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"templateCode\": \"<integer>\",\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template/email"
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                }
+              ]
+            },
+            {
+              "name": "/template/:templateCode/:consumerID",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "03965f3e-35aa-42b8-b59e-c63c58c635ef",
+                    "exec": [
+                      "if (pm.environment.get(\"OAuth_Timestamp\") == null) {\r",
+                      "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                      "} else {\r",
+                      "    var tokenDate = new Date(2010, 1, 1);\r",
+                      "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                      "    if (tokenTimestamp) {\r",
+                      "        tokenDate = Date.parse(tokenTimestamp);\r",
+                      "    }\r",
+                      "    //console.log(\"timestamp is\"+tokenDate);\r",
+                      "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                      "    if (!expiresInTime) {\r",
+                      "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                      "    }\r",
+                      "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                      "    if ((new Date() - tokenDate) >= expiresInTime) {\r",
+                      "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                      "        let clientId = 'cc92e9b3-5045-4369-9105-5b085a45e247';\r",
+                      "        let clientSecret = 'f3r6G:bq.2b:n:APJhUui18D=WVG_hHz';\r",
+                      "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                      "\r",
+                      "        let getTokenRequest = {\r",
+                      "            method: 'POST',\r",
+                      "            url: tokenUrl,\r",
+                      "            auth: {\r",
+                      "                type: \"basic\",\r",
+                      "                basic: [\r",
+                      "                    { key: \"username\", value: clientId },\r",
+                      "                    { key: \"password\", value: clientSecret }\r",
+                      "                ]\r",
+                      "            },\r",
+                      "            body: {\r",
+                      "                mode: 'formdata',\r",
+                      "                formdata: [\r",
+                      "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                      "                    { key: 'scope', value: scope }\r",
+                      "                ]\r",
+                      "            }\r",
+                      "        };\r",
+                      "\r",
+                      "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                      "            let jsonResponse = response.json(),\r",
+                      "                newAccessToken = jsonResponse.access_token;\r",
+                      "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                      "\r",
+                      "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                      "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in * 1000);\r",
+                      "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                      "        });\r",
+                      "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                      "    }\r",
+                      "}"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "_postman_id": "3b0666a3-2025-45ba-8bb7-01c5fd4a97ee",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "accessToken": "{{OAuth_Token}}",
+                    "tokenType": "Bearer",
+                    "addTokenTo": "header"
+                  }
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Origin",
+                    "value": "Postman",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Username",
+                    "value": "Test-User",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/email/template/:templateCode/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "email",
+                    "template",
+                    ":templateCode",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "b257e77b-7f0b-45ed-b03f-04315eb2985c",
+                      "key": "templateCode",
+                      "value": "1",
+                      "type": "string",
+                      "description": "(Required) "
+                    },
+                    {
+                      "id": "0ec599a9-4cb1-4278-92ad-72001cb4bfce",
+                      "key": "consumerID",
+                      "value": "2361220",
+                      "type": "string",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Gets the Template text, with variables converted for the given consumerID"
+              },
+              "response": [
+                {
+                  "id": "036521b8-1e66-4b27-895a-c6fbfa41295b",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/template/:templateCode/:consumerID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "template",
+                        ":templateCode",
+                        ":consumerID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "templateCode"
+                        },
+                        {
+                          "key": "consumerID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "ae98a075-ae38-4663-b76e-2c2225ef6809",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/template/:templateCode/:consumerID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "template",
+                        ":templateCode",
+                        ":consumerID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "templateCode"
+                        },
+                        {
+                          "key": "consumerID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "f0a933d6-1845-4bd2-9b8c-3529d71145f9",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/template/:templateCode/:consumerID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "template",
+                        ":templateCode",
+                        ":consumerID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "templateCode"
+                        },
+                        {
+                          "key": "consumerID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                }
+              ]
+            }
+          ],
+          "_postman_id": "d1348643-400c-496f-8e21-815cb7db860e",
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "/email",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "72785693-06e8-4256-88d8-69d96c634674",
+                "exec": [
+                  "if (pm.environment.get(\"OAuth_Timestamp\") == null) {\r",
+                  "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                  "} else {\r",
+                  "    var tokenDate = new Date(2010, 1, 1);\r",
+                  "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "    if (tokenTimestamp) {\r",
+                  "        tokenDate = Date.parse(tokenTimestamp);\r",
+                  "    }\r",
+                  "    //console.log(\"timestamp is\"+tokenDate);\r",
+                  "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "    if (!expiresInTime) {\r",
+                  "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "    }\r",
+                  "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                  "    if ((new Date() - tokenDate) >= expiresInTime) {\r",
+                  "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                  "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                  "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                  "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                  "\r",
+                  "        let getTokenRequest = {\r",
+                  "            method: 'POST',\r",
+                  "            url: tokenUrl,\r",
+                  "            auth: {\r",
+                  "                type: \"basic\",\r",
+                  "                basic: [\r",
+                  "                    { key: \"username\", value: clientId },\r",
+                  "                    { key: \"password\", value: clientSecret }\r",
+                  "                ]\r",
+                  "            },\r",
+                  "            body: {\r",
+                  "                mode: 'formdata',\r",
+                  "                formdata: [\r",
+                  "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                    { key: 'scope', value: scope }\r",
+                  "                ]\r",
+                  "            }\r",
+                  "        };\r",
+                  "\r",
+                  "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "            let jsonResponse = response.json(),\r",
+                  "                newAccessToken = jsonResponse.access_token;\r",
+                  "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "\r",
+                  "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in * 1000);\r",
+                  "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "        });\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "    }\r",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "113853d2-eda6-495e-ad8d-c623c5d185a3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json,multipart/form-data,v1.0.0"
+              },
+              {
+                "key": "Correlation-Id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Username",
+                "value": "Test-User",
+                "type": "text"
+              },
+              {
+                "key": "Origin",
+                "value": "Postman",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "consumerID",
+                  "value": "2361220",
+                  "type": "text"
+                },
+                {
+                  "key": "emailAddress",
+                  "value": "lusimpson@cabotcm.com",
+                  "type": "text"
+                },
+                {
+                  "key": "subject",
+                  "value": "Test",
+                  "type": "text"
+                },
+                {
+                  "key": "messageBody",
+                  "value": "Hello",
+                  "type": "text"
+                },
+                {
+                  "key": "templateCode",
+                  "value": "3",
+                  "type": "text"
+                },
+                {
+                  "key": "",
+                  "type": "file",
+                  "value": null,
+                  "disabled": true
+                }
+              ],
+              "options": {
+                "formdata": {}
+              }
+            },
+            "url": "{{baseUrl}}/email/email"
+          },
+          "response": [
+            {
+              "id": "072adc2b-5492-4edb-a3fa-f8fe480ee48a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/email"
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "dolor"
+            },
+            {
+              "id": "093e45ce-731d-42da-ac33-7f15798e252e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/email"
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "dolor"
+            },
+            {
+              "id": "34d57dfd-756d-43b1-9196-9db4dbbce74c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/email"
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "dolor"
+            },
+            {
+              "id": "4cb72875-86e5-4fa8-b63d-3c4b923e331d",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/email"
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "dolor"
+            },
+            {
+              "id": "b58e8f5d-1a55-4fc6-b9f0-969b8b6dd23d",
+              "name": "Server Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/email"
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "dolor"
+            },
+            {
+              "id": "b7c9a627-b906-4e9f-8e3a-596a4f869404",
+              "name": "Server Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/email"
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "dolor"
+            }
+          ]
+        }
+      ],
       "_postman_id": "cc6f8e1e-d94a-4785-a739-cbc726ef02da"
     },
     {
