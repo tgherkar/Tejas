@@ -76092,7 +76092,7 @@
           "response": []
         },
         {
-          "name": "SendSMS Copy",
+          "name": "templateCreate",
           "event": [
             {
               "listen": "prerequest",
@@ -76224,7 +76224,7 @@
           "response": []
         },
         {
-          "name": "SendSMS Copy 2",
+          "name": "Template Update",
           "event": [
             {
               "listen": "prerequest",
@@ -76300,37 +76300,37 @@
                 "addTokenTo": "header"
               }
             },
-            "method": "POST",
+            "method": "PUT",
             "header": [
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
-                "value": "{{Ocp-Apim-Subscription-Key-South}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}"
               },
               {
                 "key": "Ocp-Apim-Subscription-Key-West",
-                "value": "{{Ocp-Apim-Subscription-Key-West}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}"
               },
               {
                 "key": "Correlation-Id",
-                "value": "{{$guid}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{$guid}}"
               },
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
+                "type": "text",
+                "value": "application/json"
               },
               {
                 "key": "Origin",
-                "value": "Postman",
-                "type": "text"
+                "type": "text",
+                "value": "Postman"
               },
               {
                 "key": "Username",
-                "value": "{{$randomUserName}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{$randomUserName}}"
               }
             ],
             "url": {
@@ -76346,7 +76346,6 @@
               ],
               "variable": [
                 {
-                  "id": "f4ddf967-4e0d-4068-bb4e-7a43a9cf6dda",
                   "key": "activeStatus",
                   "value": "0",
                   "type": "string"
@@ -76357,7 +76356,7 @@
           "response": []
         },
         {
-          "name": "SendSMS Copy 3",
+          "name": "Template Delete",
           "event": [
             {
               "listen": "prerequest",
@@ -76433,37 +76432,37 @@
                 "addTokenTo": "header"
               }
             },
-            "method": "POST",
+            "method": "DELETE",
             "header": [
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
-                "value": "{{Ocp-Apim-Subscription-Key-South}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}"
               },
               {
                 "key": "Ocp-Apim-Subscription-Key-West",
-                "value": "{{Ocp-Apim-Subscription-Key-West}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}"
               },
               {
                 "key": "Correlation-Id",
-                "value": "{{$guid}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{$guid}}"
               },
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
+                "type": "text",
+                "value": "application/json"
               },
               {
                 "key": "Origin",
-                "value": "Postman",
-                "type": "text"
+                "type": "text",
+                "value": "Postman"
               },
               {
                 "key": "Username",
-                "value": "{{$randomUserName}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{$randomUserName}}"
               }
             ],
             "url": {
@@ -76479,7 +76478,6 @@
               ],
               "variable": [
                 {
-                  "id": "62f8003a-97cf-45f0-8cf6-26a34b8dfad9",
                   "key": "activeStatus",
                   "value": "0",
                   "type": "string"
@@ -76490,7 +76488,7 @@
           "response": []
         },
         {
-          "name": "SendSMS Copy 4",
+          "name": "templateGet",
           "event": [
             {
               "listen": "prerequest",
