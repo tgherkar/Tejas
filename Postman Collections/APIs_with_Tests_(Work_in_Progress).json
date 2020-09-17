@@ -76161,54 +76161,43 @@
             "header": [
               {
                 "key": "Ocp-Apim-Subscription-Key-South",
-                "value": "{{Ocp-Apim-Subscription-Key-South}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}"
               },
               {
                 "key": "Ocp-Apim-Subscription-Key-West",
-                "value": "{{Ocp-Apim-Subscription-Key-West}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}"
               },
               {
                 "key": "Correlation-Id",
-                "value": "{{$guid}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{$guid}}"
               },
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
+                "type": "text",
+                "value": "application/json"
               },
               {
                 "key": "Origin",
-                "value": "Postman",
-                "type": "text"
+                "type": "text",
+                "value": "Postman"
               },
               {
                 "key": "Username",
-                "value": "{{$randomUserName}}",
-                "type": "text"
+                "type": "text",
+                "value": "{{$randomUserName}}"
               }
             ],
-            "url": {
-              "raw": "{{baseUrl}}/sms/template/:activeStatus/admin",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "sms",
-                "template",
-                ":activeStatus",
-                "admin"
-              ],
-              "variable": [
-                {
-                  "key": "activeStatus",
-                  "value": "0",
-                  "type": "string"
-                }
-              ]
-            }
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"displayName\": \"string\",\r\n  \"templateBody\": \"string\",\r\n  \"campaign\": \"string\",\r\n  \"type\": \"string\",\r\n  \"isActive\": true,\r\n  \"isAgentPortalOption\": true\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "{{baseUrl}}/sms/template/admin"
           },
           "response": []
         },
