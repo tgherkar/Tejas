@@ -75836,7 +75836,25 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": "{{baseUrl}}/sms/template/{activeStatus}/admin"
+            "url": {
+              "raw": "{{baseUrl}}/sms/template/:activeStatus/admin",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sms",
+                "template",
+                ":activeStatus",
+                "admin"
+              ],
+              "variable": [
+                {
+                  "key": "activeStatus",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            }
           },
           "response": []
         }
