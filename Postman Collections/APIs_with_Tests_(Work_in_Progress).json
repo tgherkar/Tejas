@@ -74712,6 +74712,28 @@
                     ],
                     "type": "text/javascript"
                   }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "78b58ea4-309c-45a0-b48d-0abcea234471",
+                    "exec": [
+                      "pm.test(\"TEST1: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                      "});\r",
+                      "\r",
+                      " pm.test(\"TEST2: Status code Check\", function() {\r",
+                      "    pm.response.to.have.status(204);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                      "    pm.response.to.have.header('Content-Length', '0', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                      "});\r",
+                      "\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
                 }
               ],
               "_postman_id": "e2d34acd-88ae-4d0a-85ad-685cadc52160",
