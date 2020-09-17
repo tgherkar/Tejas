@@ -72812,6 +72812,432 @@
               "body": "elit aliquip eiusmod sint"
             }
           ]
+        },
+        {
+          "name": "/quicktypes/:ActiveStatus/:voiceOnly",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "b9b0df32-9a33-49fd-97e6-24ef2ae1a1f6",
+                "exec": [
+                  "if (pm.environment.get(\"OAuth_Timestamp\") == null) {\r",
+                  "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                  "} else {\r",
+                  "    var tokenDate = new Date(2010, 1, 1);\r",
+                  "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "    if (tokenTimestamp) {\r",
+                  "        tokenDate = Date.parse(tokenTimestamp);\r",
+                  "    }\r",
+                  "    //console.log(\"timestamp is\"+tokenDate);\r",
+                  "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "    if (!expiresInTime) {\r",
+                  "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "    }\r",
+                  "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                  "    if ((new Date() - tokenDate) >= expiresInTime) {\r",
+                  "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                  "        let clientId = 'cc92e9b3-5045-4369-9105-5b085a45e247';\r",
+                  "        let clientSecret = 'f3r6G:bq.2b:n:APJhUui18D=WVG_hHz';\r",
+                  "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                  "\r",
+                  "        let getTokenRequest = {\r",
+                  "            method: 'POST',\r",
+                  "            url: tokenUrl,\r",
+                  "            auth: {\r",
+                  "                type: \"basic\",\r",
+                  "                basic: [\r",
+                  "                    { key: \"username\", value: clientId },\r",
+                  "                    { key: \"password\", value: clientSecret }\r",
+                  "                ]\r",
+                  "            },\r",
+                  "            body: {\r",
+                  "                mode: 'formdata',\r",
+                  "                formdata: [\r",
+                  "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                    { key: 'scope', value: scope }\r",
+                  "                ]\r",
+                  "            }\r",
+                  "        };\r",
+                  "\r",
+                  "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "            let jsonResponse = response.json(),\r",
+                  "                newAccessToken = jsonResponse.access_token;\r",
+                  "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "\r",
+                  "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in * 1000);\r",
+                  "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "        });\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "    }\r",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "e360fd23-29f4-4ee6-82e4-58c03effbb89",
+                "exec": [
+                  "try{\r",
+                  "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                  "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                  "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                  "\r",
+                  "let expectedCode = pm.iterationData.get(\"expectedHttpCode\");\r",
+                  "var jsonData = JSON.parse(responseBody);\r",
+                  "var req = request.url;\r",
+                  "var query = request.url.split('/');\r",
+                  "console.log(query);\r",
+                  "\r",
+                  "var Ajv = require('ajv'),\r",
+                  "ajv= new Ajv ({logger:console}),\r",
+                  "schema = {\r",
+                  "    \"required\": [\r",
+                  "        \"quickTypes\"\r",
+                  "    ],\r",
+                  "    \"properties\": {\r",
+                  "        \"quickTypes\": {\r",
+                  "            \"items\": {\r",
+                  "                \"required\": [\r",
+                  "                    \"quickTypeCode\",\r",
+                  "                    \"description\",\r",
+                  "                    \"noteInput\",\r",
+                  "                    \"dispositionPrimaryCode\",\r",
+                  "                    \"dispositionSecondaryCode\",\r",
+                  "                    \"actionDeleteCurrentPhone\",\r",
+                  "                    \"actionDiallerKill\",\r",
+                  "                    \"isVoice\",\r",
+                  "                    \"isActive\",\r",
+                  "                    \"actionResults\"\r",
+                  "                ],\r",
+                  "                \"properties\": {\r",
+                  "                    \"quickTypeCode\": {\r",
+                  "                        \"$id\": \"#/properties/quickTypes/items/properties/quickTypeCode\",\r",
+                  "                        \"type\": \"integer\"\r",
+                  "                    },\r",
+                  "                    \"description\": {\r",
+                  "                        \"$id\": \"#/properties/quickTypes/items/properties/description\",\r",
+                  "                        \"type\": \"string\"\r",
+                  "                    },\r",
+                  "                    \"noteInput\": {\r",
+                  "                        \"$id\": \"#/properties/quickTypes/items/properties/noteInput\",\r",
+                  "                        \"type\": \"string\"\r",
+                  "                    },\r",
+                  "                    \"dispositionPrimaryCode\": {\r",
+                  "                        \"$id\": \"#/properties/quickTypes/items/properties/dispositionPrimaryCode\",\r",
+                  "                            \"type\": [\"string\", \"null\"]\r",
+                  "                    },\r",
+                  "                    \"dispositionSecondaryCode\": {\r",
+                  "                        \"$id\": \"#/properties/quickTypes/items/properties/dispositionSecondaryCode\",\r",
+                  "                        \"type\": \"string\"\r",
+                  "                    },\r",
+                  "                    \"actionDeleteCurrentPhone\": {\r",
+                  "                        \"$id\": \"#/properties/quickTypes/items/properties/actionDeleteCurrentPhone\",\r",
+                  "                        \"type\": \"boolean\"\r",
+                  "                    },\r",
+                  "                    \"actionDiallerKill\": {\r",
+                  "                        \"$id\": \"#/properties/quickTypes/items/properties/actionDiallerKill\",\r",
+                  "                        \"type\": \"boolean\"\r",
+                  "                    },\r",
+                  "                    \"isVoice\": {\r",
+                  "                        \"$id\": \"#/properties/quickTypes/items/properties/isVoice\",\r",
+                  "                        \"type\": [\"null\" , \"boolean\"]\r",
+                  "                    },\r",
+                  "                    \"isActive\": {\r",
+                  "                        \"$id\": \"#/properties/quickTypes/items/properties/isActive\",\r",
+                  "                        \"type\": \"boolean\"\r",
+                  "                    },\r",
+                  "                    \"actionResults\": {\r",
+                  "                        \"items\": {\r",
+                  "                            \"required\": [\r",
+                  "                                \"actionResultCode\",\r",
+                  "                                \"description\",\r",
+                  "                                \"actionCode\",\r",
+                  "                                \"resultCode\",\r",
+                  "                                \"isVoice\",\r",
+                  "                                \"isActive\"\r",
+                  "                            ],\r",
+                  "                            \"properties\": {\r",
+                  "                                \"actionResultCode\": {\r",
+                  "                                    \"$id\": \"#/properties/quickTypes/items/properties/actionResults/items/properties/actionResultCode\",\r",
+                  "                                    \"type\": \"integer\"\r",
+                  "                                },\r",
+                  "                                \"description\": {\r",
+                  "                                    \"$id\": \"#/properties/quickTypes/items/properties/actionResults/items/properties/description\",\r",
+                  "                                    \"type\": \"string\"\r",
+                  "                                },\r",
+                  "                                \"actionCode\": {\r",
+                  "                                    \"$id\": \"#/properties/quickTypes/items/properties/actionResults/items/properties/actionCode\",\r",
+                  "                                    \"type\": \"string\"\r",
+                  "                                },\r",
+                  "                                \"resultCode\": {\r",
+                  "                                    \"$id\": \"#/properties/quickTypes/items/properties/actionResults/items/properties/resultCode\",\r",
+                  "                                    \"type\": \"string\"\r",
+                  "                                },\r",
+                  "                                \"isVoice\": {\r",
+                  "                                    \"$id\": \"#/properties/quickTypes/items/properties/actionResults/items/properties/isVoice\",\r",
+                  "                                    \"type\": \"null\"\r",
+                  "                                },\r",
+                  "                                \"isActive\": {\r",
+                  "                                    \"$id\": \"#/properties/quickTypes/items/properties/actionResults/items/properties/isActive\",\r",
+                  "                                    \"type\": \"boolean\"\r",
+                  "                                }\r",
+                  "                            },\r",
+                  "                            \"$id\": \"#/properties/quickTypes/items/properties/actionResults/items\",\r",
+                  "                            \"type\": [\"null\", \"object\"]\r",
+                  "                        },\r",
+                  "                        \"$id\": \"#/properties/quickTypes/items/properties/actionResults\",\r",
+                  "                        \"type\": [\"null\", \"array\"]\r",
+                  "                    }\r",
+                  "                },\r",
+                  "                \"$id\": \"#/properties/quickTypes/items\",\r",
+                  "                \"type\": \"object\"\r",
+                  "            },\r",
+                  "            \"$id\": \"#/properties/quickTypes\",\r",
+                  "            \"type\": \"array\"\r",
+                  "        }\r",
+                  "    },\r",
+                  "    \"$id\": \"http://example.org/root.json#\",\r",
+                  "    \"type\": \"object\",\r",
+                  "    \"definitions\": {},\r",
+                  "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                  "}\r",
+                  "    pm.test(\"Ajv Test Schema Response: \", function() {\r",
+                  "        pm.expect(ajv.validate(schema, jsonData)).to.be.true;\r",
+                  "    });\r",
+                  "    \r",
+                  "    pm.test(\"TEST2: Status code Check\", function() {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                  "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                  "});\r",
+                  "\r",
+                  "    ///NEGATIVE TESTS\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "} catch (e){\r",
+                  "\r",
+                  "pm.test(\"Neg Test 01: Check SFSID isn't empty\", function () {\r",
+                  "     pm.expect(\"{{SFSID}}\").to.not.be.empty;\r",
+                  "});\r",
+                  " pm.test(\"Neg Test 02: Check if string is empty\", function () {\r",
+                  "     pm.expect('noteTypeCode').to.not.be.empty;\r",
+                  "});\r",
+                  " pm.test(\"Neg Test 03: Check description isn't empty\", function () {\r",
+                  "     pm.expect('description').to.not.be.empty;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"TEST4: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "\r",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "17e758d6-af35-41d8-9540-59bb41e81c53",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Origin",
+                "value": "Postman",
+                "type": "text"
+              },
+              {
+                "key": "Username",
+                "value": "Test-User",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Correlation-Id",
+                "value": "{{$guid}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/quicknote/quicktypes/:ActiveStatus/:voiceOnly",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "quicknote",
+                "quicktypes",
+                ":ActiveStatus",
+                ":voiceOnly"
+              ],
+              "variable": [
+                {
+                  "id": "ff4fc33f-5dfb-46a9-a901-a68ab41de7b7",
+                  "key": "ActiveStatus",
+                  "value": "1",
+                  "type": "string",
+                  "description": "(Required) "
+                },
+                {
+                  "id": "44b5cbff-104c-4997-a37b-1718dcef7a93",
+                  "key": "voiceOnly",
+                  "value": "0000000",
+                  "type": "string",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "description": "Gets the Note Types for given active status "
+          },
+          "response": [
+            {
+              "id": "0117b763-4d09-44b3-9793-a2cdc41d8118",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/quicktypes/:ActiveStatus/:voiceOnly",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "quicktypes",
+                    ":ActiveStatus",
+                    ":voiceOnly"
+                  ],
+                  "variable": [
+                    {
+                      "key": "ActiveStatus"
+                    },
+                    {
+                      "key": "voiceOnly"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "a3b8ab4f-96ae-4361-be33-bc2c870070a6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/quicktypes/:ActiveStatus/:voiceOnly",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "quicktypes",
+                    ":ActiveStatus",
+                    ":voiceOnly"
+                  ],
+                  "variable": [
+                    {
+                      "key": "ActiveStatus"
+                    },
+                    {
+                      "key": "voiceOnly"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "elit aliquip eiusmod sint"
+            },
+            {
+              "id": "fbb5dadc-d1f5-48c6-b5d2-6008fa43d3ff",
+              "name": "Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/quicktypes/:ActiveStatus/:voiceOnly",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "quicktypes",
+                    ":ActiveStatus",
+                    ":voiceOnly"
+                  ],
+                  "variable": [
+                    {
+                      "key": "ActiveStatus"
+                    },
+                    {
+                      "key": "voiceOnly"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "elit aliquip eiusmod sint"
+            }
+          ]
         }
       ],
       "_postman_id": "8012988e-7e11-4f28-852d-0ec29fb87f33"
