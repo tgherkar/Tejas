@@ -74224,7 +74224,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"templateCode\": {{TemplateCode}},\n    \"description\": {{Description}},\n    \"toEmail\": {{ToEmail}},\n    \"templateBody\": {{TemplateBody}},\n    \"actionCode\": {{ActionCode}},\n    \"resultCode\": {{ResultCode}},\n    \"isActive\": {{isActiveEmail}}\n}",
+                  "raw": "{\n    \"templateCode\": \"{{TemplateCode}}\",\n    \"description\": \"{{Description}}\",\n    \"toEmail\": \"{{ToEmail}}\",\n    \"templateBody\": \"{{TemplateBody}}\",\n    \"actionCode\": \"{{ActionCode}}\",\n    \"resultCode\": \"{{ResultCode}}\",\n    \"isActive\": \"{{isActiveEmail}}\"\n}",
                   "options": {
                     "raw": {}
                   }
