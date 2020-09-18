@@ -74126,6 +74126,12 @@
                       "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
                       "});\r",
                       "\r",
+                      "\r",
+                      "if (data.TemplateCode!=null){\r",
+                      "    pm.test(\"TEST1A: ConsumerID check\", function() {\r",
+                      "        pm.expect(jsonData.templateCode).to.equal(data.TemplateCode);\r",
+                      "    });\r",
+                      "\r",
                       "    ///NEGATIVE TESTS\r",
                       "\r",
                       "\r",
@@ -74199,7 +74205,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"templateCode\": {{tempCode}},\n    \"description\": \"{{Description}}\",\n    \"toEmail\": \"{{ToEmail}}\",\n    \"templateBody\": \"{{TemplateBody}}\",\n    \"actionCode\": \"{{ActionCode}}\",\n    \"resultCode\": \"{{ResultCode}}\",\n    \"isActive\": {{isActiveEmail}}\n}",
+                  "raw": "{\n    \"templateCode\": {{tempCode}},\n    \"description\": {{Description}},\n    \"toEmail\": {{ToEmail}},\n    \"templateBody\": {{TemplateBody}},\n    \"actionCode\": {{ActionCode}},\n    \"resultCode\": {{ResultCode}},\n    \"isActive\": {{isActiveEmail}}\n}",
                   "options": {
                     "raw": {}
                   }
