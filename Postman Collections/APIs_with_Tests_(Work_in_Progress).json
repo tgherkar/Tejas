@@ -74883,7 +74883,7 @@
                     {
                       "key": "messageBody",
                       "type": "text",
-                      "value": "<table><thead><tr><th>Legacy ID:</th><th>{Consumer.LegacyID} </th></tr></thead><tbody><tr><td>Customers / Authorised Third Party Name:</td><td>{Consumer.ConsumerFirstName} {Consumer.ConsumerLastName}</td></tr><tr><td>Date of Request:</td><td>{DateToday}</td></tr><tr><td>Consultants Name:</td><td>{UserName}</td></tr><tr><td>What documentation has been requested?:</td><td> </td></tr><tr><td>Why is the documentation being requested?:</td><td> </td></tr></tbody></table>"
+                      "value": "{{TemplateBody}}"
                     },
                     {
                       "key": "templateCode",
@@ -75488,7 +75488,7 @@
                 },
                 {
                   "key": "messageBody",
-                  "value": "<table><thead><tr><th>Cheque or Bacs?</th><th> </th></tr></thead><tbody><tr><td>Date of Refund Request:</td><td>{DateToday}</td></tr><tr><td>Amount:</td><td> </td></tr><tr><td>Legacy Id:</td><td>{Consumer.LegacyID}</td></tr><tr><td>Customer Name:</td><td>{Consumer.ConsumerFirstName} {Consumer.ConsumerLastName}</td></tr><tr><td>Payable To:</td><td>{Consumer.ConsumerFirstName} {Consumer.ConsumerLastName}</td></tr><tr><td>Payment Method (Bacs or Cheque):</td><td> </td></tr><tr><td>Account No:</td><td> </td></tr><tr><td>Sort Code:</td><td> </td></tr><tr><td>Third Party Authority Requited:</td><td> </td></tr><tr><td>Refund Reason:</td><td> </td></tr></tbody></table>",
+                  "value": "{{TemplateBody}}",
                   "type": "text"
                 },
                 {
