@@ -75857,7 +75857,7 @@
               "variable": [
                 {
                   "key": "ActiveStatus",
-                  "value": "Active",
+                  "value": "{{item}}",
                   "type": "string",
                   "description": "(Required) "
                 }
