@@ -74185,7 +74185,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"templateCode\": {{tempCode}},\n    \"description\": \"Test Forms\",\n    \"toEmail\": \"cabottestemail@test.com\",\n    \"templateBody\": \"<table><thead><tr><th>Account Reference &amp; Customer Name:</th><th>{Consumer.LegacyID} {Consumer.ConsumerFirstName} {Consumer.ConsumerLastName}</th></tr></thead><tbody><tr><td>Vulnerability:</td><td> </td></tr><tr><td>Telephone or Postcode:</td><td>{ConsumerAddress.Postcode}</td></tr><tr><td>Call Back Date:</td><td> </td></tr><tr><td>Call Back AM or PM:</td><td> </td></tr><tr><td>DCON taken to call customer?</td><td> </td></tr><tr><td>Reason for call back request:</td><td> </td></tr></tbody></table>\",\n    \"actionCode\": \"CO\",\n    \"resultCode\": \"CO\",\n    \"isActive\": true\n}",
+                  "raw": "{\n    \"templateCode\": {{tempCode}},\n    \"description\": \"Test Forms\",\n    \"toEmail\": \"cabottestemail@test.com\",\n    \"templateBody\": \"<table><thead><tr><th>Account Reference &amp; Customer Name:</th><th>{Consumer.LegacyID} {Consumer.ConsumerFirstName} {Consumer.ConsumerLastName}</th></tr></thead><tbody><tr><td>Vulnerability:</td><td> </td></tr><tr><td>Telephone or Postcode:</td><td>{ConsumerAddress.Postcode}</td></tr><tr><td>Call Back Date:</td><td> </td></tr><tr><td>Call Back AM or PM:</td><td> </td></tr><tr><td>DCON taken to call customer?</td><td> </td></tr><tr><td>Reason for call back request:</td><td> </td></tr></tbody></table>\",\n    \"actionCode\": \"CO\",\n    \"resultCode\": \"CO\",\n    \"isActive\": {{isActiveEmail}}\n}",
                   "options": {
                     "raw": {}
                   }
