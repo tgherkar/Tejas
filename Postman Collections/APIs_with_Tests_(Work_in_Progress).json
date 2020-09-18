@@ -74041,10 +74041,9 @@
                       "\r",
                       "\r",
                       "const isActiveEmail =  Math.random() >= 0.5;\r",
-                      "pm.globals.set(\"isActiveEmail\", isActiveEmail);\r",
+                      "pm.globals.set(\"isActiveEmail\", isActiveEmail); \r",
                       "\r",
-                      "\r",
-                      "\r",
+                      "pm.globals.set(\"isAct\", jsonData.isActive);\r",
                       ""
                     ],
                     "type": "text/javascript"
@@ -74224,7 +74223,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"templateCode\": \"{{TemplateCode}}\",\n    \"description\": \"{{Description}}\",\n    \"toEmail\": \"{{ToEmail}}\",\n    \"templateBody\": \"{{TemplateBody}}\",\n    \"actionCode\": \"{{ActionCode}}\",\n    \"resultCode\": \"{{ResultCode}}\",\n    \"isActive\": \"{{isActiveEmail}}\"\n}",
+                  "raw": "{\n    \"templateCode\": \"{{TemplateCode}}\",\n    \"description\": \"{{Description}}\",\n    \"toEmail\": \"{{ToEmail}}\",\n    \"templateBody\": \"{{TemplateBody}}\",\n    \"actionCode\": \"{{ActionCode}}\",\n    \"resultCode\": \"{{ResultCode}}\",\n    \"isActive\": \"{{isAct}}\"\n}",
                   "options": {
                     "raw": {}
                   }
