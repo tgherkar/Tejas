@@ -75674,9 +75674,8 @@
                   "\r",
                   "var items = Array['Active' , 'inActive', 'all']\r",
                   "pm.globals.set('items', items);\r",
-                  "\r",
                   "var item = items[Math.floor(Math.random() * items.length)];\r",
-                  "pm.globals.set('item', item)\r",
+                  "\r",
                   "\r",
                   "\r",
                   "\r",
@@ -75860,7 +75859,7 @@
               "variable": [
                 {
                   "key": "ActiveStatus",
-                  "value": "{{item}}",
+                  "value": "{{items}}",
                   "type": "string",
                   "description": "(Required) "
                 }
