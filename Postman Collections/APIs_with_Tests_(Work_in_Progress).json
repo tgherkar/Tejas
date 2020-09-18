@@ -75672,7 +75672,7 @@
                   "}\r",
                   "\r",
                   "\r",
-                  "var items = Array['Active' , 'inActive', 'all']\r",
+                  "var items = Array('Active' , 'inActive', 'all')\r",
                   "pm.globals.set('items', items);\r",
                   "var item = items[Math.floor(Math.random() * items.length)];\r",
                   "\r",
