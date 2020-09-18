@@ -74774,7 +74774,22 @@
                     "exec": [
                       "var tempCodes = Array('1','2', '3', '4', '5', '6', '7', '8', '9', '10');\r",
                       "var tempCode = tempCodes[Math.floor(Math.random() * tempCodes.length)];\r",
-                      "pm.globals.set('tempCode', tempCode);"
+                      "pm.globals.set('tempCode', tempCode);\r",
+                      "\r",
+                      "\r",
+                      "/*\r",
+                      "SET NO COUNT ON\r",
+                      "SELECT TOP (1000) [TemplateCode]\r",
+                      "      ,[Description]\r",
+                      "      ,[ToEmail]\r",
+                      "      ,[TemplateBody]\r",
+                      "      ,[ActionCode]\r",
+                      "      ,[ResultCode]\r",
+                      "      ,[IsActive]\r",
+                      "      ,[RowVersion]\r",
+                      "  FROM [dbo].[Template]\r",
+                      "\r",
+                      "  */"
                     ],
                     "type": "text/javascript"
                   }
@@ -75365,7 +75380,23 @@
                   "\r",
                   "var tempCodes = Array('1','2', '3', '4', '5', '6', '7', '8', '9', '10');\r",
                   "var tempCode = tempCodes[Math.floor(Math.random() * tempCodes.length)];\r",
-                  "pm.globals.set('tempCode', tempCode);"
+                  "pm.globals.set('tempCode', tempCode);\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "/*\r",
+                  "SET NO COUNT ON\r",
+                  "SELECT TOP (1000) [TemplateCode]\r",
+                  "      ,[Description]\r",
+                  "      ,[ToEmail]\r",
+                  "      ,[TemplateBody]\r",
+                  "      ,[ActionCode]\r",
+                  "      ,[ResultCode]\r",
+                  "      ,[IsActive]\r",
+                  "      ,[RowVersion]\r",
+                  "  FROM [dbo].[Template]\r",
+                  "\r",
+                  "  */"
                 ],
                 "type": "text/javascript"
               }
@@ -75447,7 +75478,7 @@
                 },
                 {
                   "key": "emailAddress",
-                  "value": "cabotautouser4414@cabotcm.com",
+                  "value": "{{ToEmail}}",
                   "type": "text"
                 },
                 {
