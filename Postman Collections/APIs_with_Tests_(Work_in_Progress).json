@@ -6615,7 +6615,7 @@
                 },
                 {
                   "key": "messagePart",
-                  "value": "",
+                  "value": "world",
                   "type": "string"
                 },
                 {
