@@ -74043,7 +74043,7 @@
                       "const isActiveEmail =  Math.random() >= 0.5;\r",
                       "pm.globals.set(\"isActiveEmail\", isActiveEmail); \r",
                       "\r",
-                      "pm.globals.set(\"isAct\", jsonData.isActive);\r",
+                      "\r",
                       ""
                     ],
                     "type": "text/javascript"
@@ -74156,6 +74156,7 @@
                       "    ///NEGATIVE TESTS\r",
                       "\r",
                       "}\r",
+                      "pm.globals.set(\"isAct\", jsonData.isActive);\r",
                       "\r",
                       "} catch (e){\r",
                       "\r",
