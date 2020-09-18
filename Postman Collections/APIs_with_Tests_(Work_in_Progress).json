@@ -74185,7 +74185,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"templateCode\": 10,\n    \"description\": \"Test Form 2\",\n    \"toEmail\": \"cabottestemail@test.com\",\n    \"templateBody\": \"<table><thead><tr><th>Account Reference &amp; Customer Name:</th><th>{Consumer.LegacyID} {Consumer.ConsumerFirstName} {Consumer.ConsumerLastName}</th></tr></thead><tbody><tr><td>Vulnerability:</td><td> </td></tr><tr><td>Telephone or Postcode:</td><td>{ConsumerAddress.Postcode}</td></tr><tr><td>Call Back Date:</td><td> </td></tr><tr><td>Call Back AM or PM:</td><td> </td></tr><tr><td>DCON taken to call customer?</td><td> </td></tr><tr><td>Reason for call back request:</td><td> </td></tr></tbody></table>\",\n    \"actionCode\": \"CO\",\n    \"resultCode\": \"CO\",\n    \"isActive\": true\n}",
+                  "raw": "{\n    \"templateCode\": 9,\n    \"description\": \"Test Forms\",\n    \"toEmail\": \"cabottestemail@test.com\",\n    \"templateBody\": \"<table><thead><tr><th>Account Reference &amp; Customer Name:</th><th>{Consumer.LegacyID} {Consumer.ConsumerFirstName} {Consumer.ConsumerLastName}</th></tr></thead><tbody><tr><td>Vulnerability:</td><td> </td></tr><tr><td>Telephone or Postcode:</td><td>{ConsumerAddress.Postcode}</td></tr><tr><td>Call Back Date:</td><td> </td></tr><tr><td>Call Back AM or PM:</td><td> </td></tr><tr><td>DCON taken to call customer?</td><td> </td></tr><tr><td>Reason for call back request:</td><td> </td></tr></tbody></table>\",\n    \"actionCode\": \"CO\",\n    \"resultCode\": \"CO\",\n    \"isActive\": true\n}",
                   "options": {
                     "raw": {}
                   }
@@ -75199,7 +75199,7 @@
                   "variable": [
                     {
                       "key": "templateCode",
-                      "value": "4",
+                      "value": "10",
                       "type": "string",
                       "description": "(Required) "
                     },
@@ -75780,13 +75780,16 @@
                   "} catch (e){\r",
                   "\r",
                   "pm.test(\"Neg Test 01: Check SFSID isn't empty\", function () {\r",
-                  "     pm.expect(\"{{SFSID}}\").to.not.be.empty;\r",
+                  "     pm.expect(\"templateBody\").to.not.be.empty;\r",
                   "});\r",
                   " pm.test(\"Neg Test 02: Check if string is empty\", function () {\r",
-                  "     pm.expect('noteTypeCode').to.not.be.empty;\r",
+                  "     pm.expect('templateCode').to.not.be.empty;\r",
                   "});\r",
                   " pm.test(\"Neg Test 03: Check description isn't empty\", function () {\r",
                   "     pm.expect('description').to.not.be.empty;\r",
+                  "});\r",
+                  "    pm.test(\"TEST2: Status code Check\", function() {\r",
+                  "    pm.response.to.have.status(500);\r",
                   "});\r",
                   "\r",
                   "pm.test(\"TEST4: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
