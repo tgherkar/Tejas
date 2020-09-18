@@ -76596,12 +76596,12 @@
                   "    var query = request.url.split('/');\r",
                   "    //console.log(query);\r",
                   "    pm.test(\"TEST1: Active Status Check\", function () {\r",
-                  "        if(query[5]){\r",
+                  "        if(query[5].toUpperCase()=='ACTIVE'){\r",
                   "            for(var i=0; i<jsonData.length;i++){\r",
                   "                pm.expect(jsonData[i].isActive).to.deep.equal(true);\r",
                   "            }\r",
                   "        }\r",
-                  "        else{\r",
+                  "        if(query[5].toUpperCase()=='INACTIVE'){\r",
                   "            for(var i=0; i<jsonData.length;i++){\r",
                   "                pm.expect(jsonData[i].isActive).to.deep.equal(false);\r",
                   "            }\r",
@@ -76756,7 +76756,7 @@
               "variable": [
                 {
                   "key": "activeStatus",
-                  "value": "All",
+                  "value": "InActive",
                   "type": "string"
                 }
               ]
