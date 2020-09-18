@@ -75669,7 +75669,13 @@
                   "        });\r",
                   "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                   "    }\r",
-                  "}"
+                  "}\r",
+                  "\r",
+                  "\r",
+                  "var randomActiveString = Array['Active' , 'inActive', 'all']\r",
+                  "\r",
+                  "\r",
+                  ""
                 ],
                 "type": "text/javascript"
               }
@@ -75848,7 +75854,7 @@
               "variable": [
                 {
                   "key": "ActiveStatus",
-                  "value": "InActive",
+                  "value": "Active",
                   "type": "string",
                   "description": "(Required) "
                 }
