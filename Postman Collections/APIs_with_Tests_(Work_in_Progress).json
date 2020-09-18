@@ -74406,7 +74406,7 @@
                       "}\r",
                       "\r",
                       "\r",
-                      "var isActiveEmail =  Math.random() >= 0.5;\r",
+                      "const isActiveEmail =  Math.random() >= 0.5;\r",
                       "pm.globals.set(\"isActiveEmail\", isActiveEmail);\r",
                       "\r",
                       "\r",
