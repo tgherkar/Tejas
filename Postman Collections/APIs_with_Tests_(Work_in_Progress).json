@@ -74908,7 +74908,7 @@
                     {
                       "key": "templateCode",
                       "type": "text",
-                      "value": "3"
+                      "value": "{{tempCode}}"
                     },
                     {
                       "key": "",
