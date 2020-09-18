@@ -75167,6 +75167,28 @@
                     ],
                     "type": "text/javascript"
                   }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "e6b18725-9e14-4606-bbe2-0de5046140e5",
+                    "exec": [
+                      "pm.test(\"TEST1: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                      "});\r",
+                      "\r",
+                      " pm.test(\"TEST2: Status code Check\", function() {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                      "    pm.response.to.have.header('Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                      "});\r",
+                      "\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
                 }
               ],
               "_postman_id": "3b0666a3-2025-45ba-8bb7-01c5fd4a97ee",
@@ -75235,7 +75257,7 @@
                     },
                     {
                       "key": "consumerID",
-                      "value": "2141104",
+                      "value": "{{cnsmr_id}}",
                       "type": "string",
                       "description": "(Required) "
                     }
