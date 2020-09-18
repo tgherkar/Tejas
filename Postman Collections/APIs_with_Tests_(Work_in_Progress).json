@@ -74157,7 +74157,7 @@
                       "} catch (e){\r",
                       "\r",
                       "pm.test(\"Neg Test 01: Check SFSID isn't empty\", function () {\r",
-                      "     pm.expect(\"templateCode\").to.be.empty;\r",
+                      "     pm.expect(\"templateCode\").to.not.be.empty;\r",
                       "});\r",
                       " pm.test(\"Neg Test 02: Check if string is empty\", function () {\r",
                       "     pm.expect('description').to.not.be.empty;\r",
