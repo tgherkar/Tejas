@@ -74131,7 +74131,7 @@
                       "});\r",
                       "\r",
                       "\r",
-                      "if (data.TemplateCode!=null){\r",
+                      "if (data!=null){\r",
                       "    pm.test(\"TEST1A: ConsumerID check\", function() {\r",
                       "        pm.expect(jsonData.templateCode).to.equal(data.TemplateCode);\r",
                       "    });\r",
