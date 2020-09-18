@@ -74031,7 +74031,11 @@
                       "        });\r",
                       "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                       "    }\r",
-                      "}"
+                      "}\r",
+                      "\r",
+                      "\r",
+                      "const isActiveEmail =  Math.random() >= 0.5;\r",
+                      "pm.globals.set(\"isActiveEmail\", isActiveEmail);"
                     ],
                     "type": "text/javascript"
                   }
