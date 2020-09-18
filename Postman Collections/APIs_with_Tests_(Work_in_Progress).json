@@ -74795,297 +74795,6 @@
               ]
             },
             {
-              "name": "/template/email",
-              "event": [
-                {
-                  "listen": "prerequest",
-                  "script": {
-                    "id": "c95fa857-4550-412d-a0f1-4f8ca4b930b0",
-                    "exec": [
-                      "var tempCodes = Array('1','2', '3', '4', '5', '6', '7', '8', '9', '10');\r",
-                      "var tempCode = tempCodes[Math.floor(Math.random() * tempCodes.length)];\r",
-                      "pm.globals.set('tempCode', tempCode);\r",
-                      "\r",
-                      "\r",
-                      "/*\r",
-                      "SET NO COUNT ON\r",
-                      "SELECT TOP (1000) [TemplateCode]\r",
-                      "      ,[Description]\r",
-                      "      ,[ToEmail]\r",
-                      "      ,[TemplateBody]\r",
-                      "      ,[ActionCode]\r",
-                      "      ,[ResultCode]\r",
-                      "      ,[IsActive]\r",
-                      "      ,[RowVersion]\r",
-                      "  FROM [dbo].[Template]\r",
-                      "\r",
-                      "  */"
-                    ],
-                    "type": "text/javascript"
-                  }
-                },
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "78b58ea4-309c-45a0-b48d-0abcea234471",
-                    "exec": [
-                      "pm.test(\"TEST1: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
-                      "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
-                      "});\r",
-                      "\r",
-                      " pm.test(\"TEST2: Status code Check\", function() {\r",
-                      "    pm.response.to.have.status(204);\r",
-                      "});\r",
-                      "\r",
-                      "pm.test(\"TEST3: Response Header Checks\", function() {\r",
-                      "    pm.response.to.have.header('Content-Length', '0', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
-                      "});\r",
-                      "\r",
-                      ""
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "_postman_id": "e2d34acd-88ae-4d0a-85ad-685cadc52160",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "auth": {
-                  "type": "oauth2",
-                  "oauth2": {
-                    "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImppYk5ia0ZTU2JteFBZck45Q0ZxUms0SzRndyIsImtpZCI6ImppYk5ia0ZTU2JteFBZck45Q0ZxUms0SzRndyJ9.eyJhdWQiOiJhcGk6Ly84MTE2N2QzZC04NTNmLTQyMDctODBmYS0zMjI1YTQ5MjdhY2EiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMvIiwiaWF0IjoxNjAwMzU3MzYxLCJuYmYiOjE2MDAzNTczNjEsImV4cCI6MTYwMDM2MTI2MSwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkUyQmdZTkJLRFE0dTcrNFUrcmJtc2RxRjIyR3NBQT09IiwiYW1yIjpbInB3ZCJdLCJhcHBpZCI6IjNiMWRlOTRlLTQ5MmQtNGM0OS04N2NjLWE5ZWY4OTM2MTg1ZCIsImFwcGlkYWNyIjoiMSIsImF1dGhfdGltZSI6MTYwMDMzMjUyMSwiZW1haWwiOiJsdXNpbXBzb25AY2Fib3RmaW5hbmNpYWwuY29tIiwiZmFtaWx5X25hbWUiOiJTaW1wc29uIiwiZ2l2ZW5fbmFtZSI6Ikx1a2UiLCJncm91cHMiOlsiMTM0YjMyZjctMTdjYS00MGRiLTliNjMtYWZlMzYxZTc1M2NjIiwiMzIzOTliMjUtYzM5MS00MTg2LThjMDEtYjBhNDk1MDQ1OGU0IiwiYWFlODJjMjMtZGU1Zi00NDZkLWIzYzQtZTM3OTdhOGVlNjI4IiwiZDc4OTA2NWItNjZlNC00NDJiLWJjNjMtMTM2YzM1NDk2ZjQyIiwiN2QxMDQ2NTAtNzk0ZS00N2ZiLWE1NTQtYjFkNDk4OTkzYzllIl0sImlwYWRkciI6IjE4NS4yLjE2NC4yMzgiLCJuYW1lIjoiTHVrZSBTaW1wc29uIiwib2lkIjoiZmE5ZTNkNjYtMmZiNC00MDBlLThmNDgtYzdjYWNjOTg5NTczIiwib25wcmVtX3NpZCI6IlMtMS01LTIxLTE1NjQzNjk0NzctMTEwOTU5NzE5Ni0xNjkxNjE2NzE1LTc1NDYwMCIsInBsYXRmIjoiMyIsInJoIjoiMC5BQUFBOS1sSE5nVUR0a3F3YjBzMm8xU1hrMDdwSFRzdFNVbE1oOHlwNzRrMkdGMXpBSGcuIiwic2NwIjoiRmlsZXMuUmVhZCIsInNpZCI6ImIyODhlY2UxLThiNjItNDQ3Yy04YWUwLWNlNzZmYjIyOTI4YyIsInN1YiI6IlZlTzh4MjU2U1R2cWtiejEzeG1xZE1LTGhhVUFXalF4aDlfcmxkWXJjZXciLCJ0ZW5hbnRfY3RyeSI6IkdCIiwidGVuYW50X3JlZ2lvbl9zY29wZSI6IkVVIiwidGlkIjoiMzY0N2U5ZjctMDMwNS00YWI2LWIwNmYtNGIzNmEzNTQ5NzkzIiwidW5pcXVlX25hbWUiOiJsdXNpbXBzb25AY2Fib3RjbS5jb20iLCJ1cG4iOiJsdXNpbXBzb25AY2Fib3RjbS5jb20iLCJ1dGkiOiJlckFwY2xKckMwR3RqQTJJQW9NTEFRIiwidmVyIjoiMS4wIiwidmVyaWZpZWRfcHJpbWFyeV9lbWFpbCI6WyJsdXNpbXBzb25AY2Fib3RmaW5hbmNpYWwuY29tIl0sInZlcmlmaWVkX3NlY29uZGFyeV9lbWFpbCI6WyJsdXNpbXBzb25AY2Fib3RjbS5jb20iLCJsdXNpbXBzb25AY2Fib3RjbS5tYWlsLm9ubWljcm9zb2Z0LmNvbSIsImx1c2ltcHNvbkBjYWJvdGNtLm9ubWljcm9zb2Z0LmNvbSJdLCJ4bXNfdHBsIjoiZW4ifQ.CDbVeT4f57VV3YtCXV730wNyBcrfkoKXFtmaiNCkfpLuOP_XAFkUpg2EOmrfkrV5OHH0BqhW_cH38dn6eIsb3jcdOei3NMDARguCGOOlMIXXKe8f-1eYy2vjRotLxmWhJS--8-j7eAOixo_pwBCicRwoJ3b177h7AkoAjEaAkA9env-wdjq6-3MKta1DVHOqrCqYf0F3qFWqOMSDRhjatqNVzjY38CxOe6X4kPrMdpu7-ccb_RHBbZJIEY3t8cEeKcqEZ-c5zg778-ozbIlC35bk55oZDxp1xqrS8klfcKpZC2soMQ0zYXmWQ5kPQPdpdenRNLnMaxgCxOXjPXY7rg",
-                    "tokenType": "Bearer",
-                    "addTokenTo": "header"
-                  }
-                },
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json,multipart/form-data,v1.0.0"
-                  },
-                  {
-                    "key": "Origin",
-                    "value": "Postman",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Username",
-                    "value": "Test-User",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Correlation-Id",
-                    "value": "{{$guid}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Ocp-Apim-Subscription-Key-South",
-                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Ocp-Apim-Subscription-Key-West",
-                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
-                    "type": "text"
-                  }
-                ],
-                "body": {
-                  "mode": "formdata",
-                  "formdata": [
-                    {
-                      "key": "consumerID",
-                      "type": "text",
-                      "value": "{{cnsmr_id}}"
-                    },
-                    {
-                      "key": "emailAddress",
-                      "type": "text",
-                      "value": "{{ToEmail}}"
-                    },
-                    {
-                      "key": "subject",
-                      "type": "text",
-                      "value": "Test"
-                    },
-                    {
-                      "key": "messageBody",
-                      "type": "text",
-                      "value": "{{TemplateBody}}"
-                    },
-                    {
-                      "key": "templateCode",
-                      "type": "text",
-                      "value": "{{tempCode}}"
-                    },
-                    {
-                      "key": "",
-                      "type": "file",
-                      "value": null
-                    }
-                  ],
-                  "options": {
-                    "formdata": {}
-                  }
-                },
-                "url": "{{baseUrl}}/email/template/email"
-              },
-              "response": [
-                {
-                  "id": "20c061d9-f10a-4f74-bf65-9423357d2f82",
-                  "name": "Unauthorized",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"templateCode\": \"<integer>\",\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/template/email"
-                  },
-                  "status": "Unauthorized",
-                  "code": 401,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "application/json,v1.0.0"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": "dolor"
-                },
-                {
-                  "id": "526a27ab-a772-4300-99ae-e1add98f78fb",
-                  "name": "Bad Request",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"templateCode\": \"<integer>\",\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/template/email"
-                  },
-                  "status": "Bad Request",
-                  "code": 400,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "application/json,v1.0.0"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": "dolor"
-                },
-                {
-                  "id": "55241f1e-0ee1-4e86-a3d7-7cf927014440",
-                  "name": "Server Error",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"templateCode\": \"<integer>\",\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/template/email"
-                  },
-                  "status": "Service Unavailable",
-                  "code": 503,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "application/json,v1.0.0"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": "dolor"
-                },
-                {
-                  "id": "6180e3f1-6fc2-47ca-bc74-5d2f58ce3f4f",
-                  "name": "Forbidden",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"templateCode\": \"<integer>\",\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/template/email"
-                  },
-                  "status": "Forbidden",
-                  "code": 403,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "application/json,v1.0.0"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": "dolor"
-                },
-                {
-                  "id": "9487cf73-5f7f-4173-a6ed-30c6fb040a57",
-                  "name": "Server Error",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"templateCode\": \"<integer>\",\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/template/email"
-                  },
-                  "status": "Internal Server Error",
-                  "code": 500,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "application/json,v1.0.0"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": "dolor"
-                },
-                {
-                  "id": "d6508b69-65aa-4784-905c-412ff6767959",
-                  "name": "Success",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"consumerID\": \"<long>\",\n    \"templateCode\": \"<integer>\",\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/template/email"
-                  },
-                  "status": "No Content",
-                  "code": 204,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "application/json,v1.0.0"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": "dolor"
-                }
-              ]
-            },
-            {
               "name": "/template/:templateCode/:consumerID",
               "event": [
                 {
@@ -76964,7 +76673,299 @@
     },
     {
       "name": "AW_Email2",
-      "item": [],
+      "item": [
+        {
+          "name": "/template/email",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "c95fa857-4550-412d-a0f1-4f8ca4b930b0",
+                "exec": [
+                  "var tempCodes = Array('1','2', '3', '4', '5', '6', '7', '8', '9', '10');\r",
+                  "var tempCode = tempCodes[Math.floor(Math.random() * tempCodes.length)];\r",
+                  "pm.globals.set('tempCode', tempCode);\r",
+                  "\r",
+                  "\r",
+                  "/*\r",
+                  "SET NO COUNT ON\r",
+                  "SELECT TOP (1000) [TemplateCode]\r",
+                  "      ,[Description]\r",
+                  "      ,[ToEmail]\r",
+                  "      ,[TemplateBody]\r",
+                  "      ,[ActionCode]\r",
+                  "      ,[ResultCode]\r",
+                  "      ,[IsActive]\r",
+                  "      ,[RowVersion]\r",
+                  "  FROM [dbo].[Template]\r",
+                  "\r",
+                  "  */"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "78b58ea4-309c-45a0-b48d-0abcea234471",
+                "exec": [
+                  "pm.test(\"TEST1: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "\r",
+                  " pm.test(\"TEST2: Status code Check\", function() {\r",
+                  "    pm.response.to.have.status(204);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                  "    pm.response.to.have.header('Content-Length', '0', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                  "});\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "e2d34acd-88ae-4d0a-85ad-685cadc52160",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImppYk5ia0ZTU2JteFBZck45Q0ZxUms0SzRndyIsImtpZCI6ImppYk5ia0ZTU2JteFBZck45Q0ZxUms0SzRndyJ9.eyJhdWQiOiJhcGk6Ly84MTE2N2QzZC04NTNmLTQyMDctODBmYS0zMjI1YTQ5MjdhY2EiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMvIiwiaWF0IjoxNjAwMzU3MzYxLCJuYmYiOjE2MDAzNTczNjEsImV4cCI6MTYwMDM2MTI2MSwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkUyQmdZTkJLRFE0dTcrNFUrcmJtc2RxRjIyR3NBQT09IiwiYW1yIjpbInB3ZCJdLCJhcHBpZCI6IjNiMWRlOTRlLTQ5MmQtNGM0OS04N2NjLWE5ZWY4OTM2MTg1ZCIsImFwcGlkYWNyIjoiMSIsImF1dGhfdGltZSI6MTYwMDMzMjUyMSwiZW1haWwiOiJsdXNpbXBzb25AY2Fib3RmaW5hbmNpYWwuY29tIiwiZmFtaWx5X25hbWUiOiJTaW1wc29uIiwiZ2l2ZW5fbmFtZSI6Ikx1a2UiLCJncm91cHMiOlsiMTM0YjMyZjctMTdjYS00MGRiLTliNjMtYWZlMzYxZTc1M2NjIiwiMzIzOTliMjUtYzM5MS00MTg2LThjMDEtYjBhNDk1MDQ1OGU0IiwiYWFlODJjMjMtZGU1Zi00NDZkLWIzYzQtZTM3OTdhOGVlNjI4IiwiZDc4OTA2NWItNjZlNC00NDJiLWJjNjMtMTM2YzM1NDk2ZjQyIiwiN2QxMDQ2NTAtNzk0ZS00N2ZiLWE1NTQtYjFkNDk4OTkzYzllIl0sImlwYWRkciI6IjE4NS4yLjE2NC4yMzgiLCJuYW1lIjoiTHVrZSBTaW1wc29uIiwib2lkIjoiZmE5ZTNkNjYtMmZiNC00MDBlLThmNDgtYzdjYWNjOTg5NTczIiwib25wcmVtX3NpZCI6IlMtMS01LTIxLTE1NjQzNjk0NzctMTEwOTU5NzE5Ni0xNjkxNjE2NzE1LTc1NDYwMCIsInBsYXRmIjoiMyIsInJoIjoiMC5BQUFBOS1sSE5nVUR0a3F3YjBzMm8xU1hrMDdwSFRzdFNVbE1oOHlwNzRrMkdGMXpBSGcuIiwic2NwIjoiRmlsZXMuUmVhZCIsInNpZCI6ImIyODhlY2UxLThiNjItNDQ3Yy04YWUwLWNlNzZmYjIyOTI4YyIsInN1YiI6IlZlTzh4MjU2U1R2cWtiejEzeG1xZE1LTGhhVUFXalF4aDlfcmxkWXJjZXciLCJ0ZW5hbnRfY3RyeSI6IkdCIiwidGVuYW50X3JlZ2lvbl9zY29wZSI6IkVVIiwidGlkIjoiMzY0N2U5ZjctMDMwNS00YWI2LWIwNmYtNGIzNmEzNTQ5NzkzIiwidW5pcXVlX25hbWUiOiJsdXNpbXBzb25AY2Fib3RjbS5jb20iLCJ1cG4iOiJsdXNpbXBzb25AY2Fib3RjbS5jb20iLCJ1dGkiOiJlckFwY2xKckMwR3RqQTJJQW9NTEFRIiwidmVyIjoiMS4wIiwidmVyaWZpZWRfcHJpbWFyeV9lbWFpbCI6WyJsdXNpbXBzb25AY2Fib3RmaW5hbmNpYWwuY29tIl0sInZlcmlmaWVkX3NlY29uZGFyeV9lbWFpbCI6WyJsdXNpbXBzb25AY2Fib3RjbS5jb20iLCJsdXNpbXBzb25AY2Fib3RjbS5tYWlsLm9ubWljcm9zb2Z0LmNvbSIsImx1c2ltcHNvbkBjYWJvdGNtLm9ubWljcm9zb2Z0LmNvbSJdLCJ4bXNfdHBsIjoiZW4ifQ.CDbVeT4f57VV3YtCXV730wNyBcrfkoKXFtmaiNCkfpLuOP_XAFkUpg2EOmrfkrV5OHH0BqhW_cH38dn6eIsb3jcdOei3NMDARguCGOOlMIXXKe8f-1eYy2vjRotLxmWhJS--8-j7eAOixo_pwBCicRwoJ3b177h7AkoAjEaAkA9env-wdjq6-3MKta1DVHOqrCqYf0F3qFWqOMSDRhjatqNVzjY38CxOe6X4kPrMdpu7-ccb_RHBbZJIEY3t8cEeKcqEZ-c5zg778-ozbIlC35bk55oZDxp1xqrS8klfcKpZC2soMQ0zYXmWQ5kPQPdpdenRNLnMaxgCxOXjPXY7rg",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json,multipart/form-data,v1.0.0"
+              },
+              {
+                "key": "Origin",
+                "value": "Postman",
+                "type": "text"
+              },
+              {
+                "key": "Username",
+                "value": "Test-User",
+                "type": "text"
+              },
+              {
+                "key": "Correlation-Id",
+                "value": "{{$guid}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-West",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "consumerID",
+                  "type": "text",
+                  "value": "{{cnsmr_id}}"
+                },
+                {
+                  "key": "emailAddress",
+                  "type": "text",
+                  "value": "{{ToEmail}}"
+                },
+                {
+                  "key": "subject",
+                  "type": "text",
+                  "value": "Test"
+                },
+                {
+                  "key": "messageBody",
+                  "type": "text",
+                  "value": "{{TemplateBody}}"
+                },
+                {
+                  "key": "templateCode",
+                  "type": "text",
+                  "value": "{{tempCode}}"
+                },
+                {
+                  "key": "",
+                  "type": "file",
+                  "value": null
+                }
+              ],
+              "options": {
+                "formdata": {}
+              }
+            },
+            "url": "{{baseUrl}}/email/template/email"
+          },
+          "response": [
+            {
+              "id": "20c061d9-f10a-4f74-bf65-9423357d2f82",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"consumerID\": \"<long>\",\n    \"templateCode\": \"<integer>\",\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/template/email"
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "dolor"
+            },
+            {
+              "id": "526a27ab-a772-4300-99ae-e1add98f78fb",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"consumerID\": \"<long>\",\n    \"templateCode\": \"<integer>\",\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/template/email"
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "dolor"
+            },
+            {
+              "id": "55241f1e-0ee1-4e86-a3d7-7cf927014440",
+              "name": "Server Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"consumerID\": \"<long>\",\n    \"templateCode\": \"<integer>\",\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/template/email"
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "dolor"
+            },
+            {
+              "id": "6180e3f1-6fc2-47ca-bc74-5d2f58ce3f4f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"consumerID\": \"<long>\",\n    \"templateCode\": \"<integer>\",\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/template/email"
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "dolor"
+            },
+            {
+              "id": "9487cf73-5f7f-4173-a6ed-30c6fb040a57",
+              "name": "Server Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"consumerID\": \"<long>\",\n    \"templateCode\": \"<integer>\",\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/template/email"
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "dolor"
+            },
+            {
+              "id": "d6508b69-65aa-4784-905c-412ff6767959",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"consumerID\": \"<long>\",\n    \"templateCode\": \"<integer>\",\n    \"emailAddress\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"messageBody\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/template/email"
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "dolor"
+            }
+          ]
+        }
+      ],
       "_postman_id": "6ebcb539-6bcf-4ce6-9013-4372c3d7222b"
     },
     {
