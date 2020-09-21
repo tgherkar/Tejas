@@ -74880,7 +74880,7 @@
                       "\r",
                       "\r",
                       "\r",
-                      "var tempCodes = Array('1','2', '3', '4', '5', '6', '7', '8', '9', '10');\r",
+                      "var tempCodes = Array('1','2', '3', '4', '5', '6', '7');\r",
                       "var tempCode = tempCodes[Math.floor(Math.random() * tempCodes.length)];\r",
                       "pm.globals.set('tempCode', tempCode);\r",
                       "\r",
