@@ -71538,7 +71538,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "        {\n            \"quickTypeCode\": 23,\n            \"description\": \"Customer Overdue - No Answer\",\n            \"noteInput\": \"CALLED OVERDUE NO ANSWER\",\n            \"dispositionPrimaryCode\": \"AP\",\n            \"dispositionSecondaryCode\": \"AB\",\n            \"actionDeleteCurrentPhone\": false,\n            \"actionDiallerKill\": false,\n            \"isVoice\": true,\n            \"isActive\": true,\n            \"quickTypeActionResults\": [\n                {\n                    \"actionResultCode\": 88,\n                    \"description\": \"Comment\",\n                    \"actionCode\": \"CO\",\n                    \"resultCode\": \"CO\",\n                    \"isVoice\": null,\n                    \"isActive\": true\n                }\n            ]\n        }",
+                  "raw": "        {\n            \"quickTypeCode\": 27,\n            \"description\": \"Customer Overdue - No Answer\",\n            \"noteInput\": \"CALLED OVERDUE NO ANSWER\",\n            \"dispositionPrimaryCode\": \"AP\",\n            \"dispositionSecondaryCode\": \"AB\",\n            \"actionDeleteCurrentPhone\": false,\n            \"actionDiallerKill\": false,\n            \"isVoice\": true,\n            \"isActive\": true,\n            \"quickTypeActionResults\": [\n                {\n                    \"actionResultCode\": 88,\n                    \"description\": \"Comment\",\n                    \"actionCode\": \"CO\",\n                    \"resultCode\": \"CO\",\n                    \"isVoice\": null,\n                    \"isActive\": true\n                }\n            ]\n        }",
                   "options": {
                     "raw": {}
                   }
@@ -71756,7 +71756,31 @@
                       "        });\r",
                       "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                       "    }\r",
-                      "}"
+                      "}\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      "/*\r",
+                      "SET NOCOUNT ON\r",
+                      "SELECT TOP (50) QuickType.QuickTypeCode,\r",
+                      "QuickType.Description AS 'qt_description',\r",
+                      "NoteInput,\r",
+                      "DispositionPrimaryCode,\r",
+                      "DispositionSecondaryCode,\r",
+                      "ActionDeleteCurrentPhone,\r",
+                      "ActionDiallerKill,\r",
+                      "QuickType.IsVoice AS 'qt_isvoice',\r",
+                      "QuickType.IsActive AS 'qt_isactive',\r",
+                      "AR.ActionResultCode,\r",
+                      "AR.Description AS 'ar_desc',\r",
+                      "AR.ActionCode,\r",
+                      "AR.ResultCode,\r",
+                      "AR.IsVoice AS 'ar_isvoice',\r",
+                      "AR.IsActive AS 'ar_isactive'\r",
+                      "FROM [dbo].[QuickType]\r",
+                      "FULL JOIN dbo.QuickTypeActionResult QT ON QT.QuickTypeCode = QuickType.QuickTypeCode\r",
+                      "INNER JOIN dbo.ActionResult AR ON AR.ActionResultCode = QT.ActionResultCode\r",
+                      "*/"
                     ],
                     "type": "text/javascript"
                   }
@@ -72430,7 +72454,31 @@
                       "        });\r",
                       "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                       "    }\r",
-                      "}"
+                      "}\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      "/*\r",
+                      "\r",
+                      "\r",
+                      "SET NOCOUNT ON\r",
+                      "SELECT TOP (50)\r",
+                      "NoteTypeCode,\r",
+                      "NoteType.Description AS 'nt_desc',\r",
+                      "NoteType.IsVoice,\r",
+                      "NoteType.IsActive,\r",
+                      "AR.ActionResultCode,\r",
+                      "AR.IsActive AS 'ar_isactive',\r",
+                      "AR.IsVoice AS 'ar_isvoice',\r",
+                      "AR.ResultCode AS 'ar_resultcode',\r",
+                      "AR.Description AS 'ar_desc'\r",
+                      "FROM [dbo].[NoteType]\r",
+                      "INNER JOIN dbo.ActionResult AR ON AR.ActionResultCode = NoteType.ActionResultCode\r",
+                      "\r",
+                      "\r",
+                      "*/"
                     ],
                     "type": "text/javascript"
                   }
