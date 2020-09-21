@@ -73034,16 +73034,14 @@
               ],
               "variable": [
                 {
-                  "id": "16bd9784-03ce-4406-89c5-be2ffeb62424",
                   "key": "ActiveStatus",
-                  "value": "1",
+                  "value": "Inactive",
                   "type": "string",
                   "description": "(Required) "
                 },
                 {
-                  "id": "031460aa-eeb4-4662-9e57-e116dd518415",
                   "key": "voiceOnly",
-                  "value": "22",
+                  "value": "Inactive",
                   "type": "string",
                   "description": "(Required) "
                 }
