@@ -73783,7 +73783,13 @@
                   "\r",
                   "var items = Array('Active','inActive', 'all')\r",
                   "var item = items[Math.floor(Math.random() * items.length)];\r",
-                  "pm.globals.set('item', item);"
+                  "pm.globals.set('item', item);\r",
+                  "\r",
+                  "var voices = Array('VoiceOnly','NonVoiceOnly', 'all')\r",
+                  "var voice = voices[Math.floor(Math.random() * voices.length)];\r",
+                  "pm.globals.set('voice', voice);\r",
+                  "\r",
+                  ""
                 ],
                 "type": "text/javascript"
               }
@@ -73855,7 +73861,7 @@
                 },
                 {
                   "key": "voiceOnly",
-                  "value": "6436453",
+                  "value": "{{voice}}",
                   "type": "string"
                 }
               ]
