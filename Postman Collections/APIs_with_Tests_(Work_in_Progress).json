@@ -70989,7 +70989,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": " {\n            \"actionResultCode\": 20,\n            \"description\": \"Debt Management Company Payplan\",\n            \"actionCode\": \"PRI\",\n            \"resultCode\": \"DI\",\n            \"isVoice\": true,\n            \"isActive\": true\n}",
+                  "raw": " {\n            \"actionResultCode\": 20,\n            \"description\": \"Debt Management Company Payplan\",\n            \"actionCode\": \"PRI\",\n            \"resultCode\": \"DI\",\n            \"isVoice\": true,\n            \"isActive\": false\n}",
                   "options": {
                     "raw": {}
                   }
