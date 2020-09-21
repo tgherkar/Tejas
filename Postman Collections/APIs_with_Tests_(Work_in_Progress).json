@@ -72840,9 +72840,9 @@
                   "pm.globals.set('item', item);\r",
                   "\r",
                   "\r",
-                  "var items = Array('Active','inActive', 'all')\r",
-                  "var item = items[Math.floor(Math.random() * items.length)];\r",
-                  "pm.globals.set('item', item);"
+                  "var voices = Array('VoiceOnly','NonVoiceOnly', 'all')\r",
+                  "var voice = voices[Math.floor(Math.random() * voices.length)];\r",
+                  "pm.globals.set('voice', voice);"
                 ],
                 "type": "text/javascript"
               }
@@ -73052,7 +73052,7 @@
                 },
                 {
                   "key": "voiceOnly",
-                  "value": "VoiceOnly",
+                  "value": "{{voice}}",
                   "type": "string",
                   "description": "(Required) "
                 }
@@ -73238,7 +73238,16 @@
                   "        });\r",
                   "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                   "    }\r",
-                  "}"
+                  "}\r",
+                  "\r",
+                  "var items = Array('Active','inActive', 'all')\r",
+                  "var item = items[Math.floor(Math.random() * items.length)];\r",
+                  "pm.globals.set('item', item);\r",
+                  "\r",
+                  "\r",
+                  "var voices = Array('VoiceOnly','NonVoiceOnly', 'all')\r",
+                  "var voice = voices[Math.floor(Math.random() * voices.length)];\r",
+                  "pm.globals.set('voice', voice);"
                 ],
                 "type": "text/javascript"
               }
@@ -73476,7 +73485,7 @@
                 },
                 {
                   "key": "voiceOnly",
-                  "value": "0000000",
+                  "value": "{{voice}}",
                   "type": "string",
                   "description": "(Required) "
                 }
