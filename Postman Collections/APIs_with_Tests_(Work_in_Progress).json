@@ -71538,7 +71538,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"quickTypeCode\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"noteInput\": \"<string>\",\n    \"dispositionPrimaryCode\": \"<string>\",\n    \"dispositionSecondaryCode\": \"<string>\",\n    \"actionDeleteCurrentPhone\": \"<boolean>\",\n    \"actionDiallerKill\": \"<boolean>\",\n    \"isVoice\": \"<boolean>\",\n    \"isActive\": \"<boolean>\",\n    \"quickTypeActionResults\": [\n        {\n            \"actionResultCode\": \"<integer>\",\n            \"sequence\": \"<integer>\"\n        },\n        {\n            \"actionResultCode\": \"<integer>\",\n            \"sequence\": \"<integer>\"\n        }\n    ]\n}",
+                  "raw": "        {\n            \"quickTypeCode\": 23,\n            \"description\": \"Customer Overdue - No Answer\",\n            \"noteInput\": \"CALLED OVERDUE NO ANSWER\",\n            \"dispositionPrimaryCode\": \"AP\",\n            \"dispositionSecondaryCode\": \"AB\",\n            \"actionDeleteCurrentPhone\": false,\n            \"actionDiallerKill\": false,\n            \"isVoice\": true,\n            \"isActive\": true,\n            \"quickTypeActionResults\": [\n                {\n                    \"actionResultCode\": 88,\n                    \"description\": \"Comment\",\n                    \"actionCode\": \"CO\",\n                    \"resultCode\": \"CO\",\n                    \"isVoice\": null,\n                    \"isActive\": true\n                }\n            ]\n        }",
                   "options": {
                     "raw": {}
                   }
