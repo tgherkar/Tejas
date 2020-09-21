@@ -72831,7 +72831,18 @@
                   "        });\r",
                   "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                   "    }\r",
-                  "}"
+                  "}\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "var items = Array('Active','inActive', 'all')\r",
+                  "var item = items[Math.floor(Math.random() * items.length)];\r",
+                  "pm.globals.set('item', item);\r",
+                  "\r",
+                  "\r",
+                  "var items = Array('Active','inActive', 'all')\r",
+                  "var item = items[Math.floor(Math.random() * items.length)];\r",
+                  "pm.globals.set('item', item);"
                 ],
                 "type": "text/javascript"
               }
@@ -73035,7 +73046,7 @@
               "variable": [
                 {
                   "key": "ActiveStatus",
-                  "value": "Active",
+                  "value": "{{item}}",
                   "type": "string",
                   "description": "(Required) "
                 },
@@ -73458,14 +73469,12 @@
               ],
               "variable": [
                 {
-                  "id": "ff4fc33f-5dfb-46a9-a901-a68ab41de7b7",
                   "key": "ActiveStatus",
-                  "value": "1",
+                  "value": "{{item}}",
                   "type": "string",
                   "description": "(Required) "
                 },
                 {
-                  "id": "44b5cbff-104c-4997-a37b-1718dcef7a93",
                   "key": "voiceOnly",
                   "value": "0000000",
                   "type": "string",
@@ -73826,14 +73835,12 @@
               ],
               "variable": [
                 {
-                  "id": "2341646e-4e69-4a66-843e-6003897fe72e",
                   "key": "ActiveStatus",
-                  "value": "24324",
+                  "value": "{{item}}",
                   "type": "string",
                   "description": "(Required) "
                 },
                 {
-                  "id": "02736a47-2003-4f71-b17d-a4846fda3085",
                   "key": "voiceOnly",
                   "value": "6436453",
                   "type": "string"
