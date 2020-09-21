@@ -73770,7 +73770,11 @@
                   "        });\r",
                   "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
                   "    }\r",
-                  "}"
+                  "}\r",
+                  "\r",
+                  "var items = Array('Active','inActive', 'all')\r",
+                  "var item = items[Math.floor(Math.random() * items.length)];\r",
+                  "pm.globals.set('item', item);"
                 ],
                 "type": "text/javascript"
               }
