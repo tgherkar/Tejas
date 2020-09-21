@@ -73035,13 +73035,13 @@
               "variable": [
                 {
                   "key": "ActiveStatus",
-                  "value": "Inactive",
+                  "value": "Active",
                   "type": "string",
                   "description": "(Required) "
                 },
                 {
                   "key": "voiceOnly",
-                  "value": "Inactive",
+                  "value": "VoiceOnly",
                   "type": "string",
                   "description": "(Required) "
                 }
