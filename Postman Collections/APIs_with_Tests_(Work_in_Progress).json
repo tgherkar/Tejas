@@ -72236,7 +72236,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"noteTypeCode\": 12,\n    \"description\": \"TEST 1 - Notetype\",\n    \"isVoice\": true,\n    \"isActive\": true,\n    \"actionResultCode\": 87\n}",
+                  "raw": "{\n    \"noteTypeCode\": 21,\n    \"description\": \"TEST 1 - Notetype\",\n    \"isVoice\": true,\n    \"isActive\": true,\n    \"actionResultCode\": 87\n}",
                   "options": {
                     "raw": {}
                   }
