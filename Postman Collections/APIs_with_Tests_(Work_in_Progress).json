@@ -71613,7 +71613,7 @@
                       "        pm.expect(jsonData.quickTypeCode).to.equal(data.quickTypeCode);\r",
                       "    });\r",
                       "    pm.test(\"TEST1B: description check\", function() {\r",
-                      "        pm.expect(jsonData.description).to.equal(data.qn_desc);\r",
+                      "        pm.expect(jsonData.description).to.equal(data.description);\r",
                       "    });\r",
                       "\r",
                       "    pm.test(\"TEST1A: noteTypeCode check\", function() {\r",
