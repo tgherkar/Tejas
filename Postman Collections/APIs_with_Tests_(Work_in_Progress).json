@@ -72171,7 +72171,7 @@
                       "            if (jsonData.actionResult != null) {\r",
                       "                pm.expect(JSON.stringify(jsonData.actionResult.actionResultCode)).to.equal(data.ActionResultCode);\r",
                       "                pm.expect(JSON.stringify(jsonData.actionResult.description)).to.equal(data.ar_desc);\r",
-                      "                 pm.expect(JSON.stringify(jsonData.actionResult.actionResultCode)).to.equal(data.ActionResultCode);\r",
+                      "                 pm.expect(JSON.stringify(jsonData.actionResult.actionCode)).to.equal(data.ar_resultcode);\r",
                       "                pm.expect(JSON.stringify(jsonData.actionResult.actionResultCode)).to.equal(data.ActionResultCode);\r",
                       "                pm.expect(JSON.stringify(jsonData.actionResult.actionResultCode)).to.equal(data.ActionResultCode);\r",
                       "                pm.expect(JSON.stringify(jsonData.actionResult.actionResultCode)).to.equal(data.ActionResultCode);                                                                                \r",
