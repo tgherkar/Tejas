@@ -72166,7 +72166,7 @@
                       "        pm.expect(jsonData.isActive).to.equal(data.IsActive);\r",
                       "    });\r",
                       "    pm.test(\"TEST1E: actionCode check\", function() {\r",
-                      "        pm.expect(jsonData.actionResultCode).to.equal(data.IsVoice);\r",
+                      "        pm.expect(jsonData.actionResultCode).to.equal(data.ActionResultCode);\r",
                       "    });\r",
                       "    pm.test(\"TEST1F: resultCode check\", function() {\r",
                       "        pm.expect(jsonData.resultCode).to.equal(data.ResultCode);\r",
