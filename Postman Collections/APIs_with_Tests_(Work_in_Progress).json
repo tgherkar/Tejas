@@ -72169,7 +72169,7 @@
                       "        pm.expect(jsonData.actionResultCode).to.equal(data.ActionResultCode);\r",
                       "    });\r",
                       "    pm.test(\"TEST1F: resultCode check\", function() {\r",
-                      "        pm.expect(jsonData.resultCode).to.equal(data.ResultCode);\r",
+                      "        pm.expect(jsonData.description).to.equal(data.ar_desc);\r",
                       "    });\r",
                       "    pm.test(\"TEST1G: ConsumerID check\", function() {\r",
                       "        pm.expect(jsonData.isActive).to.equal(data.IsActive);\r",
