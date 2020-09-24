@@ -77481,7 +77481,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"noteTypeCode\": {{NoteTypeCode}},\n    \"description\": \"{{nt_desc}}\",\n    \"isVoice\": {{IsVoice}},\n    \"isActive\": {{IsActive}},\n    \"actionResultCode\": {{ActionResultCode}}\n}",
+                  "raw": "{\n    \"noteTypeCode\": {{NoteTypeCode}},\n    \"description\": \"{{nt_desc}}\",\n    \"isVoice\": {{IsVoice}},\n    \"isActive\": {{IsActive}},\n    \"actionResultCode\": 87\n}",
                   "options": {
                     "raw": {}
                   }
