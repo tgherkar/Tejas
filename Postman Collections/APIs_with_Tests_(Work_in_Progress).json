@@ -77541,7 +77541,6 @@
                   "    });\r",
                   "    pm.test(\"TEST1C: Date Received check\", function() {\r",
                   "      pm.expect(jsonData.dateReceived.split('T')[0]).to.equal(data.date_received.split(' ')[0]);\r",
-                  "     pm.expect(jsonData.dateReceived.split('T')[1]).to.equal(data.date_received.split(' ')[1]);\r",
                   "     });\r",
                   "\r",
                   "    pm.test(\"TEST1D: Document Upload Time/Date check\", function() {\r",
