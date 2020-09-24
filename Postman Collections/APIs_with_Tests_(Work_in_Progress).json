@@ -77537,7 +77537,7 @@
                   "        pm.expect((jsonData.sfsid).toUpperCase()).to.equal(data.SFSID);\r",
                   "    });\r",
                   "    pm.test(\"TEST1B: GroupID check\", function() {\r",
-                  "        pm.expect(jsonData.groupID).to.equal(JSON.stringify(data.group_id));\r",
+                  "        pm.expect((jsonData.groupID).toUpperCase()).to.equal(JSON.stringify(data.group_id));\r",
                   "    });\r",
                   "    pm.test(\"TEST1C: Date Received check\", function() {\r",
                   "        pm.expect((jsonData.dateReceived).toUpperCase()).to.equal(JSON.stringify(data.date_received));\r",
