@@ -77934,7 +77934,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"description\": \"TEST 1 - Notetype\",\n    \"actionResultCode\": 88,\n    \"isVoice\": \"true\"\n}",
+                  "raw": "{\n    \"description\": \"{{nt_desc}}\",\n    \"actionResultCode\": {{ActionResultCode}},\n    \"isVoice\": \"{{ar_isvoice}}\"\n}",
                   "options": {
                     "raw": {}
                   }
