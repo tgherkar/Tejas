@@ -77554,7 +77554,7 @@
                   "        pm.expect(jsonData.copyType).to.equal(data.copy_type);\r",
                   "    });\r",
                   "\r",
-                  "    pm.test(\"TEST1G: Document Template Version Soft Delete Flag check\", function() {\r",
+                  "    pm.test(\"TEST1G: CopyNotes\", function() {\r",
                   "        pm.expect((jsonData.copyNotes).toUpperCase()).to.equal(data.copy_notes);\r",
                   "    });\r",
                   "\r",
