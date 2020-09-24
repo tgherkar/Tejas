@@ -77555,7 +77555,7 @@
                   "    });\r",
                   "\r",
                   "    pm.test(\"TEST1G: CopyNotes\", function() {\r",
-                  "        pm.expect((jsonData.copyNotes).toUpperCase()).to.equal(data.copy_notes);\r",
+                  "        pm.expect(jsonData.copyNotes).to.equal(data.copy_notes);\r",
                   "    });\r",
                   "\r",
                   "\r",
