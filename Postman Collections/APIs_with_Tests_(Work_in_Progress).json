@@ -72151,6 +72151,8 @@
                       "\r",
                       "};\r",
                       "\r",
+                      "    pm.test(\"TEST1: Active Status Check\",function(){if(query[5].toUpperCase()=='1'){for(var i=0; i<jsonData.length;i++){                pm.expect(jsonData[i].isActive).to.deep.equal(true);}}if(query[5].toUpperCase()=='0'){for(var i=0; i<jsonData.length;i++){                pm.expect(jsonData[i].isActive).to.deep.equal(false);}}});\r",
+                      "\r",
                       "    ///NEGATIVE TESTS\r",
                       "\r",
                       "\r",
