@@ -77540,7 +77540,7 @@
                   "        pm.expect(jsonData.groupID).to.equal(JSON.stringify(data.group_id));\r",
                   "    });\r",
                   "    pm.test(\"TEST1C: Date Received check\", function() {\r",
-                  "        pm.expect(jsonData.dateReceived).to.equal(JSON.stringify(data.date_received));\r",
+                  "        pm.expect((jsonData.dateReceived).toUpperCase()).to.equal(JSON.stringify(data.date_received));\r",
                   "    });\r",
                   "\r",
                   "    pm.test(\"TEST1D: Document Upload Time/Date check\", function() {\r",
