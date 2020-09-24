@@ -73631,6 +73631,416 @@
                 {
                   "listen": "prerequest",
                   "script": {
+                    "id": "a77a75ff-7c72-44a3-b735-5a4e68657c05",
+                    "exec": [
+                      "if (pm.environment.get(\"OAuth_Timestamp\") == null) {\r",
+                      "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                      "} else {\r",
+                      "    var tokenDate = new Date(2010, 1, 1);\r",
+                      "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                      "    if (tokenTimestamp) {\r",
+                      "        tokenDate = Date.parse(tokenTimestamp);\r",
+                      "    }\r",
+                      "    //console.log(\"timestamp is\"+tokenDate);\r",
+                      "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                      "    if (!expiresInTime) {\r",
+                      "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                      "    }\r",
+                      "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                      "    if ((new Date() - tokenDate) >= expiresInTime) {\r",
+                      "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                      "        let clientId = 'cc92e9b3-5045-4369-9105-5b085a45e247';\r",
+                      "        let clientSecret = 'f3r6G:bq.2b:n:APJhUui18D=WVG_hHz';\r",
+                      "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                      "\r",
+                      "        let getTokenRequest = {\r",
+                      "            method: 'POST',\r",
+                      "            url: tokenUrl,\r",
+                      "            auth: {\r",
+                      "                type: \"basic\",\r",
+                      "                basic: [\r",
+                      "                    { key: \"username\", value: clientId },\r",
+                      "                    { key: \"password\", value: clientSecret }\r",
+                      "                ]\r",
+                      "            },\r",
+                      "            body: {\r",
+                      "                mode: 'formdata',\r",
+                      "                formdata: [\r",
+                      "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                      "                    { key: 'scope', value: scope }\r",
+                      "                ]\r",
+                      "            }\r",
+                      "        };\r",
+                      "\r",
+                      "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                      "            let jsonResponse = response.json(),\r",
+                      "                newAccessToken = jsonResponse.access_token;\r",
+                      "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                      "\r",
+                      "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                      "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in * 1000);\r",
+                      "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                      "        });\r",
+                      "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                      "    }\r",
+                      "}\r",
+                      "\r",
+                      "\r",
+                      "const isActiveEmail =  Math.random() >= 0.5;\r",
+                      "pm.globals.set(\"isActiveEmail\", isActiveEmail);\r",
+                      "\r",
+                      "let r = Math.random().toString(36).substring(7);\r",
+                      "pm.globals.set('r', r)\r",
+                      "console.log(\"random\", r);\r",
+                      "\r",
+                      "\r",
+                      "/*\r",
+                      "\r",
+                      "SELECT TOP (1000) [TemplateCode]\r",
+                      "      ,[Description]\r",
+                      "      ,[ToEmail]\r",
+                      "      ,[TemplateBody]\r",
+                      "      ,[ActionCode]\r",
+                      "      ,[ResultCode]\r",
+                      "      ,[IsActive]\r",
+                      "      ,[RowVersion]\r",
+                      "  FROM [dbo].[Template]\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      "  */"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "91501ab2-e45b-4fe0-8207-e3aa54216673",
+                    "exec": [
+                      "try{\r",
+                      "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                      "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                      "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                      "var Ajv = require('ajv'),\r",
+                      "ajv = new Ajv({logger: console});\r",
+                      "\r",
+                      "var jsonData = JSON.parse(responseBody);\r",
+                      "var schema =\r",
+                      "{\r",
+                      "    \"required\": [\r",
+                      "        \"templateCode\",\r",
+                      "        \"description\",\r",
+                      "        \"toEmail\",\r",
+                      "        \"templateBody\",\r",
+                      "        \"actionCode\",\r",
+                      "        \"resultCode\",\r",
+                      "        \"isActive\"\r",
+                      "    ],\r",
+                      "    \"properties\": {\r",
+                      "        \"templateCode\": {\r",
+                      "            \"$id\": \"#/properties/templateCode\",\r",
+                      "            \"type\": \"integer\"\r",
+                      "        },\r",
+                      "        \"description\": {\r",
+                      "            \"$id\": \"#/properties/description\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"toEmail\": {\r",
+                      "            \"$id\": \"#/properties/toEmail\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"templateBody\": {\r",
+                      "            \"$id\": \"#/properties/templateBody\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"actionCode\": {\r",
+                      "            \"$id\": \"#/properties/actionCode\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"resultCode\": {\r",
+                      "            \"$id\": \"#/properties/resultCode\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"isActive\": {\r",
+                      "            \"$id\": \"#/properties/isActive\",\r",
+                      "            \"type\": \"boolean\"\r",
+                      "        }\r",
+                      "    },\r",
+                      "    \"$id\": \"http://example.org/root.json#\",\r",
+                      "    \"type\": \"object\",\r",
+                      "    \"definitions\": {},\r",
+                      "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                      "}\r",
+                      "\r",
+                      "if (data.templateCode!=null){\r",
+                      "    pm.test(\"TEST1A: Template Code check\", function() {\r",
+                      "        pm.expect(jsonData.templateCode).to.equal(JSON.stringify(data.TemplateCode));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1B: description check\", function() {\r",
+                      "        pm.expect(jsonData.description).to.equal(JSON.stringify(data.Description));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1C: to Email check\", function() {\r",
+                      "        pm.expect(jsonData.toEmail).to.equal(JSON.stringify(data.ToEmail));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1D: templateBody check\", function() {\r",
+                      "        pm.expect(jsonData.templateBody).to.equal(JSON.stringify(data.TemplateBody));\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(\"TEST1E: actionCode check\", function() {\r",
+                      "        pm.expect(jsonData[0].actionCode).to.equal(JSON.stringify(data.ActionCode));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1G: resultCode check\", function() {\r",
+                      "        pm.expect(jsonData.resultCode).to.equal(JSON.stringify(data.ResultCode));\r",
+                      "    });\r",
+                      "\r",
+                      "};\r",
+                      "pm.test(\"TEST03: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST01: Status Code Check\", function() {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST02: Response Header Checks\", function() {\r",
+                      "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST04: Response Schema is valid\", function() {\r",
+                      "  pm.expect(ajv.validate(schema, jsonData, true, false)).to.be.true;\r",
+                      "});\r",
+                      "\r",
+                      "///Negative Test\r",
+                      "} catch (e){\r",
+                      "\r",
+                      "pm.test(\"Check if Schema Response isn't empty\", function () {\r",
+                      "     pm.expect(schema).to.not.be.empty;\r",
+                      "});\r",
+                      " pm.test(\"Check templateCode variable isn't empty\", function () {\r",
+                      "     pm.expect('templateCode').to.not.be.empty;\r",
+                      "});\r",
+                      "\r",
+                      "}"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "_postman_id": "23253381-61ec-458b-8221-39170a2e6974",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "accessToken": "{{OAuth_Token}}",
+                    "tokenType": "Bearer",
+                    "addTokenTo": "header"
+                  }
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json,application/json,v1.0.0"
+                  },
+                  {
+                    "key": "Correlation-Id",
+                    "value": "{{$guid}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Username",
+                    "value": "Test-User",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "Postman",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"description\": \"Test {{r}}\",\n    \"toEmail\": \"skip@cabotfinancial.com\",\n    \"templateBody\": \"<table><thead><tr><th>Customer Name:</th><th>{Consumer.ConsumerFirstName} {Consumer.ConsumerLastName}</th></tr></thead><tbody><tr><td>DM9 Ref:</td><td>{Consumer.LegacyID}</td></tr><tr><td>Complaint&nbsp;&nbsp;&nbsp;Registered:</td><td></td></tr><tr><td>What address have we received contact from and by whome?</td><td>{ConsumerAddress.AddressLine1} {ConsumerAddress.AddressLine2} {ConsumerAddress.AddressLine3} {ConsumerAddress.Postcode}</td></tr><tr><td>Query:</td><td></td></tr><tr><td>Forwarding&nbsp;&nbsp;&nbsp;Information: </td><td></td></tr></tbody></table>\",\n    \"actionCode\": \"CO\",\n    \"resultCode\": \"CO\",\n    \"isActive\": \"{{isActiveEmail}}\"\n}",
+                  "options": {
+                    "raw": {}
+                  }
+                },
+                "url": "{{baseUrl}}/email/template"
+              },
+              "response": [
+                {
+                  "id": "166d5c2f-9100-4915-abf7-2ee6acfd66c4",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template"
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "35cac9d2-0272-4fd2-a360-ee423ce226ea",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template"
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "4f3be4bd-92ad-4dc7-87e5-7a11726dae8b",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template"
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "559251b7-3053-4cd9-8c3d-1c99451b6fae",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template"
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "cebc9049-730b-4c02-ac3d-430a7e0447c3",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template"
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "dolor"
+                },
+                {
+                  "id": "d82f98f1-0453-4f48-941d-0953bb9eb5dc",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/template"
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "name": "/template",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
                     "id": "b6704a95-328a-471e-b2c3-e3949ffdeb55",
                     "exec": [
                       "if (pm.environment.get(\"OAuth_Timestamp\") == null) {\r",
@@ -74018,416 +74428,6 @@
                     "body": {
                       "mode": "raw",
                       "raw": "{\n    \"templateCode\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/template"
-                  },
-                  "status": "OK",
-                  "code": 200,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "application/json,v1.0.0"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                }
-              ]
-            },
-            {
-              "name": "/template",
-              "event": [
-                {
-                  "listen": "prerequest",
-                  "script": {
-                    "id": "a77a75ff-7c72-44a3-b735-5a4e68657c05",
-                    "exec": [
-                      "if (pm.environment.get(\"OAuth_Timestamp\") == null) {\r",
-                      "    console.log(\"OAuth timestamp null, check the environment\");\r",
-                      "} else {\r",
-                      "    var tokenDate = new Date(2010, 1, 1);\r",
-                      "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
-                      "    if (tokenTimestamp) {\r",
-                      "        tokenDate = Date.parse(tokenTimestamp);\r",
-                      "    }\r",
-                      "    //console.log(\"timestamp is\"+tokenDate);\r",
-                      "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
-                      "    if (!expiresInTime) {\r",
-                      "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
-                      "    }\r",
-                      "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
-                      "    if ((new Date() - tokenDate) >= expiresInTime) {\r",
-                      "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
-                      "        let clientId = 'cc92e9b3-5045-4369-9105-5b085a45e247';\r",
-                      "        let clientSecret = 'f3r6G:bq.2b:n:APJhUui18D=WVG_hHz';\r",
-                      "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
-                      "\r",
-                      "        let getTokenRequest = {\r",
-                      "            method: 'POST',\r",
-                      "            url: tokenUrl,\r",
-                      "            auth: {\r",
-                      "                type: \"basic\",\r",
-                      "                basic: [\r",
-                      "                    { key: \"username\", value: clientId },\r",
-                      "                    { key: \"password\", value: clientSecret }\r",
-                      "                ]\r",
-                      "            },\r",
-                      "            body: {\r",
-                      "                mode: 'formdata',\r",
-                      "                formdata: [\r",
-                      "                    { key: 'grant_type', value: 'client_credentials' },\r",
-                      "                    { key: 'scope', value: scope }\r",
-                      "                ]\r",
-                      "            }\r",
-                      "        };\r",
-                      "\r",
-                      "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
-                      "            let jsonResponse = response.json(),\r",
-                      "                newAccessToken = jsonResponse.access_token;\r",
-                      "            //console.log({ err, jsonResponse, newAccessToken });\r",
-                      "\r",
-                      "            pm.environment.set('OAuth_Token', newAccessToken);\r",
-                      "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in * 1000);\r",
-                      "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
-                      "        });\r",
-                      "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
-                      "    }\r",
-                      "}\r",
-                      "\r",
-                      "\r",
-                      "const isActiveEmail =  Math.random() >= 0.5;\r",
-                      "pm.globals.set(\"isActiveEmail\", isActiveEmail);\r",
-                      "\r",
-                      "let r = Math.random().toString(36).substring(7);\r",
-                      "pm.globals.set('r', r)\r",
-                      "console.log(\"random\", r);\r",
-                      "\r",
-                      "\r",
-                      "/*\r",
-                      "\r",
-                      "SELECT TOP (1000) [TemplateCode]\r",
-                      "      ,[Description]\r",
-                      "      ,[ToEmail]\r",
-                      "      ,[TemplateBody]\r",
-                      "      ,[ActionCode]\r",
-                      "      ,[ResultCode]\r",
-                      "      ,[IsActive]\r",
-                      "      ,[RowVersion]\r",
-                      "  FROM [dbo].[Template]\r",
-                      "\r",
-                      "\r",
-                      "\r",
-                      "  */"
-                    ],
-                    "type": "text/javascript"
-                  }
-                },
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "91501ab2-e45b-4fe0-8207-e3aa54216673",
-                    "exec": [
-                      "try{\r",
-                      "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
-                      "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
-                      "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
-                      "var Ajv = require('ajv'),\r",
-                      "ajv = new Ajv({logger: console});\r",
-                      "\r",
-                      "var jsonData = JSON.parse(responseBody);\r",
-                      "var schema =\r",
-                      "{\r",
-                      "    \"required\": [\r",
-                      "        \"templateCode\",\r",
-                      "        \"description\",\r",
-                      "        \"toEmail\",\r",
-                      "        \"templateBody\",\r",
-                      "        \"actionCode\",\r",
-                      "        \"resultCode\",\r",
-                      "        \"isActive\"\r",
-                      "    ],\r",
-                      "    \"properties\": {\r",
-                      "        \"templateCode\": {\r",
-                      "            \"$id\": \"#/properties/templateCode\",\r",
-                      "            \"type\": \"integer\"\r",
-                      "        },\r",
-                      "        \"description\": {\r",
-                      "            \"$id\": \"#/properties/description\",\r",
-                      "            \"type\": \"string\"\r",
-                      "        },\r",
-                      "        \"toEmail\": {\r",
-                      "            \"$id\": \"#/properties/toEmail\",\r",
-                      "            \"type\": \"string\"\r",
-                      "        },\r",
-                      "        \"templateBody\": {\r",
-                      "            \"$id\": \"#/properties/templateBody\",\r",
-                      "            \"type\": \"string\"\r",
-                      "        },\r",
-                      "        \"actionCode\": {\r",
-                      "            \"$id\": \"#/properties/actionCode\",\r",
-                      "            \"type\": \"string\"\r",
-                      "        },\r",
-                      "        \"resultCode\": {\r",
-                      "            \"$id\": \"#/properties/resultCode\",\r",
-                      "            \"type\": \"string\"\r",
-                      "        },\r",
-                      "        \"isActive\": {\r",
-                      "            \"$id\": \"#/properties/isActive\",\r",
-                      "            \"type\": \"boolean\"\r",
-                      "        }\r",
-                      "    },\r",
-                      "    \"$id\": \"http://example.org/root.json#\",\r",
-                      "    \"type\": \"object\",\r",
-                      "    \"definitions\": {},\r",
-                      "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
-                      "}\r",
-                      "\r",
-                      "if (data.templateCode!=null){\r",
-                      "    pm.test(\"TEST1A: Template Code check\", function() {\r",
-                      "        pm.expect(jsonData.templateCode).to.equal(JSON.stringify(data.TemplateCode));\r",
-                      "    });\r",
-                      "    pm.test(\"TEST1B: description check\", function() {\r",
-                      "        pm.expect(jsonData.description).to.equal(JSON.stringify(data.Description));\r",
-                      "    });\r",
-                      "    pm.test(\"TEST1C: to Email check\", function() {\r",
-                      "        pm.expect(jsonData.toEmail).to.equal(JSON.stringify(data.ToEmail));\r",
-                      "    });\r",
-                      "\r",
-                      "    pm.test(\"TEST1D: templateBody check\", function() {\r",
-                      "        pm.expect(jsonData.templateBody).to.equal(JSON.stringify(data.TemplateBody));\r",
-                      "    });\r",
-                      "\r",
-                      "    pm.test(\"TEST1E: actionCode check\", function() {\r",
-                      "        pm.expect(jsonData[0].actionCode).to.equal(JSON.stringify(data.ActionCode));\r",
-                      "    });\r",
-                      "    pm.test(\"TEST1G: resultCode check\", function() {\r",
-                      "        pm.expect(jsonData.resultCode).to.equal(JSON.stringify(data.ResultCode));\r",
-                      "    });\r",
-                      "\r",
-                      "};\r",
-                      "pm.test(\"TEST03: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
-                      "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
-                      "});\r",
-                      "\r",
-                      "pm.test(\"TEST01: Status Code Check\", function() {\r",
-                      "    pm.response.to.have.status(200);\r",
-                      "});\r",
-                      "\r",
-                      "pm.test(\"TEST02: Response Header Checks\", function() {\r",
-                      "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
-                      "});\r",
-                      "\r",
-                      "pm.test(\"TEST04: Response Schema is valid\", function() {\r",
-                      "  pm.expect(ajv.validate(schema, jsonData, true, false)).to.be.true;\r",
-                      "});\r",
-                      "\r",
-                      "///Negative Test\r",
-                      "} catch (e){\r",
-                      "\r",
-                      "pm.test(\"Check if Schema Response isn't empty\", function () {\r",
-                      "     pm.expect(schema).to.not.be.empty;\r",
-                      "});\r",
-                      " pm.test(\"Check templateCode variable isn't empty\", function () {\r",
-                      "     pm.expect('templateCode').to.not.be.empty;\r",
-                      "});\r",
-                      "\r",
-                      "}"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "_postman_id": "23253381-61ec-458b-8221-39170a2e6974",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "auth": {
-                  "type": "oauth2",
-                  "oauth2": {
-                    "accessToken": "{{OAuth_Token}}",
-                    "tokenType": "Bearer",
-                    "addTokenTo": "header"
-                  }
-                },
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json,application/json,v1.0.0"
-                  },
-                  {
-                    "key": "Correlation-Id",
-                    "value": "{{$guid}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Ocp-Apim-Subscription-Key-South",
-                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Ocp-Apim-Subscription-Key-West",
-                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Username",
-                    "value": "Test-User",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Origin",
-                    "value": "Postman",
-                    "type": "text"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n    \"description\": \"Test {{r}}\",\n    \"toEmail\": \"skip@cabotfinancial.com\",\n    \"templateBody\": \"<table><thead><tr><th>Customer Name:</th><th>{Consumer.ConsumerFirstName} {Consumer.ConsumerLastName}</th></tr></thead><tbody><tr><td>DM9 Ref:</td><td>{Consumer.LegacyID}</td></tr><tr><td>Complaint&nbsp;&nbsp;&nbsp;Registered:</td><td></td></tr><tr><td>What address have we received contact from and by whome?</td><td>{ConsumerAddress.AddressLine1} {ConsumerAddress.AddressLine2} {ConsumerAddress.AddressLine3} {ConsumerAddress.Postcode}</td></tr><tr><td>Query:</td><td></td></tr><tr><td>Forwarding&nbsp;&nbsp;&nbsp;Information: </td><td></td></tr></tbody></table>\",\n    \"actionCode\": \"CO\",\n    \"resultCode\": \"CO\",\n    \"isActive\": \"{{isActiveEmail}}\"\n}",
-                  "options": {
-                    "raw": {}
-                  }
-                },
-                "url": "{{baseUrl}}/email/template"
-              },
-              "response": [
-                {
-                  "id": "166d5c2f-9100-4915-abf7-2ee6acfd66c4",
-                  "name": "Server Error",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/template"
-                  },
-                  "status": "Internal Server Error",
-                  "code": 500,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "application/json,v1.0.0"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": "dolor"
-                },
-                {
-                  "id": "35cac9d2-0272-4fd2-a360-ee423ce226ea",
-                  "name": "Server Error",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/template"
-                  },
-                  "status": "Service Unavailable",
-                  "code": 503,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "application/json,v1.0.0"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": "dolor"
-                },
-                {
-                  "id": "4f3be4bd-92ad-4dc7-87e5-7a11726dae8b",
-                  "name": "Unauthorized",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/template"
-                  },
-                  "status": "Unauthorized",
-                  "code": 401,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "application/json,v1.0.0"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": "dolor"
-                },
-                {
-                  "id": "559251b7-3053-4cd9-8c3d-1c99451b6fae",
-                  "name": "Forbidden",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/template"
-                  },
-                  "status": "Forbidden",
-                  "code": 403,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "application/json,v1.0.0"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": "dolor"
-                },
-                {
-                  "id": "cebc9049-730b-4c02-ac3d-430a7e0447c3",
-                  "name": "Bad Request",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/template"
-                  },
-                  "status": "Bad Request",
-                  "code": 400,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "application/json,v1.0.0"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": "dolor"
-                },
-                {
-                  "id": "d82f98f1-0453-4f48-941d-0953bb9eb5dc",
-                  "name": "Success",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"description\": \"<string>\",\n    \"toEmail\": \"<string>\",\n    \"templateBody\": \"<string>\",\n    \"actionCode\": \"<string>\",\n    \"resultCode\": \"<string>\",\n    \"isActive\": \"<boolean>\"\n}"
                     },
                     "url": "{{baseUrl}}/template"
                   },
@@ -77823,6 +77823,7 @@
                       "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
                       "}\r",
                       "\r",
+                      "    pm.test(\"TEST1: Active Status Check\",function(){if(query[5].toUpperCase()=='1'){for(var i=0; i<jsonData.length;i++){                pm.expect(jsonData[i].isActive).to.deep.equal(true);}}if(query[5].toUpperCase()=='0'){for(var i=0; i<jsonData.length;i++){                pm.expect(jsonData[i].isActive).to.deep.equal(false);}}});\r",
                       "\r",
                       "if (data!=null){\r",
                       "    pm.test(\"TEST1A: noteTypeCode check\", function() {\r",
