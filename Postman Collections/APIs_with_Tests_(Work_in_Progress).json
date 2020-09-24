@@ -77545,7 +77545,7 @@
                   "     });\r",
                   "\r",
                   "    pm.test(\"TEST1D: Document Upload Time/Date check\", function() {\r",
-                  "        pm.expect(jsonData.statusCode.split('T')[0]).to.equal(data.sfs_status_code);\r",
+                  "        pm.expect(jsonData.statusCode).to.equal(data.sfs_status_code);\r",
                   "    });\r",
                   "    pm.test(\"TEST1E: Document Template Finalized Flag check\", function() {\r",
                   "        pm.expect((jsonData.originalSFSID).toUpperCase()).to.equal(data.original_sfs_id);\r",
