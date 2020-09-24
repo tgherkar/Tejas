@@ -77564,7 +77564,7 @@
                   "\r",
                   "\r",
                   "    pm.test(\"TEST1G: Savings check\", function() {\r",
-                  "        if(jsonData[0].savings!=null){\r",
+                  "        if(jsonData.savings!=null){\r",
                   "            pm.expect(jsonData.savings.sfsSavingID).to.equal((data.sfs_saving_id));\r",
                   "            pm.expect(jsonData.savings.savingTypeCode).to.equal(JSON.stringify(data.saving_type));\r",
                   "            pm.expect(jsonData.savings.amount).to.equal(JSON.stringify(data.saving_amount));\r",
