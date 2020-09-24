@@ -77534,7 +77534,7 @@
                   "\r",
                   "if (data.cnsmr_id!=null){\r",
                   "    pm.test(\"TEST1A: SFSID check\", function() {\r",
-                  "        pm.expect((jsonData.sfsid).toUpperCase()).to.equal(data.SFSID);\r",
+                  "        pm.expect((jsonData.sfsid).toUpperCase()).to.equal(data.sfs_id);\r",
                   "    });\r",
                   "    pm.test(\"TEST1B: GroupID check\", function() {\r",
                   "        pm.expect((jsonData.groupID).toUpperCase()).to.equal((data.group_id));\r",
