@@ -77633,7 +77633,7 @@
                   "pm.test(\"TEST1G: description check\", function() {\r",
                   "        if(jsonData.description !=null){\r",
                   "            pm.expect((jsonData.description.sfsDescriptionID).toUpperCase()).to.equal((data.sfs_description_id));\r",
-                  "            pm.expect(jsonData.description.value).to.equal(data.value);\r",
+                  "            pm.expect((jsonData.description.value).toUpperCase()).to.equal(data.value);\r",
                   "        }\r",
                   "    });\r",
                   "\r",
