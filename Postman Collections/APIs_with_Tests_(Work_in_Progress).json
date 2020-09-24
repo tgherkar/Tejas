@@ -77578,7 +77578,7 @@
                   "        if(jsonData.consumerDetail !=null){\r",
                   "            pm.expect((jsonData.consumerDetail.sfsConsumerDetailID).toUpperCase()).to.equal(data.sfs_consumer_detail_id);\r",
                   "\r",
-                  "            pm.expect(jsonData.consumerDetail.outstandingDebt).to.equal(JSON.stringify(data.outstanding_debt));\r",
+                  "            pm.expect(jsonData.consumerDetail.outstandingDebt).to.equal(data.outstanding_debt);\r",
                   "\r",
                   "            pm.expect(jsonData.consumerDetail.numberInHousehold).to.equal(JSON.stringify(data.number_in_hh));\r",
                   "\r",
