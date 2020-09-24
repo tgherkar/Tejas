@@ -77576,7 +77576,7 @@
                   "\r",
                   "       pm.test(\"TEST1G: Consumer Detail check\", function() {\r",
                   "        if(jsonData.consumerDetail!=null){\r",
-                  "            pm.expect(jsonData.consumerDetail.sfsConsumerDetailID).to.equal(data.sfs_consumer_detail_id);\r",
+                  "            pm.expect((jsonData.consumerDetail.sfsConsumerDetailID).toUpperCase()).to.equal(data.sfs_consumer_detail_id);\r",
                   "\r",
                   "            pm.expect(jsonData.consumerDetail.outstandingDebt).to.equal(JSON.stringify(data.outstanding_debt));\r",
                   "\r",
