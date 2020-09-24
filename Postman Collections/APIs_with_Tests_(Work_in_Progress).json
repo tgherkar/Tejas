@@ -77608,7 +77608,7 @@
                   "\r",
                   "            pm.expect(jsonData.consumerDetail.propertyValue).to.equal(JSON.stringify(data.property_value));\r",
                   "\r",
-                  "            pm.expect(jsonData.consumerDetail.mortgageAmount).to.equal(JSON.stringify(data.mortgage_amount));\r",
+                  "            pm.expect(jsonData.consumerDetail.mortgageAmount).to.equal(data.mortgage_amount);\r",
                   "\r",
                   "            pm.expect(jsonData.consumerDetail.repayingDebtTypeCode).to.equal(data.repaying_debt_type);\r",
                   "            \r",
