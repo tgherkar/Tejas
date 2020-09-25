@@ -71048,7 +71048,7 @@
                       "        pm.expect(jsonData.noteTypeCode).to.equal(data.NoteTypeCode);\r",
                       "    });\r",
                       "    pm.test(\"TEST1B: description check\", function() {\r",
-                      "        pm.expect(jsonData.description).to.equal(data.nt_desc2);\r",
+                      "        pm.expect(jsonData.description).to.equal(data.nt_desc);\r",
                       "    });\r",
                       "    pm.test(\"TEST1C: isVoice check\", function() {\r",
                       "       pm.expect(JSON.stringify(jsonData.isVoice).toUpperCase()).to.equal(data.IsVoice);\r",
