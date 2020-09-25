@@ -68982,7 +68982,7 @@
                   "pm.test(\"TEST3: Response Header Checks\", function() {\r",
                   "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
                   "});\r",
-                  "    pm.globals.set(\"sms_tmplt_code\", jsonData.templateCode);\r",
+                  "pm.globals.set(\"sms_tmplt_code1\", jsonData.templateCode);\r",
                   "pm.test(\"TEST4: Response Content Check\", function() {\r",
                   "    pm.expect(jsonData.displayName).to.deep.equal(req_body.displayName);\r",
                   "    pm.expect(jsonData.templateBody).to.deep.equal(req_body.templateBody);\r",
@@ -69272,7 +69272,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"templateCode\": {{sms_tmplt_code}},\r\n  \"displayName\": \"{{sms_tmplt_disp_nm}}\",\r\n  \"templateBody\": \"{{sms_tmplt_body}}\",\r\n  \"campaign\": \"{{sms_cmpgn}}\",\r\n  \"type\": \"{{sms_tmplt_type}}\",\r\n  \"isActive\": {{IsActive}},\r\n  \"isAgentPortalOption\": {{isagnt}}\r\n}",
+              "raw": "{\r\n  \"templateCode\": {{sms_tmplt_code1}},\r\n  \"displayName\": \"{{sms_tmplt_disp_nm}}\",\r\n  \"templateBody\": \"{{sms_tmplt_body}}\",\r\n  \"campaign\": \"{{sms_cmpgn}}\",\r\n  \"type\": \"{{sms_tmplt_type}}\",\r\n  \"isActive\": {{IsActive}},\r\n  \"isAgentPortalOption\": {{isagnt}}\r\n}",
               "options": {
                 "raw": {}
               }
@@ -71488,7 +71488,7 @@
                       "                pm.expect(jsonData[0].actionResult.description).to.equal(data.ar_desc);\r",
                       "                pm.expect(jsonData[0].actionResult.actionCode).to.equal(data.ar_actioncode);\r",
                       "                pm.expect(jsonData[0].actionResult.resultCode).to.equal(data.ar_resultcode);\r",
-                      "                  pm.expect(JSON.stringify(jsonData.isActive).toUpperCase()).to.equal(data.ar_isVoice)\r",
+                      "                  pm.expect(JSON.stringify(jsonData.isVoice).toUpperCase()).to.equal(data.ar_isVoice)\r",
                       "               pm.expect(JSON.stringify(jsonData.isActive).toUpperCase()).to.equal(data.ar_isActive);;                                                                                \r",
                       "    };\r",
                       "        });\r",
