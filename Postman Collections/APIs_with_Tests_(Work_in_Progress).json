@@ -65101,7 +65101,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "        {\n            \"quickTypeCode\": {{QuickTypeCode}},\n            \"description\": \"{{qt_description}}\",\n            \"noteInput\": \"{{NoteInput}}\",\n            \"dispositionPrimaryCode\": \"{{DispositionPrimaryCode}}\",\n            \"dispositionSecondaryCode\": \"{{DispositionSecondaryCode}}\",\n            \"actionDeleteCurrentPhone\": {{ActionDeleteCurrentPhone}},\n            \"actionDiallerKill\": {{ActionDiallerKill}},\n            \"isVoice\": {{qt_isvoice}},\n            \"isActive\": {{qt_isactive}},\n            \"quickTypeActionResults\": [\n                {\n                    \"actionResultCode\": {{ActionResultCode}},\n                    \"description\": \"{{ar_desc}}\",\n                    \"actionCode\": \"{{ar_actioncode}}\",\n                    \"resultCode\": \"{{ar_resultcode}}\",\n                    \"isVoice\": {{ar_isvoice}},\n                    \"isActive\": {{ar_isactive}}\n                }\n            ]\n        }",
+                  "raw": "        {\n            \"quickTypeCode\": {{QuickTypeCode}},\n            \"description\": \"{{qt_desc}}\",\n            \"noteInput\": \"{{NoteInput}}\",\n            \"dispositionPrimaryCode\": \"{{DispositionPrimaryCode}}\",\n            \"dispositionSecondaryCode\": \"{{DispositionSecondaryCode}}\",\n            \"actionDeleteCurrentPhone\": {{ActionDeleteCurrentPhone}},\n            \"actionDiallerKill\": {{ActionDiallerKill}},\n            \"isVoice\": {{qt_isvoice}},\n            \"isActive\": {{qt_isactive}},\n            \"quickTypeActionResults\": [\n                {\n                    \"actionResultCode\": {{ActionResultCode}},\n                    \"description\": \"{{ar_desc}}\",\n                    \"actionCode\": \"{{ar_actioncode}}\",\n                    \"resultCode\": \"{{ar_resultcode}}\",\n                    \"isVoice\": {{ar_isvoice}},\n                    \"isActive\": {{ar_isactive}}\n                }\n            ]\n        }",
                   "options": {
                     "raw": {}
                   }
@@ -79119,8 +79119,10 @@
                       "            }\r",
                       "        });\r",
                       "    pm.test(\"TEST1C: eventDateTime check\", function () {\r",
-                      "    if(jsonData[0].eventDateTime != null){\r",
-                      "    pm.expect(jsonData[0].eventDateTime.split('T')[0]).to.equal(data.eventDateTime.split(' ')[0]);}\r",
+                      "    if(jsonData.eventDateTime != null){\r",
+                      "        pm.expect(jsonData.eventDateTime.split('T')[0]).to.equal(data.eventDateTime.split(' ')[0]);\r",
+                      "        pm.expect(jsonData.eventDateTime.split('T')[1]).to.equal(data.eventDateTime.split(' ')[1]);}\r",
+                      "    }\r",
                       "    });\r",
                       "    pm.test(\"TEST1D: consumerID check\", function () {\r",
                       "        pm.expect(jsonData[0].consumerID).to.equal(JSON.stringify(data.consumerID));\r",
