@@ -80875,7 +80875,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"targetUsername\": \"MCole\",\n    \"eventDateTime\": \"{{event_dttm}}\",\n    \"consumerID\": 2108175,\n    \"subject\": \"SETTLEMENT\",\n    \"comment\": \"Customer likes Nandos\",\n    \"applyToLinkedConsumers\": true\n}",
+              "raw": "{\n    \"targetUsername\": \"{{targetUsername}}\",\n    \"eventDateTime\": \"{{event_dttm}}\",\n    \"consumerID\": {{cnsmr_id}},\n    \"subject\": \"{{rmdr_subj}}\",\n    \"comment\": \"Test Comment\",\n    \"applyToLinkedConsumers\": {{applyToLinkedConsumers}}\n}",
               "options": {
                 "raw": {}
               }
