@@ -64991,7 +64991,7 @@
                       "        pm.expect(jsonData.actionDeleteCurrentPhone).to.equal(data.actionDeleteCurrentPhone);\r",
                       "    });\r",
                       "    pm.test(\"TEST1B: description check\", function() {\r",
-                      "        pm.expect(jsonData.actionDiallerKill).to.equal(data.actionDiallerKill);\r",
+                      "       pm.expect(JSON.stringify(jsonData.actionDiallerKill).toUpperCase()).to.equal(data.actionDiallerKill);\r",
                       "    });\r",
                       "    pm.test(\"TEST1C: isVoice check\", function() {\r",
                       "       pm.expect(JSON.stringify(jsonData.isVoice).toUpperCase()).to.equal(data.qt_isVoice);\r",
@@ -79248,9 +79248,8 @@
                   ],
                   "variable": [
                     {
-                      "id": "7b3b8611-3ebd-457a-b701-706a64277f1a",
                       "key": "userReminderID",
-                      "value": "7343",
+                      "value": "{{userReminderID}}",
                       "type": "string"
                     }
                   ]
