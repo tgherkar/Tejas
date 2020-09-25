@@ -69357,7 +69357,7 @@
               "variable": [
                 {
                   "key": "activeStatus",
-                  "value": "Active",
+                  "value": "{{aw_activestatus}}",
                   "type": "string"
                 }
               ]
