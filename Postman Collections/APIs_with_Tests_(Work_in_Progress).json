@@ -79470,6 +79470,1277 @@
           ],
           "_postman_id": "7bd7e175-5833-42fd-9ae3-c0f69354fac5",
           "_postman_isSubFolder": true
+        },
+        {
+          "name": "/agent/:targetUsername",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "63fcf43b-537e-429e-872d-578a00316866",
+                "exec": [
+                  "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                  "{\r",
+                  "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                  "} else {\r",
+                  "    var tokenDate = new Date(2010,1,1);\r",
+                  "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "    if(tokenTimestamp){\r",
+                  "        tokenDate = Date.parse(tokenTimestamp);\r",
+                  "    }\r",
+                  "    //console.log(\"timestamp is\"+tokenDate);\r",
+                  "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "    if(!expiresInTime){\r",
+                  "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "    }\r",
+                  "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                  "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                  "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                  "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                  "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                  "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                  "\r",
+                  "        let getTokenRequest = {\r",
+                  "            method: 'POST',\r",
+                  "            url: tokenUrl,\r",
+                  "            auth: {\r",
+                  "                type: \"basic\",\r",
+                  "                basic: [\r",
+                  "                    { key: \"username\", value: clientId },\r",
+                  "                    { key: \"password\", value: clientSecret }\r",
+                  "                ]\r",
+                  "            },\r",
+                  "            body: {\r",
+                  "                mode: 'formdata',\r",
+                  "                formdata: [\r",
+                  "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                    { key: 'scope', value: scope }\r",
+                  "                ]\r",
+                  "            }\r",
+                  "        };\r",
+                  "\r",
+                  "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "            let jsonResponse = response.json(),\r",
+                  "            newAccessToken = jsonResponse.access_token;\r",
+                  "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "\r",
+                  "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "        });\r",
+                  "\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "    }\r",
+                  "}\r",
+                  "//console.log(\"End of Pre-req script\");"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "408a9666-4695-48fc-879c-23bc61ec92e4",
+                "exec": [
+                  "try{\r",
+                  "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                  "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                  "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                  "\r",
+                  "/////////////////////////////////////////////////////////////////////////////////////\r",
+                  "let expectedCode = pm.iterationData.get(\"expectedHttpCode\");\r",
+                  "var jsonData = JSON.parse(responseBody);\r",
+                  "var req = request.url;\r",
+                  "var query = request.url.split('/');\r",
+                  "console.log(query);\r",
+                  "\r",
+                  "pm.test(\"TEST1: Status code Check\", function() {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"TEST2: Response Header Checks\", function() {\r",
+                  "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"TEST3: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "\r",
+                  "var Ajv = require('ajv'),\r",
+                  "ajv = new Ajv({logger: console}),\r",
+                  "schema = {\r",
+                  "    \"items\": {\r",
+                  "        \"required\": [\r",
+                  "            \"userReminderID\",\r",
+                  "            \"targetUsername\",\r",
+                  "            \"eventDateTime\",\r",
+                  "            \"consumerID\",\r",
+                  "            \"subject\",\r",
+                  "            \"comment\"\r",
+                  "        ],\r",
+                  "        \"properties\": {\r",
+                  "            \"userReminderID\": {\r",
+                  "                \"$id\": \"#/items/properties/userReminderID\",\r",
+                  "                \"type\": \"integer\"\r",
+                  "            },\r",
+                  "            \"targetUsername\": {\r",
+                  "                \"$id\": \"#/items/properties/targetUsername\",\r",
+                  "                \"type\": \"string\"\r",
+                  "            },\r",
+                  "            \"eventDateTime\": {\r",
+                  "                \"$id\": \"#/items/properties/eventDateTime\",\r",
+                  "                \"type\": \"string\"\r",
+                  "            },\r",
+                  "            \"consumerID\": {\r",
+                  "                \"$id\": \"#/items/properties/consumerID\",\r",
+                  "                \"type\": \"integer\"\r",
+                  "            },\r",
+                  "            \"subject\": {\r",
+                  "                \"$id\": \"#/items/properties/subject\",\r",
+                  "                \"type\": \"string\"\r",
+                  "            },\r",
+                  "            \"comment\": {\r",
+                  "                \"$id\": \"#/items/properties/comment\",\r",
+                  "                \"type\": \"string\"\r",
+                  "            }\r",
+                  "        },\r",
+                  "        \"$id\": \"#/items\",\r",
+                  "        \"type\": \"object\"\r",
+                  "    },\r",
+                  "    \"$id\": \"http://example.org/root.json#\",\r",
+                  "    \"type\": \"array\",\r",
+                  "    \"definitions\": {},\r",
+                  "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                  "};\r",
+                  "pm.test(\"TEST4: Schema Test\", function(){\r",
+                  "    pm.expect(ajv.validate(schema, jsonData)).to.be.true;\r",
+                  "});\r",
+                  "} catch (e){}\r",
+                  "/*\r",
+                  "pm.environment.set(\"data_id\", jsonData.data[0].id);\r",
+                  "pm.environment.set(\"cnsmr_id\", jsonData.data[0].cnsmr_id);\r",
+                  "pm.environment.set(\"udp_id\", jsonData.udpTable.udpid);*/"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "553d6f9e-e36f-4b4e-89f5-1d43a56b64ae",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "correlation-id",
+                "value": "{{Correlation-Id}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
+              },
+              {
+                "key": "ocp-apim-subscription-key-West",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "username",
+                "value": "Mike",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/reminder/agent/:targetUsername",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reminder",
+                "agent",
+                ":targetUsername"
+              ],
+              "variable": [
+                {
+                  "id": "47fb05e1-9ec1-4b6c-8705-d9d306142d08",
+                  "key": "targetUsername",
+                  "value": "Sswann",
+                  "type": "string",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "description": "Get all Reminders for a specific username"
+          },
+          "response": [
+            {
+              "id": "172c2160-ae14-4fc1-ac03-ab3c26dcd6ad",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/:targetUsername",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    ":targetUsername"
+                  ],
+                  "variable": [
+                    {
+                      "key": "targetUsername"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "magna ad con"
+            },
+            {
+              "id": "4a03bad5-1083-45da-af70-b343eb5669fd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/:targetUsername",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    ":targetUsername"
+                  ],
+                  "variable": [
+                    {
+                      "key": "targetUsername"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "magna ad con"
+            },
+            {
+              "id": "9c2a6bef-881f-47ab-8ea8-164cf02a31d6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/:targetUsername",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    ":targetUsername"
+                  ],
+                  "variable": [
+                    {
+                      "key": "targetUsername"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "magna ad con"
+            },
+            {
+              "id": "d6bbe614-cd11-4410-866c-ff18de7b6e81",
+              "name": "Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/:targetUsername",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    ":targetUsername"
+                  ],
+                  "variable": [
+                    {
+                      "key": "targetUsername"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "magna ad con"
+            },
+            {
+              "id": "e2676358-27d5-480c-b52f-e465eb62cb84",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/:targetUsername",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    ":targetUsername"
+                  ],
+                  "variable": [
+                    {
+                      "key": "targetUsername"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "magna ad con"
+            },
+            {
+              "id": "effbc2d2-9257-49af-b1ad-995acf74ecec",
+              "name": "Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/:targetUsername",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    ":targetUsername"
+                  ],
+                  "variable": [
+                    {
+                      "key": "targetUsername"
+                    }
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "magna ad con"
+            }
+          ]
+        },
+        {
+          "name": "/consumer/:consumerID",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "f3874793-67a6-42f3-8d9e-ac72ca21f999",
+                "exec": [
+                  "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                  "{\r",
+                  "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                  "} else {\r",
+                  "    var tokenDate = new Date(2010,1,1);\r",
+                  "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "    if(tokenTimestamp){\r",
+                  "        tokenDate = Date.parse(tokenTimestamp);\r",
+                  "    }\r",
+                  "    //console.log(\"timestamp is\"+tokenDate);\r",
+                  "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "    if(!expiresInTime){\r",
+                  "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "    }\r",
+                  "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                  "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                  "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                  "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                  "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                  "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                  "\r",
+                  "        let getTokenRequest = {\r",
+                  "            method: 'POST',\r",
+                  "            url: tokenUrl,\r",
+                  "            auth: {\r",
+                  "                type: \"basic\",\r",
+                  "                basic: [\r",
+                  "                    { key: \"username\", value: clientId },\r",
+                  "                    { key: \"password\", value: clientSecret }\r",
+                  "                ]\r",
+                  "            },\r",
+                  "            body: {\r",
+                  "                mode: 'formdata',\r",
+                  "                formdata: [\r",
+                  "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                    { key: 'scope', value: scope }\r",
+                  "                ]\r",
+                  "            }\r",
+                  "        };\r",
+                  "\r",
+                  "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "            let jsonResponse = response.json(),\r",
+                  "            newAccessToken = jsonResponse.access_token;\r",
+                  "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "\r",
+                  "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "        });\r",
+                  "\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "    }\r",
+                  "}\r",
+                  "//console.log(\"End of Pre-req script\");"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "72208e08-69a9-40d1-b0b7-b48e4379bf8f",
+                "exec": [
+                  "try{\r",
+                  "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                  "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                  "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                  "\r",
+                  "/////////////////////////////////////////////////////////////////////////////////////\r",
+                  "let expectedCode = pm.iterationData.get(\"expectedHttpCode\");\r",
+                  "var jsonData = JSON.parse(responseBody);\r",
+                  "var req = request.url;\r",
+                  "var query = request.url.split('/');\r",
+                  "console.log(query);\r",
+                  "\r",
+                  "pm.test(\"TEST1: Status code Check\", function() {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"TEST2: Response Header Checks\", function() {\r",
+                  "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"TEST3: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "\r",
+                  "var Ajv = require('ajv'),\r",
+                  "ajv = new Ajv({logger: console}),\r",
+                  "schema = {\r",
+                  "    \"items\": {\r",
+                  "        \"required\": [\r",
+                  "            \"userReminderID\",\r",
+                  "            \"targetUsername\",\r",
+                  "            \"eventDateTime\",\r",
+                  "            \"consumerID\",\r",
+                  "            \"subject\",\r",
+                  "            \"comment\"\r",
+                  "        ],\r",
+                  "        \"properties\": {\r",
+                  "            \"userReminderID\": {\r",
+                  "                \"$id\": \"#/items/properties/userReminderID\",\r",
+                  "                \"type\": \"integer\"\r",
+                  "            },\r",
+                  "            \"targetUsername\": {\r",
+                  "                \"$id\": \"#/items/properties/targetUsername\",\r",
+                  "                \"type\": \"string\"\r",
+                  "            },\r",
+                  "            \"eventDateTime\": {\r",
+                  "                \"$id\": \"#/items/properties/eventDateTime\",\r",
+                  "                \"type\": \"string\"\r",
+                  "            },\r",
+                  "            \"consumerID\": {\r",
+                  "                \"$id\": \"#/items/properties/consumerID\",\r",
+                  "                \"type\": \"integer\"\r",
+                  "            },\r",
+                  "            \"subject\": {\r",
+                  "                \"$id\": \"#/items/properties/subject\",\r",
+                  "                \"type\": \"string\"\r",
+                  "            },\r",
+                  "            \"comment\": {\r",
+                  "                \"$id\": \"#/items/properties/comment\",\r",
+                  "                \"type\": \"string\"\r",
+                  "            }\r",
+                  "        },\r",
+                  "        \"$id\": \"#/items\",\r",
+                  "        \"type\": \"object\"\r",
+                  "    },\r",
+                  "    \"$id\": \"http://example.org/root.json#\",\r",
+                  "    \"type\": \"array\",\r",
+                  "    \"definitions\": {},\r",
+                  "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                  "};\r",
+                  "pm.test(\"TEST4: Schema Test\", function(){\r",
+                  "    pm.expect(ajv.validate(schema, jsonData)).to.be.true;\r",
+                  "});\r",
+                  "} catch (e){}\r",
+                  "/*\r",
+                  "pm.environment.set(\"data_id\", jsonData.data[0].id);\r",
+                  "pm.environment.set(\"cnsmr_id\", jsonData.data[0].cnsmr_id);\r",
+                  "pm.environment.set(\"udp_id\", jsonData.udpTable.udpid);*/"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "ddc50b87-1a8d-40c3-ac4c-10e0eb5d2921",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "correlation-id",
+                "value": "{{Correlation-Id}}",
+                "type": "text"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                "type": "text"
+              },
+              {
+                "key": "ocp-apim-subscription-key-West",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "username",
+                "value": "Mike",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/reminder/consumer/:consumerID",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reminder",
+                "consumer",
+                ":consumerID"
+              ],
+              "variable": [
+                {
+                  "id": "9eea416c-8b20-433a-80dc-e8576b8531a3",
+                  "key": "consumerID",
+                  "value": "2108175",
+                  "type": "string",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "description": "Get all Reminders for a specific consumerID"
+          },
+          "response": [
+            {
+              "id": "35a91a49-57de-475d-9afb-b607d1b04810",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "magna ad con"
+            },
+            {
+              "id": "4996b450-5dd2-499d-a497-3869ae3732c1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "magna ad con"
+            },
+            {
+              "id": "4d53bdca-bc94-4cfd-bd10-a1aa2e1f0379",
+              "name": "Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "magna ad con"
+            },
+            {
+              "id": "7369ca1f-53fe-424d-bdb1-2851c82dac36",
+              "name": "Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "magna ad con"
+            },
+            {
+              "id": "9cdec2e2-06f6-4b86-8668-cd180e35b04e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "magna ad con"
+            },
+            {
+              "id": "ac365c80-2934-47e4-b198-cf668407b027",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "magna ad con"
+            }
+          ]
+        },
+        {
+          "name": "/agent/ AllUsers",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "6743d582-0b90-4ff7-8df4-36b664362f63",
+                "exec": [
+                  "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                  "{\r",
+                  "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                  "} else {\r",
+                  "    var tokenDate = new Date(2010,1,1);\r",
+                  "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                  "    if(tokenTimestamp){\r",
+                  "        tokenDate = Date.parse(tokenTimestamp);\r",
+                  "    }\r",
+                  "    //console.log(\"timestamp is\"+tokenDate);\r",
+                  "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                  "    if(!expiresInTime){\r",
+                  "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                  "    }\r",
+                  "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                  "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                  "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                  "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                  "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                  "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                  "\r",
+                  "        let getTokenRequest = {\r",
+                  "            method: 'POST',\r",
+                  "            url: tokenUrl,\r",
+                  "            auth: {\r",
+                  "                type: \"basic\",\r",
+                  "                basic: [\r",
+                  "                    { key: \"username\", value: clientId },\r",
+                  "                    { key: \"password\", value: clientSecret }\r",
+                  "                ]\r",
+                  "            },\r",
+                  "            body: {\r",
+                  "                mode: 'formdata',\r",
+                  "                formdata: [\r",
+                  "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                  "                    { key: 'scope', value: scope }\r",
+                  "                ]\r",
+                  "            }\r",
+                  "        };\r",
+                  "\r",
+                  "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                  "            let jsonResponse = response.json(),\r",
+                  "            newAccessToken = jsonResponse.access_token;\r",
+                  "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                  "\r",
+                  "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                  "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                  "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                  "        });\r",
+                  "\r",
+                  "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                  "    }\r",
+                  "}\r",
+                  "//console.log(\"End of Pre-req script\");"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "0298b41b-cc25-4299-bf3b-f93301bb7a0f",
+                "exec": [
+                  "try{\r",
+                  "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                  "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                  "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                  "\r",
+                  "/////////////////////////////////////////////////////////////////////////////////////\r",
+                  "let expectedCode = pm.iterationData.get(\"expectedHttpCode\");\r",
+                  "var jsonData = JSON.parse(responseBody);\r",
+                  "var req = request.url;\r",
+                  "var query = request.url.split('/');\r",
+                  "console.log(query);\r",
+                  "\r",
+                  "pm.test(\"TEST1: Status code Check\", function() {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"TEST2: Response Header Checks\", function() {\r",
+                  "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"TEST3: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "\r",
+                  "var Ajv = require('ajv'),\r",
+                  "ajv = new Ajv({logger: console}),\r",
+                  "schema = {\r",
+                  "    \"items\": {\r",
+                  "        \"required\": [\r",
+                  "            \"userReminderID\",\r",
+                  "            \"targetUsername\",\r",
+                  "            \"eventDateTime\",\r",
+                  "            \"consumerID\",\r",
+                  "            \"subject\",\r",
+                  "            \"comment\"\r",
+                  "        ],\r",
+                  "        \"properties\": {\r",
+                  "            \"userReminderID\": {\r",
+                  "                \"$id\": \"#/items/properties/userReminderID\",\r",
+                  "                \"type\": \"integer\"\r",
+                  "            },\r",
+                  "            \"targetUsername\": {\r",
+                  "                \"$id\": \"#/items/properties/targetUsername\",\r",
+                  "                \"type\": \"string\"\r",
+                  "            },\r",
+                  "            \"eventDateTime\": {\r",
+                  "                \"$id\": \"#/items/properties/eventDateTime\",\r",
+                  "                \"type\": \"string\"\r",
+                  "            },\r",
+                  "            \"consumerID\": {\r",
+                  "                \"$id\": \"#/items/properties/consumerID\",\r",
+                  "                \"type\": \"integer\"\r",
+                  "            },\r",
+                  "            \"subject\": {\r",
+                  "                \"$id\": \"#/items/properties/subject\",\r",
+                  "                \"type\": \"string\"\r",
+                  "            },\r",
+                  "            \"comment\": {\r",
+                  "                \"$id\": \"#/items/properties/comment\",\r",
+                  "                \"type\": \"string\"\r",
+                  "            }\r",
+                  "        },\r",
+                  "        \"$id\": \"#/items\",\r",
+                  "        \"type\": \"object\"\r",
+                  "    },\r",
+                  "    \"$id\": \"http://example.org/root.json#\",\r",
+                  "    \"type\": \"array\",\r",
+                  "    \"definitions\": {},\r",
+                  "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                  "};\r",
+                  "pm.test(\"TEST4: Schema Test\", function(){\r",
+                  "    pm.expect(ajv.validate(schema, jsonData)).to.be.true;\r",
+                  "});\r",
+                  "} catch (e){}\r",
+                  "/*\r",
+                  "pm.environment.set(\"data_id\", jsonData.data[0].id);\r",
+                  "pm.environment.set(\"cnsmr_id\", jsonData.data[0].cnsmr_id);\r",
+                  "pm.environment.set(\"udp_id\", jsonData.udpTable.udpid);*/"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "c8aad979-326c-40f6-8b83-fec591316609",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": {
+                "accessToken": "{{OAuth_Token}}",
+                "tokenType": "Bearer",
+                "addTokenTo": "header"
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "correlation-id",
+                "type": "text",
+                "value": "{{Correlation-Id}}"
+              },
+              {
+                "key": "Ocp-Apim-Subscription-Key-South",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-South}}"
+              },
+              {
+                "key": "ocp-apim-subscription-key-West",
+                "type": "text",
+                "value": "{{Ocp-Apim-Subscription-Key-West}}"
+              },
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "username",
+                "type": "text",
+                "value": "Mike"
+              }
+            ],
+            "url": "{{baseUrl}}/reminder/agent/mcole01",
+            "description": "Get all Reminders for a specific consumerID"
+          },
+          "response": [
+            {
+              "id": "00f80659-3fef-4cbf-82ca-c4edb9959fad",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "magna ad con"
+            },
+            {
+              "id": "40365985-4003-4b0c-8978-2165e3e13eec",
+              "name": "Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "magna ad con"
+            },
+            {
+              "id": "77f5f470-87eb-4bef-a976-cd5985706f23",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "magna ad con"
+            },
+            {
+              "id": "892fa6aa-a13e-492d-a16d-3f4c79b1cc46",
+              "name": "Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "magna ad con"
+            },
+            {
+              "id": "c08aee93-91d3-4b7f-9fda-cbc297d2c351",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "magna ad con"
+            },
+            {
+              "id": "c1bf7495-9a0b-4cc9-891a-87511df660b5",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer/:consumerID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer",
+                    ":consumerID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "consumerID"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json,v1.0.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "magna ad con"
+            }
+          ]
         }
       ],
       "_postman_id": "92f59ed8-1c48-44fc-85fa-0b27940f7252"
