@@ -80875,7 +80875,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"targetUsername\": \"MCole\",\n    \"eventDateTime\": \"2020-09-27T14:00:00\",\n    \"consumerID\": 2108175,\n    \"subject\": \"SETTLEMENT\",\n    \"comment\": \"Customer likes Nandos\",\n    \"applyToLinkedConsumers\": true\n}",
+              "raw": "{\n    \"targetUsername\": \"MCole\",\n    \"eventDateTime\": \"{{event_dttm}}\",\n    \"consumerID\": 2108175,\n    \"subject\": \"SETTLEMENT\",\n    \"comment\": \"Customer likes Nandos\",\n    \"applyToLinkedConsumers\": true\n}",
               "options": {
                 "raw": {}
               }
