@@ -71379,7 +71379,7 @@
                       "       pm.expect((JSON.stringify.jsonData.isVoice).to.equal(data.IsVoice));\r",
                       "    });\r",
                       "    pm.test(\"TEST1D: isActive check\", function() {\r",
-                      "       (JSON.stringify(jsonData.isActive).toUpperCase()).to.equal(data.isActive);\r",
+                      "       pm.expect(JSON.stringify(jsonData.isActive).toUpperCase()).to.equal(data.isActive);\r",
                       "    });\r",
                       "\r",
                       "\r",
@@ -71482,7 +71482,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"noteTypeCode\": {{NoteTypeCode}},\n    \"description\": \"{{nt_desc2}}\",\n    \"isVoice\": false,\n    \"isActive\": false,\n    \"actionResultCode\": 87\n}",
+                  "raw": "{\n    \"noteTypeCode\": {{NoteTypeCode}},\n    \"description\": \"{{nt_desc2}}\",\n    \"isVoice\": false,\n    \"isActive\": {{isActive}},\n    \"actionResultCode\": 87\n}",
                   "options": {
                     "raw": {}
                   }
