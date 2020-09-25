@@ -68752,7 +68752,7 @@
                   "    });\r",
                   "    \r",
                   "pm.test(\"TEST2: Status code Check\", function() {\r",
-                  "    pm.response.to.have.status(200);\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200,202]);\r",
                   "});\r",
                   "\r",
                   "pm.test(\"TEST3: Response Header Checks\", function() {\r",
