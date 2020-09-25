@@ -78293,6 +78293,10 @@
                   "script": {
                     "id": "d58d9738-6803-44ed-bd83-d5522471b1fb",
                     "exec": [
+                      "    var moment = require('moment');\r",
+                      "let dt = moment().format(\"YYYY-MM-DDThh:mm:ss\");\r",
+                      "console.log(dt);\r",
+                      "pm.globals.set(\"event_dttm\", dt);\r",
                       "    var tokenDate = new Date(2010,1,1);\r",
                       "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
                       "    if(tokenTimestamp){\r",
@@ -78421,7 +78425,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"userReminderID\": 7343,\n    \"targetUsername\": \"Sswann\",\n    \"eventDateTime\": \"2014-05-27T14:00:00\",\n    \"consumerID\": 2108175,\n    \"subject\": \"Something else\",\n    \"comment\": \"Bananas too\"\n}",
+                  "raw": "{\n    \"userReminderID\": {{userReminderID}},\n    \"targetUsername\": \"{{targetUsername}}\",\n    \"eventDateTime\": \"2014-05-27T14:00:00\",\n    \"consumerID\": 2108175,\n    \"subject\": \"Something else\",\n    \"comment\": \"Bananas too\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
