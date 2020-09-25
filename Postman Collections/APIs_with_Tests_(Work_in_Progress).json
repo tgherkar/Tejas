@@ -71483,7 +71483,7 @@
                       "\r",
                       "\r",
                       "pm.test(\"TEST1G: actionResult check\", function () {\r",
-                      "    if (jsonData[0].actionResult != null) {\r",
+                      "    if (jsonData.actionResult != null) {\r",
                       "                pm.expect(jsonData[0].actionResult.actionResultCode).to.equal(data.ActionResultCode);\r",
                       "                pm.expect(jsonData[0].actionResult.description).to.equal(data.ar_desc);\r",
                       "                pm.expect(jsonData[0].actionResult.actionCode).to.equal(data.ar_actioncode);\r",
