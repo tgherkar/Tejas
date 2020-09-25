@@ -64988,10 +64988,10 @@
                       "        pm.expect(jsonData.dispositionSecondaryCode).to.equal(data.dispositionSecondaryCode);\r",
                       "    });\r",
                       "    pm.test(\"TEST1B: description check\", function() {\r",
-                      "    pm.expect(JSON.stringify(jsonData.actionDeleteCurrentPhone).toUpperCase()).to.equal(data.actionDeleteCurrentPhone);\r",
+                      "        pm.expect(jsonData.actionDeleteCurrentPhone).to.equal(data.actionDeleteCurrentPhone);\r",
                       "    });\r",
                       "    pm.test(\"TEST1B: description check\", function() {\r",
-                      "       pm.expect(JSON.stringify(jsonData.actionDiallerKill).toUpperCase()).to.equal(data.actionDiallerKill);\r",
+                      "        pm.expect(jsonData.actionDiallerKill).to.equal(data.actionDiallerKill);\r",
                       "    });\r",
                       "    pm.test(\"TEST1C: isVoice check\", function() {\r",
                       "       pm.expect(JSON.stringify(jsonData.isVoice).toUpperCase()).to.equal(data.qt_isVoice);\r",
@@ -65101,7 +65101,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "        {\n            \"quickTypeCode\": {{QuickTypeCode}},\n            \"description\": \"{{qt_desc}}\",\n            \"noteInput\": \"{{NoteInput}}\",\n            \"dispositionPrimaryCode\": \"{{DispositionPrimaryCode}}\",\n            \"dispositionSecondaryCode\": \"{{DispositionSecondaryCode}}\",\n            \"actionDeleteCurrentPhone\": {{ActionDeleteCurrentPhone}},\n            \"actionDiallerKill\": {{ActionDiallerKill}},\n            \"isVoice\": {{qt_isvoice}},\n            \"isActive\": {{qt_isactive}},\n            \"quickTypeActionResults\": [\n                {\n                    \"actionResultCode\": {{ActionResultCode}},\n                    \"description\": \"{{ar_desc}}\",\n                    \"actionCode\": \"{{ar_actioncode}}\",\n                    \"resultCode\": \"{{ar_resultcode}}\",\n                    \"isVoice\": {{ar_isvoice}},\n                    \"isActive\": {{ar_isactive}}\n                }\n            ]\n        }",
+                  "raw": "        {\n            \"quickTypeCode\": {{QuickTypeCode}},\n            \"description\": \"{{qt_description}}\",\n            \"noteInput\": \"{{NoteInput}}\",\n            \"dispositionPrimaryCode\": \"{{DispositionPrimaryCode}}\",\n            \"dispositionSecondaryCode\": \"{{DispositionSecondaryCode}}\",\n            \"actionDeleteCurrentPhone\": {{ActionDeleteCurrentPhone}},\n            \"actionDiallerKill\": {{ActionDiallerKill}},\n            \"isVoice\": {{qt_isvoice}},\n            \"isActive\": {{qt_isactive}},\n            \"quickTypeActionResults\": [\n                {\n                    \"actionResultCode\": {{ActionResultCode}},\n                    \"description\": \"{{ar_desc}}\",\n                    \"actionCode\": \"{{ar_actioncode}}\",\n                    \"resultCode\": \"{{ar_resultcode}}\",\n                    \"isVoice\": {{ar_isvoice}},\n                    \"isActive\": {{ar_isactive}}\n                }\n            ]\n        }",
                   "options": {
                     "raw": {}
                   }
@@ -65575,7 +65575,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "        {\n            \"quickTypeCode\": {{QuickTypeCode}},\n            \"description\": \"{{qt_desc2}}\",\n            \"noteInput\": \"{{NoteInput}}\",\n            \"dispositionPrimaryCode\": \"{{DispositionPrimaryCode}}\",\n            \"dispositionSecondaryCode\": \"{{DispositionSecondaryCode}}\",\n            \"actionDeleteCurrentPhone\": \"{{ActionDeleteCurrentPhone}}\",\n            \"actionDiallerKill\": \"{{ActionDiallerKill}}\",\n            \"isVoice\": \"{{qt_isVoice}}\",\n            \"isActive\": \"{{qt_isActive}}\",\n            \"quickTypeActionResults\": [\n                {\n                    \"actionResultCode\": 88,\n                    \"description\": \"Comment\",\n                    \"actionCode\": \"CO\",\n                    \"resultCode\": \"CO\",\n                    \"isVoice\": null,\n                    \"isActive\": true\n                }\n            ]\n        }",
+                  "raw": "        {\n            \"quickTypeCode\": {{QuickTypeCode}},\n            \"description\": \"{{qt_description}}\",\n            \"noteInput\": \"{{NoteInput}}\",\n            \"dispositionPrimaryCode\": \"{{DispositionPrimaryCode}}\",\n            \"dispositionSecondaryCode\": \"{{DispositionSecondaryCode}}\",\n            \"actionDeleteCurrentPhone\": {{ActionDeleteCurrentPhone}},\n            \"actionDiallerKill\": {{ActionDiallerKill}},\n            \"isVoice\": {{qt_isvoice}},\n            \"isActive\": {{qt_isactive}},\n            \"quickTypeActionResults\": [\n                {\n                    \"actionResultCode\": 88,\n                    \"description\": \"Comment\",\n                    \"actionCode\": \"CO\",\n                    \"resultCode\": \"CO\",\n                    \"isVoice\": null,\n                    \"isActive\": true\n                }\n            ]\n        }",
                   "options": {
                     "raw": {}
                   }
@@ -79109,20 +79109,18 @@
                       "\r",
                       "if (data.userReminderID!=null){\r",
                       "    pm.test(\"TEST1A: userReminderID check\", function () {\r",
-                      "    pm.expect(jsonData.userReminderID).to.equal(data.userReminderID);\r",
+                      "    pm.expect(jsonData[0].userReminderID).to.equal(JSON.stringify(data.userReminderID));\r",
                       "    });\r",
                       "    pm.test(\"TEST1B: targetUsername check\", function () {\r",
-                      "        if(jsonData.targetUsername1= null){\r",
-                      "            pm.expect(jsonData.targetUsername).to.deep.equal(data.targetUsername);\r",
+                      "        if(jsonData[0].targetUsername=== null){\r",
+                      "            pm.expect(JSON.stringify(jsonData[0].targetUsername).toUpperCase()).to.equal((data.targetUsername).toUpperCase());\r",
                       "            }else{\r",
-                      "                pm.expect(data.targetUsername).to.equal('');\r",
+                      "                pm.expect(jsonData[0].targetUsername).to.equal(data.targetUsername);\r",
                       "            }\r",
                       "        });\r",
                       "    pm.test(\"TEST1C: eventDateTime check\", function () {\r",
-                      "    if(jsonData.eventDateTime != null){\r",
-                      "        pm.expect(jsonData.eventDateTime.split('T')[0]).to.equal(data.eventDateTime.split(' ')[0]);\r",
-                      "        pm.expect(jsonData.eventDateTime.split('T')[1]).to.equal(data.eventDateTime.split(' ')[1]);\r",
-                      "    }\r",
+                      "    if(jsonData[0].eventDateTime != null){\r",
+                      "    pm.expect(jsonData[0].eventDateTime.split('T')[0]).to.equal(data.eventDateTime.split(' ')[0]);}\r",
                       "    });\r",
                       "    pm.test(\"TEST1D: consumerID check\", function () {\r",
                       "        pm.expect(jsonData[0].consumerID).to.equal(JSON.stringify(data.consumerID));\r",
