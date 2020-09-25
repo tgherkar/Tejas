@@ -79068,9 +79068,6 @@
                   "script": {
                     "id": "3a294e06-c299-460d-9034-3c57669e94b3",
                     "exec": [
-                      "var moment = require('moment');\r",
-                      "let dt = moment().format(\"YYYY-MM-DDThh:mm:ss\");\r",
-                      "console.log(dt);\r",
                       "try{\r",
                       "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
                       "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
@@ -80773,6 +80770,10 @@
               "script": {
                 "id": "016df084-4258-4caa-9936-3a123afea8d9",
                 "exec": [
+                  "var moment = require('moment');\r",
+                  "let dt = moment().format(\"YYYY-MM-DDThh:mm:ss\");\r",
+                  "console.log(dt);\r",
+                  "pm.globals.set(\"event_dttm\", dt);\r",
                   "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
                   "{\r",
                   "    console.log(\"OAuth timestamp null, check the environment\");\r",
