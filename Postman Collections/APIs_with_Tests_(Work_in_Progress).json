@@ -73397,7 +73397,7 @@
                   "\r",
                   "\r",
                   "///////////////CONSUMER DETAILS////////\r",
-                  "const sfsStatusCode = Math.floor(Math.random() * 2);\r",
+                  "const sfsStatusCode = Math.floor(Math.random() * 2) + 1;\r",
                   "pm.globals.set(\"sfsStatusCode\", sfsStatusCode);\r",
                   "console.log(\"SFS Status Code: \" + sfsStatusCode.toString());\r",
                   "\r",
@@ -76438,7 +76438,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "{{SFSID}}",
+                  "value": "3F341299-9532-E811-A06A-005056927C52",
                   "type": "string",
                   "description": "uuid"
                 }
