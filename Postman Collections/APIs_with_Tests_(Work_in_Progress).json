@@ -77458,7 +77458,7 @@
                   "\r",
                   "\r",
                   "    pm.test(\"TEST1G: Consumer Detail check\", function() {\r",
-                  "            pm.expect(jsonData.consumerDetail.sfsConsumerDetailID).to.equal(data.sfs_consumer_detail_id);\r",
+                  "            pm.expect(jsonData.consumerDetail.sfsConsumerDetailID).to.equal((data.sfs_consumer_detail_id).toUpperCase());\r",
                   "\r",
                   "            pm.expect(jsonData.consumerDetail.outstandingDebt).to.equal(data.outstanding_debt);\r",
                   "\r",
