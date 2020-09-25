@@ -71482,7 +71482,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"noteTypeCode\": {{NoteTypeCode}},\n    \"description\": \"{{nt_desc2}}\",\n    \"isVoice\": {{isVoice}},\n    \"isActive\": {{isActive}},\n    \"actionResultCode\": 87\n}",
+                  "raw": "{\n    \"noteTypeCode\": {{NoteTypeCode}},\n    \"description\": \"{{nt_desc2}}\",\n    \"isVoice\": \"{{IsVoice}}\",\n    \"isActive\": \"{{IsActive}}\",\n    \"actionResultCode\": 87\n}",
                   "options": {
                     "raw": {}
                   }
