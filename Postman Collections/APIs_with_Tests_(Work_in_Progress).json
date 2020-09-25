@@ -79674,7 +79674,7 @@
               "variable": [
                 {
                   "key": "targetUsername",
-                  "value": "Sswann",
+                  "value": "{{targetUsername}}",
                   "type": "string",
                   "description": "(Required) "
                 }
