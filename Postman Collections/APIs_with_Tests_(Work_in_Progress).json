@@ -68768,7 +68768,7 @@
                   "} catch (e){\r",
                   "     ///NEGATIVE TESTS\r",
                   "    pm.test(\"TEST2: Status code Check\", function() {\r",
-                  "        pm.response.status.to.be.Oneof[400, 404, 500];\r",
+                  "        pm.response.status.to.be.oneOf([400, 404, 500]);\r",
                   "    });\r",
                   "    pm.test(\"TEST4: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
                   "        pm.expect(pm.response.responseTime).to.not.be.below(5000);\r",
@@ -79550,7 +79550,7 @@
                   "console.log(query);\r",
                   "\r",
                   "pm.test(\"TEST1: Status code Check\", function() {\r",
-                  "    pm.response.to.have.status(200);\r",
+                  "    pm.response.status.to.be.oneOf([200,202,400,404]);\r",
                   "});\r",
                   "\r",
                   "pm.test(\"TEST2: Response Header Checks\", function() {\r",
@@ -79673,7 +79673,6 @@
               ],
               "variable": [
                 {
-                  "id": "47fb05e1-9ec1-4b6c-8705-d9d306142d08",
                   "key": "targetUsername",
                   "value": "Sswann",
                   "type": "string",
