@@ -79068,8 +79068,6 @@
                   "script": {
                     "id": "3a294e06-c299-460d-9034-3c57669e94b3",
                     "exec": [
-                      "const dt = dateNow.toISOString();\r",
-                      "console.log(dt);\r",
                       "try{\r",
                       "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
                       "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
