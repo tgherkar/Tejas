@@ -78418,310 +78418,6 @@
           "name": "{user Reminder ID}",
           "item": [
             {
-              "name": "/apply",
-              "event": [
-                {
-                  "listen": "prerequest",
-                  "script": {
-                    "id": "016df084-4258-4caa-9936-3a123afea8d9",
-                    "exec": [
-                      "var moment = require('moment');\r",
-                      "let dt = moment().format(\"YYYY-MM-DDThh:mm:ss\");\r",
-                      "console.log(dt);\r",
-                      "pm.globals.set(\"event_dttm\", dt);\r",
-                      "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
-                      "{\r",
-                      "    console.log(\"OAuth timestamp null, check the environment\");\r",
-                      "} else {\r",
-                      "    var tokenDate = new Date(2010,1,1);\r",
-                      "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
-                      "    if(tokenTimestamp){\r",
-                      "        tokenDate = Date.parse(tokenTimestamp);\r",
-                      "    }\r",
-                      "    //console.log(\"timestamp is\"+tokenDate);\r",
-                      "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
-                      "    if(!expiresInTime){\r",
-                      "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
-                      "    }\r",
-                      "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
-                      "    if((new Date() - tokenDate) >= expiresInTime) {\r",
-                      "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
-                      "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
-                      "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
-                      "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
-                      "\r",
-                      "        let getTokenRequest = {\r",
-                      "            method: 'POST',\r",
-                      "            url: tokenUrl,\r",
-                      "            auth: {\r",
-                      "                type: \"basic\",\r",
-                      "                basic: [\r",
-                      "                    { key: \"username\", value: clientId },\r",
-                      "                    { key: \"password\", value: clientSecret }\r",
-                      "                ]\r",
-                      "            },\r",
-                      "            body: {\r",
-                      "                mode: 'formdata',\r",
-                      "                formdata: [\r",
-                      "                    { key: 'grant_type', value: 'client_credentials' },\r",
-                      "                    { key: 'scope', value: scope }\r",
-                      "                ]\r",
-                      "            }\r",
-                      "        };\r",
-                      "\r",
-                      "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
-                      "            let jsonResponse = response.json(),\r",
-                      "            newAccessToken = jsonResponse.access_token;\r",
-                      "            //console.log({ err, jsonResponse, newAccessToken });\r",
-                      "\r",
-                      "            pm.environment.set('OAuth_Token', newAccessToken);\r",
-                      "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
-                      "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
-                      "        });\r",
-                      "\r",
-                      "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
-                      "    }\r",
-                      "}\r",
-                      "//console.log(\"End of Pre-req script\");"
-                    ],
-                    "type": "text/javascript"
-                  }
-                },
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "d49c4e87-80a2-4890-b206-026e06631ec2",
-                    "exec": [
-                      "try{\r",
-                      "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
-                      "    pm.expect(pm.response.code).to.be.oneOf([200,202]);\r",
-                      "});\r",
-                      "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
-                      "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
-                      "});\r",
-                      "pm.test(\"TEST3: Response Header Checks\", function() {\r",
-                      "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
-                      "});\r",
-                      "}catch(e){\r",
-                      "    pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
-                      "        pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
-                      "    });\r",
-                      "    pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
-                      "        pm.expect(pm.response.responseTime).to.be.below(5000);\r",
-                      "    });\r",
-                      "    pm.test(\"TEST3: ResponseBody Check\", function () {\r",
-                      "        pm.expect(responseBody).to.deep.equal(\"Category Source with name '\"+req_body.name+\"' already exists\");\r",
-                      "    });\r",
-                      "}"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "_postman_id": "7ffe269a-6315-4817-93c2-96e79ebe3d1e",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "auth": {
-                  "type": "oauth2",
-                  "oauth2": {
-                    "accessToken": "{{OAuth_Token}}",
-                    "tokenType": "Bearer",
-                    "addTokenTo": "header"
-                  }
-                },
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "correlation-id",
-                    "value": "{{Correlation-Id}}"
-                  },
-                  {
-                    "key": "Ocp-Apim-Subscription-Key-South",
-                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "ocp-apim-subscription-key-West",
-                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  },
-                  {
-                    "key": "username",
-                    "value": "Mike",
-                    "type": "text"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n    \"targetUsername\": \"{{targetUsername}}\",\n    \"eventDateTime\": \"{{event_dttm}}\",\n    \"consumerID\": {{cnsmr_id}},\n    \"subject\": \"{{rmdr_subj}}\",\n    \"comment\": \"Test Comment\",\n    \"applyToLinkedConsumers\": {{applyToLinkedConsumers}}\n}",
-                  "options": {
-                    "raw": {}
-                  }
-                },
-                "url": "{{baseUrl}}/reminder/apply",
-                "description": "Create a Reminder"
-              },
-              "response": [
-                {
-                  "id": "0a18fee8-29d1-4cb6-ad59-ee21ec70a73c",
-                  "name": "Bad Request",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"targetUsername\": \"<string>\",\n    \"eventDateTime\": \"<dateTime>\",\n    \"consumerID\": \"<long>\",\n    \"subject\": \"<string>\",\n    \"comment\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/apply"
-                  },
-                  "status": "Bad Request",
-                  "code": 400,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "application/json,v1.0.0"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": "magna ad con"
-                },
-                {
-                  "id": "5dc3bf9b-a47d-4ca5-b218-e30ce8675fb9",
-                  "name": "Success",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"targetUsername\": \"<string>\",\n    \"eventDateTime\": \"<dateTime>\",\n    \"consumerID\": \"<long>\",\n    \"subject\": \"<string>\",\n    \"comment\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/apply"
-                  },
-                  "status": "OK",
-                  "code": 200,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "application/json,v1.0.0"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": "magna ad con"
-                },
-                {
-                  "id": "caa38d60-f336-47b4-8935-fb67902776aa",
-                  "name": "Forbidden",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"targetUsername\": \"<string>\",\n    \"eventDateTime\": \"<dateTime>\",\n    \"consumerID\": \"<long>\",\n    \"subject\": \"<string>\",\n    \"comment\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/apply"
-                  },
-                  "status": "Forbidden",
-                  "code": 403,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "application/json,v1.0.0"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": "magna ad con"
-                },
-                {
-                  "id": "de5168db-1adf-486f-a463-ea9e80d7bfe9",
-                  "name": "Server Error",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"targetUsername\": \"<string>\",\n    \"eventDateTime\": \"<dateTime>\",\n    \"consumerID\": \"<long>\",\n    \"subject\": \"<string>\",\n    \"comment\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/apply"
-                  },
-                  "status": "Service Unavailable",
-                  "code": 503,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "application/json,v1.0.0"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": "magna ad con"
-                },
-                {
-                  "id": "e2a4acc4-03a9-4eb3-931c-a0f67b4b26df",
-                  "name": "Server Error",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"targetUsername\": \"<string>\",\n    \"eventDateTime\": \"<dateTime>\",\n    \"consumerID\": \"<long>\",\n    \"subject\": \"<string>\",\n    \"comment\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/apply"
-                  },
-                  "status": "Internal Server Error",
-                  "code": 500,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "application/json,v1.0.0"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": "magna ad con"
-                },
-                {
-                  "id": "ef243446-fac1-4e1a-a80c-e2999b237a0f",
-                  "name": "Unauthorized",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"targetUsername\": \"<string>\",\n    \"eventDateTime\": \"<dateTime>\",\n    \"consumerID\": \"<long>\",\n    \"subject\": \"<string>\",\n    \"comment\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/apply"
-                  },
-                  "status": "Unauthorized",
-                  "code": 401,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "application/json,v1.0.0"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": "magna ad con"
-                }
-              ]
-            },
-            {
               "name": "/:userReminderID",
               "event": [
                 {
@@ -79945,6 +79641,310 @@
                   },
                   "status": "Bad Request",
                   "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                }
+              ]
+            },
+            {
+              "name": "/apply",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "016df084-4258-4caa-9936-3a123afea8d9",
+                    "exec": [
+                      "var moment = require('moment');\r",
+                      "let dt = moment().format(\"YYYY-MM-DDThh:mm:ss\");\r",
+                      "console.log(dt);\r",
+                      "pm.globals.set(\"event_dttm\", dt);\r",
+                      "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                      "{\r",
+                      "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                      "} else {\r",
+                      "    var tokenDate = new Date(2010,1,1);\r",
+                      "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                      "    if(tokenTimestamp){\r",
+                      "        tokenDate = Date.parse(tokenTimestamp);\r",
+                      "    }\r",
+                      "    //console.log(\"timestamp is\"+tokenDate);\r",
+                      "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                      "    if(!expiresInTime){\r",
+                      "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                      "    }\r",
+                      "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                      "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                      "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                      "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                      "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                      "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                      "\r",
+                      "        let getTokenRequest = {\r",
+                      "            method: 'POST',\r",
+                      "            url: tokenUrl,\r",
+                      "            auth: {\r",
+                      "                type: \"basic\",\r",
+                      "                basic: [\r",
+                      "                    { key: \"username\", value: clientId },\r",
+                      "                    { key: \"password\", value: clientSecret }\r",
+                      "                ]\r",
+                      "            },\r",
+                      "            body: {\r",
+                      "                mode: 'formdata',\r",
+                      "                formdata: [\r",
+                      "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                      "                    { key: 'scope', value: scope }\r",
+                      "                ]\r",
+                      "            }\r",
+                      "        };\r",
+                      "\r",
+                      "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                      "            let jsonResponse = response.json(),\r",
+                      "            newAccessToken = jsonResponse.access_token;\r",
+                      "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                      "\r",
+                      "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                      "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                      "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                      "        });\r",
+                      "\r",
+                      "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                      "    }\r",
+                      "}\r",
+                      "//console.log(\"End of Pre-req script\");"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "d49c4e87-80a2-4890-b206-026e06631ec2",
+                    "exec": [
+                      "try{\r",
+                      "pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200,202]);\r",
+                      "});\r",
+                      "pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                      "});\r",
+                      "pm.test(\"TEST3: Response Header Checks\", function() {\r",
+                      "    pm.response.to.have.header('X-Content-Type-Options', 'nosniff', 'Strict-Transport-Security', 'max-age=31536000; includeSubDomains', 'Date', '', 'Request-Context', '', 'Set-Cookie', '');\r",
+                      "});\r",
+                      "}catch(e){\r",
+                      "    pm.test(\"TEST1: Response Check \" + pm.response.status, function () {\r",
+                      "        pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+                      "    });\r",
+                      "    pm.test(\"TEST2: Response time Check: Response Time - \"+(pm.response.responseTime)+\"ms\", function () {\r",
+                      "        pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                      "    });\r",
+                      "    pm.test(\"TEST3: ResponseBody Check\", function () {\r",
+                      "        pm.expect(responseBody).to.deep.equal(\"Category Source with name '\"+req_body.name+\"' already exists\");\r",
+                      "    });\r",
+                      "}"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "_postman_id": "7ffe269a-6315-4817-93c2-96e79ebe3d1e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "accessToken": "{{OAuth_Token}}",
+                    "tokenType": "Bearer",
+                    "addTokenTo": "header"
+                  }
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "{{Correlation-Id}}"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "username",
+                    "value": "Mike",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"targetUsername\": \"{{targetUsername}}\",\n    \"eventDateTime\": \"{{event_dttm}}\",\n    \"consumerID\": {{cnsmr_id}},\n    \"subject\": \"{{rmdr_subj}}\",\n    \"comment\": \"Test Comment\",\n    \"applyToLinkedConsumers\": {{applyToLinkedConsumers}}\n}",
+                  "options": {
+                    "raw": {}
+                  }
+                },
+                "url": "{{baseUrl}}/reminder/apply",
+                "description": "Create a Reminder"
+              },
+              "response": [
+                {
+                  "id": "0a18fee8-29d1-4cb6-ad59-ee21ec70a73c",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"targetUsername\": \"<string>\",\n    \"eventDateTime\": \"<dateTime>\",\n    \"consumerID\": \"<long>\",\n    \"subject\": \"<string>\",\n    \"comment\": \"<string>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/apply"
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "5dc3bf9b-a47d-4ca5-b218-e30ce8675fb9",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"targetUsername\": \"<string>\",\n    \"eventDateTime\": \"<dateTime>\",\n    \"consumerID\": \"<long>\",\n    \"subject\": \"<string>\",\n    \"comment\": \"<string>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/apply"
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "caa38d60-f336-47b4-8935-fb67902776aa",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"targetUsername\": \"<string>\",\n    \"eventDateTime\": \"<dateTime>\",\n    \"consumerID\": \"<long>\",\n    \"subject\": \"<string>\",\n    \"comment\": \"<string>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/apply"
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "de5168db-1adf-486f-a463-ea9e80d7bfe9",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"targetUsername\": \"<string>\",\n    \"eventDateTime\": \"<dateTime>\",\n    \"consumerID\": \"<long>\",\n    \"subject\": \"<string>\",\n    \"comment\": \"<string>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/apply"
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "e2a4acc4-03a9-4eb3-931c-a0f67b4b26df",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"targetUsername\": \"<string>\",\n    \"eventDateTime\": \"<dateTime>\",\n    \"consumerID\": \"<long>\",\n    \"subject\": \"<string>\",\n    \"comment\": \"<string>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/apply"
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "ef243446-fac1-4e1a-a80c-e2999b237a0f",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"targetUsername\": \"<string>\",\n    \"eventDateTime\": \"<dateTime>\",\n    \"consumerID\": \"<long>\",\n    \"subject\": \"<string>\",\n    \"comment\": \"<string>\"\n}"
+                    },
+                    "url": "{{baseUrl}}/apply"
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
                   "_postman_previewlanguage": "text",
                   "header": [
                     {
