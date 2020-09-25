@@ -71489,7 +71489,7 @@
                       "                pm.expect(jsonData[0].actionResult.resultCode).to.equal(data.ar_resultcode);\r",
                       "                pm.expect(jsonData[0].actionResult.isVoice).to.equal(data.ar_isvoice);\r",
                       "                pm.expect(jsonData[0].actionResult.isActive).to.equal(data.ar_isactive);                                                                                \r",
-                      "    };\r",
+                      "    }\r",
                       "        });\r",
                       "\r",
                       "\r",
