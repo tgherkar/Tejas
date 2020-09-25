@@ -79979,7 +79979,7 @@
                   "console.log(query);\r",
                   "\r",
                   "pm.test(\"TEST1: Status code Check\", function() {\r",
-                  "    pm.response.to.have.status(200);\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200,202,400,404]);\r",
                   "});\r",
                   "\r",
                   "pm.test(\"TEST2: Response Header Checks\", function() {\r",
@@ -80102,7 +80102,6 @@
               ],
               "variable": [
                 {
-                  "id": "9eea416c-8b20-433a-80dc-e8576b8531a3",
                   "key": "consumerID",
                   "value": "2108175",
                   "type": "string",
