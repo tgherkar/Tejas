@@ -42859,7 +42859,7 @@
                   "        pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
                   "});",
                   "",
-                  "pm.globals.set(\"sfsdelete\", jsonData.SFSID);",
+                  "pm.globals.set(\"sfsdelete\", jsonData.sfsid);",
                   "",
                   "pm.test(\"TEST2: Status code Check\", function() {",
                   "    pm.response.to.have.status(200);",
