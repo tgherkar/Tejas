@@ -68736,7 +68736,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"smsRequestID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"consumerID\": 0,\r\n  \"consumerPhoneID\": 0,\r\n  \"number\": \"string\",\r\n  \"templateCode\": 0,\r\n  \"messageBody\": \"string\"\r\n}",
+              "raw": "{\r\n  \"smsRequestID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"consumerID\": {{cnsmr_id}},\r\n  \"consumerPhoneID\": {{consumerPhoneID}},\r\n  \"number\": \"07879548777\",\r\n  \"templateCode\": {{TemplateCode}},\r\n  \"messageBody\": \"{{Message_Text}}\"\r\n}",
               "options": {
                 "raw": {}
               }
