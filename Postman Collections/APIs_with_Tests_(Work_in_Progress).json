@@ -64276,6 +64276,16 @@
                     ],
                     "type": "text/javascript"
                   }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "f8af8215-9679-4ddd-aee9-89e4a79e2e2a",
+                    "exec": [
+                      "pm.globals.set(\"act_Code\", jsonData.actionResultCode);"
+                    ],
+                    "type": "text/javascript"
+                  }
                 }
               ],
               "_postman_id": "ab8c86db-64c3-4eff-87b7-31b6e5337805",
@@ -64325,7 +64335,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"description\": \"TEST 3 - AR\",\n    \"actionCode\": \"T6N\",\n    \"resultCode\": \"TE\",\n    \"isVoice\": true\n}",
+                  "raw": "{\n    \"description\": \"TRESTR\",\n    \"actionCode\": \"CI\",\n    \"resultCode\": \"CO\",\n    \"isVoice\": \"TRUE\"\n}",
                   "options": {
                     "raw": {}
                   }
@@ -78430,7 +78440,7 @@
                   "variable": [
                     {
                       "key": "userReminderID",
-                      "value": "7343",
+                      "value": "{{userReminderID}}",
                       "type": "string"
                     }
                   ]
