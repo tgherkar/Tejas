@@ -64967,9 +64967,6 @@
                       "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
                       "}\r",
                       "\r",
-                      "\r",
-                      "    pm.test(\"TEST1: Active Status Check\",function(){if(query[5].toUpperCase()=='1'){for(var i=0; i<jsonData.length;i++){                pm.expect(jsonData[i].isActive).to.deep.equal(true);}}if(query[5].toUpperCase()=='0'){for(var i=0; i<jsonData.length;i++){                pm.expect(jsonData[i].isActive).to.deep.equal(false);}}});\r",
-                      "\r",
                       "if (data!=null){\r",
                       "    pm.test(\"TEST1B: description check\", function() {\r",
                       "        pm.expect(jsonData.description).to.equal(data.qn_desc);\r",
@@ -79071,6 +79068,8 @@
                   "script": {
                     "id": "3a294e06-c299-460d-9034-3c57669e94b3",
                     "exec": [
+                      "const dt = dateNow.toISOString();\r",
+                      "console.log(dt);\r",
                       "try{\r",
                       "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
                       "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
@@ -79081,7 +79080,6 @@
                       "var jsonData = JSON.parse(responseBody);\r",
                       "var req = request.url;\r",
                       "var query = request.url.split('/');\r",
-                      "//console.log(query);\r",
                       "\r",
                       "pm.test(\"TEST1: Status code Check\", function() {\r",
                       "    pm.response.to.have.status(200);\r",
