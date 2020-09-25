@@ -69424,7 +69424,7 @@
               "variable": [
                 {
                   "key": "templateCode",
-                  "value": "{{sms_tmplt_code}}",
+                  "value": "{{sms_tmplt_code1}}",
                   "type": "string"
                 }
               ]
