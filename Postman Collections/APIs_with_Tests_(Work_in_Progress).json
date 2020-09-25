@@ -65569,7 +65569,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "        {\n            \"quickTypeCode\": {{QuickTypeCode}},\n            \"description\": \"{{qt_description}}\",\n            \"noteInput\": \"{{NoteInput}}\",\n            \"dispositionPrimaryCode\": \"{{DispositionPrimaryCode}}\",\n            \"dispositionSecondaryCode\": \"{{DispositionSecondaryCode}}\",\n            \"actionDeleteCurrentPhone\": \"{{ActionDeleteCurrentPhone}}\",\n            \"actionDiallerKill\": \"{{ActionDiallerKill}}\",\n            \"isVoice\": \"{{qt_isVoice}}\",\n            \"isActive\": \"{{qt_isActive}}\",\n            \"quickTypeActionResults\": [\n                {\n                    \"actionResultCode\": 88,\n                    \"description\": \"Comment\",\n                    \"actionCode\": \"CO\",\n                    \"resultCode\": \"CO\",\n                    \"isVoice\": null,\n                    \"isActive\": true\n                }\n            ]\n        }",
+                  "raw": "        {\n            \"quickTypeCode\": 32,\n            \"description\": \"API_Test_Cat_Name40\",\n            \"noteInput\": \"CALLED OVERDUE NO ANSWER\",\n            \"dispositionPrimaryCode\": \"AP\",\n            \"dispositionSecondaryCode\": \"AB\",\n            \"actionDeleteCurrentPhone\": \"FALSE\",\n            \"actionDiallerKill\": \"FALSE\",\n            \"isVoice\": \"TRUE\",\n            \"isActive\": \"TRUE\",\n            \"quickTypeActionResults\": [\n                {\n                    \"actionResultCode\": 88,\n                    \"description\": \"Comment\",\n                    \"actionCode\": \"CO\",\n                    \"resultCode\": \"CO\",\n                    \"isVoice\": \"false\",\n                    \"isActive\": 1\n                }\n            ]\n        }",
                   "options": {
                     "raw": {}
                   }
@@ -79550,7 +79550,7 @@
                   "console.log(query);\r",
                   "\r",
                   "pm.test(\"TEST1: Status code Check\", function() {\r",
-                  "    pm.response.status.to.be.oneOf([200,202,400,404]);\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200,202,400,404]);\r",
                   "});\r",
                   "\r",
                   "pm.test(\"TEST2: Response Header Checks\", function() {\r",
