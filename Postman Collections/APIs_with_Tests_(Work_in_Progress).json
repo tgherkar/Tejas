@@ -68616,7 +68616,7 @@
               "variable": [
                 {
                   "key": "activeStatus",
-                  "value": "0",
+                  "value": "{{aw_activestatus}}",
                   "type": "string"
                 }
               ]
