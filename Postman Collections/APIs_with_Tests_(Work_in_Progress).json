@@ -79125,7 +79125,7 @@
                       "    }\r",
                       "    });\r",
                       "    pm.test(\"TEST1D: consumerID check\", function () {\r",
-                      "        pm.expect(jsonData.consumerID).to.equal(data.consumerID);\r",
+                      "        pm.expect(jsonData[0].consumerID).to.equal(JSON.stringify(data.consumerID));\r",
                       "    });\r",
                       "    pm.test(\"TEST1E subject check\", function () {\r",
                       "    pm.expect(jsonData[0].subject).to.equal(JSON.stringify(data.subject));\r",
