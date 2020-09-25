@@ -79113,7 +79113,7 @@
                       "    });\r",
                       "    pm.test(\"TEST1B: targetUsername check\", function () {\r",
                       "        if(jsonData.targetUsername1= null){\r",
-                      "            pm.expect(jsonData[0].targetUsername).to.deep.equal(data.targetUsername);\r",
+                      "            pm.expect(jsonData.targetUsername).to.deep.equal(data.targetUsername);\r",
                       "            }else{\r",
                       "                pm.expect(data.targetUsername).to.equal('');\r",
                       "            }\r",
