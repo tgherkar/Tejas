@@ -71488,7 +71488,7 @@
                       "                pm.expect(jsonData[0].actionResult.actionCode).to.equal(data.ar_actioncode);\r",
                       "                pm.expect(jsonData[0].actionResult.resultCode).to.equal(data.ar_resultcode);\r",
                       "                pm.expect(jsonData[0].actionResult.isVoice).to.equal(data.ar_isvoice);\r",
-                      "                pm.expect(jsonData[0].actionResult.isActive).to.equal(data.ar_isactive);;                                                                                \r",
+                      "               pm.expect(JSON.stringify(jsonData.isActive).toUpperCase()).to.equal(data.ar_isActive);;                                                                                \r",
                       "    };\r",
                       "        });\r",
                       "\r",
