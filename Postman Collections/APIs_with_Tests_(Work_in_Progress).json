@@ -69053,7 +69053,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"displayName\": \"{{sms_tmplt_disp_nm}}\",\r\n  \"templateBody\": \"{{sms_tmplt_body}}\",\r\n  \"campaign\": \"{{sms_cmpgn}}\",\r\n  \"type\": \"{{sms_tmplt_type}}\",\r\n  \"isActive\": 1,\r\n  \"isAgentPortalOption\": 0\r\n}",
+              "raw": "{\r\n  \"displayName\": \"{{sms_tmplt_disp_nm}}\",\r\n  \"templateBody\": \"{{sms_tmplt_body}}\",\r\n  \"campaign\": \"{{sms_cmpgn}}\",\r\n  \"type\": \"{{sms_tmplt_type}}\",\r\n  \"isActive\": {{IsActive}},\r\n  \"isAgentPortalOption\": {{isagnt}}\r\n}",
               "options": {
                 "raw": {}
               }
