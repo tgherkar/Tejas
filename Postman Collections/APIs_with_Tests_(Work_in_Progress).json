@@ -80531,7 +80531,24 @@
                 "value": "Mike"
               }
             ],
-            "url": "{{baseUrl}}/reminder/agent/mcole01",
+            "url": {
+              "raw": "{{baseUrl}}/reminder/agent/:targetUsername",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reminder",
+                "agent",
+                ":targetUsername"
+              ],
+              "variable": [
+                {
+                  "key": "targetUsername",
+                  "value": "{{targetUsername}}",
+                  "type": "string"
+                }
+              ]
+            },
             "description": "Get all Reminders for a specific consumerID"
           },
           "response": [
