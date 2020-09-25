@@ -65469,7 +65469,7 @@
                       "    });\r",
                       "\r",
                       "\r",
-                      "    pm.test(\"TEST1G: actionResult check\", function () {\r",
+                      "   /* pm.test(\"TEST1G: actionResult check\", function () {\r",
                       "    if (jsonData[0].actionResult != null) {\r",
                       "                pm.expect(jsonData[0].actionResults.actionResultCode).to.equal(data.ActionResultCode);\r",
                       "                pm.expect(jsonData[0].actionResults.description).to.equal(data.ar_desc);\r",
@@ -65480,7 +65480,7 @@
                       "            }\r",
                       "        });\r",
                       "\r",
-                      "\r",
+                      "*/\r",
                       "};\r",
                       "\r",
                       "    ///NEGATIVE TESTS\r",
@@ -65569,7 +65569,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "        {\n            \"quickTypeCode\": 32,\n            \"description\": \"API_Test_Cat_Name40\",\n            \"noteInput\": \"CALLED OVERDUE NO ANSWER\",\n            \"dispositionPrimaryCode\": \"AP\",\n            \"dispositionSecondaryCode\": \"AB\",\n            \"actionDeleteCurrentPhone\": \"FALSE\",\n            \"actionDiallerKill\": \"FALSE\",\n            \"isVoice\": \"TRUE\",\n            \"isActive\": \"TRUE\",\n            \"quickTypeActionResults\": [\n                {\n                    \"actionResultCode\": 88,\n                    \"description\": \"Comment\",\n                    \"actionCode\": \"CO\",\n                    \"resultCode\": \"CO\",\n                    \"isVoice\": \"false\",\n                    \"isActive\": 1\n                }\n            ]\n        }",
+                  "raw": "        {\n            \"quickTypeCode\": \"{{quickTypeCode}}\",\n            \"description\": \"{{qt_desc}}\",\n            \"noteInput\": \"{{NoteInput}}\",\n            \"dispositionPrimaryCode\": \"{{DispositionPrimaryCode}}\",\n            \"dispositionSecondaryCode\": \"{{DispositionSecondaryCode}}\",\n            \"actionDeleteCurrentPhone\": \"{{actionDeleteCurrentPhone}}\",\n            \"actionDiallerKill\": \"{{actionDiallerKill}}\",\n            \"isVoice\": \"{{qt_isVoice}}\",\n            \"isActive\": \"{{qt_isActive}}\",\n            \"quickTypeActionResults\": [\n                {\n                    \"actionResultCode\": 88,\n                    \"description\": \"Comment\",\n                    \"actionCode\": \"CO\",\n                    \"resultCode\": \"CO\",\n                    \"isVoice\": \"false\",\n                    \"isActive\": 1\n                }\n            ]\n        }",
                   "options": {
                     "raw": {}
                   }
