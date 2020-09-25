@@ -69203,6 +69203,7 @@
                   "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
                   "});\r",
                   "pm.test(\"TEST4: Response Content Check\", function() {\r",
+                  "    pm.expect(jsonData.templateCode).to.deep.equal(req_body.templateCode);\r",
                   "    pm.expect(jsonData.displayName).to.deep.equal(req_body.displayName);\r",
                   "    pm.expect(jsonData.templateBody).to.deep.equal(req_body.templateBody);\r",
                   "    pm.expect(jsonData.campaign).to.deep.equal(req_body.campaign);\r",
