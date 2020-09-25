@@ -78286,7 +78286,1192 @@
     },
     {
       "name": "AW_Reminders",
-      "item": [],
+      "item": [
+        {
+          "name": "{user Reminder ID}",
+          "item": [
+            {
+              "name": "/:userReminderID",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "5e7772e0-1100-470a-a385-f14ee585646a",
+                    "exec": [
+                      "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                      "{\r",
+                      "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                      "} else {\r",
+                      "    var tokenDate = new Date(2010,1,1);\r",
+                      "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                      "    if(tokenTimestamp){\r",
+                      "        tokenDate = Date.parse(tokenTimestamp);\r",
+                      "    }\r",
+                      "    //console.log(\"timestamp is\"+tokenDate);\r",
+                      "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                      "    if(!expiresInTime){\r",
+                      "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                      "    }\r",
+                      "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                      "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                      "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                      "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                      "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                      "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                      "\r",
+                      "        let getTokenRequest = {\r",
+                      "            method: 'POST',\r",
+                      "            url: tokenUrl,\r",
+                      "            auth: {\r",
+                      "                type: \"basic\",\r",
+                      "                basic: [\r",
+                      "                    { key: \"username\", value: clientId },\r",
+                      "                    { key: \"password\", value: clientSecret }\r",
+                      "                ]\r",
+                      "            },\r",
+                      "            body: {\r",
+                      "                mode: 'formdata',\r",
+                      "                formdata: [\r",
+                      "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                      "                    { key: 'scope', value: scope }\r",
+                      "                ]\r",
+                      "            }\r",
+                      "        };\r",
+                      "\r",
+                      "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                      "            let jsonResponse = response.json(),\r",
+                      "            newAccessToken = jsonResponse.access_token;\r",
+                      "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                      "\r",
+                      "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                      "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                      "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                      "        });\r",
+                      "\r",
+                      "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                      "    }\r",
+                      "}\r",
+                      "//console.log(\"End of Pre-req script\");"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "_postman_id": "c3c842f8-7b06-42d4-875f-0d5479f1367e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImppYk5ia0ZTU2JteFBZck45Q0ZxUms0SzRndyIsImtpZCI6ImppYk5ia0ZTU2JteFBZck45Q0ZxUms0SzRndyJ9.eyJhdWQiOiJhcGk6Ly84MTE2N2QzZC04NTNmLTQyMDctODBmYS0zMjI1YTQ5MjdhY2EiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMvIiwiaWF0IjoxNjAwMDc2MTk2LCJuYmYiOjE2MDAwNzYxOTYsImV4cCI6MTYwMDA4MDA5NiwiYWlvIjoiRTJCZ1lERGdiVXUvY3VYNlg5K2x2NDRzM2U0Z0R3QT0iLCJhcHBpZCI6IjIxYjhmYmVmLTcyNmItNDdhNC04MTM1LTFiY2ZlMmJhOWE5OCIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5My8iLCJpZHR5cCI6ImFwcCIsIm9pZCI6IjhlZWYzODI5LTgwM2UtNDM3ZS1hNDk0LTU3NDU3NWQ1MGVlOCIsInJoIjoiMC5BQUFBOS1sSE5nVUR0a3F3YjBzMm8xU1hrLV83dUNGcmNxUkhnVFViei1LNm1waHpBQUEuIiwic2lkIjoiMDVjNTQ1NzQtMGFlNC00OTAwLWJkZWQtMzdiZTkzYTQ4ZTMxIiwic3ViIjoiOGVlZjM4MjktODAzZS00MzdlLWE0OTQtNTc0NTc1ZDUwZWU4IiwidGVuYW50X2N0cnkiOiJHQiIsInRlbmFudF9yZWdpb25fc2NvcGUiOiJFVSIsInRpZCI6IjM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5MyIsInV0aSI6ImJTMm1xX1ctMWt5QUhJUjFCZjBrQUEiLCJ2ZXIiOiIxLjAifQ.DPyiJKEZHsK91RT80vryi4IwAb73zGI8EyYa_RROVCTRYzbhYZo0LyxgInVemTXUi_4zFDt5VizeUrgSbhlj3luqZlfPJpFWJdhvIZCy6cSX-EFpgTjw2GU12EH776THJxjtTQ9XoJxe9rBa6aKqh_BUcv9M3cX1Jph-f31BXivqK5Lkp0LYvYPF2XN__cIEI0r53ncWmacD8duxN0MXeT0cJ0FwJYVWSZi21R1TdKvBn3YzDxSHJsYbp7cHLkqPhP2R5fUQAK70hyc2PBbmBTvGfzv0EcdEac95pGLxtHnZWgjiDCB0WFng2L3eoxUe7BEdMoSerNPkTpTl-Vxj-Q",
+                    "tokenType": "Bearer",
+                    "addTokenTo": "header"
+                  }
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "{{Correlation-Id}}"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "username",
+                    "value": "Mike",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"userReminderID\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {}
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reminder/:userReminderID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reminder",
+                    ":userReminderID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "c922a94a-26ca-420e-86fc-940cee5ca1b1",
+                      "key": "userReminderID",
+                      "value": "2469",
+                      "type": "string",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Delete a specific Reminder"
+              },
+              "response": [
+                {
+                  "id": "051fdf89-2bbd-4534-9e27-67ebdd3377c0",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"userReminderID\": \"<long>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:userReminderID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":userReminderID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userReminderID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "0a1dc293-86da-4e1e-a283-6961dbd7dbe7",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"userReminderID\": \"<long>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:userReminderID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":userReminderID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userReminderID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "8d17a88c-68ab-4b9c-bd13-aa3f44edb58a",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"userReminderID\": \"<long>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:userReminderID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":userReminderID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userReminderID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "92eac526-3c52-42d1-8cc3-e931d762d07d",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"userReminderID\": \"<long>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:userReminderID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":userReminderID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userReminderID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "f2b4afb3-53fb-4321-8dae-a38cbd9f6315",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"userReminderID\": \"<long>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:userReminderID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":userReminderID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userReminderID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "f8af9a3d-69e7-46cb-ad20-c20a1754b646",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"userReminderID\": \"<long>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:userReminderID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":userReminderID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userReminderID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                }
+              ]
+            },
+            {
+              "name": "/:userReminderID",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "c0f288c0-1693-446c-a1e5-8e6176653a3d",
+                    "exec": [
+                      "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                      "{\r",
+                      "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                      "} else {\r",
+                      "    var tokenDate = new Date(2010,1,1);\r",
+                      "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                      "    if(tokenTimestamp){\r",
+                      "        tokenDate = Date.parse(tokenTimestamp);\r",
+                      "    }\r",
+                      "    //console.log(\"timestamp is\"+tokenDate);\r",
+                      "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                      "    if(!expiresInTime){\r",
+                      "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                      "    }\r",
+                      "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                      "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                      "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                      "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                      "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                      "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                      "\r",
+                      "        let getTokenRequest = {\r",
+                      "            method: 'POST',\r",
+                      "            url: tokenUrl,\r",
+                      "            auth: {\r",
+                      "                type: \"basic\",\r",
+                      "                basic: [\r",
+                      "                    { key: \"username\", value: clientId },\r",
+                      "                    { key: \"password\", value: clientSecret }\r",
+                      "                ]\r",
+                      "            },\r",
+                      "            body: {\r",
+                      "                mode: 'formdata',\r",
+                      "                formdata: [\r",
+                      "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                      "                    { key: 'scope', value: scope }\r",
+                      "                ]\r",
+                      "            }\r",
+                      "        };\r",
+                      "\r",
+                      "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                      "            let jsonResponse = response.json(),\r",
+                      "            newAccessToken = jsonResponse.access_token;\r",
+                      "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                      "\r",
+                      "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                      "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                      "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                      "        });\r",
+                      "\r",
+                      "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                      "    }\r",
+                      "}\r",
+                      "//console.log(\"End of Pre-req script\");"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "3a294e06-c299-460d-9034-3c57669e94b3",
+                    "exec": [
+                      "try{\r",
+                      "pm.environment.set(\"response time\",  (pm.response.responseTime)+Number(postman.getEnvironmentVariable(\"response time\")));\r",
+                      "pm.environment.set(\"responses\",  1+Number(postman.getEnvironmentVariable(\"responses\")));\r",
+                      "console.log(\"Average response time: \" + responseTime + \"ms\");\r",
+                      "\r",
+                      "/////////////////////////////////////////////////////////////////////////////////////\r",
+                      "let expectedCode = pm.iterationData.get(\"expectedHttpCode\");\r",
+                      "var jsonData = JSON.parse(responseBody);\r",
+                      "var req = request.url;\r",
+                      "var query = request.url.split('/');\r",
+                      "console.log(query);\r",
+                      "\r",
+                      "pm.test(\"TEST1: Status code Check\", function() {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "if (data.userReminderID!=null){\r",
+                      "    pm.test(\"TEST1A: userReminderID check\", function () {\r",
+                      "    pm.expect(jsonData[0].userReminderID).to.equal(JSON.stringify(data.userReminderID));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1B: targetUsername check\", function () {\r",
+                      "        if(jsonData[0].targetUsername=== null){\r",
+                      "            pm.expect(JSON.stringify(jsonData[0].targetUsername).toUpperCase()).to.equal((data.targetUsername).toUpperCase());\r",
+                      "            }else{\r",
+                      "                pm.expect(jsonData[0].targetUsername).to.equal(data.targetUsername);\r",
+                      "            }\r",
+                      "        });\r",
+                      "    pm.test(\"TEST1C: eventDateTime check\", function () {\r",
+                      "    if(jsonData[0].eventDateTime != null){\r",
+                      "    pm.expect(jsonData[0].eventDateTime.split('T')[0]).to.equal(data.eventDateTime.split(' ')[0]);}\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1D: consumerID check\", function () {\r",
+                      "        pm.expect(jsonData[0].consumerID).to.equal(JSON.stringify(data.consumerID));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1E subject check\", function () {\r",
+                      "    pm.expect(jsonData[0].subject).to.equal(JSON.stringify(data.subject));\r",
+                      "    });\r",
+                      "    pm.test(\"TEST1F: comment check\", function () {\r",
+                      "    pm.expect(jsonData[0].comment).to.equal(JSON.stringify(data.comment));\r",
+                      "    });\r",
+                      "};\r",
+                      "\r",
+                      "pm.test(\"TEST2: Response Header Checks\", function() {\r",
+                      "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"TEST3: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                      "});\r",
+                      "\r",
+                      "var Ajv = require('ajv'),\r",
+                      "ajv = new Ajv({logger: console}),\r",
+                      "schema = {\r",
+                      "    \"required\": [\r",
+                      "        \"userReminderID\",\r",
+                      "        \"targetUsername\",\r",
+                      "        \"eventDateTime\",\r",
+                      "        \"consumerID\",\r",
+                      "        \"subject\",\r",
+                      "        \"comment\"\r",
+                      "    ],\r",
+                      "    \"properties\": {\r",
+                      "        \"userReminderID\": {\r",
+                      "            \"$id\": \"#/properties/userReminderID\",\r",
+                      "            \"type\": \"integer\"\r",
+                      "        },\r",
+                      "        \"targetUsername\": {\r",
+                      "            \"$id\": \"#/properties/targetUsername\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"eventDateTime\": {\r",
+                      "            \"$id\": \"#/properties/eventDateTime\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"consumerID\": {\r",
+                      "            \"$id\": \"#/properties/consumerID\",\r",
+                      "            \"type\": \"integer\"\r",
+                      "        },\r",
+                      "        \"subject\": {\r",
+                      "            \"$id\": \"#/properties/subject\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        },\r",
+                      "        \"comment\": {\r",
+                      "            \"$id\": \"#/properties/comment\",\r",
+                      "            \"type\": \"string\"\r",
+                      "        }\r",
+                      "    },\r",
+                      "    \"$id\": \"http://example.org/root.json#\",\r",
+                      "    \"type\": \"object\",\r",
+                      "    \"definitions\": {},\r",
+                      "    \"$schema\": \"http://json-schema.org/draft-07/schema#\"\r",
+                      "};\r",
+                      "pm.test(\"TEST4: Schema Test\", function(){\r",
+                      "    pm.expect(ajv.validate(schema, jsonData)).to.be.true;\r",
+                      "});\r",
+                      "} catch (e){}\r",
+                      "/*\r",
+                      "pm.environment.set(\"data_id\", jsonData.data[0].id);\r",
+                      "pm.environment.set(\"cnsmr_id\", jsonData.data[0].cnsmr_id);\r",
+                      "pm.environment.set(\"udp_id\", jsonData.udpTable.udpid);*/"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "_postman_id": "433f7215-4464-4291-9161-cf5172519c5e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "accessToken": "{{OAuth_Token}}",
+                    "tokenType": "Bearer",
+                    "addTokenTo": "header"
+                  }
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "{{Correlation-Id}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "username",
+                    "value": "Mike",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reminder/:userReminderID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reminder",
+                    ":userReminderID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "7b3b8611-3ebd-457a-b701-706a64277f1a",
+                      "key": "userReminderID",
+                      "value": "7343",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "description": "Get a specific Reminder"
+              },
+              "response": [
+                {
+                  "id": "05a04773-ec47-4758-83aa-7aeb5a110e7f",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/:userReminderID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":userReminderID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userReminderID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "0aeeedbf-804d-4b8c-94de-a8b19762b504",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/:userReminderID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":userReminderID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userReminderID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "6524507f-ba29-4941-a36e-e8e81e72dcc5",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/:userReminderID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":userReminderID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userReminderID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "9cd624e8-36a0-466d-8e81-bb623f0807c1",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/:userReminderID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":userReminderID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userReminderID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "e01d5e1a-1193-41fe-b3aa-27afd96f0c63",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/:userReminderID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":userReminderID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userReminderID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "f1718839-d261-4a3e-b6aa-60d42df59ec5",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/:userReminderID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":userReminderID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userReminderID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                }
+              ]
+            },
+            {
+              "name": "/:userReminderID",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "d58d9738-6803-44ed-bd83-d5522471b1fb",
+                    "exec": [
+                      "if (pm.environment.get(\"OAuth_Timestamp\")==null)\r",
+                      "{\r",
+                      "    console.log(\"OAuth timestamp null, check the environment\");\r",
+                      "} else {\r",
+                      "    var tokenDate = new Date(2010,1,1);\r",
+                      "    var tokenTimestamp = pm.environment.get(\"OAuth_Timestamp\");\r",
+                      "    if(tokenTimestamp){\r",
+                      "        tokenDate = Date.parse(tokenTimestamp);\r",
+                      "    }\r",
+                      "    //console.log(\"timestamp is\"+tokenDate);\r",
+                      "    var expiresInTime = pm.environment.get(\"OAuth_Expiry\");\r",
+                      "    if(!expiresInTime){\r",
+                      "        expiresInTime = 3599000; // Set default expiration time to 5 minutes\r",
+                      "    }\r",
+                      "    //console.log(\"===remaining time is\"+(new Date() - tokenDate)+\"===expiry time is\"+expiresInTime);\r",
+                      "    if((new Date() - tokenDate) >= expiresInTime) {\r",
+                      "        let tokenUrl = 'https://login.microsoftonline.com/3647e9f7-0305-4ab6-b06f-4b36a3549793/oauth2/v2.0/token';\r",
+                      "        let clientId = '21b8fbef-726b-47a4-8135-1bcfe2ba9a98';\r",
+                      "        let clientSecret = ']3iL_sp[-PsuAvJYk3mNGyqn8ZZDOWq2';\r",
+                      "        let scope = 'api://81167d3d-853f-4207-80fa-3225a4927aca/.default';\r",
+                      "\r",
+                      "        let getTokenRequest = {\r",
+                      "            method: 'POST',\r",
+                      "            url: tokenUrl,\r",
+                      "            auth: {\r",
+                      "                type: \"basic\",\r",
+                      "                basic: [\r",
+                      "                    { key: \"username\", value: clientId },\r",
+                      "                    { key: \"password\", value: clientSecret }\r",
+                      "                ]\r",
+                      "            },\r",
+                      "            body: {\r",
+                      "                mode: 'formdata',\r",
+                      "                formdata: [\r",
+                      "                    { key: 'grant_type', value: 'client_credentials' },\r",
+                      "                    { key: 'scope', value: scope }\r",
+                      "                ]\r",
+                      "            }\r",
+                      "        };\r",
+                      "\r",
+                      "        pm.sendRequest(getTokenRequest, (err, response) => {\r",
+                      "            let jsonResponse = response.json(),\r",
+                      "            newAccessToken = jsonResponse.access_token;\r",
+                      "            //console.log({ err, jsonResponse, newAccessToken });\r",
+                      "\r",
+                      "            pm.environment.set('OAuth_Token', newAccessToken);\r",
+                      "            pm.environment.set('OAuth_Expiry', jsonResponse.ext_expires_in*1000);\r",
+                      "            pm.environment.set(\"OAuth_Timestamp\", new Date());\r",
+                      "        });\r",
+                      "\r",
+                      "        //console.log(pm.environment.get(\"OAuth_Token\"));\r",
+                      "    }\r",
+                      "}\r",
+                      "//console.log(\"End of Pre-req script\");"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "_postman_id": "c32484d0-140a-444c-aa91-e11ccd223d2a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": {
+                    "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImppYk5ia0ZTU2JteFBZck45Q0ZxUms0SzRndyIsImtpZCI6ImppYk5ia0ZTU2JteFBZck45Q0ZxUms0SzRndyJ9.eyJhdWQiOiJhcGk6Ly84MTE2N2QzZC04NTNmLTQyMDctODBmYS0zMjI1YTQ5MjdhY2EiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zNjQ3ZTlmNy0wMzA1LTRhYjYtYjA2Zi00YjM2YTM1NDk3OTMvIiwiaWF0IjoxNjAwMTgwNTM3LCJuYmYiOjE2MDAxODA1MzcsImV4cCI6MTYwMDE4NDQzNywiYWlvIjoiRTJCZ1lQaWMydU1kK29RaC9NKzBMcTNINS82RkF3QT0iLCJhcHBpZCI6IjIxYjhmYmVmLTcyNmItNDdhNC04MTM1LTFiY2ZlMmJhOWE5OCIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5My8iLCJpZHR5cCI6ImFwcCIsIm9pZCI6IjhlZWYzODI5LTgwM2UtNDM3ZS1hNDk0LTU3NDU3NWQ1MGVlOCIsInJoIjoiMC5BQUFBOS1sSE5nVUR0a3F3YjBzMm8xU1hrLV83dUNGcmNxUkhnVFViei1LNm1waHpBQUEuIiwic2lkIjoiMWQ5NGE2MTQtZDk3MC00MWI5LWJhZWMtYTQ4YjUyYzFhNWYxIiwic3ViIjoiOGVlZjM4MjktODAzZS00MzdlLWE0OTQtNTc0NTc1ZDUwZWU4IiwidGVuYW50X2N0cnkiOiJHQiIsInRlbmFudF9yZWdpb25fc2NvcGUiOiJFVSIsInRpZCI6IjM2NDdlOWY3LTAzMDUtNGFiNi1iMDZmLTRiMzZhMzU0OTc5MyIsInV0aSI6IlFwUDF1V1g5NVUtQURfSXhvQWhxQUEiLCJ2ZXIiOiIxLjAifQ.rPUu4-ST-IFa1H3wfCZtQB9TkhNafgxO704w85Rt5NAOmM9-Q6OxTsh17zCK4EyqzkvpWAU-zNfYqv1Tvv2FMnwb2wLkXVTIC2miXs6nLtSULIYoEQkaNQg8lhjw517Bo9dJ439GNY1pC_8IdRdsPvgiucnvQUWkpXcukf9Nz4t62UfpI7nhVKGPyHcBUZaMRFqlhy9-8CNVLCSPoDyrjxZnE4COhKJ7T7px46I-J14BgcxDU8UwzIbjAMqpYU4HeAba3DynuFxzOFAH1_ZCuFmHrrEVzUmor9HF-9Rq7ndqkIn7duW2c3OhSLjZOzfxg0WJcjRWiBokDg8u93hKIw",
+                    "tokenType": "Bearer",
+                    "addTokenTo": "header"
+                  }
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "correlation-id",
+                    "value": "{{Correlation-Id}}"
+                  },
+                  {
+                    "key": "Ocp-Apim-Subscription-Key-South",
+                    "value": "{{Ocp-Apim-Subscription-Key-South}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "ocp-apim-subscription-key-West",
+                    "value": "{{Ocp-Apim-Subscription-Key-West}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "username",
+                    "value": "Mike",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"userReminderID\": 7343,\n    \"targetUsername\": \"Sswann\",\n    \"eventDateTime\": \"2014-05-27T14:00:00\",\n    \"consumerID\": 2108175,\n    \"subject\": \"Something else\",\n    \"comment\": \"Bananas too\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reminder/:userReminderID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reminder",
+                    ":userReminderID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "fa53eeb2-f894-4666-a0bd-5f1c9d16b19b",
+                      "key": "userReminderID",
+                      "value": "7343",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "description": "Update a specific Reminder"
+              },
+              "response": [
+                {
+                  "id": "2c6989f3-8607-4c96-aa3e-0442ffd89701",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"userReminderID\": \"<long>\",\n    \"targetUsername\": \"<string>\",\n    \"eventDateTime\": \"<dateTime>\",\n    \"consumerID\": \"<long>\",\n    \"subject\": \"<string>\",\n    \"comment\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:userReminderID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":userReminderID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userReminderID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "332e4330-71df-4ef9-a6a5-4b514239119c",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"userReminderID\": \"<long>\",\n    \"targetUsername\": \"<string>\",\n    \"eventDateTime\": \"<dateTime>\",\n    \"consumerID\": \"<long>\",\n    \"subject\": \"<string>\",\n    \"comment\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:userReminderID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":userReminderID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userReminderID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "3709ce4c-99cb-47e7-9d84-7e3ce6519d1e",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"userReminderID\": \"<long>\",\n    \"targetUsername\": \"<string>\",\n    \"eventDateTime\": \"<dateTime>\",\n    \"consumerID\": \"<long>\",\n    \"subject\": \"<string>\",\n    \"comment\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:userReminderID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":userReminderID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userReminderID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "611957f0-d45b-4928-aead-ca8db032484a",
+                  "name": "Server Error",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"userReminderID\": \"<long>\",\n    \"targetUsername\": \"<string>\",\n    \"eventDateTime\": \"<dateTime>\",\n    \"consumerID\": \"<long>\",\n    \"subject\": \"<string>\",\n    \"comment\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:userReminderID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":userReminderID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userReminderID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "6e49a867-7769-4d5f-af57-7947ecfc1c13",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"userReminderID\": \"<long>\",\n    \"targetUsername\": \"<string>\",\n    \"eventDateTime\": \"<dateTime>\",\n    \"consumerID\": \"<long>\",\n    \"subject\": \"<string>\",\n    \"comment\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:userReminderID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":userReminderID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userReminderID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                },
+                {
+                  "id": "b9484a06-ad22-43d6-84f5-5cc4748d61bd",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"userReminderID\": \"<long>\",\n    \"targetUsername\": \"<string>\",\n    \"eventDateTime\": \"<dateTime>\",\n    \"consumerID\": \"<long>\",\n    \"subject\": \"<string>\",\n    \"comment\": \"<string>\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:userReminderID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":userReminderID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userReminderID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json,v1.0.0"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "magna ad con"
+                }
+              ]
+            }
+          ],
+          "_postman_id": "7bd7e175-5833-42fd-9ae3-c0f69354fac5",
+          "_postman_isSubFolder": true
+        }
+      ],
       "_postman_id": "92f59ed8-1c48-44fc-85fa-0b27940f7252"
     },
     {
