@@ -78425,7 +78425,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"userReminderID\": {{userReminderID}},\n    \"targetUsername\": \"{{targetUsername}}\",\n    \"eventDateTime\": \"2014-05-27T14:00:00\",\n    \"consumerID\": 2108175,\n    \"subject\": \"Something else\",\n    \"comment\": \"Bananas too\"\n}",
+                  "raw": "{\n    \"userReminderID\": {{userReminderID}},\n    \"targetUsername\": \"{{targetUsername}}\",\n    \"eventDateTime\": \"{{event_dttm}}\",\n    \"consumerID\": {{cnsmr_id}},\n    \"subject\": \"{{rmdr_subj}}\",\n    \"comment\": \"Test Comment1\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
