@@ -71361,7 +71361,7 @@
                       "        pm.expect(jsonData.description).to.equal(data.nt_desc);\r",
                       "    });\r",
                       "    pm.test(\"TEST1C: isVoice check\", function() {\r",
-                      "        pm.expect(jsonData.isVoice).to.equal(data.IsVoice);\r",
+                      "       (JSON.stringify(jsonData.isVoice).toUpperCase()).to.equal(data.IsVoice);\r",
                       "    });\r",
                       "    pm.test(\"TEST1D: isActive check\", function() {\r",
                       "        pm.expect(jsonData.isActive).to.equal(data.IsActive);\r",
