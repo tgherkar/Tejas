@@ -69325,7 +69325,7 @@
               "variable": [
                 {
                   "key": "templateCode",
-                  "value": "",
+                  "value": "{{sms_tmplt_code}}",
                   "type": "string"
                 }
               ]
@@ -71373,7 +71373,7 @@
                       "        pm.expect(jsonData.noteTypeCode).to.equal(data.NoteTypeCode);\r",
                       "    });\r",
                       "    pm.test(\"TEST1B: description check\", function() {\r",
-                      "        pm.expect(jsonData.description).to.equal(data.nt_desc);\r",
+                      "        pm.expect(jsonData.description).to.equal(data.nt_desc2);\r",
                       "    });\r",
                       "    pm.test(\"TEST1C: isVoice check\", function() {\r",
                       "       (JSON.stringify(jsonData.isVoice).toUpperCase()).to.equal(data.IsVoice);\r",
@@ -71386,7 +71386,7 @@
                       "pm.test(\"TEST1G: actionResult check\", function () {\r",
                       "                pm.expect(jsonData.actionResult.actionResultCode).to.equal(data.ActionResultCode);\r",
                       "                pm.expect(jsonData.actionResult.description).to.equal(data.ar_desc);\r",
-                      "                 pm.expect(jsonData.actionResult.actionCode).to.equal(data.ar_actioncode);\r",
+                      "                pm.expect(jsonData.actionResult.actionCode).to.equal(data.ar_actioncode);\r",
                       "                pm.expect(jsonData.actionResult.resultCode).to.equal(data.ar_resultcode);\r",
                       "                pm.expect(jsonData.actionResult.isVoice).to.equal(data.ar_isvoice);\r",
                       "                pm.expect(jsonData.actionResult.isActive).to.equal(data.ar_isactive);                                                                                \r",
