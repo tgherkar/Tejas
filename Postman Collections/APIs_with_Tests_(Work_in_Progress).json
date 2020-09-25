@@ -64335,7 +64335,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"description\": \"TRESTR\",\n    \"actionCode\": \"CI\",\n    \"resultCode\": \"CO\",\n    \"isVoice\": \"TRUE\"\n}",
+                  "raw": "{\n    \"description\": \"TRESTB\",\n    \"actionCode\": \"CI\",\n    \"resultCode\": \"CY\",\n    \"isVoice\": \"TRUE\"\n}",
                   "options": {
                     "raw": {}
                   }
@@ -64606,7 +64606,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": " {\n            \"actionResultCode\": \"{{act_Code}}\",\n            \"description\": \"Debt Management Company Payplan\",\n            \"actionCode\": \"PRI\",\n            \"resultCode\": \"DI\",\n            \"isVoice\": true,\n            \"isActive\": false\n}",
+                  "raw": " {\n            \"actionResultCode\": {{act_Code}},\n            \"description\": \"Debt Management Company Payplan\",\n            \"actionCode\": \"PRI\",\n            \"resultCode\": \"DI\",\n            \"isVoice\": true,\n            \"isActive\": false\n}",
                   "options": {
                     "raw": {}
                   }
