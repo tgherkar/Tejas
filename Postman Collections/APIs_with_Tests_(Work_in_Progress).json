@@ -65437,17 +65437,17 @@
                       "\r",
                       "if (data!=null){\r",
                       "    pm.test(\"TEST1B: description check\", function() {\r",
-                      "        pm.expect(jsonData.description).to.equal(data.qt_desc);\r",
+                      "        pm.expect(jsonData.description).to.equal(data.qt_desc2);\r",
                       "    });\r",
                       "\r",
                       "    pm.test(\"TEST1A: noteInput check\", function() {\r",
                       "        pm.expect(jsonData.noteInput).to.equal(data.noteInput);\r",
                       "    });\r",
                       "    pm.test(\"TEST1B: dispositionPrimaryCode check\", function() {\r",
-                      "        pm.expect(jsonData.dispositionPrimaryCode).to.equal(data.dispositionPrimaryCode);\r",
+                      "        pm.expect(jsonData.dispositionPrimaryCode).to.equal(data.DispositionPrimaryCode);\r",
                       "    });\r",
                       "    pm.test(\"TEST1B: dispositionSecondaryCode check\", function() {\r",
-                      "        pm.expect(jsonData.dispositionSecondaryCode).to.equal(data.dispositionSecondaryCode);\r",
+                      "        pm.expect(jsonData.dispositionSecondaryCode).to.equal(data.DispositionSecondaryCode);\r",
                       "    });\r",
                       "    pm.test(\"TEST1B: actionDeleteCurrentPhone check\", function() {\r",
                       "    pm.expect(JSON.stringify(jsonData.actionDeleteCurrentPhone).toUpperCase()).to.equal(data.actionDeleteCurrentPhone);\r",
@@ -65563,7 +65563,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "        {\n            \"quickTypeCode\": \"{{quickTypeCode}}\",\n            \"description\": \"{{qt_desc}}\",\n            \"noteInput\": \"{{NoteInput}}\",\n            \"dispositionPrimaryCode\": \"{{DispositionPrimaryCode}}\",\n            \"dispositionSecondaryCode\": \"{{DispositionSecondaryCode}}\",\n            \"actionDeleteCurrentPhone\": \"{{actionDeleteCurrentPhone}}\",\n            \"actionDiallerKill\": \"{{actionDiallerKill}}\",\n            \"isVoice\": \"{{qt_isVoice}}\",\n            \"isActive\": \"{{qt_isActive}}\",\n            \"quickTypeActionResults\": [\n                {\n                    \"actionResultCode\": 88,\n                    \"description\": \"Comment\",\n                    \"actionCode\": \"CO\",\n                    \"resultCode\": \"CO\",\n                    \"isVoice\": \"false\",\n                    \"isActive\": 1\n                }\n            ]\n        }",
+                  "raw": "        {\n            \"quickTypeCode\": \"{{quickTypeCode}}\",\n            \"description\": \"{{qt_desc2}}\",\n            \"noteInput\": \"{{NoteInput}}\",\n            \"dispositionPrimaryCode\": \"{{DispositionPrimaryCode}}\",\n            \"dispositionSecondaryCode\": \"{{DispositionSecondaryCode}}\",\n            \"actionDeleteCurrentPhone\": \"{{actionDeleteCurrentPhone}}\",\n            \"actionDiallerKill\": \"{{actionDiallerKill}}\",\n            \"isVoice\": \"{{qt_isVoice}}\",\n            \"isActive\": \"{{qt_isActive}}\",\n            \"quickTypeActionResults\": [\n                {\n                    \"actionResultCode\": 88,\n                    \"description\": \"Comment\",\n                    \"actionCode\": \"CO\",\n                    \"resultCode\": \"CO\",\n                    \"isVoice\": \"false\",\n                    \"isActive\": 1\n                }\n            ]\n        }",
                   "options": {
                     "raw": {}
                   }
