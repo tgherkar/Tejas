@@ -68768,7 +68768,7 @@
                   "} catch (e){\r",
                   "     ///NEGATIVE TESTS\r",
                   "    pm.test(\"TEST2: Status code Check\", function() {\r",
-                  "        pm.response.status.to.be.oneOf([400, 404, 500]);\r",
+                  "        pm.expect(pm.response.code).to.be.oneOf([400,404]);\r",
                   "    });\r",
                   "    pm.test(\"TEST4: Response time Check: Response Time - \" + (pm.response.responseTime) + \"ms\", function() {\r",
                   "        pm.expect(pm.response.responseTime).to.not.be.below(5000);\r",
