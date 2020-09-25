@@ -68982,6 +68982,7 @@
                   "pm.test(\"TEST3: Response Header Checks\", function() {\r",
                   "    pm.response.to.have.header('Content-Type', 'application/json; charset=utf-8', 'Vary', 'Accept-Encoding', 'Content-Encoding', 'gzip', 'Date', '', 'Request-Context', '');\r",
                   "});\r",
+                  "    pm.globals.set(\"sms_tmplt_code\", jsonData.templateCode);\r",
                   "pm.test(\"TEST4: Response Content Check\", function() {\r",
                   "    pm.expect(jsonData.displayName).to.deep.equal(req_body.displayName);\r",
                   "    pm.expect(jsonData.templateBody).to.deep.equal(req_body.templateBody);\r",
@@ -69052,7 +69053,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"displayName\": \"{{sms_tmplt_disp_nm}}\",\r\n  \"templateBody\": \"{{sms_tmplt_body}}\",\r\n  \"campaign\": \"{{sms_cmpgn}}\",\r\n  \"type\": \"{{sms_tmplt_type}}\",\r\n  \"isActive\": {{IsActive}},\r\n  \"isAgentPortalOption\": {{isagnt}}\r\n}",
+              "raw": "{\r\n  \"displayName\": \"{{sms_tmplt_disp_nm}}\",\r\n  \"templateBody\": \"{{sms_tmplt_body}}\",\r\n  \"campaign\": \"{{sms_cmpgn}}\",\r\n  \"type\": \"{{sms_tmplt_type}}\",\r\n  \"isActive\": 1,\r\n  \"isAgentPortalOption\": 0\r\n}",
               "options": {
                 "raw": {}
               }
