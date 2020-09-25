@@ -64606,7 +64606,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": " {\n            \"actionResultCode\": {{act_Code}},\n            \"description\": \"Debt Management Company Payplan\",\n            \"actionCode\": \"PRI\",\n            \"resultCode\": \"DI\",\n            \"isVoice\": true,\n            \"isActive\": false\n}",
+                  "raw": " {\n            \"actionResultCode\": \"{{act_Code}}\",\n            \"description\": \"Debt Management Company Payplan\",\n            \"actionCode\": \"PRI\",\n            \"resultCode\": \"DI\",\n            \"isVoice\": true,\n            \"isActive\": false\n}",
                   "options": {
                     "raw": {}
                   }
